@@ -1,0 +1,32 @@
+.signin-form .signin-btn button {
+    margin-top: 0px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+    border: 2px solid #e5803f;
+    width: 189px;
+    height: 45px;
+    text-align: center;
+    margin-bottom: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #e5803f;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding-top: 3px;
+    background-color: transparent;
+    padding-left: 58px;
+}
+
+.signin-form .signin-btn button:hover,
+.signin-header a.login-btn:hover,
+.landing-main .landing-btn button:hover,
+.main-nav a.nav-link[type="submit"]:hover,
+.ourcsr-btn:hover,
+.secsix .getintouchform .getintouchform-submit:hover {
+    border: 2px solid #e5803f;
+    background-color: #e5803f;
+    color: #fff !important;
+    text-decoration: none;
+}

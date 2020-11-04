@@ -1,0 +1,17 @@
+<div class="landing-main d-flex align-items-center">
+    <div class="row mx-auto">
+        <div class="col">
+            <div class="login-images wow zoomIn" data-wow-duration="4s" data-wow-delay="300ms">
+                <!-- <img src="./assets/logos/cd_white_final-04.png" class="img-fluid mx-auto d-block" alt="login-logo"> -->
+
+                <img [src]="env.AppLogo" class="img-fluid mx-auto d-block" alt="login-logo" width="420px">
+                <p class="company-name">{{env.AppTitle}}</p>
+            </div>
+            <h4 class="tagline text-white wow zoomIn" data-wow-duration="4s" data-wow-delay="300ms">Diamonds Beyond Imagination</h4>
+            <div class="d-flex justify-content-between landing-btn wow zoomIn" data-wow-duration="4s" data-wow-delay="300ms">
+                <a href="/home" type="button" [translate]="'index.visitwebsite'">Visit Website</a>
+                <a href="/auth/login" type="button" [translate]="'index.login'">LOG IN</a>
+            </div>
+        </div>
+    </div>
+</div>

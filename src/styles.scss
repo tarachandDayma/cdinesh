@@ -1,0 +1,736 @@
+main {
+    height: 78vh;
+    overflow: auto;
+}
+
+.user-form .signin-btn button {
+    margin-top: 0px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+    border: 2px solid #e5803f;
+    width: 189px;
+    height: 45px;
+    text-align: center;
+    margin-bottom: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #e5803f;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding-top: 3px;
+    background-color: transparent;
+    padding-left: 58px;
+}
+
+.user-form .signin-btn button:hover,
+.signin-header a.login-btn:hover,
+.landing-main .landing-btn button:hover,
+.main-nav a.nav-link[type="submit"]:hover,
+.ourcsr-btn:hover,
+.secsix .getintouchform .getintouchform-submit:hover {
+    border: 2px solid #e5803f;
+    background-color: #e5803f;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.user-form {
+    max-width: 100%;
+    margin: auto;
+    background-image: linear-gradient(#23599e, #1a2b4a) !important;
+    padding: 20px;
+    text-transform: capitalize;
+    /* padding-bottom: 70px; */
+}
+
+.user-form .form-control {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid #e5803f;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 0px;
+    height: 36px;
+    font-size: 12px;
+}
+
+.user-form .form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.user-form input[type="email"] {
+    margin-bottom: 95px;
+}
+
+.user-form a {
+    text-decoration: none;
+    padding-top: 25px;
+}
+
+.user-form .signin-btn {
+    margin-top: 80px;
+}
+
+.user-form .text-danger {
+    display: flex;
+}
+
+.user-form select option {
+    color: black;
+}
+
+.user-form .small-btn {
+    border: 2px solid #e5803f;
+    background: none;
+    color: #e5803f;
+    border-radius: 0px;
+}
+
+.user-form .small-btn :hover {
+    border: 2px solid #e5803f;
+    background-color: #e5803f;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.user-form .signin-btn a {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+    border: 2px solid #e5803f;
+    width: 189px;
+    height: 45px;
+    text-align: center;
+    margin-bottom: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #e5803f;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding-top: 3px;
+}
+
+.user-form .signin-btn a:hover,
+.signin-header a.login-btn:hover,
+.landing-main .landing-btn a:hover,
+.main-nav a.nav-link[type="submit"]:hover,
+.ourcsr-btn:hover,
+.secsix .getintouchform .getintouchform-submit:hover {
+    border: 2px solid #e5803f;
+    background-color: #e5803f;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.user-form .noaccount {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+    margin-top: 85px;
+    padding-bottom: 15px;
+}
+
+.user-form .noaccount span:first-child {
+    color: #e5803f;
+}
+
+.user-form h4 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 600;
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    position: relative;
+    width: fit-content;
+    width: -moz-fit-content;
+    margin: 0px auto 70px auto;
+}
+
+.user-form h4::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    left: 0;
+    bottom: -5px;
+    background-color: #e5803f;
+    color: #e5803f;
+}
+
+.user-form .noaccount a {
+    color: #fff;
+    padding-left: 10px;
+    position: relative;
+}
+
+.user-form .noaccount a:hover::after {
+    display: none;
+}
+
+.user-form .noaccount a:after {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    bottom: -5px;
+    left: 8px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    background-color: #fff;
+}
+
+.user-form label,
+.user-form .fogpass {
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-transform: capitalize;
+    margin-bottom: 0px;
+    position: relative;
+    width: fit-content;
+    width: -moz-fit-content;
+}
+
+.cd-button {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+    border: 2px solid #e5803f;
+    width: 189px;
+    height: 45px;
+    text-align: center;
+    margin-bottom: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #e5803f;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding-top: 3px;
+    text-align: -webkit-center;
+}
+
+.cd-button:hover {
+    border: 2px solid #e5803f;
+    background-color: #e5803f;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+fieldset {
+    border: solid .5px grey;
+    width: 100%;
+    padding: 25px !important;
+}
+
+legend {
+    color: white;
+    width: auto;
+}
+
+.page-title {
+    background: #f2f2f2;
+    padding: 10px 0;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.controlPanelContainer {
+    max-width: 100%;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.btn-sm {
+    font-size: 10px !important;
+    color: white;
+}
+
+.cd-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+}
+
+.cd-table td {
+    border: 1px solid #ddd;
+    font-size: 12px;
+    padding-left: 8px;
+    padding: 2px;
+}
+
+.cd-table th {
+    border: 1px solid #dddddd;
+    padding-left: 7px;
+    background-color: #1a487f;
+    color: wheat;
+    font-size: 11px;
+    white-space: nowrap;
+    font-weight: 300;
+}
+
+.cd-table thead tr {
+    line-height: 26px;
+}
+
+.cd-table tbody tr {
+    line-height: 20px;
+}
+
+.cd-table td {
+    text-align: left !important;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cd-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+    line-height: 26px;
+}
+
+.cd-table tr:hover {
+    background-color: #ddd;
+    line-height: 26px;
+}
+
+cd-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background: linear-gradient(to right, #192b4a, #1b579a);
+    color: white;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {}
+
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {}
+
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {}
+
+
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape) {}
+
+
+/* ----------- iPhone X ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape) {}
+
+
+/* ----------- Galaxy S3 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {}
+
+
+/* Portrait */
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {}
+
+
+/* ----------- Galaxy S4, S5 and Note 3 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {}
+
+
+/* Portrait */
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape) {}
+
+
+/* ----------- Galaxy S6 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) {}
+
+
+/* Portrait */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) and (orientation: landscape) {}
+
+
+/* ----------- Google Pixel ----------- */
+
+
+/* Portrait and Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {}
+
+
+/* Portrait */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape) {}
+
+
+/* ----------- Google Pixel XL ----------- */
+
+
+/* Portrait and Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) {}
+
+
+/* Portrait */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) and (orientation: landscape) {}
+
+
+/* ----------- HTC One ----------- */
+
+
+/* Portrait and Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {}
+
+
+/* Portrait */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape) {}
+
+
+/* ----------- Windows Phone ----------- */
+
+
+/* Portrait and Landscape */
+
+@media screen and (device-width: 480px) and (device-height: 800px) {}
+
+
+/* Portrait */
+
+@media screen and (device-width: 480px) and (device-height: 800px) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media screen and (device-width: 480px) and (device-height: 800px) and (orientation: landscape) {}
+
+
+/* ----------- iPad 1, 2, Mini and Air ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {}
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {}
+
+
+/* ----------- iPad 3, 4 and Pro 9.7" ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* ----------- iPad Pro 10.5" ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 834px) and (max-device-width: 1112px) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Portrait */
+
+
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+
+
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+
+@media only screen and (min-device-width: 834px) and (max-device-width: 834px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Landscape */
+
+
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+
+
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+
+@media only screen and (min-device-width: 1112px) and (max-device-width: 1112px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* ----------- iPad Pro 12.9" ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Portrait */
+
+
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+
+
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Landscape */
+
+
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+
+
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+
+@media only screen and (min-device-width: 1366px) and (max-device-width: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* ----------- Galaxy Tab 2 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media (min-device-width: 800px) and (max-device-width: 1280px) {}
+
+
+/* Portrait */
+
+@media (max-device-width: 800px) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media (max-device-width: 1280px) and (orientation: landscape) {}
+
+
+/* ----------- Galaxy Tab S ----------- */
+
+
+/* Portrait and Landscape */
+
+@media (min-device-width: 800px) and (max-device-width: 1280px) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Portrait */
+
+@media (max-device-width: 800px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* Landscape */
+
+@media (max-device-width: 1280px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {}
+
+
+/* ----------- Nexus 7 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media screen and (device-width: 601px) and (device-height: 906px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) {}
+
+
+/* Portrait */
+
+@media screen and (device-width: 601px) and (device-height: 906px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media screen and (device-width: 601px) and (device-height: 906px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) and (orientation: landscape) {}
+
+
+/* ----------- Nexus 9 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media screen and (device-width: 1536px) and (device-height: 2048px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) {}
+
+
+/* Portrait */
+
+@media screen and (device-width: 1536px) and (device-height: 2048px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media screen and (device-width: 1536px) and (device-height: 2048px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) and (orientation: landscape) {}
+
+
+/* ----------- Kindle Fire HD 7" ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 800px) and (max-device-width: 1280px) and (-webkit-min-device-pixel-ratio: 1.5) {}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 800px) and (max-device-width: 1280px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 800px) and (max-device-width: 1280px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape) {}
+
+
+/* ----------- Kindle Fire HD 8.9" ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1.5) {}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait) {}
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape) {}
+
+
+/* ----------- Non-Retina Screens ----------- */
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {}
+
+
+/* ----------- Retina Screens ----------- */
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {}

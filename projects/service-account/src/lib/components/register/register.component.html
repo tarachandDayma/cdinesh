@@ -1,0 +1,301 @@
+<section class="overlay">
+    <div class="signin d-flex">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex justify-content-between signin-header align-items-center">
+                        <div class="logo">
+                            <a href="#">
+                                <!-- <img src="assets/logos/cd_monogram_final-05.png" alt=""> -->
+                                <img [src]="AppLogo" alt="" width="143px" class="img-fluid">
+                                <p><small>{{AppTitle}}</small></p>
+                            </a>
+                        </div>
+                        <a [translate]="'auth.register.signin'" routerLink="/auth/login" class="login-btn">SignIn</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div style="width: 100%;padding: 20px;">
+        <div class="row">
+
+            <form [formGroup]="formgroup" (ngSubmit)="submit()" class="signin-form" autocomplete="off">
+                <h4 [translate]="'auth.register.title'">SIGN IN</h4>
+                <fieldset>
+                    <legend>Basic Info</legend>
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <label [translate]="'auth.register.username'" for="userName "></label>
+                            <input maxlength="50" formControlName="userName" [(ngModel)]="item.userName" name="userName" type="text" class="form-control" id="userName" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('userName').errors?.required && (formgroup.get('userName').touched  || submited)" [translate]="'auth.register.username_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('userName').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('userName').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.password'" for="password "></label>
+                            <input maxlength="50" formControlName="password" [(ngModel)]="item.password" name="password" type="password" class="form-control" id="password" placeholder="">
+                            <label *ngIf="formgroup.get('password').errors?.required && (formgroup.get('password').touched  || submited)" [translate]="'auth.register.password_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('password').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('password').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'guest.register.confirmPassword'" for="confirmPassword "></label>
+                            <input maxlength="50" formControlName="confirmPassword" [(ngModel)]="item.confirmPassword" name="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="">
+                            <label *ngIf="formgroup.get('confirmPassword').errors?.required && (formgroup.get('confirmPassword').touched  || submited)" [translate]="'guest.register.confirmPassword_error'" class="form-text text-danger"></label>
+                            <label *ngIf="!formgroup.get('confirmPassword').errors?.required && item.password !=item.confirmPassword && formgroup.get('confirmPassword').touched" [translate]="'guest.register.confirmPassword_matche_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('confirmPassword').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('confirmPassword').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.company'" for="companyId "></label>
+                            <lib-cddropdown [form]="formgroup" [(modelkey)]="item.userBasicInfo.companyId" [(modelvalue)]="companyName" [formcontrolname]="'companyId'" [path]="'GetCompanies'" [valuemember]="'companyId'" [displaymember]="'companyName'" (change)="companyChange($event)"></lib-cddropdown>
+                            <label *ngIf="formgroup.get('companyId').errors?.required && (formgroup.get('companyId').touched  || submited)" [translate]="'auth.register.companyId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('companyId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('companyId').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+
+                            <label [translate]="'auth.register.firstName'" for="firstName "></label>
+                            <input maxlength="50" formControlName="firstName" [(ngModel)]="item.userBasicInfo.firstName" name="firstName" type="text" class="form-control" id="firstName" placeholder="First Name" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('firstName').errors?.required && (formgroup.get('firstName').touched || submited)" [translate]="'auth.register.firstName_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('firstName').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('firstName').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.lastName'" for="firstName "></label>
+                            <input maxlength="50" formControlName="lastName" [(ngModel)]="item.userBasicInfo.lastName" name="lastName" type="text" class="form-control" id="lastName" placeholder="Last Name" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('lastName').errors?.required && (formgroup.get('lastName').touched || submited)" [translate]="'auth.register.lastName_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('lastName').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('lastName').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.emailId'" for="emailId "></label>
+                            <input maxlength="50" formControlName="emailId" [(ngModel)]="item.userBasicInfo.emailId" name="emailId" type="text" class="form-control" id="emailId" placeholder="Email Id" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('emailId').errors?.required && (formgroup.get('emailId').touched || submited)" [translate]="'auth.register.emailId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('emailId').errors?.email && (formgroup.get('emailId').touched || submited)" [translate]="'auth.register.emailId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('emailId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('emailId').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.cCEmailId'" for="cCEmailId "></label>
+                            <input maxlength="50" formControlName="cCEmailId" [(ngModel)]="item.userBasicInfo.cCEmailId" name="cCEmailId" type="text" class="form-control" id="cCEmailId" placeholder="CCEmail Id" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('cCEmailId').errors?.required && (formgroup.get('cCEmailId').touched || submited)" [translate]="'auth.register.cCEmailId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('cCEmailId').errors?.email && (formgroup.get('cCEmailId').touched || submited)" [translate]="'auth.register.cCEmailId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('cCEmailId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('cCEmailId').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+
+                            <label [translate]="'auth.register.contactNo'" for="contactNo "></label>
+                            <input maxlength="50" formControlName="contactNo" [(ngModel)]="item.userBasicInfo.contactNo" name="contactNo" type="text" class="form-control" id="contactNo" placeholder="ContactNo" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('contactNo').errors?.required && (formgroup.get('contactNo').touched || submited)" [translate]="'auth.register.contactNo_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('contactNo').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('contactNo').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.faxNo'" for="faxNo "></label>
+                            <input formControlName="faxNo" [(ngModel)]="item.userBasicInfo.faxNo" name="faxNo" type="text" class="form-control" id="contactNo" placeholder="faxNo" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('faxNo').errors?.required && (formgroup.get('faxNo').touched || submited)" [translate]="'auth.register.faxNo_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('faxNo').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('faxNo').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.whatsAppNo'" for="whatsAppNo "></label>
+                            <input maxlength="50" formControlName="whatsAppNo" [(ngModel)]="item.userBasicInfo.whatsAppNo" name="whatsAppNo" type="text" class="form-control" id="whatsAppNo" placeholder="WhatsAppNo" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('whatsAppNo').errors?.required && (formgroup.get('whatsAppNo').touched || submited)" [translate]="'auth.register.whatsAppNo_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('whatsAppNo').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('whatsAppNo').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+
+                            <label [translate]="'auth.register.skypeId'" for="skypeId "></label>
+                            <input maxlength="50" formControlName="skypeId" [(ngModel)]="item.userBasicInfo.skypeId" name="skypeId" type="text" class="form-control" id="skypeId" placeholder="Skype Id" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('skypeId').errors?.required && (formgroup.get('skypeId').touched || submited)" [translate]="'auth.register.skypeId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('skypeId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('skypeId').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.qQId'" for="qQId "></label>
+                            <input maxlength="50" formControlName="qQId" [(ngModel)]="item.userBasicInfo.qQId" name="qQId" type="text" class="form-control" id="qQId" placeholder="QQ Id" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('qQId').errors?.required && (formgroup.get('qQId').touched || submited)" [translate]="'auth.register.qQId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('qQId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('qQId').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.website'" for="website "></label>
+                            <input maxlength="50" formControlName="website" [(ngModel)]="item.userBasicInfo.website" name="website" type="text" class="form-control" id="website" placeholder="website" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('website').errors?.required && (formgroup.get('website').touched || submited)" [translate]="'auth.register.website_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('website').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('website').errors?.serverError)}} </label>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset>
+                            <legend> <span [translate]="'auth.register.billingAddresstitle'"></span> </legend>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label [translate]="'auth.register.billingAddress'" for="billingAddress "></label>
+                                    <input maxlength="200" formControlName="billingAddress" [(ngModel)]="item.userAddressInfo.billingAddress" name="billingAddress" type="text" class="form-control" id="billingAddress" placeholder="Address" aria-describedby="emailHelp">
+                                    <label *ngIf="formgroup.get('billingAddress').errors?.required && (formgroup.get('billingAddress').touched || submited)" [translate]="'auth.register.billingAddress_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('billingAddress').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('billingAddress').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label [translate]="'auth.register.billingCountry'" for="website "></label>
+                                    <lib-cddropdown [(modelkey)]="item.userAddressInfo.billingCountryId" [(modelvalue)]="billingCounry" [form]="formgroup" [formcontrolname]="'billingCountryId'" (change)="billingCountryChange($event)" [path]="'GetCountry'" [valuemember]="'id'" [displaymember]="'name'"></lib-cddropdown>
+                                    <label *ngIf="formgroup.get('billingCountryId').errors?.required && (formgroup.get('billingCountryId').touched || submited)" [translate]="'auth.register.billingCountryId_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('billingCountryId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('billingCountryId').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label [translate]="'auth.register.billingStateId'" for="billingStateId "></label>
+                                    <lib-cddropdown [params]="billingStateParam" [(modelkey)]="item.userAddressInfo.billingStateId" [form]="formgroup" [formcontrolname]="'billingStateId'" (change)="billingStateChange($event)" [path]="'GetStates'" [valuemember]="'id'" [displaymember]="'name'"></lib-cddropdown>
+                                    <label *ngIf="formgroup.get('billingStateId').errors?.required && (formgroup.get('billingStateId').touched || submited)" [translate]="'auth.register.billingStateId_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('billingStateId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('billingStateId').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label [translate]="'auth.register.billingCityId'" for="billingCityId "></label>
+                                    <lib-cddropdown [params]="billingCityParam" [(modelkey)]="item.userAddressInfo.billingCityId" [form]="formgroup" [formcontrolname]="'billingCityId'" (change)="billingCityChange($event)" [path]="'GetCities'" [valuemember]="'id'" [displaymember]="'name'"></lib-cddropdown>
+                                    <label *ngIf="formgroup.get('billingCityId').errors?.required && (formgroup.get('billingCityId').touched || submited)" [translate]="'auth.register.billingCityId_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('billingCityId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('billingCityId').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label [translate]="'auth.register.billingZipCode'" for="billingZipCode "></label>
+                                    <input maxlength="20" formControlName="billingZipCode" [(ngModel)]="item.userAddressInfo.billingZipCode" name="billingZipCode" type="text" class="form-control" id="billingZipCode" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="formgroup.get('billingZipCode').errors?.required && (formgroup.get('billingZipCode').touched || submited)" [translate]="'auth.register.billingZipCode_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('billingZipCode').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('billingZipCode').errors?.serverError)}} </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset>
+                            <legend> <span [translate]="'auth.register.shippingAddresstitle'"></span></legend>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label [translate]="'auth.register.shippingAddress'" for="shippingAddress "></label>
+                                    <input maxlength="200" formControlName="shippingAddress" [(ngModel)]="item.userAddressInfo.shippingAddress" name="shippingAddress" type="text" class="form-control" id="shippingAddress" placeholder="Address" aria-describedby="emailHelp">
+                                    <label *ngIf="formgroup.get('shippingAddress').errors?.required && (formgroup.get('shippingAddress').touched || submited)" [translate]="'auth.register.shippingAddress_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('shippingAddress').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('shippingAddress').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label [translate]="'auth.register.shippingCountry'" for="website "></label>
+                                    <lib-cddropdown [(modelkey)]="item.userAddressInfo.shippingCountryId" [(modelvalue)]="shippingCounry" [form]="formgroup" [formcontrolname]="'shippingCountryId'" (change)="shippingCountryChange($event)" [path]="'GetCountry'" [valuemember]="'id'" [displaymember]="'name'"></lib-cddropdown>
+                                    <label *ngIf="formgroup.get('shippingCountryId').errors?.required && (formgroup.get('shippingCountryId').touched || submited)" [translate]="'auth.register.shippingCountryId_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('shippingCountryId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('shippingCountryId').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label [translate]="'auth.register.shippingStateId'" for="shippingStateId "></label>
+                                    <lib-cddropdown [params]="shippingStateParam" [(modelkey)]="item.userAddressInfo.shippingStateId" [form]="formgroup" [formcontrolname]="'shippingStateId'" (change)="shippingStateChange($event)" [path]="'GetStates'" [valuemember]="'id'" [displaymember]="'name'"></lib-cddropdown>
+                                    <label *ngIf="formgroup.get('shippingStateId').errors?.required && (formgroup.get('shippingStateId').touched || submited)" [translate]="'auth.register.shippingStateId_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('shippingStateId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('shippingStateId').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label [translate]="'auth.register.shippingCityId'" for="shippingCityId "></label>
+                                    <lib-cddropdown [params]="shippingCityParam" [(modelkey)]="item.userAddressInfo.shippingCityId" [form]="formgroup" [formcontrolname]="'shippingCityId'" (change)="shippingCityChange($event)" [path]="'GetCities'" [valuemember]="'id'" [displaymember]="'name'"></lib-cddropdown>
+                                    <label *ngIf="formgroup.get('shippingCityId').errors?.required && (formgroup.get('shippingCityId').touched || submited)" [translate]="'auth.register.shippingCityId_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('shippingCityId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('shippingCityId').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label [translate]="'auth.register.shippingZipCode'" for="shippingZipCode "></label>
+                                    <input maxlength="20" formControlName="shippingZipCode" [(ngModel)]="item.userAddressInfo.shippingZipCode" name="shippingZipCode" type="text" class="form-control" id="shippingZipCode" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="formgroup.get('shippingZipCode').errors?.required && (formgroup.get('shippingZipCode').touched || submited)" [translate]="'auth.register.shippingZipCode_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('shippingZipCode').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('shippingZipCode').errors?.serverError)}} </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                        <Fieldset>
+                            <legend [translate]="'auth.register.accountTitle'"></legend>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label [translate]="'auth.register.gstNo'" for="gstNo "></label>
+                                    <input maxlength="15" formControlName="gstNo" [(ngModel)]="item.userAccountInfo.gstNo" name="gstNo" type="text" class="form-control" id="gstNo" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="(formgroup.get('gstNo').touched || submited ) && (item.userAccountInfo.gstNo=='' || item.userAccountInfo.gstNo==undefined) && ((billingCounry==undefined ?'':billingCounry).toUpperCase()=='INDIA' || (shippingCounry==undefined ?'':shippingCounry).toUpperCase()=='INDIA')"
+                                        [translate]="'auth.register.gstNo_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('gstNo').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('gstNo').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label [translate]="'auth.register.coBuyerName'" for="coBuyerName "></label>
+                                    <input maxlength="50" formControlName="coBuyerName" [(ngModel)]="item.userAccountInfo.coBuyerName" name="coBuyerName" type="text" class="form-control" id="coBuyerName" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="formgroup.get('coBuyerName').errors?.required && (formgroup.get('coBuyerName').touched || submited ) " [translate]="'auth.register.coBuyerName_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('coBuyerName').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('coBuyerName').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label [translate]="'auth.register.sellerId'" for="sellerId"></label>
+                                    <lib-cdmulitselect [modelkey]="item.sellerId" [datasource]="sellerList" [form]="formgroup" [formcontrolname]="'sellerId'" (change)="sellerChange($event)" [valuemember]="'id'" [displaymember]="'userName'"></lib-cdmulitselect>
+                                    <label *ngIf="formgroup.get('sellerId').errors?.required && (formgroup.get('sellerId').touched || submited) " [translate]="'auth.register.sellerId_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('sellerId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('sellerId').errors?.serverError)}} </label>
+                                </div>
+                            </div>
+                        </Fieldset>
+                    </div>
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend [translate]="'auth.register.referralTitle'"></legend>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label [translate]="'auth.register.refName'" for="refName1"></label>
+                                    <input maxlength="20" formControlName="refName1" [(ngModel)]="item.userReferralInfo[0].refName" name="refName1" type="text" class="form-control" id="refName1" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="formgroup.get('refName1').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('refName1').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label [translate]="'auth.register.refCompany'" for="refcompanyName1"></label>
+                                    <input maxlength="20" formControlName="refcompanyName1" [(ngModel)]="item.userReferralInfo[0].companyName" name="refcompanyName1" type="text" class="form-control" id="refcompanyName1" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="(item.userReferralInfo[0].refName!='' && item.userReferralInfo[0].refName!=undefined ) && (item.userReferralInfo[0].companyName=='' || item.userReferralInfo[0].companyName==undefined) && (formgroup.get('refcompanyName1').touched || submited) "
+                                        [translate]="'auth.register.refCompany_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('refcompanyName1').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('refcompanyName1').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label [translate]="'auth.register.refcontactNo'" for="refcontactNo1"></label>
+                                    <input maxlength="20" formControlName="refcontactNo1" [(ngModel)]="item.userReferralInfo[0].contactNo" name="refcontactNo1" type="text" class="form-control" id="refcontactNo1" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="(item.userReferralInfo[0].refName!='' && item.userReferralInfo[0].refName!=undefined )&& (item.userReferralInfo[0].companyName=='' || item.userReferralInfo[0].companyName==undefined)  && (formgroup.get('refcontactNo1').touched || submited) "
+                                        [translate]="'auth.register.refcontactNo_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('refcontactNo1').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('refcontactNo1').errors?.serverError)}} </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label [translate]="'auth.register.refName'" for="refName2"></label>
+                                    <input maxlength="20" formControlName="refName2" [(ngModel)]="item.userReferralInfo[1].refName" name="refName2" type="text" class="form-control" id="refName2" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="formgroup.get('refName2').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('refName2').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label [translate]="'auth.register.refCompany'" for="refcompanyName2"></label>
+                                    <input maxlength="20" formControlName="refcompanyName2" [(ngModel)]="item.userReferralInfo[1].companyName" name="refcompanyName2" type="text" class="form-control" id="refcompanyName2" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="(item.userReferralInfo[1].refName!='' && item.userReferralInfo[1].refName!=undefined )&& (item.userReferralInfo[1].companyName=='' || item.userReferralInfo[1].companyName==undefined)  && (formgroup.get('refcompanyName2').touched || submited) "
+                                        [translate]="'auth.register.refCompany_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('refcompanyName2').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('refcompanyName2').errors?.serverError)}} </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label [translate]="'auth.register.refcontactNo'" for="refcontactNo2"></label>
+                                    <input maxlength="20" formControlName="refcontactNo2" [(ngModel)]="item.userReferralInfo[1].contactNo" name="refcontactNo2" type="text" class="form-control" id="refcontactNo2" placeholder="" aria-describedby="emailHelp">
+                                    <label *ngIf="(item.userReferralInfo[1].refName!='' && item.userReferralInfo[1].refName!=undefined )&& (item.userReferralInfo[1].companyName=='' || item.userReferralInfo[1].companyName==undefined) && (formgroup.get('refcontactNo2').touched || submited) "
+                                        [translate]="'auth.register.refcontactNo_error'" class="form-text text-danger"></label>
+                                    <label *ngIf="formgroup.get('refcontactNo2').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('refcontactNo2').errors?.serverError)}} </label>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="form-group m-0">
+                    <label [translate]="'auth.register.captchCode'" for="captchCode m-0"></label>
+                    <img [src]="captchaImg" style="margin-left: 5px;">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button (click)="refreshCaptch()" class="btn btn-outline-secondary" type="button" id="button-addon1" wfd-id="1448">Refresh</button>
+                        </div>
+                        <input formControlName="captchCode" [(ngModel)]="item.captchCode" name="captchCode" type="text" class="form-control" id="captchCode" placeholder="">
+                    </div>
+                    <label *ngIf="formgroup.get('captchCode').errors?.required &&  ( submited ||formgroup.get('captchCode').touched)" [translate]="'auth.register.captchCode_error'" class="form-text text-danger"></label>
+                    <label *ngIf="formgroup.get('captchCode').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('captchCode').errors?.serverError)}} </label>
+                </div>
+                <div class="d-flex justify-content-between signin-btn ">
+                    <button class="signin-btn" [translate]="'auth.register.signup'" type="submit">Sign IN</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

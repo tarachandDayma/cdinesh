@@ -1,0 +1,9 @@
+<template [ngTemplateOutlet]="templ" [ngTemplateOutletContext]="{records: Pages[currentPageNo]}">
+</template>
+<div class="pagination" *ngIf="PageCount >1">
+    <a (click)="FirstPage()"> First</a>
+    <a (click)="PrevPage()">Prev</a>
+    <a> {{currentPageNo+1}} Of {{Pages.length}} </a>
+    <a (click)="NextPage()">Next</a>
+    <a (click)="LastPage()">Last</a>
+</div>

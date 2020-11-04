@@ -1,0 +1,25 @@
+<div [formGroup]="form" id="{{controlName+'div'}}" (click)="divclick()" class="form-control" style="    float: left;">
+    <div style="float: left;" id="{{controlName+'span'}}">
+        <span *ngIf="selectedItem.length >0">
+            <span *ngFor="let myitem of selectedItem;" style="cursor: pointer;border: 2px solid white;border-radius: 4px;">
+                <span style="cursor: pointer;color: white;">
+                    <span (click)="removeselectedItem(myitem)">×</span> {{myitem.name}}
+        </span>
+        </span>
+        </span>
+    </div>
+    <div style="float: left;">
+        <input style="border:none;background-color: transparent;" [name]="controlName" [id]="controlName" type="text" tabindex="0" autocomplete="off" autocorrect="off" placeholder="" (focusout)="focusout()" (focusin)="focusIn()" (keyup)="keypress($event)" (keydown)="keydown($event)"
+            aria-autocomplete="none" autocomplete="none">
+    </div>
+    <input [(ngModel)]="returndata" style="display: none;" [formControlName]="_formcontrolname" [name]="_formcontrolname" type="text" class="form-control">
+</div>
+<div id="{{controlName+'divdropdown'}}" [hidden]="!showDropdown" style="width: 96%;position: absolute;z-index: 1000000;top:70px;color: black;background-color: wheat;">
+    <table style="width: 100%;">
+        <tr *ngFor="let x=index;let item of filterdata" style="cursor: pointer;" (click)="mouseclick(x)">
+            <td [ngStyle]="{'background-color': (x==currentIndex) ? 'grey' : ''}" style="cursor: pointer;text-align: left !important;">
+                {{item[displaymember]}}
+            </td>
+        </tr>
+    </table>
+</div>

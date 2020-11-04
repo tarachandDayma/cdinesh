@@ -1,0 +1,280 @@
+@media screen and (max-width:600px){
+    .landing-main .landing-btn{
+        flex-direction: column;
+    }
+    .landing-main .landing-btn a{
+        margin: 0px auto 30px auto;
+    }
+    .landing-main .landing-btn a:first-child{
+        margin-right: auto;
+    }
+    .landing-main .login-images img{ width: 200px !important;}
+    .landing-main{ padding: 30px 30px !important;}
+    .company-name { font-size: 20px !important;}
+    .landing-main .tagline{ font-size: 14px !important; padding-top: 20px !important;}
+    .landing-main .landing-btn a{font-size: 14px !important;}
+    .landing-main .landing-btn {
+        margin-top: 65px !important;
+    }
+    .brndintro {
+        padding: 0px 30px;
+    }
+    .brndintro img{ width: 200px !important;}
+    .sectwo, .secthree, .secfour, .secfive, .secsix, .secseven{ padding-left: 30px !important; padding-right: 30px !important;}
+    .content .one h1, .content .two h1, .content .three h1, .content .four h1, .sectwo h1, .secthree h1, .secfour h1, .secfive h1, .secsix h1{ font-size: 28px !important;}
+}
+
+@media screen and (max-width:992px){
+    .content .one, .content .two, .content .three, .content .four, .sectwo, .secone, .secthree, .secfive, .secseven, .secfour{
+        background-image: unset;
+        padding: 60px 0px;
+        margin: 0;
+    }
+    .content .two .bg2,.content .four .bg4{
+        padding: 0;
+    }
+    .main-nav{
+        align-items: flex-start;
+        margin: 0;
+    }
+    .main-nav a.nav-link{padding: 12px 0px;}
+    .secsix .getintouchform .form-control{
+        margin-bottom: 45px;
+    }
+    .secseven::before{
+        top: 40px;
+    }
+    .main-nav {
+        align-items: center;
+        margin: 0;
+        padding: 40px 0px;
+    }
+    section.secone{
+        padding-top: 120px;
+    }
+    section.one{padding-top: 200px !important;}
+    .navbar-collapse{
+        background-color: rgba(26, 43, 74, 0.8);
+    }
+    .navbar-collapse li.nav-item{
+        margin-bottom: 15px;
+    }
+    .secone::before, .secone::after{ display: none !important;}
+    .landing-main{ padding: 30px 30px !important;}
+    .main-nav a.nav-link[type="submit"]{
+        height: 35px;
+        width: 120px;
+        font-size: 14px;
+    }
+    .main-nav li.nav-item.active a.nav-link, .main-nav li.nav-item:hover a.nav-link{
+        border: 0px;
+    }
+}
+
+@media screen and (max-width:768px){
+    .content .one h1, .content .two h1, content .three h1, .content .four h1{
+        font-size: 30px;
+        margin-bottom: 40px;
+    }
+    .popover-body{
+        height: auto !important;
+        width: 130px !important;
+    }
+    .secfour .card p, .secfour .secCardgroup .card p{padding-top: 5px;}
+    .secfour .secCardgroup .card{margin-bottom: 30px;}
+    .secfive .cardgroups .card-body{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .secsix .getintouchform p{margin-bottom: 45px;}
+    .secseven::before{display: none;}
+    .secseven .r1 > div, .secseven .r2 > div {
+        margin-bottom: 70px;
+    }
+    .secseven .r1 > div:last-child, .secseven .r2 > div:last-child {
+        margin-bottom: 0px;
+    }
+    .secseven h4{margin-bottom: 15px;}
+    .ftrmenu{
+        display: flex;
+        justify-content: space-between !important;
+    }
+    .ftrmenu li{
+        margin-left: 5px;
+    }
+    .privacy h1{
+        font-size: 32px !important;
+    }
+    .privacy p{
+        font-size: 14px;
+    }
+    #heritage h1{
+        margin-bottom: 100px !important;
+    }
+}
+
+@media screen and (max-width:575px) and (orientation: portrait){
+    .signin-header {
+        padding-top: 45px;
+    }
+    .signin-form{ margin-top: 10px;}
+    .signin-form h4{ margin-bottom: 45px;}
+    .signin-form input[type="email"] {
+        margin-bottom: 45px;
+    }
+    .signin-form a {
+        padding-top: 12px;
+    }
+    .signin-form .signin-btn {
+        margin-top: 45px;
+        flex-direction: column;
+    text-align: center
+    }
+    .signin-form .noaccount{
+        padding-bottom: 45px;
+        margin-top: 45px;
+    }
+    .signin-form .signin-btn a{
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .secone {
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
+    .brndintro .tagline{padding-top: 45px;}
+    .secfive .cardgroups{padding: 0;}
+    .signin{ height: 100vh;}
+    
+    .ourcsr-btn{
+        margin: 30px  0px auto;
+    }
+    .brndintro .tagline::after{width: 200px; right: 0; margin: auto;}
+}
+@media screen and (max-width:1200px){
+    .landing-main .body-wrapper .login-images img{ width: 200px !important;}
+    .signin-form{ padding-bottom: 70px;}
+    .brndintro img{width: 300px;}
+}
+
+@media  screen and (min-device-width : 320px) 
+and (max-device-width : 1024px) and (orientation: landscape){
+    .landing-main .landing-btn{margin-top: 40px;}
+    .landing-main .tagline{padding-top: 15px;}
+    .company-name{font-size: 28px;}
+    .brndintro img {
+        width: 200px;
+    }
+    section.secone {
+        padding-top: 85px;
+    }
+}
+
+@media screen and (max-width:1200px) and (orientation: landscape){
+    .signin-form{ padding-bottom: 70px;}
+}
+
+@media screen and (max-width:600px){
+    .signin{ padding: 20px;}
+    .signin .logo p{ font-size: 13px;}
+    .signin-header{padding-top: 15px;}
+    .signin-header a.login-btn{
+        width:120px;
+        font-size: 13px;
+        height: 35px;
+    }
+    .signin-header .logo img{ width: 80px;}
+    .signin-form h4{ 
+        margin-bottom: 27px;
+    font-size: 22px;
+    }
+    .signin-form input[type="email"]{
+        margin-bottom: 10px;
+    }
+
+    .signin-form .form-control{padding: 10px;}
+    .signin-form .signin-btn{
+        margin-top: 30px;
+        flex-direction: row;
+    }
+    .signin-form .noaccount{
+        margin-top: 15px;
+        padding-bottom: 32px;
+        font-size: 12px;
+    }
+    .signin-form {
+        padding-bottom: 0px;
+        margin-top: 30px;
+    }
+    .signin-form label, .signin-form .fogpass{ font-size: 13px;}
+    .signin-form .signin-btn > a[type="button"]{
+        width: 90px;
+        height: 30px;
+        font-size: 13px;
+    }
+
+}
+
+@media screen and (max-width:768px) and (orientation: landscape){
+    .signin-header {
+        padding-top: 20px;
+    }
+    .signin-header .logo img{ width: 110px;}
+    .signin-form{margin-top: 30px;}
+    .signin-form h4{ margin-bottom: 35px; font-size: 30px;}
+    .signin-form input[type="email"] {
+        margin-bottom: 30px;
+    }
+    .signin-form .signin-btn{margin-top: 30px;}
+    .signin-form .noaccount{
+        margin-top: 30px;
+        font-size: 14px;
+        padding-bottom: 32px;
+    }
+    .signin-form {
+        padding-bottom: 0px;
+    }
+    .signin-form label, .signin-form .fogpass{ font-size: 16px;}
+}
+
+@media screen and (min-width:320px) and (max-width:1600px) and (orientation: landscape){
+    .brndintro img{width: 200px;}
+}
+@media screen and (max-width:992px) and (orientation: portrait){
+    .brndintro img {
+        width: 200px ;
+    }
+    section.secone {
+        padding-top: 85px !important;
+    }
+    .brndintro .tagline{
+        padding-top: 15px !important;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:992px) and (orientation: landscape){
+    .brndintro img {
+        width: 200px;
+    }
+    section.secone {
+        padding-top: 85px !important;
+    }
+    .brndintro .tagline{
+        padding-top: 15px !important;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:768px) and (orientation: landscape){
+    .brndintro img {
+        width: 120px !important;
+    }
+    section.secone {
+        padding-top: 85px !important;
+    }
+    .brndintro .tagline{
+        padding-top: 15px !important;
+        font-size: 16px !important;
+    }
+    .company-name{ font-size: 15px !important;}
+}

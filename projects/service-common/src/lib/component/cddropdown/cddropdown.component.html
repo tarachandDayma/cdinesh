@@ -1,0 +1,13 @@
+<div [formGroup]="form">
+    <input [formControlName]="_formcontrolname" [name]="_formcontrolname" type="text" class="form-control" [(ngModel)]="_value" (focusout)="focusout()" (keyup)="keypress($event)" (keydown)="keydown($event)" aria-autocomplete="none" autocomplete="none">
+    <div *ngIf="showloading" style="position: absolute;;z-index: 1000000;right: 15px;top:30px;"> <img width="30" height="30" src="/assets/img/small.loading.gif"> </div>
+    <div id="ctmdropdown" *ngIf="showDropdown" style="position: absolute;width: 300px;overflow-y: auto;overflow-x: hidden;max-height: 300px;z-index: 1000000;background-color: wheat;">
+        <table style="width: 100%;">
+            <tr *ngFor="let x=index;let item of data" style="cursor: pointer;">
+                <td (click)="mouseclick(x)" [ngStyle]="{'background-color': (x==currentIndex) ? 'grey' : ''}" style="cursor: pointer;text-align: left !important;">
+                    {{item[displaymember]}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

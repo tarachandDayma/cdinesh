@@ -1,0 +1,34 @@
+<section class="overlay">
+    <div class="signin d-flex">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex justify-content-between signin-header align-items-center">
+                        <div class="logo">
+                            <a href="#">
+                                <!-- <img src="assets/logos/cd_monogram_final-05.png" alt=""> -->
+                                <img [src]="AppLogo" alt="" width="143px" class="img-fluid">
+                                <p><small>{{AppTitle}}</small></p>
+                            </a>
+                        </div>
+                        <a href="/home" class="login-btn">Visit Website</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row noaccount">
+                        <div class="col">
+                            <form class="signin-form">
+                                <div class="row noaccount">
+                                    <span [translate]="'guest.activation.message'">Don't have an account ?</span>
+                                    <a [translate]="'guest.activation.signin'" routerLink="/guest/login"></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

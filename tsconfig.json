@@ -1,0 +1,50 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "service-common": [
+        "dist/service-common/service-common",
+        "dist/service-common"
+      ],
+      "cdinesh-static-pages": [
+        "dist/cdinesh-static-pages/cdinesh-static-pages",
+        "dist/cdinesh-static-pages"
+      ],
+      "service-account": [
+        "dist/service-account/service-account",
+        "dist/service-account"
+      ],
+      "service-admin": [
+        "dist/service-admin/service-admin",
+        "dist/service-admin",
+        "projects/service-admin/src/public_api"
+      ],
+      "service-guest": [
+        "dist/service-guest/service-guest",
+        "dist/service-guest"
+      ],
+      "service-inventory": [
+        "dist/service-inventory/service-inventory",
+        "dist/service-inventory"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

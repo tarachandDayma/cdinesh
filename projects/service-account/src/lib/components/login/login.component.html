@@ -1,0 +1,49 @@
+<section class="overlay">
+    <div class="signin d-flex">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex justify-content-between signin-header align-items-center">
+                        <div class="logo">
+                            <a href="#">
+                                <!-- <img src="assets/logos/cd_monogram_final-05.png" alt=""> -->
+                                <img [src]="AppLogo" alt="" width="143px" class="img-fluid">
+                                <p><small>{{AppTitle}}</small></p>
+                            </a>
+                        </div>
+                        <a href="/home" class="login-btn">Visit Website</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <form [formGroup]="formgroup" (ngSubmit)="submit()" class="signin-form">
+                        <h4 [translate]="'auth.login.title'">SIGN IN</h4>
+                        <div class="form-group m-0">
+                            <label [translate]="'auth.login.email'" for="username m-0"></label>
+                            <input formControlName="username" [(ngModel)]="item.username" name="username" type="text" class="form-control" id="username" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('username').errors?.required && (formgroup.get('username').touched || submited)" [translate]="'auth.login.username_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('username').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('username').errors?.serverError)}} </label>
+                        </div>
+                        <div class="form-group m-0">
+                            <label [translate]="'auth.login.password'" for="password m-0"></label>
+                            <input formControlName="password" [(ngModel)]="item.password" name="password" type="password" class="form-control" id="password" placeholder="">
+                            <label *ngIf="formgroup.get('password').errors?.required && formgroup.get('password').touched" [translate]="'auth.login.password_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('password').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('password').errors?.serverError)}} </label>
+                            <a [translate]="'auth.login.forgotpassword'" (click)="forgotPassword()" class="form-text text-white text-right fogpass">Forgot Password</a>
+                        </div>
+                        <div class="d-flex justify-content-between signin-btn ">
+                            <a [translate]="'auth.login.guest'" href="/guest" type="button">Guest</a>
+                            <button class="signin-btn" [translate]="'auth.login.signin'" type="submit">Sign IN</button>
+                        </div>
+                        <div class="row noaccount">
+                            <div class="col">
+                                <span [translate]="'auth.login.donthaveaccount'">Don't have an account ?</span><span><a [translate]="'auth.login.registernow'" routerLink="/auth/register">Register Now</a></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

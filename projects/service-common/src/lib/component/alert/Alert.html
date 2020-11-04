@@ -1,0 +1,42 @@
+﻿<div style="left:0px;top:0px;position:fixed;display: block; padding-left: 17px;width:100%;height:100%;z-index:1000000;    background-color: #32353536;" *ngIf="MegBoxType=='success'">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h4 class="modal-title">{{title}}</h4>
+                <button type="button" class="close" (click)="close()">×</button>
+            </div>
+            <div class="modal-body">
+                <p>{{privatemessage}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" (click)="close()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div style="left:0px;top:0px;position:fixed;display: block; padding-left: 17px;width:100%;height:100%;z-index:1000000;    background-color: #32353536;" *ngIf="MegBoxType=='error'">
+    <div class="modal-dialog"  >
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #d72828;">
+                <h4 style="color: white !important;" class="modal-title">{{title}}</h4>
+                <button type="button" class="close" (click)="close()">×</button>
+            </div>
+            <div class="modal-body">
+                <p>{{privatemessage}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="close()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--<div class="alert alert-info alert-dismissible"  >
+    <a class="close">&times;</a>
+    <strong></strong>
+</div>-->

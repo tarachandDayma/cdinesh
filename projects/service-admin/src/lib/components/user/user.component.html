@@ -1,0 +1,135 @@
+<controlpanel-nav>
+</controlpanel-nav>
+<div class="page-title">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12" [translate]="'controlpanel.users.header'">
+                DASHBOARD
+            </div>
+        </div>
+    </div>
+</div>
+<main>
+    <div class="controlPanelContainer">
+        <div class="row" *ngIf="Mode==''">
+            <form (ngSubmit)="searchUser()" style="width: 100%;margin-top: 10px;margin-bottom: -10px;">
+                <div class=" col-sm-6 pull-right">
+
+                    <div class="input-group input-group-sm mb-3">
+                        <input class="form-control" [(ngModel)]="searchText" name="searchText" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <div class="input-group-append">
+                            <button class="input-group-text" id="inputGroup-sizing-sm" [translate]="'controlpanel.users.search'" type="submit">Search</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <div class="col-sm-12">
+                <div style="overflow: auto;">
+                    <app-pagination [datasource]="users" [recordrerpage]="10">
+                        <ng-template let-records="records">
+                            <table class="cd-table" style="width: 1600px;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:32px;" *ngIf="canEdit" [translate]="'controlpanel.users.th.Action'">
+                                            Edit
+                                        </th>
+                                        <th [translate]="'controlpanel.users.th.active'">Active</th>
+                                        <th [translate]="'controlpanel.users.th.website'">website</th>
+                                        <th [translate]="'controlpanel.users.th.mobileApp'">mobileApp</th>
+                                        <th [translate]="'controlpanel.users.th.stockApi'">stockApi</th>
+                                        <th [translate]="'controlpanel.users.th.holdApi'">holdApi</th>
+                                        <th [translate]="'controlpanel.users.th.autoMail'">autoMail</th>
+                                        <th [translate]="'controlpanel.users.th.fullStock'">fullStock</th>
+                                        <th [translate]="'controlpanel.users.th.deskApp'">deskApp</th>
+                                        <th [translate]="'controlpanel.users.th.forum'">forum</th>
+                                        <th [translate]="'controlpanel.users.th.copyMail'">copyMail</th>
+                                        <th [translate]="'controlpanel.users.th.exclusive'">exclusive</th>
+                                        <th [translate]="'controlpanel.users.th.emailSubscribe'">emailSubscribe</th>
+                                        <th [translate]="'controlpanel.users.th.users'">UserName</th>
+                                        <th [translate]="'controlpanel.users.th.percentage'">Per</th>
+                                        <th [translate]="'controlpanel.users.th.fname'">First Name</th>
+                                        <th [translate]="'controlpanel.users.th.lname'">Last Name</th>
+                                        <th [translate]="'controlpanel.users.th.company'">company</th>
+                                        <th [translate]="'controlpanel.users.th.email'">email</th>
+                                        <th [translate]="'controlpanel.users.th.country'">country</th>
+                                        <th [translate]="'controlpanel.users.th.state'">state</th>
+                                        <th [translate]="'controlpanel.users.th.city'">city</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="height:200px;">
+                                    <tr *ngFor="let item of records ">
+                                        <td *ngIf="canEdit" style="width: 32px;">
+                                            <i class="fa fa-edit" (click)="EditUser(item)"></i>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 50px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.isActive">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.isActive">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 61px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.allowWebsite">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.allowWebsite">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 58px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.allowMobileApp">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.allowMobileApp">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 32px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.allowStockAPI">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.allowStockAPI">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 60px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.allowHoldAPI">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.allowHoldAPI">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 67px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.isAutoMail">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.isAutoMail">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 59px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.isIsFullStock">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.isIsFullStock">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 67px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.allowDeskApp">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.allowDeskApp">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 67px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.allowForum">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.allowForum">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 73px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.sendMailCopytoClient">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.sendMailCopytoClient">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 73px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.isExclusive">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.isExclusive">N</span>
+                                        </td>
+                                        <td align="center" style="text-align: center !important;width: 73px!important;">
+                                            <span class="btn btn-sm btn-success" *ngIf="item.isEmailSubscribe">Y</span>
+                                            <span class="btn btn-sm btn-danger" *ngIf="!item.isEmailSubscribe">N</span>
+                                        </td>
+                                        <td style="width: 75px!important;">{{item.userName}}</td>
+                                        <td style="width: 50px!important;">{{item.userAccountInfo?.percentage}}</td>
+                                        <td style="width: 75px!important;">{{item.userBasicInfo?.firstName}}</td>
+                                        <td style="width: 75px!important;">{{item.userBasicInfo?.lastName}}</td>
+                                        <td style="width: 100px!important;">{{item.companyName}}</td>
+                                        <td style="width: 72px!important;">{{item.emailId}}</td>
+                                        <td style="width: 60px!important;">{{item.billingCountryName}}</td>
+                                        <td style="width: 60px!important;">{{item.billingStateName}}</td>
+                                        <td style="width: 60px!important;">{{item.billingCityName}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ng-template>
+                    </app-pagination>
+
+                </div>
+            </div>
+        </div>
+        <div *ngIf="Mode=='Edit' && canEdit">
+            <admin-user-detail [item]="item" (savedata)="savedata()" (canceldata)="canceldata()"></admin-user-detail>
+        </div>
+    </div>
+</main>

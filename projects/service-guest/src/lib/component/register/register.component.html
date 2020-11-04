@@ -1,0 +1,76 @@
+<section class="overlay">
+    <div class="signin d-flex">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex justify-content-between signin-header align-items-center">
+                        <div class="logo">
+                            <a href="#">
+                                <!-- <img src="assets/logos/cd_monogram_final-05.png" alt=""> -->
+                                <img [src]="AppLogo" alt="" width="143px" class="img-fluid">
+                                <p><small>{{AppTitle}}</small></p>
+                            </a>
+                        </div>
+                        <a routerLink="/guest/login" class="login-btn">Login</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <form [formGroup]="formgroup" (ngSubmit)="submit()" class="signin-form">
+                        <h4 [translate]="'guest.register.title'">GEUST SIGN UP</h4>
+                        <div class="form-group m-0">
+                            <label [translate]="'guest.register.name'" for="username m-0"></label>
+                            <input formControlName="name" [(ngModel)]="item.name" name="name" type="text" class="form-control" id="name" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('name').errors?.required && ( submited || formgroup.get('name').touched)" [translate]="'guest.register.name_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('name').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('name').errors?.serverError)}} </label>
+                        </div>
+                        <div class="form-group m-0">
+                            <label [translate]="'guest.register.email'" for="username m-0"></label>
+                            <input formControlName="email" [(ngModel)]="item.email" name="email" type="text" class="form-control" id="email" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('email').errors?.required &&  ( submited || formgroup.get('email').touched )" [translate]="'guest.register.email_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('email').errors?.email &&  ( submited ||formgroup.get('email').touched)" [translate]="'guest.register.email_format_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('email').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('email').errors?.serverError)}} </label>
+                        </div>
+                        <div class="form-group m-0">
+                            <label [translate]="'guest.register.phoneNo'" for="username m-0"></label>
+                            <input formControlName="phoneNo" [(ngModel)]="item.phoneNo" name="phoneNo" type="text" class="form-control" id="phoneNo" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('phoneNo').errors?.required &&  ( submited ||formgroup.get('phoneNo').touched)" [translate]="'guest.register.phoneNo_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('phoneNo').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('phoneNo').errors?.serverError)}} </label>
+                        </div>
+                        <div class="form-group m-0">
+                            <label [translate]="'guest.register.password'" for="password m-0"></label>
+                            <input formControlName="password" [(ngModel)]="item.password" name="password" type="password" class="form-control" id="password" placeholder="">
+                            <label *ngIf="formgroup.get('password').errors?.required &&  ( submited ||formgroup.get('password').touched)" [translate]="'guest.register.password_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('password').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('password').errors?.serverError)}} </label>
+                        </div>
+                        <div class="form-group m-0">
+                            <label [translate]="'guest.register.confirmPassword'" for="password m-0"></label>
+                            <input formControlName="confirmPassword" [(ngModel)]="item.confirmPassword" name="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="">
+                            <label *ngIf="formgroup.get('confirmPassword').errors?.required &&  ( submited ||formgroup.get('confirmPassword').touched)" [translate]="'guest.register.confirmPassword_error'" class="form-text text-danger"></label>
+                            <label *ngIf="!formgroup.get('confirmPassword').errors?.required && item.password !=item.confirmPassword && formgroup.get('confirmPassword').touched" [translate]="'guest.register.confirmPassword_matche_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('confirmPassword').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('confirmPassword').errors?.serverError)}} </label>
+                        </div>
+                        <div class="form-group m-0">
+                            <label [translate]="'guest.register.captchCode'" for="captchCode m-0"></label>
+                            <img [src]="captchaImg" style="margin-left: 5px;">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button (click)="refreshCaptch()" class="btn btn-outline-secondary" type="button" id="button-addon1" wfd-id="1448">Refresh</button>
+                                </div>
+                                <input formControlName="captchCode" [(ngModel)]="item.captchCode" name="captchCode" type="text" class="form-control" id="captchCode" placeholder="">
+                            </div>
+                            <label *ngIf="formgroup.get('captchCode').errors?.required &&  ( submited ||formgroup.get('captchCode').touched)" [translate]="'guest.register.captchCode_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('captchCode').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('captchCode').errors?.serverError)}} </label>
+                        </div>
+                        <div class="form-group m-0">
+                            <div class="d-flex justify-content-between signin-btn ">
+                                <button class="signin-btn" [translate]="'guest.register.signup'" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
