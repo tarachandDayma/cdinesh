@@ -1,4 +1,4 @@
-.page-button {
+/* .page-button {
     font-size: 12px;
     font-family: 'Josefin Sans', sans-serif;
     border: 2px solid #e5803f;
@@ -17,12 +17,19 @@
     border: 2px solid #e5803f;
     background-color: #e5803f;
     color: white;
-}
+} */
 
 .pagination {
     display: inline-block;
 }
 
+.pagination a {
+    color: white !important;
+    margin-right: 5px;
+}
+
+
+/* 
 .pagination a {
     background-color: #e5803f;
     float: left;
@@ -33,4 +40,4 @@
     color: white;
     cursor: pointer;
     font-size: 12px;
-}
+} */
