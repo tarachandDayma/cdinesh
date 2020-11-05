@@ -9,25 +9,59 @@
     </div>
 </div>
 <!-- PAGE TITLE END -->
-<main>
+<main class="myform">
     <div class="controlPanelContainer">
         <div class="row">
-            <div class="row shapes">
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="All Shapes">All Shapes</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Round"><img src="./assets/img/round.png"> <br> Round</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Princess"><img src="./assets/img/princess.png"> <br> Princess</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pear"><img src="./assets/img/pear.png"> <br> Pear</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Heart"><img src="./assets/img/heart.png"> <br> Heart</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Oval"><img src="./assets/img/oval.png"> <br> Oval</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Marquise"><img src="./assets/img/marquise.png"> <br> Marquise</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Emerald"><img src="./assets/img/emerald.png"> <br> Emerald</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Radiant"><img src="./assets/img/radiant.png"> <br> Radiant</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cushion"><img src="./assets/img/cushion.png"> <br> Cushion</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cushion 2"><img src="./assets/img/cushionb.png"> <br> Cushion B</span></div>
-                <div name="" id="" class="col-3 col-sm-2 col-xl-1"><span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="Other"><img src="./assets/img/other.png"> <br> Other</span></div>
+            <div class="row col-md-12 shapes" *ngIf="shapeList.list.length >0">
+                <div (click)="SelectCriteria(shapeList,null)" name="" id="" class="col-3 col-sm-2 col-xl-1">
+                    <span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="All Shapes" [ngStyle]="shapeList.allSelected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}"><br>All Shapes</span></div>
+                <div (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement>9" name="" id="" class="col-3 col-sm-2 col-xl-1">
+                    <span [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
+                        <img onerror="this.style.display='none'" src="./assets/img/{{item.selected?item.id+'-white':item.id}}.png" style="height: 38px;"> <br> {{item.websiteAbr}}
+                    </span>
+                </div>
+                <div name="" id="" class="col-3 col-sm-2 col-xl-1">
+                    <a [ngStyle]=" (shapeList.selectedOther || shapeList.allSelected) && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class=" shape nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <img onerror="this.style.display='none'" src="./assets/img/{{shapeList.selectedOther?'other-white':'other'}}.png"> <br> Other
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="body">
+                            <a [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="dropdown-item" (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement<=9"
+                                name="" id="">
+                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}} 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row col-md-12">
+                <div class="col-sm-1">Colour <i class="fa fa-refresh" data-toggle="tooltip" data-placement="top" title="Refresh"></i></div>
+                <div class="col-sm-10">
+                    <input [(ngModel)]="colorList.allSelected" (change)="SelectCriteria(colorList,null)" type="checkbox" id="allcolor" name="color">
+                    <label for="allcolor" class="btn">All</label>
+                    <span *ngFor="let  item of colorList.list;">
+                        <input [(ngModel)]="item.selected" (change)="SelectCriteria(colorList,item)" type="checkbox" id="color{{item.id}}" name="color{{item.id}}">
+                        <label for="color{{item.id}}" class="btn">{{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</label>
+                    </span>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="col-sm-1">Clarity <i class="fa fa-refresh" data-toggle="tooltip" data-placement="top" title="Refresh"></i></div>
+                <div class="col-sm-10">
+                    <input [(ngModel)]="clarityList.allSelected" (change)="SelectCriteria(clarityList,null)" type="checkbox" id="allclarity" name="allclarity">
+                    <label for="allclarity" class="btn">All</label>
+                    <span *ngFor="let  item of clarityList.list;">
+                        <input [(ngModel)]="item.selected" (change)="SelectCriteria(clarityList,item)" type="checkbox" id="clarity{{item.id}}" name="clarity{{item.id}}">
+                        <label for="clarity{{item.id}}" class="btn">{{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</label>
+                    </span>
+                </div>
             </div>
         </div>
+
     </div>
+
 </main>
 <!-- MAIN END -->
 <!-- SIDEBAR START -->

@@ -540,7 +540,7 @@ font-size: 16px !important;
 }
 
 
-.btn {
+main .btn {
   font-size: 12px;
 }
 
@@ -562,6 +562,16 @@ font-size: 16px !important;
   color: #ffffff;
 }
 
+.signup-form .custom-select, .signup-form .form-control, select {
+  background: transparent;
+border: 0;
+border-bottom: 1px solid #e5803f;
+border-radius: 0px;
+margin-right: 5px;
+color: #ffffff;
+}
+
+
 
 .signup-header {
   padding-top: 5px;
@@ -581,7 +591,7 @@ font-size: 16px !important;
     top: 0;
   }
 
-  .form-control{
+  .signup-form .form-control{
     padding: 3px 10px;
     margin-bottom: 20px;
   }
@@ -651,6 +661,27 @@ font-size: 16px !important;
     border-bottom: 1px solid #e5803f;
     color: #ffffff;
   }
+
+
+
+
+
+  nav .form-control, nav .custom-select {
+
+    background-color: transparent !important;
+    border-radius: 0;
+    border: 0px;
+    border-bottom: 1px solid #e5803f;
+    color: #ffffff;
+    
+  }
+
+  nav .form-control:active, nav .form-control:focus {
+    color: #fff;
+    box-shadow: 0;
+    border-bottom: 1px solid #e5803f;
+  }
+
 
   footer {
     height: auto;
@@ -804,3 +835,21 @@ font-size: 16px !important;
     display: inline-block;
   }
 }
+
+.signup-header a.login-btn {
+  font-size: 16px;
+  font-weight: 900;
+  font-family: 'Josefin Sans', sans-serif;
+  border: 1px solid #e5803f;
+  width: 150px;
+  height: 45px;
+  text-align: center;
+  margin-bottom: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #e5803f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 4px;
+  }
