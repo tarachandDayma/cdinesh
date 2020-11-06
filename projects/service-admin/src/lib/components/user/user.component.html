@@ -29,10 +29,10 @@
                     <app-pagination [datasource]="users" [recordrerpage]="10">
                         <ng-template let-records="records">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table" style="width: 1600px;">
+                                <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table table-fixed" style="width: 1600px;">
                                     <thead>
                                         <tr>
-                                            <th style="width:32px;" *ngIf="canEdit" [translate]="'controlpanel.users.th.Action'">
+                                            <th class="fixed-column" style="width:50px;" *ngIf="canEdit" [translate]="'controlpanel.users.th.Action'">
                                                 Edit
                                             </th>
                                             <th [translate]="'controlpanel.users.th.active'">Active</th>
@@ -60,7 +60,7 @@
                                     </thead>
                                     <tbody style="height:200px;">
                                         <tr *ngFor="let item of records ">
-                                            <td *ngIf="canEdit" style="width: 32px;">
+                                            <td class="fixed-column" *ngIf="canEdit" style="width: 32px;">
                                                 <button class="btn btn-sm btn-primary" (click)="EditUser(item)"><i class="fa fa-edit  mr-2" ></i></button>
                                             </td>
                                             <td align="center" style="text-align: center !important;width: 50px!important;">

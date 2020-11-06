@@ -1,4 +1,4 @@
-import { ContentChild, TemplateRef } from '@angular/core';
+import { ContentChild, TemplateRef, ViewChild } from '@angular/core';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 declare var $: any;
 @Component({
@@ -7,6 +7,7 @@ declare var $: any;
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent implements OnInit, OnChanges {
+  @ViewChild('div') div;
 
   @Input() datasource: any[];
   @Input() recordrerpage: number;
@@ -37,10 +38,15 @@ export class PaginationComponent implements OnInit, OnChanges {
         }
       }
     }
+    var _this = this;
     setTimeout(() => {
 
-      $.each($(".cd-table").find("td"), function (index, value) {
-        $(this).width($(this).width());
+      $.each($(_this.div.nativeElement).find(".cd-table").find("th"), function (index, value) {
+        _this.start = this;
+        var indx = $(this).index();
+        $.each($(_this.div.nativeElement).find(".cd-table").find("td").parent("tr").parent("tbody").find("tr"), function (index1, value1) {
+          $(this).find("td").eq(indx).width($(_this.start).width());
+        });
       });
     }, 1000);
   }
@@ -48,26 +54,30 @@ export class PaginationComponent implements OnInit, OnChanges {
   start: any;
   startX: any;
   startWidth: any;
+  tableWidth:number;
   ngOnInit(): void {
     var _this = this;
-    setTimeout(() => {
-      $(".cd-table").find("th").mousedown(function (e) {
+    setTimeout(() => { 
+      $(_this.div.nativeElement).find(".cd-table").find("th").mousedown(function (e) {
         _this.start = $(this);
         _this.pressed = true;
         _this.startX = e.pageX;
         _this.startWidth = $(this).width();
+        _this.tableWidth=$(_this.div.nativeElement).find(".cd-table").width();
       })
       $(document).mousemove(function (e) {
         if (_this.pressed) {
           if (_this.startWidth + (e.pageX - _this.startX) > 10) {
             $(_this.start).width(_this.startWidth + (e.pageX - _this.startX));
             var indx = $(_this.start).index();
-            $.each($(".cd-table").find("td").parent("tr").parent("tbody").find("tr"), function (index, value) {
+            $.each($(_this.div.nativeElement).find(".cd-table").find("td").parent("tr").parent("tbody").find("tr"), function (index, value) {
               $(this).find("td").eq(indx).width($(_this.start).width());
             });
-           // $(".cd-table").find("td").eq(indx).width($(_this.start).width());
-            $(".cd-table").find("td").eq(indx).parent("tr").parent("thead").width($(_this.start).parent("tr").parent("thead").width());
-          }
+            // $(".cd-table").find("td").eq(indx).width($(_this.start).width());
+            $(_this.div.nativeElement).find(".cd-table").find("td").eq(indx).parent("tr").parent("thead").width($(_this.start).parent("tr").parent("thead").width());
+            $(_this.div.nativeElement).find(".cd-table").width(_this.tableWidth + (e.pageX - _this.startX));
+             
+          }           
         }
       });
       $(document).mouseup(function () {
@@ -75,7 +85,7 @@ export class PaginationComponent implements OnInit, OnChanges {
           _this.pressed = false;
         }
       });
-      $(".cd-table").find("th").mousemove(function (e) {
+      $(_this.div.nativeElement).find(".cd-table").find("th").mousemove(function (e) {
         if (!_this.pressed && e.offsetX < $(this).innerWidth() - 10) {
           $(this).css('cursor', 'pointer');
 
@@ -87,6 +97,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     }, 2000);
 
   }
+
   FirstPage(): void {
     this.currentPageNo = 0;
   }

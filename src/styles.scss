@@ -3,6 +3,33 @@ main {
     overflow: auto;
 }
 
+.table-fixed .fixed-column {
+    position: relative;
+}
+
+.table-fixed tbody {
+    height: 200px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+    display: block;
+    height: 26px;
+}
+
+.table-fixed tbody td {
+    float: left;
+}
+
+.table-fixed thead tr th {
+    float: left;
+}
+
 .user-form .signin-btn button {
     margin-top: 0px;
     font-size: 16px;
