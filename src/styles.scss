@@ -3,31 +3,94 @@ main {
     overflow: auto;
 }
 
-.table-fixed .fixed-column {
-    position: relative;
-}
-
-.table-fixed tbody {
-    height: 200px;
-    overflow-y: auto;
-    width: 100%;
-}
-
-.table-fixed thead,
-.table-fixed tbody,
-.table-fixed tr,
-.table-fixed td,
+// .table-fixed .fixed-column {
+//     position: relative;
+//     display: table-cell;
+//     float: unset;
+// }
+// .table-fixed tbody {
+//     height: 200px;
+//     overflow-y: auto;
+//     width: 100%;
+// }
+// .table-fixed thead,
+// .table-fixed tbody,
+// .table-fixed tr,
+// .table-fixed td,
+// .table-fixed th {
+//     display: block;
+//     height: 26px;
+// }
+// .table-fixed tbody td {
+//     float: left;
+// }
+// .table-fixed thead tr th {
+//     float: left;
+// }
 .table-fixed th {
+    background-color: #ebebec;
+}
+
+.table-fixed th,
+.table-fixed td {
+    padding: .10rem;
+    max-width: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table-fixed {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    height: 350px;
     display: block;
-    height: 26px;
 }
 
-.table-fixed tbody td {
-    float: left;
+.table-fixed table {
+    width: 100%;
+    min-width: 1280px;
+    margin: auto;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
-.table-fixed thead tr th {
-    float: left;
+.table-fixed th,
+.table-fixed td {
+    vertical-align: top;
+}
+
+.table-fixed thead th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+
+/* safari and ios need the tfoot itself to be position:sticky also */
+
+.table-fixed tfoot,
+.table-fixed tfoot th,
+.table-fixed tfoot td {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    z-index: 4;
+}
+
+.table-fixed th:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+.table-fixed thead th:first-child,
+.table-fixed tfoot th:first-child {
+    z-index: 5;
 }
 
 .user-form .signin-btn button {

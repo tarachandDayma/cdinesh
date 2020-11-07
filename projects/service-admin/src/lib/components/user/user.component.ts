@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { alert, alertserice, EnvironmentService, loaderserice } from 'service-common';
 import { UserModel } from '../../models/user.model';
 import { userService } from '../../services/user.service';
@@ -10,7 +11,7 @@ import { userService } from '../../services/user.service';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private userserve:userService,private alert:alertserice,private loader:loaderserice,private environment : EnvironmentService) { }
+  constructor(private userserve:userService,private alert:alertserice,private loader:loaderserice,private environment : EnvironmentService, public translate: TranslateService) { }
   Mode:string="";
   users: UserModel[] = [];
   searchText:string="";

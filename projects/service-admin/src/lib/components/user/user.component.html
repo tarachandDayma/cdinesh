@@ -26,43 +26,43 @@
             </form>
             <div class="col-sm-12">
                 <div style="overflow: auto;">
-                    <app-pagination [datasource]="users" [recordrerpage]="10">
+                    <app-pagination [datasource]="users" [recordrerpage]="20">
                         <ng-template let-records="records">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table table-fixed" style="width: 1600px;">
+                            <div class="table-fixed">
+                                <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table " style="width: 1600px;">
                                     <thead>
                                         <tr>
-                                            <th class="fixed-column" style="width:50px;" *ngIf="canEdit" [translate]="'controlpanel.users.th.Action'">
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.Action')}}" class="fixed-column" style="width:50px;" *ngIf="canEdit" [translate]="'controlpanel.users.th.Action'">
                                                 Edit
                                             </th>
-                                            <th [translate]="'controlpanel.users.th.active'">Active</th>
-                                            <th [translate]="'controlpanel.users.th.website'">website</th>
-                                            <th [translate]="'controlpanel.users.th.mobileApp'">mobileApp</th>
-                                            <th [translate]="'controlpanel.users.th.stockApi'">stockApi</th>
-                                            <th [translate]="'controlpanel.users.th.holdApi'">holdApi</th>
-                                            <th [translate]="'controlpanel.users.th.autoMail'">autoMail</th>
-                                            <th [translate]="'controlpanel.users.th.fullStock'">fullStock</th>
-                                            <th [translate]="'controlpanel.users.th.deskApp'">deskApp</th>
-                                            <th [translate]="'controlpanel.users.th.forum'">forum</th>
-                                            <th [translate]="'controlpanel.users.th.copyMail'">copyMail</th>
-                                            <th [translate]="'controlpanel.users.th.exclusive'">exclusive</th>
-                                            <th [translate]="'controlpanel.users.th.emailSubscribe'">emailSubscribe</th>
-                                            <th [translate]="'controlpanel.users.th.users'">UserName</th>
-                                            <th [translate]="'controlpanel.users.th.percentage'">Per</th>
-                                            <th [translate]="'controlpanel.users.th.fname'">First Name</th>
-                                            <th [translate]="'controlpanel.users.th.lname'">Last Name</th>
-                                            <th [translate]="'controlpanel.users.th.company'">company</th>
-                                            <th [translate]="'controlpanel.users.th.email'">email</th>
-                                            <th [translate]="'controlpanel.users.th.country'">country</th>
-                                            <th [translate]="'controlpanel.users.th.state'">state</th>
-                                            <th [translate]="'controlpanel.users.th.city'">city</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.active')}}" [translate]="'controlpanel.users.th.active'">Active</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.website')}}" [translate]="'controlpanel.users.th.website'">website</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.mobileApp')}}" [translate]="'controlpanel.users.th.mobileApp'">mobileApp</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.stockApi')}}" [translate]="'controlpanel.users.th.stockApi'">stockApi</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.holdApi')}}" [translate]="'controlpanel.users.th.holdApi'">holdApi</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.autoMail')}}" [translate]="'controlpanel.users.th.autoMail'">autoMail</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.fullStock')}}" [translate]="'controlpanel.users.th.fullStock'">fullStock</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.deskApp')}}" [translate]="'controlpanel.users.th.deskApp'">deskApp</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.forum')}}" [translate]="'controlpanel.users.th.forum'">forum</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.copyMail')}}" [translate]="'controlpanel.users.th.copyMail'">copyMail</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.exclusive')}}" [translate]="'controlpanel.users.th.exclusive'">exclusive</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.emailSubscribe')}}" [translate]="'controlpanel.users.th.emailSubscribe'">emailSubscribe</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.user')}}" [translate]="'controlpanel.users.th.users'">UserName</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.percentage')}}" [translate]="'controlpanel.users.th.percentage'">Per</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.fname')}}" [translate]="'controlpanel.users.th.fname'">First Name</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.lname')}}" [translate]="'controlpanel.users.th.lname'">Last Name</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.company')}}" [translate]="'controlpanel.users.th.company'">company</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.email')}}" [translate]="'controlpanel.users.th.email'">email</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.country')}}" [translate]="'controlpanel.users.th.country'">country</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.state')}}" [translate]="'controlpanel.users.th.state'">state</th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('controlpanel.users.th.city')}}" [translate]="'controlpanel.users.th.city'">city</th>
                                         </tr>
                                     </thead>
                                     <tbody style="height:200px;">
                                         <tr *ngFor="let item of records ">
-                                            <td class="fixed-column" *ngIf="canEdit" style="width: 32px;">
+                                            <th class="fixed-column" *ngIf="canEdit" style="width: 32px;">
                                                 <button class="btn btn-sm btn-primary" (click)="EditUser(item)"><i class="fa fa-edit  mr-2" ></i></button>
-                                            </td>
+                                            </th>
                                             <td align="center" style="text-align: center !important;width: 50px!important;">
                                                 <span class="text-success" *ngIf="item.isActive">Y</span>
                                                 <span class="text-danger" *ngIf="!item.isActive">N</span>
