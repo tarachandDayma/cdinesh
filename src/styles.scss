@@ -3,6 +3,109 @@ main {
     overflow: auto;
 }
 
+.refresh-button {
+    text-align: center;
+    padding-left: 4px;
+    background-color: transparent;
+    border-radius: 0px;
+}
+
+hr {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    width: 100%;
+}
+
+.btn-critearia-hover {
+    height: 30px;
+    min-width: 30px;
+}
+
+.btn-critearia-hover :hover {
+    text-align: center;
+    padding-left: 4px;
+    background-color: #e5803f;
+    border-radius: 0px;
+    color: white !important;
+    border: 1px solid #e5803f;
+    margin-right: 5px;
+    font-size: 10px !important;
+    height: 30px;
+    min-width: 30px;
+    padding-right: 4px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.btn-pointer {
+    text-align: center;
+    padding-left: 4px;
+    background-color: transparent;
+    border-radius: 0px;
+    color: #1a4578 !important;
+    border: 1px solid #e5803f;
+    margin-right: 5px;
+    font-size: 12px !important;
+    height: 30px;
+    width: 100%;
+    max-width: 100%;
+    padding-right: 4px;
+    padding-right: 4px;
+    // font-weight: bold;
+    margin-top: 5px;
+}
+
+.btn-pointer-selected {
+    text-align: center;
+    padding-left: 4px;
+    background: linear-gradient(to right, #192b4a, #1b579a);
+    border-radius: 0px;
+    color: #fbfbfb !important;
+    border: 1px solid #e5803f;
+    margin-right: 5px;
+    font-size: 12px !important;
+    height: 30px;
+    width: 100%;
+    max-width: 100%;
+    padding-right: 4px;
+    // font-weight: bold;
+    margin-top: 5px;
+}
+
+.btn-critearia-selected {
+    text-align: center;
+    padding-left: 4px;
+    background: linear-gradient(to right, #192b4a, #1b579a);
+    border-radius: 0px;
+    color: #fbfbfb !important;
+    border: 1px solid #e5803f;
+    margin-right: 5px;
+    font-size: 10px !important;
+    height: 30px;
+    min-width: 30px;
+    padding-right: 4px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.btn-critearia {
+    text-align: center;
+    padding-left: 4px;
+    background-color: transparent;
+    border-radius: 0px;
+    color: #1a4578 !important;
+    border: 1px solid #e5803f;
+    margin-right: 5px;
+    font-size: 10px !important;
+    height: 30px;
+    min-width: 30px;
+    padding-right: 4px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
 // .table-fixed .fixed-column {
 //     position: relative;
 //     display: table-cell;

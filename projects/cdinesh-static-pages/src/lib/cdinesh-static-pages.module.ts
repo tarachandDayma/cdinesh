@@ -11,11 +11,12 @@ import { environment } from './environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
 @NgModule({
-  declarations: [CdineshStaticPagesComponent,HomeComponent,NavigationComponent, HeaderComponent, OurStoryComponent, PrivacyComponent],
+  declarations: [CdineshStaticPagesComponent,HomeComponent,NavigationComponent, HeaderComponent, OurStoryComponent, PrivacyComponent, FooterComponent],
   imports: [
     AppRoutingModule,
     FormsModule,ReactiveFormsModule,CommonModule,

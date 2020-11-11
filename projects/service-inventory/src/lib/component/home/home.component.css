@@ -1,0 +1,194 @@
+main {
+    padding: 0px;
+}
+
+.box {
+    padding: 3px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 2px solid #ccc;
+    background: #f3f3f3;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+
+.carat-col-sm-1 {
+    padding-top: 5px;
+}
+
+.carat-input {
+    border-radius: 0;
+}
+
+@media (min-width:100px) and (max-width:768px) {
+    .col-md-pointer-1 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 30.333333%;
+        flex: 0 0 30.333333%;
+        max-width: 30.333333%;
+        padding: 2px;
+    }
+    .col-md-selected-pointer-1 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 30.333333%;
+        flex: 0 0 30.333333%;
+        max-width: 30.333333%;
+        padding: 2px;
+        padding-left: 15px;
+    }
+    .col-md-selected-pointer-1 span {
+        padding-top: 5px;
+    }
+}
+
+@media (min-width:769px) and (max-width:1024px) {
+    .col-sm-color-6 {
+        padding-right: 0px;
+    }
+    .col-sm-clarity-6 {
+        padding-right: 6px;
+    }
+    .col-sm-cut-6 {
+        padding-right: 0px;
+    }
+    .col-sm-polish-6 {
+        padding-right: 0px;
+        padding-left: 6px;
+    }
+    .col-sm-symmetry-6 {
+        padding-left: 6px;
+    }
+    .col-md-selected-pointer-1 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 13.333333%;
+        flex: 0 0 13.333333%;
+        max-width: 13.333333%;
+        padding: 1px;
+    }
+    .col-md-selected-pointer-1 span {
+        padding-top: 5px;
+    }
+    .col-md-pointer-1 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 11.333333%;
+        flex: 0 0 13.333333%;
+        max-width: 13.333333%;
+        padding: 2px;
+    }
+    .col-sm-pointer-2 {
+        flex: 0 0 15.666667%;
+        max-width: 15.666667%;
+    }
+    .col-sm-color-2 {
+        padding-right: 0px;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 11.666667%;
+        max-width: 11.666667%;
+    }
+    .col-sm-clarity-2 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 18.666667%;
+        max-width: 18.666667%;
+    }
+}
+
+@media (min-width: 1025px) {
+    .col-sm-color-6 {
+        padding-right: 0px;
+    }
+    .col-sm-clarity-6 {
+        padding-left: 6px;
+    }
+    .col-sm-cut-6 {
+        padding-right: 0px;
+    }
+    .col-sm-polish-6 {
+        padding-right: 0px;
+        padding-left: 6px;
+    }
+    .col-sm-symmetry-6 {
+        padding-left: 6px;
+    }
+    .col-md-selected-pointer-1 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 13.333333%;
+        flex: 0 0 13.333333%;
+        max-width: 13.333333%;
+        padding: 1px;
+    }
+    .col-md-selected-pointer-1 span {
+        padding-top: 5px;
+    }
+    .col-sm-color-2 {
+        padding-right: 0px;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 11.666667%;
+        max-width: 11.666667%;
+    }
+    .col-sm-clarity-2 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 18.666667%;
+        max-width: 18.666667%;
+    }
+    .col-sm-shape-2 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 10.666667%;
+        max-width: 8%;
+        padding-right: 0px;
+    }
+    col-sm-2 {
+        flex: 0 0 12.666667%;
+        max-width: 12%;
+        padding-right: 0;
+    }
+    .col-sm-pointer-2 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 12.666667%;
+        flex: 0 0 12.666667%;
+        max-width: 12.666667%;
+    }
+    .col-md-pointer-1 {
+        padding: 2px;
+    }
+}
+
+@media (max-width:450px) {
+    .controlPanelContainer {
+        max-width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .col-sm-12 {
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 0px;
+        padding-left: 15px;
+    }
+    .col-sm-shape-2 {
+        padding-right: 0px;
+    }
+    .col-sm-color-6 {
+        padding-right: 0px;
+    }
+    .col-sm-clarity-6 {
+        padding-left: 15px;
+        padding-right: 0px;
+    }
+    .col-sm-cut-6 {
+        padding-right: 0px;
+    }
+    .col-sm-polish-6 {
+        padding-left: 15px;
+        padding-right: 0px;
+    }
+    .col-sm-symmetry-6 {
+        padding-left: 15px;
+        padding-right: 0px;
+    }
+}
