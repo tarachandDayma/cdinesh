@@ -19,16 +19,21 @@ export class HomeComponent implements OnInit {
     , private entityService: EntityService) { }
   shapeList: any;
   colorList: any;
+  fancycolorList: any;
+  fancyOvertoneList: any;
+  fancyIntensityList: any;
   clarityList: any;
   cutList: any;
   polishList: any;
   symList: any;
+  locationList: any;
   caratRange: any;
   defaultCaratRange: any[];
   fromCarat: number;
   toCarat: number;
   selectedPointer: any[];
   showMorePointer: boolean = false;
+  fancyColor: boolean = false;
   ngOnInit(): void {
     this.selectedPointer = [];
     this.defaultCaratRange = [
@@ -282,6 +287,26 @@ export class HomeComponent implements OnInit {
       selectedOther: false,
       list: []
     };
+    this.locationList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.fancycolorList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.fancyOvertoneList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.fancyIntensityList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
     this.loader.show(true);
     this.entityService.GetEntity("Shape").subscribe(result => {
       this.loader.show(false);
@@ -319,8 +344,34 @@ export class HomeComponent implements OnInit {
     }, error => {
       this.loader.show(false);
     })
+    this.entityService.GetEntity("Location").subscribe(result => {
+      this.loader.show(false);
+      this.locationList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("FancyColor").subscribe(result => {
+      this.loader.show(false);
+      this.fancycolorList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("FancyColorOvertone").subscribe(result => {
+      this.loader.show(false);
+      this.fancyOvertoneList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("FancyColorIntensity").subscribe(result => {
+      this.loader.show(false);
+      this.fancyIntensityList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
   }
-
+  showFancy(flag:boolean){
+    this.fancyColor=flag;
+  }
   SelectCriteria(list: any, item: any) {
     if (item != null) {
       item.selected = item.selected != true;

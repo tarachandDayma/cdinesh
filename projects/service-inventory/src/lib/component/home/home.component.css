@@ -6,10 +6,20 @@ main {
     padding: 3px;
     padding-bottom: 10px;
     padding-top: 10px;
-    border: 2px solid #ccc;
-    background: #f3f3f3;
+    border: 1px solid #ccc;
+    background: white;
     border-radius: 6px;
     margin-bottom: 5px;
+}
+
+.carat-col-sm-1 {
+    color: #1b5393;
+    font-weight: 500;
+}
+
+.box h6 {
+    color: #1b5393;
+    font-weight: 500;
 }
 
 .carat-col-sm-1 {

@@ -1,192 +1,259 @@
 <inventory-nav></inventory-nav>
-<div class="page-title">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12" [translate]="'inventory.search.title'">
-                TITLE
-            </div>
-        </div>
-    </div>
-</div>
-<!-- PAGE TITLE END -->
-<main class="myform">
-    <div class="controlPanelContainer">
-        <div class="row">
-
-            <div class="row col-md-12" *ngIf="shapeList.list.length >0">
-
-                <div (click)="SelectCriteria(shapeList,null)" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
-                    <span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="All Shapes" [ngStyle]="shapeList.allSelected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}"><br>All Shapes</span></div>
-                <div (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement>9" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
-                    <span [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
-                        <img onerror="this.style.display='none'" src="./assets/img/{{item.selected?item.id+'-white':item.id}}.png" style="height: 38px;"> <br> {{item.websiteAbr}}
-                    </span>
-                </div>
-                <div name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
-                    <a [ngStyle]=" (shapeList.selectedOther) && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class=" shape nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <img onerror="this.style.display='none'" src="./assets/img/{{shapeList.selectedOther?'other-white':'other'}}.png"> <br> Other
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <div class="body">
-                            <a [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="dropdown-item" (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement<=9"
-                                name="" id="">
-                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}} 
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <hr>
-                </div>
-
-            </div>
-
-            <div class="row col-md-12">
-                <div class=" col-sm-12 ">
-                    <div class="box">
-                        <div class="row">
-                            <div class="col-sm-2 col-sm-pointer-2 carat-col-sm-1">
-                                Carat Range
-                                <i class="fa fa-refresh" (click)="resetPointer()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i>
-                            </div>
-                            <div class="col-sm-3 carat-col-sm-1">
-                                <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-sm">From</span>
-                                    </div>
-                                    <input name="fromCarat" [(ngModel)]="fromCarat" type="number" class="form-control carat-input" min="0" placeholder="from">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="inputGroup-sizing-sm">To</span>
-                                    </div>
-                                    <input name="toCarat" [(ngModel)]="toCarat" type="number" class="form-control carat-input" min="0" placeholder="to">
-                                    <div class="input-group-append">
-                                        <button type="button" (click)="addPointer()" class="btn btn-outline-secondary"> <i class="fa fa-plus"> </i> </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="row">
-                                    <div class="col-md-1 col-md-selected-pointer-1" *ngFor="let  item of selectedPointer;">
-                                        <span [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{item.from}}-{{item.to}} <span (click)="removeCaratRange(item)" style="padding-left: 2px;" >X</span> </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="pull-left"><button type="button" class="btn-critearia" (click)="openMorePointer()"><i *ngIf="!showMorePointer" class="fa fa-plus"></i><i *ngIf="showMorePointer" class="fa fa-minus"></i> </button></div>
-                                <div class="row">
-                                    <div class="col-md-1 col-md-pointer-1" *ngFor="let  item of defaultCaratRange;">
-                                        <button [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" (click)="selectPointer(null,item)" type="button"> {{item.lable}}</button>
-                                        <ul style="list-style-type:none;" [hidden]="!showMorePointer">
-                                            <li *ngFor="let  subitem of item.list;">
-                                                <button (click)="selectPointer(item,subitem)" [ngClass]="subitem.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{subitem.from}}-{{subitem.to}}</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row col-md-12">
-                <div class=" col-sm-6 col-sm-color-6 ">
-                    <div class="box">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h6 class="pull-left">Color</h6>
-                                <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(colorList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
-                            </div>
-                            <div class="col-sm-12">
-                                <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="colorList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(colorList,null)"> ALL</button>
-                                <button *ngFor="let  item of colorList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(colorList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-sm-6 col-sm-clarity-6 ">
-                    <div class="box">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h6 class="pull-left">Clarity</h6>
-                                <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(clarityList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="clarityList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(clarityList,null)"> ALL</button>
-                                <button *ngFor="let  item of clarityList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(clarityList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row col-md-12">
-                <div class=" col-sm-4 col-sm-cut-6 ">
-                    <div class="box">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h6 class="pull-left">Cut</h6>
-                                <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(cutList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
-                            </div>
-                            <div class="col-sm-12">
-                                <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="cutList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(cutList,null)"> ALL</button>
-                                <button *ngFor="let  item of cutList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(cutList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-sm-4 col-sm-polish-6 ">
-                    <div class="box">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h6 class="pull-left">Polish</h6>
-                                <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(polishList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="polishList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(polishList,null)"> ALL</button>
-                                <button *ngFor="let  item of polishList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(polishList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-sm-4 col-sm-symmetry-6 ">
-                    <div class="box">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h6 class="pull-left">Symmetry</h6>
-                                <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(symList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="symList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(symList,null)"> ALL</button>
-                                <button *ngFor="let  item of symList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(symList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row col-md-7">
-
-            </div>
-            <div class="row col-md-5">
-
-            </div>
-        </div>
-    </div>
-</main>
-<footer style="z-index: 10000;" id="colophon" role="contentinfo" class="site-footer ng-tns-c59-0">
+<div class="content">
     <div class="page-title">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12" [translate]="'inventory.search.title'">
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-primary">Search</button>
-                    </div>
+                    TITLE
                 </div>
             </div>
         </div>
     </div>
-</footer>
+    <!-- PAGE TITLE END -->
+    <main class="myform">
+        <div class="controlPanelContainer">
+            <div class="row">
+
+                <div class="row col-md-12" *ngIf="shapeList.list.length >0">
+
+                    <div (click)="SelectCriteria(shapeList,null)" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
+                        <span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="All Shapes" [ngStyle]="shapeList.allSelected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}"><br>All Shapes</span></div>
+                    <div (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement>9" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
+                        <span [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
+                        <img onerror="this.style.display='none'" src="./assets/img/{{item.selected?item.id+'-white':item.id}}.png" style="height: 38px;"> <br> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}
+                    </span>
+                    </div>
+                    <div name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
+                        <a [ngStyle]=" (shapeList.selectedOther) && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class=" shape nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <img onerror="this.style.display='none'" src="./assets/img/{{shapeList.selectedOther?'other-white':'other'}}.png"> <br> Other
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="body">
+                                <a [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="dropdown-item" (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement<=9"
+                                    name="" id="">
+                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}} 
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
+
+                </div>
+
+                <div class="row col-md-12">
+                    <div class=" col-sm-12 ">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-2 col-sm-pointer-2 carat-col-sm-1">
+                                    Carat Range
+                                    <i class="fa fa-refresh" (click)="resetPointer()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i>
+                                </div>
+                                <div class="col-sm-3 carat-col-sm-1">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">From</span>
+                                        </div>
+                                        <input name="fromCarat" [(ngModel)]="fromCarat" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">To</span>
+                                        </div>
+                                        <input name="toCarat" [(ngModel)]="toCarat" type="number" class="form-control carat-input" min="0" placeholder="to">
+                                        <div class="input-group-append">
+                                            <button type="button" (click)="addPointer()" class="btn btn-outline-secondary"> <i class="fa fa-plus"> </i> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="row">
+                                        <div class="col-md-1 col-md-selected-pointer-1" *ngFor="let  item of selectedPointer;">
+                                            <span [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{item.from}}-{{item.to}} <span (click)="removeCaratRange(item)" style="padding-left: 2px;" >X</span> </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="pull-left"><button type="button" class="btn-critearia" (click)="openMorePointer()"><i *ngIf="!showMorePointer" class="fa fa-plus"></i><i *ngIf="showMorePointer" class="fa fa-minus"></i> </button></div>
+                                    <div class="row">
+                                        <div class="col-md-1 col-md-pointer-1" *ngFor="let  item of defaultCaratRange;">
+                                            <button [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" (click)="selectPointer(null,item)" type="button"> {{item.lable}}</button>
+                                            <ul style="list-style-type:none;" [hidden]="!showMorePointer">
+                                                <li *ngFor="let  subitem of item.list;">
+                                                    <button (click)="selectPointer(item,subitem)" [ngClass]="subitem.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{subitem.from}}-{{subitem.to}}</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col-md-12">
+                    <div class=" col-sm-7 col-sm-color-6 " *ngIf="!fancyColor">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h6 class="pull-left">Color</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(colorList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancyColor !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="showFancy(true)"> Fancy</button>
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="colorList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(colorList,null)"> ALL</button>
+                                    <button *ngFor="let  item of colorList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(colorList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="  col-sm-7 col-sm-color-6 " *ngIf="fancyColor">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h6 class="pull-left">Fancy Color</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fancycolorList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancyColor ==true ? 'btn-critearia': 'btn-critearia-selected'" (click)="showFancy(false)"> White</button>
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancycolorList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(fancycolorList,null)"> ALL</button>
+                                    <button *ngFor="let  item of fancycolorList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(fancycolorList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-sm-5 col-sm-clarity-6 ">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="pull-left">Clarity</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(clarityList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="clarityList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(clarityList,null)"> ALL</button>
+                                    <button *ngFor="let  item of clarityList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(clarityList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12" *ngIf="fancyColor">
+                    <div class=" col-sm-6 col-sm-color-6 ">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="pull-left">Fancy Overtone</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fancyOvertoneList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancyOvertoneList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(fancyOvertoneList,null)"> ALL</button>
+                                    <button *ngFor="let  item of fancyOvertoneList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(fancyOvertoneList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-sm-6 col-sm-clarity-6 ">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="pull-left">Fancy Intensity</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fancyIntensityList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancyIntensityList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(fancyIntensityList,null)"> ALL</button>
+                                    <button *ngFor="let  item of fancyIntensityList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(fancyIntensityList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <div class=" col-sm-4 col-sm-cut-6 ">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="pull-left">Cut</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(cutList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="cutList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(cutList,null)"> ALL</button>
+                                    <button *ngFor="let  item of cutList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(cutList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-sm-4 col-sm-polish-6 ">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="pull-left">Polish</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(polishList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="polishList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(polishList,null)"> ALL</button>
+                                    <button *ngFor="let  item of polishList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(polishList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-sm-4 col-sm-symmetry-6 ">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="pull-left">Symmetry</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(symList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="symList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(symList,null)"> ALL</button>
+                                    <button *ngFor="let  item of symList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(symList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-sm-4 col-sm-cut-6 ">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="pull-left">Location</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(locationList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="locationList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(locationList,null)"> ALL</button>
+                                    <button *ngFor="let  item of locationList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(locationList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-7">
+
+                </div>
+                <div class="row col-md-5">
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer style="z-index: 10000;" id="colophon" class="footer">
+        <div class="page-title">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12" [translate]="'inventory.search.title'">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
 <!-- MAIN END -->
 <!-- SIDEBAR START -->
