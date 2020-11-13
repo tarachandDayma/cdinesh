@@ -1,4 +1,5 @@
 import { Component,  OnInit} from "@angular/core";
+import { ToastrService } from 'ngx-toastr';
 import { AltBroadcaster } from "./alertbroadcast";
 
 @Component({
@@ -10,7 +11,7 @@ export class alert implements OnInit {
     public title: string;
     public privatemessage: string;
     public MegBoxType: string;
-    constructor(  private broadcat: AltBroadcaster) {
+    constructor(  private broadcat: AltBroadcaster,private toastr: ToastrService) {
         this._hidden = true;
         this.MegBoxType = "";
     }
@@ -18,13 +19,19 @@ export class alert implements OnInit {
         this.broadcat.on().subscribe(data => this.setDataSuccess(data));
     }
     setDataSuccess(values: string): void {
+        
         var data=JSON.parse(values);
         this.title = data.title;
         this.privatemessage = data.msg;
         this.MegBoxType = data.key;
-        this._hidden = false;
+        if(this.MegBoxType=='success'){
+            this.toastr.success(this.privatemessage,this.title);
+        }else if(this.MegBoxType=="error"){
+            this.toastr.error(this.privatemessage,this.title);
+        }
+        // this._hidden = false;
     }
-    close(): void {
+    close(): void { 
         this.MegBoxType = "";
     }
 

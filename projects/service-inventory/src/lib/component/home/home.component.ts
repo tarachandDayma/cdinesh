@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   polishList: any;
   symList: any;
   locationList: any;
+  flourenceList:any;
   caratRange: any;
   defaultCaratRange: any[];
   fromCarat: number;
@@ -307,6 +308,11 @@ export class HomeComponent implements OnInit {
       selectedOther: false,
       list: []
     };
+    this.flourenceList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
     this.loader.show(true);
     this.entityService.GetEntity("Shape").subscribe(result => {
       this.loader.show(false);
@@ -365,6 +371,12 @@ export class HomeComponent implements OnInit {
     this.entityService.GetEntity("FancyColorIntensity").subscribe(result => {
       this.loader.show(false);
       this.fancyIntensityList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("Flourence").subscribe(result => {
+      this.loader.show(false);
+      this.flourenceList.list = result;
     }, error => {
       this.loader.show(false);
     })

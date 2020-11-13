@@ -24,6 +24,8 @@ import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ServiceInventoryModule } from 'service-inventory';
 import { ServiceAdminModule } from 'service-admin';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -75,7 +77,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     ServiceAccountModule.forRoot(),
     ServiceGuestModule.forRoot(),
     ServiceInventoryModule.forRoot(),
-    ServiceAdminModule.forRoot()
+    ServiceAdminModule.forRoot(),
+    NgbModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-left',
+      preventDuplicates: true,
+      closeButton:true,
+      disableTimeOut:false,
+      autoDismiss:false,
+      timeOut:600000
+    })
   ],
   providers: [
     GlobleService

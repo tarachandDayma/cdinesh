@@ -167,7 +167,6 @@
                                     <button *ngFor="let  item of fancyIntensityList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(fancyIntensityList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -231,13 +230,23 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row col-md-7">
+                    <div class=" col-sm-8 col-sm-clarity-6 ">
+                        <div class="box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="pull-left">Fluorescence</h6>
+                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(flourenceList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                </div>
 
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="flourenceList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(flourenceList,null)"> ALL</button>
+                                    <button *ngFor="let  item of flourenceList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(flourenceList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="row col-md-5">
 
-                </div>
             </div>
         </div>
     </main>

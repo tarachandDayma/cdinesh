@@ -1,28 +1,45 @@
 /* begin:: blobal css */
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.bg-none{background: transparent;}
-.outline-none{outline: none;}
-.no-shadow{box-shadow: none;}
-a[type="button"], button, a[type="submit"], .signin-header a.login-btn{
-    -moz-appearance: none;
--webkit-appearance: none;
-transition: .5s ease-in-out;
+
+.bg-none {
+    background: transparent !important;
 }
-body{
+
+.outline-none {
+    outline: none;
+}
+
+.no-shadow {
+    box-shadow: none;
+}
+
+a[type="button"],
+button,
+a[type="submit"],
+.signin-header a.login-btn {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    transition: .5s ease-in-out;
+}
+
+body {
     background-image: linear-gradient(#23599e, #1a2b4a);
 }
 
-.hidden{
+.hidden {
     visibility: hidden;
     transition: .5s ease-in-out;
 }
 
+
 /* end:: blobal css */
-.company-name{
+
+.company-name {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     text-transform: uppercase;
@@ -33,22 +50,22 @@ body{
 }
 
 #bg {
-   /* Set rules to fill background */
-  min-height: 100%;
-  min-width: 1024px;
-	
-  /* Set up proportionate scaling */
-  width: 100%;
-  height: auto;
-	
-  /* Set up positioning */
-  position: fixed;
-  top: 0;
-  left: 0;
+    /* Set rules to fill background */
+    min-height: 100%;
+    min-width: 1024px;
+    /* Set up proportionate scaling */
+    width: 100%;
+    height: auto;
+    /* Set up positioning */
+    position: fixed;
+    top: 0;
+    left: 0;
 }
-  .body-wrapper {
+
+.body-wrapper {
     position: absolute;
 }
+
 .landing-main {
     display: flex;
     width: 100%;
@@ -57,13 +74,16 @@ body{
     justify-content: center;
     align-items: center;
 }
-section.overlay{
-     background-image: url('../images/sign-in-bg.jpg');
-     background-position: center;
-     background-size: cover;
-     height: 100vh;
-     height: 100%;
+
+section.overlay {
+    background-image: url('../images/sign-in-bg.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    height: 100%;
 }
+
+
 /* .signin{
     background-image: url('../images/Cdinesh-Pattern-Back.jpg');
     background-position: center;
@@ -71,14 +91,16 @@ section.overlay{
     height: 100vh;
     height: 100%;
 } */
- .wrapper{
+
+.wrapper {
     background-image: linear-gradient(#23599e, #1a2b4a);
     /* background-image: url('../images/Cdinesh-Pattern-Back.jpg'); */
     /* background-position: center;
     background-size: cover; */
     height: 100%;
 }
-.landing-main .tagline{
+
+.landing-main .tagline {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 21px;
@@ -90,7 +112,8 @@ section.overlay{
     margin: auto;
     padding-top: 40px;
 }
-.landing-main .tagline::after{
+
+.landing-main .tagline::after {
     content: "";
     position: absolute;
     height: 2px;
@@ -101,10 +124,11 @@ section.overlay{
     color: #e5803f;
 }
 
-.landing-main .landing-btn{
+.landing-main .landing-btn {
     margin-top: 95px;
 }
-.landing-main .landing-btn a{
+
+.landing-main .landing-btn a {
     font-size: 16px;
     font-weight: 600;
     font-family: 'Josefin Sans', sans-serif;
@@ -121,13 +145,16 @@ section.overlay{
     flex-direction: column;
     padding-top: 3px;
 }
-.landing-main .landing-btn a:first-child{
+
+.landing-main .landing-btn a:first-child {
     margin-right: 193px;
 }
-.signin-header{
+
+.signin-header {
     padding-top: 85px;
 }
-.signin-header a.login-btn{
+
+.signin-header a.login-btn {
     font-size: 16px;
     font-weight: 900;
     font-family: 'Josefin Sans', sans-serif;
@@ -145,14 +172,15 @@ section.overlay{
     padding-top: 4px;
 }
 
-.signin-form{
-    max-width:510px;
+.signin-form {
+    max-width: 510px;
     margin: auto;
     margin-top: 80px;
     /* padding-bottom: 70px; */
 }
 
-.signin-form label, .signin-form .fogpass{
+.signin-form label,
+.signin-form .fogpass {
     font-family: 'Raleway', sans-serif;
     font-size: 20px;
     color: #fff;
@@ -162,10 +190,12 @@ section.overlay{
     width: fit-content;
     width: -moz-fit-content;
 }
-.fogpass{
+
+.fogpass {
     margin-left: auto;
 }
-.fogpass:hover::after{
+
+.fogpass:hover::after {
     position: absolute;
     content: "";
     height: 2px;
@@ -178,7 +208,7 @@ section.overlay{
     background-color: #fff;
 }
 
-.signin-form .form-control{
+.signin-form .form-control {
     background-color: transparent;
     border: 0;
     border-bottom: 2px solid #e5803f;
@@ -187,32 +217,36 @@ section.overlay{
     border-radius: 0px;
 }
 
-.signin-form .form-control:focus{
+.signin-form .form-control:focus {
     outline: none;
     box-shadow: none;
 }
-.signin-form input[type="email"]{
+
+.signin-form input[type="email"] {
     margin-bottom: 95px;
 }
 
-.signin-form a{
+.signin-form a {
     text-decoration: none;
     padding-top: 25px;
 }
 
-.signin-form .signin-btn{
+.signin-form .signin-btn {
     margin-top: 80px;
 }
-.signin .logo{
+
+.signin .logo {
     cursor: pointer;
     text-align: center;
 }
+
 .signin .logo p {
     color: #fff;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
 }
-.signin-form .signin-btn a{
+
+.signin-form .signin-btn a {
     font-size: 16px;
     font-weight: 600;
     font-family: 'Josefin Sans', sans-serif;
@@ -229,13 +263,20 @@ section.overlay{
     flex-direction: column;
     padding-top: 3px;
 }
-.signin-form .signin-btn a:hover, .signin-header a.login-btn:hover,.landing-main .landing-btn a:hover, .main-nav a.nav-link[type="submit"]:hover,.ourcsr-btn:hover, .secsix .getintouchform .getintouchform-submit:hover{
+
+.signin-form .signin-btn a:hover,
+.signin-header a.login-btn:hover,
+.landing-main .landing-btn a:hover,
+.main-nav a.nav-link[type="submit"]:hover,
+.ourcsr-btn:hover,
+.secsix .getintouchform .getintouchform-submit:hover {
     border: 2px solid #e5803f;
     background-color: #e5803f;
     color: #fff !important;
     text-decoration: none;
 }
-.signin-form .noaccount{
+
+.signin-form .noaccount {
     text-align: center;
     font-size: 20px;
     font-weight: 600;
@@ -244,10 +285,11 @@ section.overlay{
     padding-bottom: 15px;
 }
 
-.signin-form .noaccount span:first-child{
+.signin-form .noaccount span:first-child {
     color: #e5803f;
 }
-.signin-form h4{
+
+.signin-form h4 {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 600;
     color: #fff;
@@ -258,7 +300,8 @@ section.overlay{
     width: -moz-fit-content;
     margin: 0px auto 70px auto;
 }
-.signin-form h4::after{
+
+.signin-form h4::after {
     content: "";
     position: absolute;
     height: 2px;
@@ -269,13 +312,17 @@ section.overlay{
     color: #e5803f;
 }
 
-.signin-form .noaccount a{
+.signin-form .noaccount a {
     color: #fff;
     padding-left: 10px;
     position: relative;
 }
-.signin-form .noaccount a:hover::after{display: none;}
-.signin-form .noaccount a:after{
+
+.signin-form .noaccount a:hover::after {
+    display: none;
+}
+
+.signin-form .noaccount a:after {
     position: absolute;
     content: "";
     height: 2px;
@@ -288,19 +335,25 @@ section.overlay{
     background-color: #fff;
 }
 
-.main-nav{
+.main-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex: 1;
     margin-left: 115px;
 }
-.main-nav li.nav-item.active a.nav-link{ color: #e5803f; border-bottom: 2px solid #e5803f;}
-.main-nav li.nav-item:hover a.nav-link{
+
+.main-nav li.nav-item.active a.nav-link {
     color: #e5803f;
     border-bottom: 2px solid #e5803f;
 }
-.main-nav a.nav-link{
+
+.main-nav li.nav-item:hover a.nav-link {
+    color: #e5803f;
+    border-bottom: 2px solid #e5803f;
+}
+
+.main-nav a.nav-link {
     color: #fff;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 16px;
@@ -309,7 +362,8 @@ section.overlay{
     border-bottom: 2px solid transparent;
     display: inline;
 }
-.main-nav a.nav-link[type="submit"]{
+
+.main-nav a.nav-link[type="submit"] {
     border: 2px solid #e5803f;
     width: 189px;
     height: 45px;
@@ -324,6 +378,7 @@ section.overlay{
     padding-top: 13px;
     transition: .5s ease-in-out;
 }
+
 .learnMore {
     font-family: 'Josefin Sans', sans-serif;
     border: 2px solid #e5803f;
@@ -341,13 +396,15 @@ section.overlay{
     -webkit-appearance: none;
     transition: .5s ease-in-out;
 }
+
 .learnMore:hover {
     border: 2px solid #e5803f;
     background-color: #e5803f;
     color: #fff !important;
     text-decoration: none;
 }
-.content .one{
+
+.content .one {
     background-image: url("../images/beyound-jor-right.png");
     background-repeat: no-repeat;
     background-position: right;
@@ -357,7 +414,16 @@ section.overlay{
     padding-top: 250px;
     background-position-y: bottom;
 }
-.content .one h1, .content .two h1, .content .three h1, .content .four h1, .sectwo h1, .secthree h1, .secfour h1,.secfive h1, .secsix h1{
+
+.content .one h1,
+.content .two h1,
+.content .three h1,
+.content .four h1,
+.sectwo h1,
+.secthree h1,
+.secfour h1,
+.secfive h1,
+.secsix h1 {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 40px;
     font-weight: 700;
@@ -368,7 +434,16 @@ section.overlay{
     width: fit-content;
     width: -moz-fit-content;
 }
-.content .one h1::after, .content .two h1::after, .content .three h1::after, .content .four h1::after, .sectwo h1::after, .secthree h1::after, .secfour h1::after, .secfive h1::after, .secsix h1::after{
+
+.content .one h1::after,
+.content .two h1::after,
+.content .three h1::after,
+.content .four h1::after,
+.sectwo h1::after,
+.secthree h1::after,
+.secfour h1::after,
+.secfive h1::after,
+.secsix h1::after {
     content: "";
     position: absolute;
     height: 2px;
@@ -378,21 +453,37 @@ section.overlay{
     background-color: #e5803f;
     color: #e5803f;
 }
-.content .one p, .content .two p, .content .three p, .content .four p, .sectwo p{
+
+.content .one p,
+.content .two p,
+.content .three p,
+.content .four p,
+.sectwo p {
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
     color: #fff;
     line-height: 26px;
     margin-bottom: 40px;
 }
-.content .one p:last-child, .content .two p:last-child, .content .three p:last-child, .content .four p:last-child, .sectwo p:last-child{
+
+.content .one p:last-child,
+.content .two p:last-child,
+.content .three p:last-child,
+.content .four p:last-child,
+.sectwo p:last-child {
     margin-bottom: 0px;
 }
-.content .one p span , .content .two p span,.content .three p span, .content .four p span, .sectwo p span{
+
+.content .one p span,
+.content .two p span,
+.content .three p span,
+.content .four p span,
+.sectwo p span {
     font-weight: 400;
     font-family: 'Raleway', sans-serif;
 }
-.content .two{
+
+.content .two {
     background-image: url("../images/beyond-carftman-bg-left.png");
     background-repeat: no-repeat;
     background-position: left;
@@ -400,7 +491,8 @@ section.overlay{
     padding-bottom: 220px;
     background-position-y: top;
 }
-.content .four{
+
+.content .four {
     background-image: url("../images/beyond-csr-bg-left.png");
     background-repeat: no-repeat;
     background-position: left;
@@ -408,17 +500,21 @@ section.overlay{
     padding-bottom: 220px;
     background-position-y: top;
 }
-.content .four{
+
+.content .four {
     padding-bottom: 20px;
 }
-.content .four .bg4{
+
+.content .four .bg4 {
     padding-bottom: 20px;
     padding-top: 100px;
 }
-.content .two .bg2{
+
+.content .two .bg2 {
     padding-top: 105px;
 }
-.content .three{
+
+.content .three {
     background-image: url("../images/beyon-tech-bg-right.png");
     background-repeat: no-repeat;
     background-position: right;
@@ -428,7 +524,7 @@ section.overlay{
     background-position-y: bottom;
 }
 
-.content .three .overview h4{
+.content .three .overview h4 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     font-size: 25px;
@@ -436,11 +532,13 @@ section.overlay{
     text-transform: uppercase;
     margin-bottom: 25px;
 }
-.content .three .overview span{
+
+.content .three .overview span {
     color: #e5803f;
     font-weight: 600;
 }
-.content .three .overview .btn-bynow{
+
+.content .three .overview .btn-bynow {
     border: 2px solid #e5803f;
     width: 150px;
     height: 40px;
@@ -456,31 +554,38 @@ section.overlay{
     -webkit-appearance: none;
     transition: .5s ease-in-out;
 }
-.content .three .overview .btn-bynow:hover{
+
+.content .three .overview .btn-bynow:hover {
     border: 2px solid #e5803f;
     background-color: #e5803f;
     color: #fff !important;
     text-decoration: none;
 }
-.navbar-toggler, .navbar-toggler:focus-within{
+
+.navbar-toggler,
+.navbar-toggler:focus-within {
     border-color: #fff;
     padding: 3px;
 }
+
+
 /* .navbar{
     max-width:1140px;
     margin: auto;
 } */
-.sticky{
+
+.sticky {
     overflow: hidden;
     position: fixed;
     top: 0;
-    left:0;
+    left: 0;
     right: 0;
-    z-index: 99999; 
+    z-index: 99999;
     transition: all 300ms ease-in-out;
     height: auto;
     background-color: transparent;
 }
+
 .sticky.active {
     background-color: rgba(26, 43, 74, 0.8);
     -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
@@ -488,7 +593,7 @@ section.overlay{
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 }
 
-.brndintro .tagline{
+.brndintro .tagline {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 21px;
@@ -500,7 +605,8 @@ section.overlay{
     margin: auto;
     padding-top: 80px;
 }
-.brndintro .tagline::after{
+
+.brndintro .tagline::after {
     content: "";
     position: absolute;
     height: 2px;
@@ -511,14 +617,17 @@ section.overlay{
     color: #e5803f;
 }
 
-.secone_wrapper{ position: relative;}
-.secone{
+.secone_wrapper {
+    position: relative;
+}
+
+.secone {
     padding-top: 250px;
     padding-bottom: 300px;
     position: relative;
 }
 
-.secone::before{
+.secone::before {
     content: " ";
     background-image: url('../images/home-l-diamond.png');
     height: 400px;
@@ -530,7 +639,8 @@ section.overlay{
     background-position: left;
     background-repeat: no-repeat;
 }
-.secone::after{
+
+.secone::after {
     content: " ";
     background-image: url('../images/hrd.png');
     height: 400px;
@@ -542,6 +652,7 @@ section.overlay{
     background-position: right;
     background-repeat: no-repeat;
 }
+
 .sectwo {
     background-image: url("../images/bg1.png");
     background-repeat: no-repeat;
@@ -551,36 +662,48 @@ section.overlay{
     padding-bottom: 220px;
     background-position-y: bottom;
 }
-.secthree{
+
+.secthree {
     padding: 225px 0;
     min-height: 750px;
 }
 
-.secthree .timeline{
+.secthree .timeline {
     margin-top: 280px;
-     position: relative;
-    }
+    position: relative;
+}
 
-.secthree .timeline label{
+.secthree .timeline label {
     font-family: 'Montserrat', sans-serif;
     font-size: 17px;
     font-weight: 500;
     color: #fff;
 }
-.secthree .timeline button:nth-child(odd){
+
+.secthree .timeline button:nth-child(odd) {
     padding-bottom: 40px;
 }
 
-.secthree .timeline button:nth-child(even){
+.secthree .timeline button:nth-child(even) {
     padding-top: 40px;
 }
-.secthree label{ font-family: 'Josefin Sans', sans-serif;}
-.secthree .timeline button{position: relative; padding-left: 0px; padding-right: 0px;}
-.secthree .timeline button:focus-within{
+
+.secthree label {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.secthree .timeline button {
+    position: relative;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.secthree .timeline button:focus-within {
     outline: none;
     box-shadow: none;
 }
-.secthree .timeline::after{
+
+.secthree .timeline::after {
     position: absolute;
     content: "";
     height: 3px;
@@ -591,15 +714,7 @@ section.overlay{
     left: 30px;
 }
 
-.secthree .timeline .oval1::before{
-    position: absolute;
-    content: url(../images/Oval.png);
-    height: 10px;
-    width: 10px;
-    top: 13%;
-    left: 12px;
-}
-.secthree .timeline .oval2::before{
+.secthree .timeline .oval1::before {
     position: absolute;
     content: url(../images/Oval.png);
     height: 10px;
@@ -608,33 +723,44 @@ section.overlay{
     left: 12px;
 }
 
-.secthree .timeline .nopopover{
+.secthree .timeline .oval2::before {
     position: absolute;
+    content: url(../images/Oval.png);
+    height: 10px;
+    width: 10px;
+    top: 13%;
+    left: 12px;
 }
-.secthree .timeline-mobile .nopopover{
+
+.secthree .timeline .nopopover {
     position: absolute;
 }
 
-.secthree .timeline .nopopover.option1{
-    top:130px;
+.secthree .timeline-mobile .nopopover {
+    position: absolute;
+}
+
+.secthree .timeline .nopopover.option1 {
+    top: 130px;
     left: -70px;
 }
-.secthree .timeline-mobile .nopopover.option1{
+
+.secthree .timeline-mobile .nopopover.option1 {
     top: -42px;
     left: -20px;
 }
 
-.secthree .timeline .nopopover.option2{
+.secthree .timeline .nopopover.option2 {
     top: -215px;
     left: -70px;
 }
 
-.secthree .timeline-mobile .nopopover.option2{
+.secthree .timeline-mobile .nopopover.option2 {
     top: -42px;
     right: -20px;
 }
 
-.secthree .timeline .nopopover .card{
+.secthree .timeline .nopopover .card {
     width: 180px;
     max-width: 180px;
     padding: .5rem .75rem;
@@ -646,7 +772,8 @@ section.overlay{
     width: 172px;
     border-radius: 0;
 }
-.secthree .timeline-mobile .nopopover .card{
+
+.secthree .timeline-mobile .nopopover .card {
     width: 130px;
     max-width: 130px;
     padding: .5rem .75rem;
@@ -658,7 +785,8 @@ section.overlay{
     width: 172px;
     border-radius: 0;
 }
-.secthree .timeline .nopopover .card .card-body{
+
+.secthree .timeline .nopopover .card .card-body {
     padding: 0px;
     display: flex;
     flex-direction: column;
@@ -669,7 +797,8 @@ section.overlay{
     font-weight: 400;
     z-index: 0;
 }
-.secthree .timeline-mobile .nopopover .card .card-body{
+
+.secthree .timeline-mobile .nopopover .card .card-body {
     padding: 0px;
     display: flex;
     flex-direction: column;
@@ -681,17 +810,23 @@ section.overlay{
     z-index: 0;
 }
 
-.secthree .timeline .nopopover .card .card-body p{margin-bottom: 0px;}
-.secthree .timeline-mobile .nopopover .card .card-body p{margin-bottom: 0px;}
-
-
-
-.popover{
-   /* box-shadow: 0px 2px 10px rgba(0, 0, 0, .45); */
-   border: none;
-   background: transparent;
+.secthree .timeline .nopopover .card .card-body p {
+    margin-bottom: 0px;
 }
-.popover .arrow{display: none;}
+
+.secthree .timeline-mobile .nopopover .card .card-body p {
+    margin-bottom: 0px;
+}
+
+.popover {
+    /* box-shadow: 0px 2px 10px rgba(0, 0, 0, .45); */
+    border: none;
+    background: transparent;
+}
+
+.popover .arrow {
+    display: none;
+}
 
 .popover-body {
     padding: .5rem .75rem;
@@ -711,7 +846,8 @@ section.overlay{
     z-index: 0;
 }
 
-.secfour .card p, .secfour .secCardgroup .card p{
+.secfour .card p,
+.secfour .secCardgroup .card p {
     font-family: 'Raleway', sans-serif;
     font-size: 17px;
     line-height: 32px;
@@ -719,45 +855,64 @@ section.overlay{
     text-transform: capitalize;
     padding-top: 35px;
 }
-.secfour .secCardgroup .card a{text-decoration: none;}
-.secfour .secCardgroup .card p{
+
+.secfour .secCardgroup .card a {
+    text-decoration: none;
+}
+
+.secfour .secCardgroup .card p {
     font-weight: 600;
     text-transform: capitalize;
 }
 
-.secfour .card p span,.secfour .secCardgroup .card p span{
+.secfour .card p span,
+.secfour .secCardgroup .card p span {
     font-family: 'Raleway', sans-serif;
     color: #e5803f;
     font-weight: 600;
     padding-right: 10px;
 }
-.secfour .secCardgroup .card p span{
+
+.secfour .secCardgroup .card p span {
     text-transform: uppercase;
 }
+
 .secfour .secCardgroup .card .card-img small {
     font-size: 14px;
 }
-.secfour{
+
+.secfour {
     padding: 255px 0px 140px 0px;
 }
-.secfour .secCardgroup{padding-top: 105px;}
-.secfour .secCardgroup a{cursor: pointer;}
-.secfive .card-body h4{
+
+.secfour .secCardgroup {
+    padding-top: 105px;
+}
+
+.secfour .secCardgroup a {
+    cursor: pointer;
+}
+
+.secfive .card-body h4 {
     font-family: 'Raleway', sans-serif;
     font-size: 24px;
     font-weight: 400;
     color: #fff;
     text-transform: uppercase;
 }
-.secfive .card-body { padding-left: 0;}
-.secfive .card-body .card-text{
+
+.secfive .card-body {
+    padding-left: 0;
+}
+
+.secfive .card-body .card-text {
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     font-weight: 300;
     color: #fff;
 }
 
-.secfive .card-body .readMore{
+.secfive .card-body .readMore {
     font-family: 'Josefin Sans', sans-serif;
     border: 2px solid #e5803f;
     width: 150px;
@@ -774,24 +929,29 @@ section.overlay{
     -webkit-appearance: none;
     transition: .5s ease-in-out;
 }
-.secfive .card-body .readMore:hover{
+
+.secfive .card-body .readMore:hover {
     border: 2px solid #e5803f;
     background-color: #e5803f;
     color: #fff !important;
     text-decoration: none;
 }
+
+
 /* .secfive .cardgroups img {
     height: 220px;
     width: 100%;
 } */
-.secfive{
+
+.secfive {
     padding: 160px 0px;
 }
-.secfive .cardgroups{
-    padding:30px 0px 70px 0px
+
+.secfive .cardgroups {
+    padding: 30px 0px 70px 0px
 }
 
-.ourcsr-btn{
+.ourcsr-btn {
     font-family: 'Josefin Sans', sans-serif;
     /* font-size: 24px; */
     font-weight: 600;
@@ -814,7 +974,7 @@ section.overlay{
     transition: .5s ease-in-out;
 }
 
-.secsix .getintouchform .form-control{
+.secsix .getintouchform .form-control {
     border: none;
     outline: none;
     border-bottom: 1px solid #fff;
@@ -829,18 +989,22 @@ section.overlay{
     line-height: 26px;
     resize: none;
 }
-.secsix .getintouchform .form-control::placeholder{
+
+.secsix .getintouchform .form-control::placeholder {
     color: #fff;
     font-family: 'Raleway', sans-serif;
     font-size: 20px;
     line-height: 26px;
     font-weight: 300;
 }
-.secsix .getintouchform .form-control:focus, .secsix .getintouchform .form-control:focus-within{
+
+.secsix .getintouchform .form-control:focus,
+.secsix .getintouchform .form-control:focus-within {
     background-color: transparent;
     outline: none;
     box-shadow: none;
 }
+
 .secsix .getintouchform .getintouchform-submit {
     font-family: 'Josefin Sans', sans-serif;
     border: 2px solid #e5803f;
@@ -854,10 +1018,13 @@ section.overlay{
     cursor: pointer;
     transition: .5s ease-in-out;
 }
-.secsix .getintouchform .getintouchform-submit:focus-within, .secsix .getintouchform .getintouchform-submit:focus{
+
+.secsix .getintouchform .getintouchform-submit:focus-within,
+.secsix .getintouchform .getintouchform-submit:focus {
     outline: none;
 }
-.secsix .getintouchform  p{
+
+.secsix .getintouchform p {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 20px;
     font-weight: 600;
@@ -865,26 +1032,29 @@ section.overlay{
     margin-bottom: 65px;
 }
 
-.secseven{
+.secseven {
     padding: 75px 0px;
     position: relative;
 }
-.secseven::before{
-   position: absolute;
-   content: "";
-   height: 2px;
-   width: 100%;
-   background-color: #e5803f;
-   top: 55px;
+
+.secseven::before {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    background-color: #e5803f;
+    top: 55px;
 }
-.secseven h4{
+
+.secseven h4 {
     font-family: 'Raleway', sans-serif;
     font-size: 24px;
     color: #e5803f;
     margin-bottom: 30px;
     text-transform: capitalize;
 }
-.secseven h3{
+
+.secseven h3 {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 19px;
     color: #fff;
@@ -897,7 +1067,8 @@ section.overlay{
     width: fit-content;
     width: -moz-fit-content;
 }
-.secseven h3::after{
+
+.secseven h3::after {
     position: absolute;
     content: "";
     height: 2px;
@@ -908,7 +1079,8 @@ section.overlay{
     margin: auto;
     bottom: -10px;
 }
-.secseven p{
+
+.secseven p {
     font-family: 'Raleway', sans-serif;
     font-weight: 300;
     font-size: 13px;
@@ -916,7 +1088,8 @@ section.overlay{
     line-height: 20px;
     position: relative;
 }
-.secseven p::after{
+
+.secseven p::after {
     position: absolute;
     content: "";
     height: 2px;
@@ -927,7 +1100,8 @@ section.overlay{
     margin: auto;
     bottom: -10px;
 }
-.secseven a{
+
+.secseven a {
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
     color: #e5803f;
@@ -935,11 +1109,17 @@ section.overlay{
     font-weight: 500;
 }
 
-.secseven .r2{
+.secseven .r2 {
     margin-bottom: 40px;
 }
-.timeline-mobile p, .timeline-mobile label{margin: 0; color: #fff;}
-.timeline-mobile > .row {
+
+.timeline-mobile p,
+.timeline-mobile label {
+    margin: 0;
+    color: #fff;
+}
+
+.timeline-mobile>.row {
     margin-bottom: 60px;
     position: relative;
     min-height: 150px;
@@ -948,7 +1128,7 @@ section.overlay{
     margin-right: auto;
 }
 
-.timeline-mobile > .row::after{
+.timeline-mobile>.row::after {
     position: absolute;
     content: "";
     height: 140px;
@@ -959,51 +1139,73 @@ section.overlay{
     margin: auto;
     top: 65px;
 }
-.timeline-mobile > .row:last-child::after{display: none;}
-.site-footer {background-color: #23599e; color: #fff;}
+
+.timeline-mobile>.row:last-child::after {
+    display: none;
+}
+
+.site-footer {
+    background-color: #23599e;
+    color: #fff;
+}
+
 .site-footer .site-info {
-    padding-top:20px;
+    padding-top: 20px;
     padding-bottom: 20px;
     font-family: 'Raleway', sans-serif;
 }
 
-.ftrmenu{
+.ftrmenu {
     display: flex;
     justify-content: flex-end;
     color: #fff;
     margin-bottom: 0px;
     padding: 0px 15px;
 }
-.ftrmenu li{
+
+.ftrmenu li {
     list-style-type: none;
     margin-left: 10px;
 }
-.ftrmenu li a{ color: #fff; font-family: 'Raleway', sans-serif;}
-.ftrmenu li:hover a{ color: #e5803f;}
+
+.ftrmenu li a {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+}
+
+.ftrmenu li:hover a {
+    color: #e5803f;
+}
+
 
 /* zoom effect on images */
+
 .hover01 a img {
-	-webkit-transform: scale(1);
-	transform: scale(1);
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
-}
-.hover01 a:hover img {
-	-webkit-transform: scale(1.1);
-	transform: scale(1.1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
 }
 
+.hover01 a:hover img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+
 /* css for privacy page */
-section.pricavysec1{
+
+section.pricavysec1 {
     padding: 150px 0px 30px 0px;
     color: #fff;
 }
-section.pricavysec2{
+
+section.pricavysec2 {
     padding: 30px 0px 100px 0px;
     color: #fff;
 }
 
-.privacy h1{
+.privacy h1 {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 700;
     font-size: 40px;
@@ -1024,25 +1226,23 @@ section.pricavysec2{
     color: #e5803f;
 }
 
-.privacy p{
+.privacy p {
     font-family: 'Raleway', sans-serif;
     font-weight: 400px;
     font-size: 16px;
 }
 
-.privacy a{
+.privacy a {
     font-family: 'Raleway', sans-serif;
     font-weight: 400px;
     font-size: inherit;
     color: inherit;
 }
 
-.privacy li{
+.privacy li {
     list-style-type: none;
 }
 
-.image-div4small img{
+.image-div4small img {
     width: 85%;
 }
-
-
