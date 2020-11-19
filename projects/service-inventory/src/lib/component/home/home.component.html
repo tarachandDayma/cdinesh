@@ -246,7 +246,233 @@
                         </div>
                     </div>
                 </div>
+                <div class="row col-md-12">
+                    <div class="col-sm-12">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0 text-center">
+                                        <button class="btn btn-link btn-more-parameter" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Advance Parameter 
+                              </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body" style="padding-left: 0px;
+                                    padding-right: 0px;">
+                                        <div class="row col-md-12" style="padding-left: 0px;
+                                        padding-right: 0px;">
 
+                                            <div class=" col-sm-3 col-sm-cut-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Milky</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(milkyList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="milkyList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(milkyList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of milkyList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(milkyList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Luster</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(lusterList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="lusterList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(lusterList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of lusterList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(lusterList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-6 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Shade</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(shadeList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="shadeList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(shadeList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of shadeList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(shadeList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                            <div class=" col-sm-3 col-sm-cut-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Black Inc. Tbl.</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(blackIncTblList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="blackIncTblList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(blackIncTblList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of blackIncTblList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(blackIncTblList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Black Inc. Crn.</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(blackIncCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="blackIncCrnList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(blackIncCrnList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of blackIncCrnList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(blackIncCrnList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">White Inc. Tbl.</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(whiteIncTblList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="whiteIncTblList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(whiteIncTblList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of whiteIncTblList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(whiteIncTblList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">White Inc. Crn.</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(whiteIncCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="whiteIncCrnList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(whiteIncCrnList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of whiteIncCrnList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(whiteIncCrnList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                            <div class=" col-sm-3 col-sm-cut-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Culet</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(culetList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="culetList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(culetList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of culetList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(culetList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Eye Clean</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(eyeCleanList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="eyeCleanList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(eyeCleanList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of eyeCleanList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(eyeCleanList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Extra Facet Pv.</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(extraFacetPavList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="extraFacetPavList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(extraFacetPavList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of extraFacetPavList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(extraFacetPavList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-7">
+                                                            <h6 class="pull-left">Extra Facet Crn.</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(extraFacetCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="extraFacetCrnList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(extraFacetCrnList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of extraFacetCrnList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(extraFacetCrnList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                            <div class=" col-sm-3 col-sm-cut-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Natural Grdl.</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(naturalGirdleList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="naturalGirdleList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(naturalGirdleList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of naturalGirdleList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(naturalGirdleList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Natural Pav.</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(naturalPavList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="naturalPavList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(naturalPavList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of naturalPavList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(naturalPavList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-6 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left">Natural Crn.</h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(naturalCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="naturalCrnList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(naturalCrnList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of naturalCrnList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(naturalCrnList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -254,9 +480,18 @@
         <div class="page-title">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12" [translate]="'inventory.search.title'">
+                    <div class="col-sm-12">
+                        <div class="pull-left">
+                            <button type="button" class="btn-critearia search-footer-button"> 3EX</button>
+                            <button type="button" class="btn-critearia search-footer-button"> 2EX</button>
+                            <button type="button" class="btn-critearia search-footer-button"> 3VG+</button>
+                            <button type="button" class="btn-critearia search-footer-button"> NO BGM</button>
+                        </div>
                         <div class="pull-right">
                             <button type="button" class="btn btn-primary">Search</button>
+                            <button type="button" class="btn btn-primary">Save & Search</button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>

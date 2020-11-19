@@ -20,6 +20,7 @@ main {
 .box h6 {
     color: #1b5393;
     font-weight: 500;
+    font-size: 14px !important;
 }
 
 .carat-col-sm-1 {
@@ -28,6 +29,20 @@ main {
 
 .carat-input {
     border-radius: 0;
+}
+
+.search-footer-button {
+    color: #1b53ae !important;
+    font-size: 12px !important;
+    background-color: white;
+}
+
+footer button {
+    margin-right: 5px;
+}
+
+footer button i {
+    font-size: 18px;
 }
 
 @media (min-width:100px) and (max-width:768px) {
@@ -201,4 +216,17 @@ main {
         padding-left: 15px;
         padding-right: 0px;
     }
+}
+
+.btn-more-parameter {
+    border: 2px solid #ccc;
+    color: gray;
+    text-decoration: none;
+}
+
+.btn-more-parameter :hover {
+    border: 2px solid #e5803f !important;
+    background-color: #e5803f !important;
+    text-decoration: none !important;
+    color: white !important;
 }

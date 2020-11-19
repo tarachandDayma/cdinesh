@@ -28,13 +28,29 @@ export class HomeComponent implements OnInit {
   symList: any;
   locationList: any;
   flourenceList:any;
+  milkyList:any;
+  shadeList:any;
+  lusterList:any;
+  blackIncTblList:any;
+  blackIncCrnList:any;
+  whiteIncTblList:any;
+  whiteIncCrnList:any;
+  culetList:any;
+  eyeCleanList:any;
+  naturalGirdleList:any;
+  naturalPavList:any;
+  naturalCrnList:any;
+  extraFacetPavList:any;
+  extraFacetCrnList:any;
   caratRange: any;
+
   defaultCaratRange: any[];
   fromCarat: number;
   toCarat: number;
   selectedPointer: any[];
   showMorePointer: boolean = false;
   fancyColor: boolean = false;
+  
   ngOnInit(): void {
     this.selectedPointer = [];
     this.defaultCaratRange = [
@@ -313,6 +329,76 @@ export class HomeComponent implements OnInit {
       selectedOther: false,
       list: []
     };
+    this.shadeList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.milkyList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.lusterList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.blackIncCrnList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.blackIncTblList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.whiteIncCrnList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.whiteIncTblList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.culetList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.eyeCleanList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.naturalGirdleList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.naturalPavList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.naturalCrnList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.extraFacetCrnList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.extraFacetPavList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
     this.loader.show(true);
     this.entityService.GetEntity("Shape").subscribe(result => {
       this.loader.show(false);
@@ -377,6 +463,80 @@ export class HomeComponent implements OnInit {
     this.entityService.GetEntity("Flourence").subscribe(result => {
       this.loader.show(false);
       this.flourenceList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("shade").subscribe(result => {
+      this.loader.show(false);
+      this.shadeList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("milky").subscribe(result => {
+      this.loader.show(false);
+      this.milkyList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("Lusture").subscribe(result => {
+      this.loader.show(false);
+      this.lusterList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("BlackCrown").subscribe(result => {
+      this.loader.show(false);
+      this.blackIncCrnList.list = result;
+      this.whiteIncCrnList.list = JSON.parse(JSON.stringify(result));
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("BlackTable").subscribe(result => {
+      this.loader.show(false);
+      this.blackIncTblList.list = result;
+      this.whiteIncTblList.list = JSON.parse(JSON.stringify(result));
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("Culet").subscribe(result => {
+      this.loader.show(false);
+      this.culetList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("ExtraFacetCrown").subscribe(result => {
+      this.loader.show(false);
+      this.extraFacetCrnList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("ExtraFacetPavilion").subscribe(result => {
+      this.loader.show(false);
+      this.extraFacetPavList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("EyeClean").subscribe(result => {
+      this.loader.show(false);
+      this.eyeCleanList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("NaturalGirdle").subscribe(result => {
+      this.loader.show(false);
+      this.naturalGirdleList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("NaturalPavilion").subscribe(result => {
+      this.loader.show(false);
+      this.naturalPavList.list = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.entityService.GetEntity("NaturalCrown").subscribe(result => {
+      this.loader.show(false);
+      this.naturalCrnList.list = result;
     }, error => {
       this.loader.show(false);
     })

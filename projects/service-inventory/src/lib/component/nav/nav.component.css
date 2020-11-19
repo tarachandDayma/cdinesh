@@ -1,7 +1,7 @@
 .sidebar {
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 103px;
     background-color: #f1f1f1;
     position: fixed;
     height: 100%;
@@ -12,11 +12,16 @@
     font-size: 20px;
 }
 
+.fa-ribbon:before {
+    content: "\f4d6";
+}
+
 .sidebar a {
     display: block;
     color: black;
     padding: 16px;
     text-decoration: none;
+    text-align: center;
 }
 
 .sidebar a.active {
