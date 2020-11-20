@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { alertserice, FormValidationService, loaderserice } from 'service-common';
 import { EntityModel } from '../../models/entity.model';
 import { EntityService } from '../../service/entity.service';
 @Component({
-  selector: 'lib-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'lib-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class HomeComponent implements OnInit {
+export class SearchComponent implements OnInit {
 
   constructor(private loader: loaderserice
     , private router: Router
     , private alertService: alertserice
     , public translate: TranslateService
     , private formvalidationService: FormValidationService
-    , private entityService: EntityService) { }
+    , private entityService: EntityService
+    , private route: ActivatedRoute) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -50,8 +51,26 @@ export class HomeComponent implements OnInit {
   selectedPointer: any[];
   showMorePointer: boolean = false;
   fancyColor: boolean = false;
-  
+  catchRouteParam(){
+    if (-1 != this.router.url.indexOf("fancySearch")) {
+      this.fancyColor=true;
+    }
+    // this.route
+    //   .queryParams
+    //   .subscribe(params => {
+    //     try {
+    //       var color = params['color'];
+    //       if (color == undefined)
+    //         return;
+    //       if(color=="fancy")
+    //         this.fancyColor=true;
+    //     } catch (error) {
+          
+    //     }
+    //   });
+  }
   ngOnInit(): void {
+    this.catchRouteParam();
     this.selectedPointer = [];
     this.defaultCaratRange = [
       {

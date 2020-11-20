@@ -64,6 +64,16 @@ footer button i {
     .col-md-selected-pointer-1 span {
         padding-top: 5px;
     }
+    footer .pull-left {
+        float: none !important;
+        text-align: center !important;
+        margin-bottom: 5px;
+        ;
+    }
+    footer .pull-right {
+        float: none !important;
+        text-align: center !important;
+    }
 }
 
 @media (min-width:769px) and (max-width:1024px) {

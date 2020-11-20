@@ -242,10 +242,66 @@
             "controlpanel": "ControlPanel",
             "profile": "Profile",
             "setting": "Settings",
-            "logout": "logout"
+            "logout": "logout",
+            "dashboard": "Dashboard",
+            "search": "Search",
+            "fancy": "Fancy",
+            "recommended": "Recomm-ended",
+            "newgoods": "New goods",
+            "bestofcd": "Best Of CD",
+            "upcoming": "Upcoming"
         },
         "search": {
-            "title": "Search"
+            "title": "Search",
+            "save&search": "Save & Search",
+            "search": "Search",
+            "nobgm": "NO BGM",
+            "3vg": "3VG+",
+            "2ex": "2EX",
+            "3ex": "3EX",
+            "naturalcrn": "Natural Crn.",
+            "naturalpav": "Natural Pav.",
+            "naturalgrdl": "Natural Grdl.",
+            "extrafacetcrn": "Extra Facet Crn.",
+            "extrafacetpv": "Extra Facet Pv.",
+            "eyeclean": "Eye Clean",
+            "culet": "Culet",
+            "whiteinccrn": "White Inc. Crn.",
+            "whiteinctbl": "White Inc. Tbl.",
+            "blackinccrn": "Black Inc. Crn.",
+            "blackinctbl": "Black Inc. Tbl.",
+            "shade": "Shade",
+            "luster": "Luster",
+            "milky": "Milky",
+            "advanceparameter": "Advance Parameter",
+            "fluorescence": "Fluorescence",
+            "location": "Location",
+            "symmetry": "Symmetry",
+            "polish": "Polish",
+            "Cut": "Cut",
+            "fancyintensity": "Fancy Intensity",
+            "fancyovertone": "Fancy Overtone",
+            "clarity": "Clarity",
+            "fancycolor": "Fancy Color",
+            "color": "Color",
+            "caratrangeto": "To",
+            "caratrangefrom": "From",
+            "caratrange": "Carat Range"
+        },
+        "dashboard": {
+            "title": "Dashboard"
+        },
+        "newgoods": {
+            "title": "New Goods"
+        },
+        "recommended": {
+            "title": "Recommended"
+        },
+        "upcoming": {
+            "title": "Upcoming"
+        },
+        "bestofcd": {
+            "title": "Best Of CD"
         }
     },
     "controlpanel": {

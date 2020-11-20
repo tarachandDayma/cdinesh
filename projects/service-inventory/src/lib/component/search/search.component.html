@@ -48,17 +48,17 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-2 col-sm-pointer-2 carat-col-sm-1">
-                                    Carat Range
+                                    <span [translate]="'inventory.search.caratrange'"> Carat Range </span>
                                     <i class="fa fa-refresh" (click)="resetPointer()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i>
                                 </div>
                                 <div class="col-sm-3 carat-col-sm-1">
                                     <div class="input-group input-group-sm mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-sm">From</span>
+                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
                                         </div>
                                         <input name="fromCarat" [(ngModel)]="fromCarat" type="number" class="form-control carat-input" min="0" placeholder="from">
                                         <div class="input-group-append">
-                                            <span class="input-group-text" id="inputGroup-sizing-sm">To</span>
+                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
                                         </div>
                                         <input name="toCarat" [(ngModel)]="toCarat" type="number" class="form-control carat-input" min="0" placeholder="to">
                                         <div class="input-group-append">
@@ -96,7 +96,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h6 class="pull-left">Color</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.color'"> color </span></h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(colorList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
 
@@ -112,7 +112,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h6 class="pull-left">Fancy Color</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.fancycolor'"> Fancy Color </span></h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fancycolorList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
                                 <div class="col-sm-12">
@@ -127,7 +127,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h6 class="pull-left">Clarity</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.clarity'"> Clarity </span></h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(clarityList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
 
@@ -144,7 +144,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h6 class="pull-left">Fancy Overtone</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.fancyovertone'"> Fancy Overtone </span> </h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fancyOvertoneList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
                                 <div class="col-sm-12">
@@ -158,7 +158,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h6 class="pull-left">Fancy Intensity</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.fancyintensity'"> Fancy Intensity </span></h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fancyIntensityList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
 
@@ -175,7 +175,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h6 class="pull-left">Cut</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.cut'"> Cut </span></h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(cutList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
                                 <div class="col-sm-12">
@@ -189,7 +189,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h6 class="pull-left">Polish</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.polish'"> Polish </span></h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(polishList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
 
@@ -204,7 +204,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h6 class="pull-left">Symmetry</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.symmetry'"> Symmetry </span></h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(symList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
 
@@ -219,7 +219,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h6 class="pull-left">Location</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.location'"> Location </span></h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(locationList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
 
@@ -234,7 +234,7 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h6 class="pull-left">Fluorescence</h6>
+                                    <h6 class="pull-left"><span [translate]="'inventory.search.fluorescence'"> Fluorescence </span></h6>
                                     <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(flourenceList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                 </div>
 
@@ -253,7 +253,7 @@
                                 <div class="card-header" id="headingOne">
                                     <h2 class="mb-0 text-center">
                                         <button class="btn btn-link btn-more-parameter" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Advance Parameter 
+                                            <span [translate]="'inventory.search.advanceparameter'"> Advance Parameter </span>  
                               </button>
                                     </h2>
                                 </div>
@@ -267,7 +267,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Milky</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.milky'"> Milky </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(milkyList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -281,7 +281,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Luster</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.luster'"> Luster </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(lusterList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -295,7 +295,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Shade</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.shade'"> shade </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(shadeList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -311,7 +311,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Black Inc. Tbl.</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.blackinctbl'"> Black Inc. Tbl. </span> </h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(blackIncTblList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -325,7 +325,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Black Inc. Crn.</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.blackinccrn'"> Black Inc. Crn. </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(blackIncCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -339,7 +339,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">White Inc. Tbl.</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.whiteinctbl'"> White Inc. Tbl. </span>.</h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(whiteIncTblList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -353,7 +353,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">White Inc. Crn.</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.whiteinccrn'"> White Inc. Crn. </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(whiteIncCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -369,7 +369,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Culet</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.culet'"> Culet </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(culetList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -383,7 +383,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Eye Clean</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.eyeclean'"> Eye Clean</span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(eyeCleanList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -397,7 +397,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Extra Facet Pv.</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.extrafacetpv'"> Extra Facet Pv. </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(extraFacetPavList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -411,7 +411,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-7">
-                                                            <h6 class="pull-left">Extra Facet Crn.</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.extrafacetcrn'"> Extra Facet Crn. </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(extraFacetCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -428,7 +428,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Natural Grdl.</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.naturalgrdl'"> Natural Grdl. </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(naturalGirdleList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -442,7 +442,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Natural Pav.</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.naturalpav'"> Natural Pav. </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(naturalPavList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -456,7 +456,7 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <h6 class="pull-left">Natural Crn.</h6>
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.naturalcrn'"> Natural Crn. </span></h6>
                                                             <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(naturalCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
                                                         </div>
                                                         <div class="col-sm-12">
@@ -482,14 +482,14 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="pull-left">
-                            <button type="button" class="btn-critearia search-footer-button"> 3EX</button>
-                            <button type="button" class="btn-critearia search-footer-button"> 2EX</button>
-                            <button type="button" class="btn-critearia search-footer-button"> 3VG+</button>
-                            <button type="button" class="btn-critearia search-footer-button"> NO BGM</button>
+                            <button type="button" class="btn-critearia search-footer-button"><span [translate]="'inventory.search.3ex'"> 3EX </span></button>
+                            <button type="button" class="btn-critearia search-footer-button"><span [translate]="'inventory.search.2ex'"> 2EX </span></button>
+                            <button type="button" class="btn-critearia search-footer-button"><span [translate]="'inventory.search.3vg'"> 3VG+ </span></button>
+                            <button type="button" class="btn-critearia search-footer-button"><span [translate]="'inventory.search.nobgm'"> NO BGM </span></button>
                         </div>
                         <div class="pull-right">
-                            <button type="button" class="btn btn-primary">Search</button>
-                            <button type="button" class="btn btn-primary">Save & Search</button>
+                            <button type="button" class="btn btn-primary"> <span [translate]="'inventory.search.search'"> Search </span></button>
+                            <button type="button" class="btn btn-primary"><span [translate]="'inventory.search.save&search'"> Save & Search </span></button>
                             <button type="button" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i></button>
                             <button type="button" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i></button>
                         </div>

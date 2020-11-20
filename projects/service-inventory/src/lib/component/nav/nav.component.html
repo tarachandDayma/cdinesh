@@ -9,7 +9,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="col-md-6">
                         <div class="input-group input-group-sm">
-                            <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control mr-2 search-control" type="search" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
                             </div>
@@ -78,12 +78,12 @@
         </div>
     </div>
 </header>
-<div class="sidebar">
-    <a href="#home"> <i class="fa fa-tachometer" aria-hidden="true"> </i> Dashboard</a>
-    <a class="active" href="#home"><i class="fa fa-search" aria-hidden="true"> </i> <br> Search</a>
-    <a href="#home"><i class="fa fa-diamond" aria-hidden="true"></i> <br> Fancy</a>
-    <a href="#home"><i class="fa fa-thumbs-up" aria-hidden="true" style="word-break: break-all;"></i> <br> Recomm-ended</a>
-    <a href="#home"><i class="fa fa-diamond" aria-hidden="true"></i> <br> New goods</a>
-    <a href="#home"><i class="fa fa-certificate" aria-hidden="true"></i> <br> Best Of CD</a>
-    <a href="#home"><i class="fa fa-gift" aria-hidden="true"></i> <br> Upcoming</a>
+<div class="sidebar collapse navbar-collapse" id="navbarSupportedContent">
+    <a routerLink="/inventory/dashboard" [ngClass]="currentMenu =='dashboard' ? 'active': ''"> <i class="fa fa-tachometer" aria-hidden="true"> </i> <br> <span [translate]="'inventory.nav.dashboard'"> Dashboard </span></a>
+    <a routerLink="/inventory/search" [ngClass]="currentMenu =='search' ? 'active': ''"><i class="fa fa-search" aria-hidden="true"> </i> <br> <span [translate]="'inventory.nav.search'"> Search </span></a>
+    <a routerLink="/inventory/fancySearch" [ngClass]="currentMenu =='fancysearch' ? 'active': ''"><i class="fa fa-diamond" aria-hidden="true"></i> <br> <span [translate]="'inventory.nav.fancy'"> Fancy </span></a>
+    <a routerLink="/inventory/recommended" [ngClass]="currentMenu =='recommended' ? 'active': ''"><i class="fa fa-thumbs-up" aria-hidden="true" style="word-break: break-all;"></i> <br> <span [translate]="'inventory.nav.recommended'"> Recomm-ended </span> </a>
+    <a routerLink="/inventory/newgoods" [ngClass]="currentMenu =='newgoods' ? 'active': ''"><i class="fa fa-diamond" aria-hidden="true"></i> <br> <span [translate]="'inventory.nav.newgoods'">  New goods </span></a>
+    <a routerLink="/inventory/bestofcd" [ngClass]="currentMenu =='bestofcd' ? 'active': ''"><i class="fa fa-certificate" aria-hidden="true"></i> <br> <span [translate]="'inventory.nav.bestofcd'">  Best Of CD </span></a>
+    <a routerLink="/inventory/upcoming" [ngClass]="currentMenu =='upcoming' ? 'active': ''"><i class="fa fa-gift" aria-hidden="true"></i> <br><span [translate]="'inventory.nav.upcoming'">  Upcoming </span> </a>
 </div>
