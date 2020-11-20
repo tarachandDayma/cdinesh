@@ -278,7 +278,7 @@
             "location": "Location",
             "symmetry": "Symmetry",
             "polish": "Polish",
-            "Cut": "Cut",
+            "cut": "Cut",
             "fancyintensity": "Fancy Intensity",
             "fancyovertone": "Fancy Overtone",
             "clarity": "Clarity",

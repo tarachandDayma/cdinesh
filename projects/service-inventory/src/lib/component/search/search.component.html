@@ -23,24 +23,24 @@
                         <img onerror="this.style.display='none'" src="./assets/img/{{item.selected?item.id+'-white':item.id}}.png" style="height: 38px;"> <br> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}
                     </span>
                     </div>
-                    <div name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
-                        <a [ngStyle]=" (shapeList.selectedOther) && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class=" shape nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <img onerror="this.style.display='none'" src="./assets/img/{{shapeList.selectedOther?'other-white':'other'}}.png"> <br> Other
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <div class="body">
-                                <a [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="dropdown-item" (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement<=9"
-                                    name="" id="">
-                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}} 
-                            </a>
-                            </div>
-                        </div>
+                    <div name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1" (click)="ShowMoreLess(shapeList)">
+                        <span [ngStyle]=" (shapeList.selectedOther) && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class=" shape " role="button">
+                            <img onerror="this.style.display='none'" src="./assets/img/{{shapeList.selectedOther?'other-white':'other'}}.png"> <br> {{shapeList.showMore?"Less":"More"}}
+                        </span>
                     </div>
                     <div class="col-sm-12">
                         <hr>
                     </div>
-
+                </div>
+                <div class="row col-md-12" *ngIf="shapeList.list.length >0 && shapeList.showMore">
+                    <div (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement<=9" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
+                        <span [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
+                        <img onerror="this.style.display='none'" src="./assets/img/{{item.selected?item.id+'-white':item.id}}.png" style="height: 38px;"> <br> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}
+                    </span>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
                 </div>
 
                 <div class="row col-md-12">

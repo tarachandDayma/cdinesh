@@ -560,7 +560,10 @@ export class SearchComponent implements OnInit {
       this.loader.show(false);
     })
   }
-  showFancy(flag:boolean){
+  ShowMoreLess(list){
+    list.showMore=!list.showMore; 
+  }
+  showFancy(flag:boolean){ 
     this.fancyColor=flag;
   }
   SelectCriteria(list: any, item: any) {
