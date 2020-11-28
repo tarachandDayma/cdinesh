@@ -1,22 +1,20 @@
 <lib-header></lib-header>
 
-<div class="wrapper">
-    <div class="container">
-        <!-- begin::content -->
-        <section class="secone">
-            <div class="d-flex justify-content-center">
-                <div class="brndintro">
-                    <div class="card bg-none border-0">
-                        <!-- <img class="img-fluid" src="./assets/logos/cd_white_final-04.png" alt=""> -->
-                        <img [src]="AppLogo" class="img-fluid mx-auto d-block" alt="login-logo" width="420px">
-                        <p class="company-name  wow zoomIn" data-wow-delay="300ms" data-wow-duration="4s">{{AppTitle}}</p>
-                    </div>
-                    <h4 class="tagline text-white wow zoomIn" data-wow-delay="300ms" data-wow-duration="4s">Diamonds Beyond Imagination</h4>
+<div class="secone_wrapper">
+    <!-- begin::content -->
+    <section class="secone">
+        <div class="d-flex justify-content-center">
+            <div class="brndintro">
+                <div class="card bg-none border-0">
+                    <!-- <img class="img-fluid" src="./assets/logos/cd_white_final-04.png" alt=""> -->
+                    <img [src]="AppLogo" class="img-fluid mx-auto d-block" alt="login-logo" width="420px">
+                    <p class="company-name  wow zoomIn" data-wow-delay="300ms" data-wow-duration="4s">{{AppTitle}}</p>
                 </div>
+                <h4 class="tagline text-white wow zoomIn" data-wow-delay="300ms" data-wow-duration="4s">Diamonds Beyond Imagination</h4>
             </div>
-        </section>
-        <!-- end::content -->
-    </div>
+        </div>
+    </section>
+    <!-- end::content -->
     <section class="sectwo wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="3s" id="about">
         <div class="bg1">
             <div class="container">
@@ -27,6 +25,7 @@
                             <span [translate]="'home.about.description.line1'">Established in 1976, </span> <span> {{AppTitle}} </span> <span [translate]="'home.about.description.line1.1'">  is a Diamond Manufacturing firm based out of
                                 Mumbai and
                             Surat.</span>
+                            <br>
                             <br>
                             <span [translate]="'home.about.description.line2'">
                                 The founders of the company are Mr. Chinu Doshi & Mr. Dinesh Shah. They paved and set the stones for the company, and were then supported in their journey by for Mr. Jigar Doshi,
@@ -48,132 +47,123 @@
             <h1>Beyond heritage</h1>
             <div class="timeline d-none d-md-block">
                 <div class="d-flex justify-content-between">
-                    <div class="d-flex flex-column text-center wow zoomIn" data-wow-duration="1s">
+                    <div class="d-flex flex-column text-center position-relative">
                         <label for="">1969</label>
                         <button id="btn1" type="button" class="btn bg-none redline oval1 active" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Mr. Dinesh Shah & Mr. Chinu Doshi began their partnership by pursuing rough trading in Surat.
                         ">
                             <img src="./assets/images/white_diamond.png" alt="">
                         </button>
-
+                        <div class="nopopover option1" wfd-id="87">
+                            <div class="card" wfd-id="88">
+                                <div class="card-body" wfd-id="89">
+                                    <p>
+                                        Mr. Dinesh Shah &amp; Mr. Chinu Doshi began their partnership by pursuing rough trading in Surat.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column text-center wow zoomIn" data-wow-duration="2s">
+                    <div class="d-flex flex-column text-center position-relative">
 
                         <button type="button" class="btn bg-none" data-container="body" data-toggle="popover" data-placement="top" data-content="Mr. Dinesh Shah went to Belgium, Antwerp for acquiring rough. Resulting in tremendous growth in the firms early years. 
                         ">
                             <img src="./assets/images/white_diamond.png" alt="">
                         </button>
                         <label for="">1973</label>
+                        <div class="nopopover option2" wfd-id="82">
+                            <div class="card" wfd-id="83">
+                                <div class="card-body" wfd-id="84">
+                                    <p>
+                                        Mr. Dinesh Shah went to Belgium, Antwerp for acquiring rough. Resulting in tremendous growth in the firms early years.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column text-center wow zoomIn" data-wow-duration="3s">
+                    <div class="d-flex flex-column text-center position-relative">
                         <label for="">1976</label>
                         <button type="button" class="btn bg-none redline" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Transition from Lucky Diamond to C.Dinesh & Co partnership firm in Mumbai. An export import business in rough diamonds. 
                         ">
                             <img src="./assets/images/white_diamond.png" alt="">
                         </button>
-
+                        <div class="nopopover option1" wfd-id="77">
+                            <div class="card" wfd-id="78">
+                                <div class="card-body" wfd-id="79">
+                                    <p>
+                                        Transition from Lucky Diamond to C.Dinesh &amp; Co partnership firm in Mumbai. An export import business in rough diamonds.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column text-center wow zoomIn" data-wow-duration="4s">
+                    <div class="d-flex flex-column text-center position-relative">
 
                         <button type="button" class="btn bg-none " data-container="body" data-toggle="popover" data-placement="top" data-content="Established the company's first office at Panchratana in Mumbai. 
                         ">
                             <img src="./assets/images/white_diamond.png" alt="">
                         </button>
                         <label for="">1980</label>
+                        <div class="nopopover option2" wfd-id="72">
+                            <div class="card" wfd-id="73">
+                                <div class="card-body" wfd-id="74">
+                                    <p>
+                                        Established the company's first office at Panchratana in Mumbai.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column text-center wow zoomIn" data-wow-duration="5s">
+                    <div class="d-flex flex-column text-center position-relative">
                         <label for="">1996</label>
                         <button type="button" class="btn bg-none redline" data-container="body" data-toggle="popover" data-placement="bottom" data-content=" C.Dinesh & Co strengthened their team with Mr. Jigar Doshi, Mr. Amit Doshi, Mr. Yomesh Shah & Mr Jaimin Shah entering day to day activities. 
                         ">
                             <img src="./assets/images/white_diamond.png" alt="">
                         </button>
-
+                        <div class="nopopover option1" wfd-id="67">
+                            <div class="card" wfd-id="68">
+                                <div class="card-body" wfd-id="69">
+                                    <p>
+                                        C.Dinesh &amp; Co strengthened their team with Mr. Jigar Doshi, Mr. Amit Doshi, Mr. Yomesh Shah &amp; Mr Jaimin Shah entering day to day activities.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column text-center wow zoomIn" data-wow-duration="6s">
+                    <div class="d-flex flex-column text-center position-relative">
 
                         <button type="button" class="btn bg-none" data-container="body" data-toggle="popover" data-placement="top" data-content=" Inception of Aura Jewels, expanding into the jewellery sector. Aura is 
-                        a jewellery manufacturing firm based out of Mumbai. 
-                        ">
+                        a jewellery manufacturing firm based out of Mumbai.">
                             <img src="./assets/images/white_diamond.png" alt="">
                         </button>
                         <label for="">2007</label>
+                        <div class="nopopover option2" wfd-id="62">
+                            <div class="card" wfd-id="63">
+                                <div class="card-body" wfd-id="64">
+                                    <p>
+                                        Inception of Aura Jewels, expanding into the jewellery sector. Aura is a jewellery manufacturing firm based out of Mumbai.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column text-center wow zoomIn" data-wow-duration="7s">
+                    <div class="d-flex flex-column text-center position-relative">
                         <label for="">2016</label>
                         <button type="button" class="btn bg-none oval2" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Hired the 500th employee at the Surat Manufacturing Factory">
                             <img src="./assets/images/white_diamond.png" alt="">
                         </button>
-
+                        <div class="nopopover option1" wfd-id="57">
+                            <div class="card" wfd-id="58">
+                                <div class="card-body" wfd-id="59">
+                                    <p>
+                                        Hired the 500th employee at the Surat Manufacturing Factory
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="timeline-mobile d-md-none  wow zoomIn" data-wow-delay="300ms" data-wow-duration="2s">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <p><label for="">1969</label></p>
-                        <button id="btn2" type="button" class="btn bg-none redline oval1 active" data-container="body" data-toggle="popover" data-placement="left" data-content="Mr. Dinesh Shah & Mr. Chinu Doshi began their partnership by pursuing rough trading in Surat.
-                        ">
-                            <img src="./assets/images/white_diamond.png" alt="">
-                        </button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <p><label for="">1973</label></p>
-                        <button type="button" class="btn bg-none" data-container="body" data-toggle="popover" data-placement="right" data-content="Mr. Dinesh Shah went to Belgium, Antwerp for acquiring rough. Resulting in tremendous growth in the firms early years. 
-                        ">
-                            <img src="./assets/images/white_diamond.png" alt="">
-                        </button>
 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12  text-center">
-                        <p><label for="">1976</label></p>
-                        <button type="button" class="btn bg-none redline" data-container="body" data-toggle="popover" data-placement="left" data-content="Transition from Lucky Diamond to C.Dinesh & Co partnership firm in Mumbai. An export import business in rough diamonds. 
-                        ">
-                            <img src="./assets/images/white_diamond.png" alt="">
-                        </button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12  text-center">
-                        <p><label for="">1980</label></p>
-                        <button type="button" class="btn bg-none " data-container="body" data-toggle="popover" data-placement="right" data-content="Established the company's first office at Panchratana in Mumbai. 
-                        ">
-                            <img src="./assets/images/white_diamond.png" alt="">
-                        </button>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12  text-center">
-                        <p><label for="">1996</label></p>
-                        <button type="button" class="btn bg-none redline" data-container="body" data-toggle="popover" data-placement="left" data-content=" C.Dinesh & Co strengthened their team with Mr. Jigar Doshi, Mr. Amit Doshi, Mr. Yomesh Shah & Mr Jaimin Shah entering day to day activities. 
-                        ">
-                            <img src="./assets/images/white_diamond.png" alt="">
-                        </button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12  text-center">
-                        <p><label for="">2007</label></p>
-                        <button type="button" class="btn bg-none" data-container="body" data-toggle="popover" data-placement="right" data-content=" Inception of Aura Jewels, expanding into the jewellery sector. Aura is 
-                        a jewellery manufacturing firm based out of Mumbai. 
-                        ">
-                            <img src="./assets/images/white_diamond.png" alt="">
-                        </button>
-
-                    </div>
-                </div>
-                <div class="row mb-0">
-                    <div class="col-12  text-center">
-                        <p><label for="">2016</label></p>
-                        <button type="button" class="btn bg-none oval2" data-container="body" data-toggle="popover" data-placement="left" data-content="Hired the 500th employee at the Surat Manufacturing Factory">
-                            <img src="./assets/images/white_diamond.png" alt="">
-                        </button>
-                    </div>
-                </div>
-            </div>
         </section>
         <section class="secfour" id="services">
             <h1 class="mx-auto">Beyond services</h1>

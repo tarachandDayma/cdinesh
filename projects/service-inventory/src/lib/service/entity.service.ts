@@ -18,6 +18,11 @@ export class EntityService extends RestService {
         url = this.env.ApiGateway + "/GetEntity?MasterName=" + MasterName;
         return super.Get(url);
     }
+    public GetAdvanceEntity(MasterName: string): Observable<EntityModel[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/SearchFilter/GetEntity?FilterName=" + MasterName;
+        return super.Get(url);
+    }
 
 
 }

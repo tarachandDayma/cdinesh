@@ -23,16 +23,17 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
 import { ConfirmationDialogService } from './component/confirmation-dialog/confirmation-dialog.service';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr/toastr/toastr.module';
+import { AppSwitchComponent } from './component/app-switch/app-switch.component';
 
 
 
 @NgModule({
-  declarations: [ServiceCommonComponent, loader,alert, CDDropdownComponent, CdmulitselectComponent, CdGridComponent, CdDragDropDirective, PaginationComponent,ConfirmationDialogComponent],
+  declarations: [ServiceCommonComponent, loader,alert, CDDropdownComponent, CdmulitselectComponent, CdGridComponent, CdDragDropDirective, PaginationComponent,ConfirmationDialogComponent, AppSwitchComponent],
   imports: [
     HttpClientModule,
     CommonModule,FormsModule,ReactiveFormsModule
   ],
-  exports: [ServiceCommonComponent, loader,alert,CDDropdownComponent,CdmulitselectComponent,CdGridComponent,PaginationComponent,ConfirmationDialogComponent]
+  exports: [ServiceCommonComponent, loader,alert,CDDropdownComponent,CdmulitselectComponent,CdGridComponent,PaginationComponent,ConfirmationDialogComponent,AppSwitchComponent]
 })
 export class ServiceCommonModule {
   static forRoot(): ModuleWithProviders {

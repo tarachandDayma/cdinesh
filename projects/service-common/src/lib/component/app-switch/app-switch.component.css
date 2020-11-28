@@ -1,0 +1,20 @@
+.g-checkbox {
+    vertical-align: bottom;
+    margin-left: 5px;
+}
+
+.g-checkbox.checked>button {
+    background: url(../assets/img/check.png) no-repeat;
+    width: 17px;
+    height: 16px;
+    background-size: contain;
+    border: 0;
+}
+
+.g-checkbox>button {
+    background: url(../assets/img/uncheck.png) no-repeat;
+    width: 17px;
+    height: 16px;
+    background-size: contain;
+    border: 0;
+}

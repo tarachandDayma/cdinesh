@@ -17,6 +17,17 @@
                     </form>
                     <ul class="navbar-nav ml-auto navbar-nav flex-row ml-md-auto d-md-flex">
                         <li class="nav-item dropdown ">
+                            <a class="nav-link" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{Language.toUpperCase()}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="body">
+                                    <span (click)="LangChange('en')" class="dropdown-item">EN</span>
+                                    <span (click)="LangChange('zh')" class="dropdown-item">ZH</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown ">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell-o icon"></i>
                             </a>

@@ -17,14 +17,14 @@
                 <div class="row col-md-12" *ngIf="shapeList.list.length >0">
 
                     <div (click)="SelectCriteria(shapeList,null)" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
-                        <span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="All Shapes" [ngStyle]="shapeList.allSelected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}"><br>All Shapes</span></div>
+                        <span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="All Shapes" [ngStyle]="shapeList.allSelected && {'background': '#e5803f','color': '#ffffff'}"><br>All Shapes</span></div>
                     <div (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement>9" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
-                        <span [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
+                        <span [ngStyle]="item.selected && {'background': '#e5803f','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
                         <img onerror="this.style.display='none'" src="./assets/img/{{item.selected?item.id+'-white':item.id}}.png" style="height: 38px;"> <br> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}
                     </span>
                     </div>
                     <div name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1" (click)="ShowMoreLess(shapeList)">
-                        <span [ngStyle]=" (shapeList.selectedOther) && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class=" shape " role="button">
+                        <span [ngStyle]=" (shapeList.selectedOther) && {'background': '#e5803f','color': '#ffffff'}" class=" shape " role="button">
                             <img onerror="this.style.display='none'" src="./assets/img/{{shapeList.selectedOther?'other-white':'other'}}.png"> <br> {{shapeList.showMore?"Less":"More"}}
                         </span>
                     </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="row col-md-12" *ngIf="shapeList.list.length >0 && shapeList.showMore">
                     <div (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement<=9" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
-                        <span [ngStyle]="item.selected && {'background': 'linear-gradient(to right, #192b4a, #1b579a)','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
+                        <span [ngStyle]="item.selected && {'background': '#e5803f','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
                         <img onerror="this.style.display='none'" src="./assets/img/{{item.selected?item.id+'-white':item.id}}.png" style="height: 38px;"> <br> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}
                     </span>
                     </div>
@@ -69,7 +69,7 @@
                                 <div class="col-sm-7">
                                     <div class="row">
                                         <div class="col-md-1 col-md-selected-pointer-1" *ngFor="let  item of selectedPointer;">
-                                            <span [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{item.from}}-{{item.to}} <span (click)="removeCaratRange(item)" style="padding-left: 2px;" >X</span> </span>
+                                            <span [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{item.from | number : '1.2-2'}}-{{item.to | number : '1.2-2'}} <span (click)="removeCaratRange(item)" style="padding-left: 2px;" >X</span>                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                                             <button [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" (click)="selectPointer(null,item)" type="button"> {{item.lable}}</button>
                                             <ul style="list-style-type:none;" [hidden]="!showMorePointer">
                                                 <li *ngFor="let  subitem of item.list;">
-                                                    <button (click)="selectPointer(item,subitem)" [ngClass]="subitem.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{subitem.from}}-{{subitem.to}}</button>
+                                                    <button (click)="selectPointer(item,subitem)" [ngClass]="subitem.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{subitem.labelfrom}}-{{subitem.labelto}}</button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -467,6 +467,396 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                            <div class=" col-sm-3 col-sm-cut-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.girdle'"> Girdle </span></h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(girdleList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="girdleList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(girdleList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of girdleList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(girdleList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.h&a'"> H&A </span></h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(haList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="haList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(haList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of haList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(haList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.Price$/Ct.'"> Price $/Ct. </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromPrice" [(ngModel)]="fromPrice" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toPrice" [(ngModel)]="toPrice" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.TotalPrice$'">Total Price$ </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromTotalPrice" [(ngModel)]="fromTotalPrice" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toTotalPrice" [(ngModel)]="toTotalPrice" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                            <div class=" col-sm-12 col-sm-cut-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.keytoSymbol'"> keytoSymbol </span></h6>
+                                                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(keytoSymbolList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div (click)="toggleKeyToSymbol()" class="radio-button-label" [translate]="'inventory.search.keytoSymbolContains'">Contains</div> <button type="button" [ngClass]="keytoSymbolContains !=true ? 'radio-button': 'radio-button-selected'" (click)="toggleKeyToSymbol()"> </button>
+                                                            <div (click)="toggleKeyToSymbol()" class="radio-button-label" [translate]="'inventory.search.keytoSymbolNotContains'">Not Contains</div> <button type="button" [ngClass]="keytoSymbolContains ==true ? 'radio-button': 'radio-button-selected'" (click)="toggleKeyToSymbol()"></button>
+                                                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="keytoSymbolList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(keytoSymbolList,null)"> ALL</button>
+                                                            <button *ngFor="let  item of keytoSymbolList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(keytoSymbolList,item)"> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                            <div class="col-sm-12 col-sm-cut-6">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-1">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.video'"> Video </span> </span>
+                                                                </div>
+                                                                <div class="input-group-append">
+                                                                    <lib-app-switch [(_value)]="video" (change)="videoChange($event)"></lib-app-switch>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.sealdStone'"> Seald Stone </span> </span>
+                                                                </div>
+                                                                <div class="input-group-append">
+                                                                    <lib-app-switch [(_value)]="sealdStone" (change)="sealdChange($event)"></lib-app-switch>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.jewellerChoice'"> Jewellers Choice
+                                                                    </span> </span>
+                                                                </div>
+                                                                <div class="input-group-append">
+                                                                    <lib-app-switch [(_value)]="jewellerChoice" (change)="jewellerChoiceChange($event)"></lib-app-switch>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.sarineDiamondJourney'"> Sarine Diamond Journey
+                                                                    </span> </span>
+                                                                </div>
+                                                                <div class="input-group-append">
+                                                                    <lib-app-switch [(_value)]="sarineDiamondJourney" (change)="sarineDiamondJourneyChange($event)"></lib-app-switch>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                            <div class=" col-sm-3 col-sm-cut-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.length'"> Length </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromLength" [(ngModel)]="fromLength" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toLength" [(ngModel)]="toLength" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.width'"> Width </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromWidth" [(ngModel)]="fromWidth" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toWidth" [(ngModel)]="toWidth" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.depth'"> Depth </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromDepth" [(ngModel)]="fromDepth" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toDepth" [(ngModel)]="toDepth" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.ratio'"> Ratio </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromRatio" [(ngModel)]="fromRatio" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toRatio" [(ngModel)]="toRatio" type="number" class="form-control carat-input" min="0" placeholder="to">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                            <div class=" col-sm-3 col-sm-cut-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.tableper'"> Table % </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromTablePer" [(ngModel)]="fromTablePer" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toTablePer" [(ngModel)]="toTablePer" type="number" class="form-control carat-input" min="0" placeholder="to">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.depthper'"> Depth % </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromDepthPer" [(ngModel)]="fromDepthPer" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toDepthPer" [(ngModel)]="toDepthPer" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.girdleper'"> Girdle % </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromGirdlePer" [(ngModel)]="fromGirdlePer" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toGirdlePer" [(ngModel)]="toGirdlePer" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.crownheight'"> Crown Height </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromCrownHeight" [(ngModel)]="fromCrownHeight" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toCrownHeight" [(ngModel)]="toCrownHeight" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                            <div class=" col-sm-3 col-sm-cut-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.pavdepth'"> Pavilion Depth </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromPavDepth" [(ngModel)]="fromPavDepth" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toPevDepth" [(ngModel)]="toPevDepth" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-3 col-sm-polish-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.pavangle'">Pav.Angle </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromPavAngle" [(ngModel)]="fromPavAngle" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toPevAngle" [(ngModel)]="toPevAngle" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" col-sm-6 col-sm-symmetry-6 ">
+                                                <div class="box">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <h6 class="pull-left"><span [translate]="'inventory.search.crownangle'"> Cr.Angle </span></h6>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group input-group-sm mb-1">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangefrom'"> From </span> </span>
+                                                                </div>
+                                                                <input name="fromCrownAngle" [(ngModel)]="fromCrownAngle" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span [translate]="'inventory.search.caratrangeto'"> From </span></span>
+                                                                </div>
+                                                                <input name="toCrownAngle" [(ngModel)]="toCrownAngle" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -482,10 +872,10 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="pull-left">
-                            <button type="button" class="btn-critearia search-footer-button"><span [translate]="'inventory.search.3ex'"> 3EX </span></button>
-                            <button type="button" class="btn-critearia search-footer-button"><span [translate]="'inventory.search.2ex'"> 2EX </span></button>
-                            <button type="button" class="btn-critearia search-footer-button"><span [translate]="'inventory.search.3vg'"> 3VG+ </span></button>
-                            <button type="button" class="btn-critearia search-footer-button"><span [translate]="'inventory.search.nobgm'"> NO BGM </span></button>
+                            <button (click)="select3Ex()" [ngClass]="_3Ex?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.3ex'"> 3EX </span></button>
+                            <button (click)="select2Ex()" [ngClass]="_2Ex?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.2ex'"> 2EX </span></button>
+                            <button (click)="select3VG()" [ngClass]="_3Vg?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.3vg'"> 3VG+ </span></button>
+                            <button (click)="toggleNoBGM()" [ngClass]="nobgm?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.nobgm'"> NO BGM </span></button>
                         </div>
                         <div class="pull-right">
                             <button type="button" class="btn btn-primary"> <span [translate]="'inventory.search.search'"> Search </span></button>

@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { env } from 'process';
 import { EnvironmentService } from 'service-common';
 import { UserService } from '../../service/user.service';
@@ -16,11 +17,13 @@ export class NavComponent implements OnInit {
   AllowControlPanel: boolean = false;
   showNaviation: boolean = true;
   currentMenu: string;
-  constructor(private environment: EnvironmentService, private userService: UserService, private router: Router) {
+  public Language: string ;
+  constructor(private environment: EnvironmentService, private userService: UserService, private router: Router,private translate: TranslateService) {
     this.AppLogo = environment.logoUrl;
     this.AppTitle = environment.appTitle;
-
+    this.Language=translate.currentLang;
   }
+  
   ngOnInit(): void {
     if (-1 != this.router.url.indexOf("dashboard")) {
       this.currentMenu = "dashboard";
@@ -50,5 +53,9 @@ export class NavComponent implements OnInit {
   }
   logout() {
     this.environment.logout();
+  }
+  LangChange(lang) {
+    this.translate.use(lang);
+    this.Language = lang;
   }
 }
