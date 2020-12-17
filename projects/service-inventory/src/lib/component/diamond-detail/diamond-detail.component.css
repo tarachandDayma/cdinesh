@@ -1,0 +1,30 @@
+.img-button {
+    align-items: center;
+    background-color: var(--ntp-theme-shortcut-background-color);
+    border-radius: 49%;
+    justify-content: center;
+    background: #e5803f;
+    height: 42px;
+    width: 45px;
+    color: #fff;
+    padding-top: 5px;
+    padding: 6px;
+    font-size: 12px;
+}
+
+.img-lable {
+    margin-left: 5px;
+    font-size: 10px;
+}
+
+.img-div {
+    width: 25%;
+    display: inline-block;
+}
+
+@media (max-width:450px) {
+    .img-view {
+        transform: scale(0.7);
+        margin-left: -70px;
+    }
+}

@@ -1,3 +1,8 @@
+<style>
+    body{
+        overflow: hidden;
+    }
+</style>
 <header>
     <div class="container-fluid">
         <div class="row">
@@ -7,9 +12,9 @@
                     <span class="navbar-toggler-icon"></span>
                   </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="col-md-6">
+                    <form class="col-md-6" (ngSubmit)="SearchPackets()">
                         <div class="input-group input-group-sm">
-                            <input class="form-control mr-2 search-control" type="search" placeholder="Search" aria-label="Search">
+                            <input style="color: black;" name="searchPackets" [(ngModel)]="PacketNos" class="form-control mr-2 search-control" type="search" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
                             </div>

@@ -13,3 +13,4 @@ export * from "./lib/component/search/search.component";
 export * from "./lib/component/upcoming/upcoming.component";
 export * from './lib/component/nav/nav.component';
 export * from './lib/service/user.service';
+export * from './lib/component/diamond-detail/diamond-detail.component';

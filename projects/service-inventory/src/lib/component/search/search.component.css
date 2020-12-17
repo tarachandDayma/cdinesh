@@ -1,6 +1,19 @@
 main {
     padding: 0px;
 }
+.custTable > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td {
+    font-size: 12px !important;
+    display: table;
+}
+.table-fixed {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    height: 63vh;
+    display: block;
+}
 
 .box {
     padding: 3px;

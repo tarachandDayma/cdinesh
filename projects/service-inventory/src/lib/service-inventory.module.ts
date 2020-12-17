@@ -15,6 +15,7 @@ import { BestOfCDComponent } from './component/best-of-cd/best-of-cd.component';
 import { SearchComponent } from './component/search/search.component';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { DiamondDetailComponent } from './component/diamond-detail/diamond-detail.component';
 
 
 
@@ -22,7 +23,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
 }
 @NgModule({
-  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent],
+  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent],
   imports: [
     FormsModule,ReactiveFormsModule,
     TranslateModule.forChild(),
@@ -37,7 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  exports: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent]
+  exports: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent]
 })
 export class ServiceInventoryModule { 
   static forRoot(): ModuleWithProviders {

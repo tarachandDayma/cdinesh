@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BestOfCDComponent } from './component/best-of-cd/best-of-cd.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { DiamondDetailComponent } from './component/diamond-detail/diamond-detail.component';
 import { NewgoodsComponent } from './component/newgoods/newgoods.component';
 import { RecommendedComponent } from './component/recommended/recommended.component';
 import { SearchComponent } from './component/search/search.component';
@@ -27,12 +28,17 @@ const routes: Routes = [
       component:SearchComponent
     },
     {
+      path:"SearchPacket",
+      component:SearchComponent
+    }
+    ,
+    {
       path: 'upcoming',
       component:UpcomingComponent
     },
     {
       path: 'bestofcd',
-      component:BestOfCDComponent
+      component:SearchComponent
     },
     {
       path: 'recommended',
@@ -41,9 +47,17 @@ const routes: Routes = [
     ,
     {
       path: 'newgoods',
-      component:NewgoodsComponent
+      component:SearchComponent
+    },
+    {
+      path:"showselected",
+      component:SearchComponent
     }
-
+    ,
+    {
+      path:"diamondDetail",
+      component:DiamondDetailComponent
+    }
   ];
   @NgModule({
     imports: [RouterModule.forChild(routes)],

@@ -17,14 +17,27 @@ export class NavComponent implements OnInit {
   AllowControlPanel: boolean = false;
   showNaviation: boolean = true;
   currentMenu: string;
-  public Language: string ;
-  constructor(private environment: EnvironmentService, private userService: UserService, private router: Router,private translate: TranslateService) {
+  public Language: string;
+  PacketNos: string = '';
+  constructor(private environment: EnvironmentService, private userService: UserService, private router: Router, private translate: TranslateService) {
     this.AppLogo = environment.logoUrl;
     this.AppTitle = environment.appTitle;
-    this.Language=translate.currentLang;
+    this.Language = translate.currentLang;
   }
-  
+
   ngOnInit(): void {
+    try {
+      if (-1 != this.router.url.indexOf("SearchPacket")){
+        if (localStorage.getItem("PacketNo") != undefined) {
+          this.PacketNos = localStorage.getItem("PacketNo");
+        }
+      } else {
+        localStorage.setItem("PacketNo", '');
+        this.PacketNos = localStorage.getItem("PacketNo");
+      }
+    } catch (error) {
+
+    }
     if (-1 != this.router.url.indexOf("dashboard")) {
       this.currentMenu = "dashboard";
     }
@@ -57,5 +70,13 @@ export class NavComponent implements OnInit {
   LangChange(lang) {
     this.translate.use(lang);
     this.Language = lang;
+  }
+  SearchPackets() {
+    localStorage.setItem("PacketNo", this.PacketNos)
+    if (-1 !== this.router.url.indexOf("SearchPacket")) {
+      location.reload();
+    } else {
+      this.router.navigateByUrl("/inventory/SearchPacket");
+    }
   }
 }

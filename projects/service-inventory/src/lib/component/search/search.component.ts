@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs/operators';
 import { alertserice, FormValidationService, loaderserice } from 'service-common';
+import { diamondsearchResult } from '../../models/diamond.result.model';
 import { EntityModel } from '../../models/entity.model';
 import { EntityService } from '../../service/entity.service';
+import { SearchService } from '../../service/search.service';
+declare var $: any;
 @Component({
   selector: 'lib-search',
   templateUrl: './search.component.html',
@@ -18,7 +21,8 @@ export class SearchComponent implements OnInit {
     , public translate: TranslateService
     , private formvalidationService: FormValidationService
     , private entityService: EntityService
-    , private route: ActivatedRoute) { }
+    , private route: ActivatedRoute
+    , private searchService: SearchService) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -44,9 +48,12 @@ export class SearchComponent implements OnInit {
   naturalCrnList: any;
   extraFacetPavList: any;
   extraFacetCrnList: any;
-  girdleList: any;
-  haList: any;
+  fromgirdleList: any;
+  togirdleList: any;
+  fromhaList: any;
+  tohaList: any;
   keytoSymbolList: any;
+  certificateList: any;
   caratRange: any;
 
   defaultCaratRange: any[];
@@ -90,26 +97,53 @@ export class SearchComponent implements OnInit {
   _3Ex: boolean = false;
   _2Ex: boolean = false;
   _3Vg: boolean = false;
+  delveryAt: string;
+  deliveryAtList = [];
+  showResult: boolean = false;
+  searchResult: diamondsearchResult[] = [];
+  AllSelected: boolean = false;
+  PacketNos: string = '';
+  Status: string = '';
+  IsPriority: string = '';
+  ////summary variable
+  totalPcs: number;
+  totalCarat: number;
+  totalAvgPrice: number;
+  totalAvgDisc: number;
+  totalPrice: number;
+  selectedtotalPcs: number;
+  selectedtotalCarat: number;
+  selectedtotalAvgPrice: number;
+  selectedtotalAvgDisc: number;
+  selectedtotalPrice: number;
+  ////summary variable
+
   catchRouteParam() {
     if (-1 != this.router.url.indexOf("fancySearch")) {
       this.fancyColor = true;
+      localStorage.setItem("PacketNo", "");
+    } else if (-1 != this.router.url.indexOf("SearchPacket")) {
+      this.PacketNos = localStorage.getItem("PacketNo");
+      this.searchDiamond();
+    } else if (-1 != this.router.url.indexOf("newgoods")) {
+      this.Status = "N";
+      this.searchDiamond();
+      localStorage.setItem("PacketNo", "");
+    } else if (-1 != this.router.url.indexOf("bestofcd")) {
+      this.IsPriority = 'Y'
+      this.searchDiamond();
+      localStorage.setItem("PacketNo", "");
+    } else if (-1 != this.router.url.indexOf("showselected")) {
+      this.showResult = true;
+      this.searchResult = JSON.parse(localStorage.getItem("selectedResult"));
+      this.doPagination();
+      localStorage.setItem("PacketNo", "");
+    } else {
+      localStorage.setItem("PacketNo", "");
     }
-    // this.route
-    //   .queryParams
-    //   .subscribe(params => {
-    //     try {
-    //       var color = params['color'];
-    //       if (color == undefined)
-    //         return;
-    //       if(color=="fancy")
-    //         this.fancyColor=true;
-    //     } catch (error) {
-
-    //     }
-    //   });
   }
   ngOnInit(): void {
-    this.catchRouteParam();
+
     this.selectedPointer = [];
     this.defaultCaratRange = [
       {
@@ -370,7 +404,7 @@ export class SearchComponent implements OnInit {
           , {
             selected: false,
             from: "6.000",
-            to: "6.999", 
+            to: "6.999",
             labelfrom: "6.00",
             labelto: "6.99"
           }, {
@@ -524,12 +558,22 @@ export class SearchComponent implements OnInit {
       selectedOther: false,
       list: []
     };
-    this.girdleList = {
+    this.fromgirdleList = {
       allSelected: true,
       selectedOther: false,
       list: []
     };
-    this.haList = {
+    this.togirdleList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.fromhaList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
+    this.tohaList = {
       allSelected: true,
       selectedOther: false,
       list: []
@@ -539,165 +583,185 @@ export class SearchComponent implements OnInit {
       selectedOther: false,
       list: []
     };
-    this.loader.show(true);
+    this.certificateList = {
+      allSelected: true,
+      selectedOther: false,
+      list: []
+    };
     this.entityService.GetEntity("Shape").subscribe(result => {
-      this.loader.show(false);
+
       this.shapeList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("Colour").subscribe(result => {
-      this.loader.show(false);
+
       this.colorList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("Clarity").subscribe(result => {
-      this.loader.show(false);
+
       this.clarityList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("cut").subscribe(result => {
-      this.loader.show(false);
+
       this.cutList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("polish").subscribe(result => {
-      this.loader.show(false);
+
       this.polishList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("Symmetry").subscribe(result => {
-      this.loader.show(false);
+
       this.symList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("Location").subscribe(result => {
-      this.loader.show(false);
+
       this.locationList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("FancyColor").subscribe(result => {
-      this.loader.show(false);
+
       this.fancycolorList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("FancyColorOvertone").subscribe(result => {
-      this.loader.show(false);
+
       this.fancyOvertoneList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("FancyColorIntensity").subscribe(result => {
-      this.loader.show(false);
+
       this.fancyIntensityList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("Flourence").subscribe(result => {
-      this.loader.show(false);
+
       this.flourenceList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("shade").subscribe(result => {
-      this.loader.show(false);
+
       this.shadeList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("milky").subscribe(result => {
-      this.loader.show(false);
+
       this.milkyList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("Lusture").subscribe(result => {
-      this.loader.show(false);
+
       this.lusterList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("BlackCrown").subscribe(result => {
-      this.loader.show(false);
+
       this.blackIncCrnList.list = result;
       this.whiteIncCrnList.list = JSON.parse(JSON.stringify(result));
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("BlackTable").subscribe(result => {
-      this.loader.show(false);
+
       this.blackIncTblList.list = result;
       this.whiteIncTblList.list = JSON.parse(JSON.stringify(result));
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("Culet").subscribe(result => {
-      this.loader.show(false);
+
       this.culetList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("ExtraFacetCrown").subscribe(result => {
-      this.loader.show(false);
+
       this.extraFacetCrnList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("ExtraFacetPavilion").subscribe(result => {
-      this.loader.show(false);
+
       this.extraFacetPavList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("EyeClean").subscribe(result => {
-      this.loader.show(false);
+
       this.eyeCleanList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("NaturalGirdle").subscribe(result => {
-      this.loader.show(false);
+
       this.naturalGirdleList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("NaturalPavilion").subscribe(result => {
-      this.loader.show(false);
+
       this.naturalPavList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("NaturalCrown").subscribe(result => {
-      this.loader.show(false);
+
       this.naturalCrnList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("Girdle").subscribe(result => {
-      this.loader.show(false);
-      this.girdleList.list = result;
+
+      this.fromgirdleList.list = result;
+      this.togirdleList.list = JSON.parse(JSON.stringify(result));
     }, error => {
-      this.loader.show(false);
+
     })
     this.entityService.GetEntity("HNA").subscribe(result => {
-      this.loader.show(false);
-      this.haList.list = result;
+
+      this.fromhaList.list = result;
+      this.tohaList.list = JSON.parse(JSON.stringify(result));
     }, error => {
-      this.loader.show(false);
+
+    })
+    this.entityService.GetEntity("Certificate").subscribe(result => {
+
+      this.certificateList.list = result;
+    }, error => {
+
     })
     this.entityService.GetAdvanceEntity("Keytosymbol").subscribe(result => {
-      this.loader.show(false);
+
       this.keytoSymbolList.list = result;
     }, error => {
-      this.loader.show(false);
+
     })
+    this.entityService.GetDeliveryAt().subscribe(result => {
+
+      this.deliveryAtList = result;
+      this.delveryAt = this.deliveryAtList[0].deliveryAt;
+    }, error => {
+
+    })
+    this.catchRouteParam();
   }
   toggleKeyToSymbol() {
     this.keytoSymbolContains = !this.keytoSymbolContains;
@@ -743,7 +807,7 @@ export class SearchComponent implements OnInit {
             else {
               for (let index = 0; index < list.list.length; index++) {
                 list.list[index].selected = false;
-              } 
+              }
               for (let index = firstIndex; index <= currentIndex; index++) {
                 list.list[index].selected = true;
               }
@@ -839,11 +903,11 @@ export class SearchComponent implements OnInit {
   resetPointer() {
     this.selectedPointer = [];
     for (let j = 0; j < this.defaultCaratRange.length; j++) {
-      this.defaultCaratRange[j].selected=false;
+      this.defaultCaratRange[j].selected = false;
       const subElement = this.defaultCaratRange[j];
       for (let k = 0; k < subElement.list.length; k++) {
-        subElement.list[k].selected=false;;
-      } 
+        subElement.list[k].selected = false;;
+      }
     }
   }
   addPointer() {
@@ -974,5 +1038,299 @@ export class SearchComponent implements OnInit {
   }
   sarineDiamondJourneyChange(data) {
     this.sarineDiamondJourney = !this.sarineDiamondJourney;
+  }
+  ///Search Diamond
+  searchDiamond() {
+    this.loader.show(true);
+    var obj = {
+      ShapeList: this.shapeList.list,
+      ColorList: this.colorList.list,
+      FancyColorList: this.fancycolorList.list,
+      FancyOvertoneList: this.fancyOvertoneList.list,
+      FancyIntensityList: this.fancyIntensityList.list,
+      ClarityList: this.clarityList.list,
+      CutList: this.cutList.list,
+      PolishList: this.polishList.list,
+      SymList: this.symList.list,
+      LocationList: this.locationList.list,
+      FlourenceList: this.flourenceList.list,
+      MilkyList: this.milkyList.list,
+      ShadeList: this.shadeList.list,
+      BlackIncTblList: this.blackIncTblList.list,
+      BlackIncCrnList: this.blackIncCrnList.list,
+      WhiteIncTblList: this.whiteIncTblList.list,
+      WhiteIncCrnList: this.whiteIncCrnList.list,
+      CuletList: this.culetList.list,
+      EyeCleanList: this.eyeCleanList.list,
+      NaturalGirdleList: this.naturalGirdleList.list,
+      NaturalPavList: this.naturalPavList.list,
+      NaturalCrnList: this.naturalCrnList.list,
+      ExtraFacetPavList: this.extraFacetPavList.list,
+      ExtraFacetCrnList: this.extraFacetCrnList.list,
+      FromgirdleList: this.fromgirdleList.list,
+      TogirdleList: this.togirdleList.list,
+      FromhaList: this.fromhaList.list,
+      TohaList: this.tohaList.list,
+      KeytoSymbolList: this.keytoSymbolList.list,
+      CertificateList: this.certificateList.list,
+      LusterList: this.lusterList.list,
+      SelectedPointer: this.selectedPointer,
+      FancyColor: this.fancyColor,
+      FromPrice: this.fromPrice,
+      ToPrice: this.toPrice,
+      FromTotalPrice: this.fromTotalPrice,
+      ToTotalPrice: this.toTotalPrice,
+      FromLength: this.fromLength,
+      ToLength: this.toLength,
+      FromWidth: this.fromWidth,
+      ToWidth: this.toWidth,
+      FromDepth: this.fromDepth,
+      ToDepth: this.toDepth,
+      FromRatio: this.fromRatio,
+      ToRatio: this.toRatio,
+      FromTablePer: this.fromTablePer,
+      ToTablePer: this.toTablePer,
+      FromDepthPer: this.fromDepthPer,
+      ToDepthPer: this.toDepthPer,
+      FromGirdlePer: this.fromGirdlePer,
+      ToGirdlePer: this.toGirdlePer,
+      FromCrownHeight: this.fromCrownHeight,
+      ToCrownHeight: this.toCrownHeight,
+      FromPavDepth: this.fromPavDepth,
+      ToPevDepth: this.toPevDepth,
+      FromPavAngle: this.fromPavAngle,
+      ToPevAngle: this.toPevAngle,
+      FromCrownAngle: this.fromCrownAngle,
+      ToCrownAngle: this.toCrownAngle,
+      Video: this.video,
+      SealdStone: this.sealdStone,
+      KeytoSymbolContains: this.keytoSymbolContains,
+      JewellerChoice: this.jewellerChoice,
+      SarineDiamondJourney: this.sarineDiamondJourney,
+      DelveryAt: this.delveryAt,
+      PacketNos: this.PacketNos,
+      Status: this.Status,
+      IsPriority: this.IsPriority
+    }
+    this.searchService.Search(obj).subscribe(result => {
+      this.showResult = true;
+      this.loader.show(false);
+      this.searchResult = result;
+      this.calculateSummary();
+      this.doPagination();
+    }, error => {
+      this.loader.show(false);
+    })
+  }
+  backtoSearch() {
+    this.showResult = false;
+    this.PacketNos = '';
+  }
+  sortedColumn: string;
+  sortDirection = 'desc';
+  sort(columnName) {
+    this.loader.show(true);
+    var oldresult = this.searchResult //JSON.parse(JSON.stringify(this.searchResult));
+    this.searchResult = [];
+    if (this.sortDirection == 'desc') {
+      this.sortDirection = 'asc';
+      oldresult = oldresult.sort((a, b) => {
+        if (a[columnName] < b[columnName]) return -1;
+        else if (a[columnName] > b[columnName]) return 1;
+        else return 0;
+      });
+    } else {
+      this.sortDirection = 'desc';
+      oldresult = oldresult.sort((a, b) => {
+        if (a[columnName] > b[columnName]) return -1;
+        else if (a[columnName] < b[columnName]) return 1;
+        else return 0;
+      });
+    }
+    this.sortedColumn = columnName;
+    this.searchResult = oldresult;
+    this.loader.show(false);
+    this.calculateSummary();
+    this.doPagination();
+  }
+  selectAll() {
+    // var oldresult = JSON.parse(JSON.stringify(this.searchResult));
+    this.searchResult.forEach(element => {
+      element.selected = this.AllSelected;
+    });
+    // this.searchResult = [];
+    // this.searchResult = oldresult;
+    this.calculateSummary();
+  }
+  subItemcheckUncheck() {
+    this.AllSelected = this.searchResult.length == this.searchResult.filter(x => x.selected == true).length;
+    this.calculateSummary();
+  }
+  calculateSummary() {
+    try {
+      this.totalAvgDisc = 0;
+      this.totalAvgPrice = 0;
+      this.totalCarat = 0;
+      this.totalPcs = 0;
+      this.totalPrice = 0;
+      this.selectedtotalAvgDisc = 0;
+      this.selectedtotalAvgPrice = 0;
+      this.selectedtotalCarat = 0;
+      this.selectedtotalPcs = 0;
+      this.selectedtotalPrice = 0;
+      var TotalRapPrice = 0;
+      var selectedTotalRapPrice = 0;
+      this.searchResult.forEach(element => {
+        this.totalPcs += 1;
+        this.totalCarat += element.wt;
+        this.totalPrice = this.totalPrice + (element.price * element.wt);
+        TotalRapPrice = TotalRapPrice + ((element.price / ((element.back / 100) + 1)) * element.wt);
+        if (element.selected) {
+          this.selectedtotalPcs += 1;
+          this.selectedtotalCarat += element.wt;
+          this.selectedtotalPrice = this.selectedtotalPrice + (element.price * element.wt);
+          selectedTotalRapPrice = selectedTotalRapPrice + ((element.price / ((element.back / 100) + 1)) * element.wt);
+        }
+      });
+      this.totalAvgPrice = this.totalPrice / this.totalCarat;
+      this.totalAvgDisc = (this.totalPrice / TotalRapPrice - 1) * 100;
+      if (this.selectedtotalPcs > 0) {
+        this.selectedtotalAvgPrice = this.selectedtotalPrice / this.selectedtotalCarat;
+        this.selectedtotalAvgDisc = (this.selectedtotalPrice / selectedTotalRapPrice - 1) * 100;
+      }
+    } catch (error) {
+
+    }
+  }
+  selectRow(item) {
+    item.selected = !item.selected;
+    this.AllSelected = this.searchResult.length == this.searchResult.filter(x => x.selected == true).length;
+    this.calculateSummary();
+  }
+  @ViewChild('div') div;
+  currentPageNo: number = 0;
+  PageCount: number = 0;
+  Pages: any[];
+  PageNos: number[] = [];
+  FirstPageNo: number = 1;
+  LastPageNo: number = 4;
+  pressed = false;
+  start: any;
+  startX: any;
+  startWidth: any;
+  tableWidth: number;
+  recordrerpage: number = 200;
+  ////pagination
+  doPagination() {
+    this.PageCount = Math.ceil(this.searchResult.length / this.recordrerpage);
+    var RecordNumber = 0;
+    this.Pages = [];
+    this.PageNos = [];
+    for (var i = 0; i < this.PageCount; i++) {
+      this.Pages.push(new Array());
+      this.PageNos.push(i);
+      var k = 0;
+      for (var j = RecordNumber; j < this.searchResult.length; j++) {
+        this.Pages[this.Pages.length - 1].push(this.searchResult[j]);
+        RecordNumber++;
+        k++;
+        if (k >= this.recordrerpage) {
+          break;
+        }
+      }
+    }
+    this.dataTableResizeEvent();
+  }
+  FirstPage(): void {
+    this.currentPageNo = 0;
+  }
+  PrevPage(): void {
+    if (this.currentPageNo > 0)
+      this.currentPageNo = this.currentPageNo - 1;
+  }
+  NextPage(): void {
+    if (this.currentPageNo < this.Pages.length - 1)
+      this.currentPageNo = this.currentPageNo + 1;
+  }
+
+  LastPage(): void {
+    this.currentPageNo = this.Pages.length - 1;
+  }
+  dataTableResizeEvent() {
+    var _this = this;
+    setTimeout(() => {
+      $(_this.div.nativeElement).find(".cd-table").find("th").mousedown(function (e) {
+        _this.start = $(this);
+        _this.pressed = true;
+        _this.startX = e.pageX;
+        _this.startWidth = $(this).width();
+        _this.tableWidth = $(_this.div.nativeElement).find(".cd-table").width();
+      })
+      $(document).mousemove(function (e) {
+        if (_this.pressed) {
+          if (_this.startWidth + (e.pageX - _this.startX) > 10) {
+            $(_this.start).width(_this.startWidth + (e.pageX - _this.startX));
+            var indx = $(_this.start).index();
+            $.each($(_this.div.nativeElement).find(".cd-table").find("td").parent("tr").parent("tbody").find("tr"), function (index, value) {
+              $(this).find("td").eq(indx).width($(_this.start).width());
+            });
+            // $(".cd-table").find("td").eq(indx).width($(_this.start).width());
+            $(_this.div.nativeElement).find(".cd-table").find("td").eq(indx).parent("tr").parent("thead").width($(_this.start).parent("tr").parent("thead").width());
+            $(_this.div.nativeElement).find(".cd-table").width(_this.tableWidth + (e.pageX - _this.startX));
+          }
+        }
+      });
+      $(document).mouseup(function () {
+        if (_this.pressed) {
+          _this.pressed = false;
+        }
+      });
+      $(_this.div.nativeElement).find(".cd-table").find("th").mousemove(function (e) {
+        if (!_this.pressed && e.offsetX < $(this).innerWidth() - 10) {
+          $(this).css('cursor', 'pointer');
+
+        } else if (!_this.pressed && e.offsetX > $(this).innerWidth() - 10) {
+          $(this).css('cursor', 'ew-resize');
+
+        }
+      });
+    }, 2000);
+  }
+  toggleDetail(item) {
+    item.showDetail = !item.showDetail;
+  }
+  collapseAll: boolean = false;
+  toggleAllDetail() {
+    this.collapseAll = !this.collapseAll;
+    this.searchResult.forEach(element => {
+      element.showDetail = this.collapseAll;
+    });
+  }
+  ShowPopUp(item, flag: boolean) {
+
+    if (!flag) {
+      this.searchResult.forEach(element => {
+        element.showPopUp = false;
+      });
+    }
+    item.showPopUp = flag;
+  }
+  ChangeDeliveryAt() {
+    this.searchDiamond();
+  }
+  ChangeStatus() {
+    this.searchDiamond();
+  }
+  showSelected() {
+    if (this.searchResult.filter(x => x.selected).length > 0) {
+      localStorage.setItem("selectedResult", JSON.stringify(this.searchResult.filter(x => x.selected)));
+      this.router.navigate([]).then(result => { window.open("/inventory/showselected", '_blank'); });
+    }else{
+      this.alertService.Error("Please select stone","");
+    }
+  }
+  showDetail(item) {
+     localStorage.setItem("detailPacketNo", item.packetNo);
+     this.router.navigate([]).then(result => { window.open("/inventory/diamondDetail", '_blank'); }); 
   }
 }

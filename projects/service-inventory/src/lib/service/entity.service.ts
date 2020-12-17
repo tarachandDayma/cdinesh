@@ -23,6 +23,11 @@ export class EntityService extends RestService {
         url = this.env.ApiGateway + "/SearchFilter/GetEntity?FilterName=" + MasterName;
         return super.Get(url);
     }
+    public GetDeliveryAt(): Observable<any[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/LoadDeliveryAt";
+        return super.Get(url);
+    }
 
 
 }

@@ -76,7 +76,6 @@ export class PaginationComponent implements OnInit, OnChanges {
             // $(".cd-table").find("td").eq(indx).width($(_this.start).width());
             $(_this.div.nativeElement).find(".cd-table").find("td").eq(indx).parent("tr").parent("thead").width($(_this.start).parent("tr").parent("thead").width());
             $(_this.div.nativeElement).find(".cd-table").width(_this.tableWidth + (e.pageX - _this.startX));
-             
           }           
         }
       });
@@ -94,7 +93,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 
         }
       });
-    }, 2000);
+    }, 2000); 
 
   }
 
