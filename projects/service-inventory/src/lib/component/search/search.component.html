@@ -1,13 +1,13 @@
-<inventory-nav></inventory-nav>
+<inventory-nav [cartCount]="cartCount"></inventory-nav>
 <div class="content">
     <div class="page-title" *ngIf="!showResult">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
                     <span [translate]="'inventory.search.title'"> TITLE </span>
-                    <div class="pull-right">
+                    <div class="pull-right delivery-div">
                         <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend" style="background-color: transparent;border: 0;">
+                            <div class="input-group-prepend delivery-lable" style="background-color: transparent;border: 0;">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><span
                                         [translate]="'inventory.search.deliveryAt'"> DeliveryAt </span> </span>
                             </div>
@@ -754,56 +754,42 @@
                                                 <div class="box">
                                                     <div class="row">
                                                         <div class="col-sm-1">
-                                                            <div class="input-group input-group-sm mb-1">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
-                                                                            [translate]="'inventory.search.video'">
-                                                                            Video </span> </span>
-                                                                </div>
-                                                                <div class="input-group-append">
-                                                                    <lib-app-switch [(_value)]="video" (change)="videoChange($event)"></lib-app-switch>
-                                                                </div>
-                                                            </div>
+                                                            <label class="custom-control material-checkbox">
+                                                                <input type="checkbox"
+                                                                    class="material-control-input" name="video"
+                                                                    [(ngModel)]="video">
+                                                                <span class="material-control-indicator"></span>
+                                                                <span class="material-control-description" [translate]="'inventory.search.video'">video</span>
+                                                            </label>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <div class="input-group input-group-sm mb-1">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
-                                                                            [translate]="'inventory.search.sealdStone'">
-                                                                            Seald Stone </span> </span>
-                                                                </div>
-                                                                <div class="input-group-append">
-                                                                    <lib-app-switch [(_value)]="sealdStone" (change)="sealdChange($event)"></lib-app-switch>
-                                                                </div>
-                                                            </div>
+                                                            <label class="custom-control material-checkbox">
+                                                                <input type="checkbox"
+                                                                    class="material-control-input" name="sealdStone"
+                                                                    [(ngModel)]="sealdStone">
+                                                                <span class="material-control-indicator"></span>
+                                                                <span class="material-control-description" [translate]="'inventory.search.sealdStone'">sealdStone</span>
+                                                            </label>
+
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <div class="input-group input-group-sm mb-1">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
-                                                                            [translate]="'inventory.search.jewellerChoice'">
-                                                                            Jewellers Choice
-                                                                        </span> </span>
-                                                                </div>
-                                                                <div class="input-group-append">
-                                                                    <lib-app-switch [(_value)]="jewellerChoice" (change)="jewellerChoiceChange($event)">
-                                                                    </lib-app-switch>
-                                                                </div>
-                                                            </div>
+                                                            <label class="custom-control material-checkbox">
+                                                                <input type="checkbox"
+                                                                    class="material-control-input" name="jewellerChoice"
+                                                                    [(ngModel)]="jewellerChoice">
+                                                                <span class="material-control-indicator"></span>
+                                                                <span class="material-control-description" [translate]="'inventory.search.jewellerChoice'">jewellerChoice</span>
+                                                            </label>
+
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <div class="input-group input-group-sm mb-1">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
-                                                                            [translate]="'inventory.search.sarineDiamondJourney'">
-                                                                            Sarine Diamond Journey
-                                                                        </span> </span>
-                                                                </div>
-                                                                <div class="input-group-append">
-                                                                    <lib-app-switch [(_value)]="sarineDiamondJourney" (change)="sarineDiamondJourneyChange($event)">
-                                                                    </lib-app-switch>
-                                                                </div>
-                                                            </div>
+                                                            <label class="custom-control material-checkbox">
+                                                                <input  type="checkbox"
+                                                                    class="material-control-input" name="sarineDiamondJourney"
+                                                                    [(ngModel)]="sarineDiamondJourney">
+                                                                <span class="material-control-indicator"></span>
+                                                                <span class="material-control-description" [translate]="'inventory.search.sarineDiamondJourney'">Sarine Diamond Journey</span>
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1139,7 +1125,7 @@
                                     [translate]="'inventory.search.save&search'"> Save & Search </span></button>
                             <button type="button" class="btn btn-primary"><i class="fa fa-download"
                                     aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-primary"><i class="fa fa-refresh"
+                            <button (click)="reload()" type="button" class="btn btn-primary"><i class="fa fa-refresh"
                                     aria-hidden="true"></i></button>
                         </div>
                     </div>
@@ -1157,9 +1143,9 @@
                             </span></button>
 
                     </div>
-                    <div class="pull-right">
+                    <div class="pull-right delivery-div">
                         <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend" style="background-color: transparent;border: 0;">
+                            <div class="input-group-prepend delivery-lable" style="background-color: transparent;border: 0;">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><span
                                         [translate]="'inventory.search.deliveryAt'"> DeliveryAt </span> </span>
                             </div>
@@ -1172,10 +1158,10 @@
                     </div>
                 </div>
                 <div class="card-header">
-                    <div class="pull-left">
+                    <div class="pull-left button-div">
                         <span (click)="showSelected()"><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span>
                     </div>
-                    <div class="pull-right">
+                    <div class="pull-right status-div ">
                         <div class="input-group input-group-sm mb-1">
                             <div class="input-group-prepend" style="background-color: transparent;border: 0;">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><span
@@ -1192,7 +1178,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body" style="padding-top: 0px;padding-bottom: 0px;">
+                <div class="card-body table-body" style="padding-top: 0px;padding-bottom: 0px;">
                     <div #div>
                         <div class="table-fixed" style="height: 63.3vh;">
                             <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table " style="width: 100%;height: 450px;">
@@ -1496,7 +1482,7 @@
                                                     <i *ngIf="item.showDetail || item.showPopUp"
                                                         class="fa fa-minus"></i>
                                                 </span>
-                                                <img style="width: 17px;margin-left: 2px;" src="/assets/img/add-to-cart.4a5821ad.svg">
+                                                <img (click)="AddtoCart(item)" style="width: 17px;margin-left: 2px;" src="/assets/img/add-to-cart.4a5821ad.svg">
                                                 <img style="width: 17px;margin-left: 2px;" src="/assets/img/comment.7713a555.svg">
                                                 <img style="width: 17px;margin-left: 2px;" src="/assets/img/add-watchList.02894315.svg">
                                                 <img style="width: 17px;margin-left: 2px;" src="/assets/img/reminder.32af6dae.svg">

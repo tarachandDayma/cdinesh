@@ -1,8 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { env } from 'process';
 import { EnvironmentService } from 'service-common';
+import { CartService } from '../../service/cart.service';
+import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { UserService } from '../../service/user.service';
 
 @Component({
@@ -19,14 +21,15 @@ export class NavComponent implements OnInit {
   currentMenu: string;
   public Language: string;
   PacketNos: string = '';
-  constructor(private environment: EnvironmentService, private userService: UserService, private router: Router, private translate: TranslateService) {
+  @Input() cartCount:number;
+  constructor(private environment: EnvironmentService, private userService: UserService, private router: Router, private translate: TranslateService,private cartService:CartService ) {
     this.AppLogo = environment.logoUrl;
     this.AppTitle = environment.appTitle;
     this.Language = translate.currentLang;
   }
 
   ngOnInit(): void {
-    try {
+    try { 
       if (-1 != this.router.url.indexOf("SearchPacket")){
         if (localStorage.getItem("PacketNo") != undefined) {
           this.PacketNos = localStorage.getItem("PacketNo");
@@ -63,6 +66,7 @@ export class NavComponent implements OnInit {
     this.userService.GetUser().subscribe(result => {
       this.User = result;
     });
+    
   }
   logout() {
     this.environment.logout();
@@ -78,5 +82,6 @@ export class NavComponent implements OnInit {
     } else {
       this.router.navigateByUrl("/inventory/SearchPacket");
     }
-  }
+  } 
+ 
 }

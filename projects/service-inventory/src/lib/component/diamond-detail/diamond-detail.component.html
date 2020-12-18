@@ -18,13 +18,13 @@
 
                 <div class="card-body" style="padding-top: 0px;padding-bottom: 0px;overflow: auto;">
                     <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             &nbsp;
                         </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-8">
                             <h3 style="color: #1b5291;">{{searchResult[0].packetNo }}</h3>
                         </div>
-                        <div class="col-sm-5 ">
+                        <div class="col-sm-4 ">
                             <div class="img-view">
                                 <div style="width:430px" id="carouselExampleIndicators" class="carousel slide" data-interval="false" data-ride="carousel" data-pause="hover" data-ride="carousel">
                                     <div class="carousel-inner" style="width:430px">
@@ -101,74 +101,74 @@
                             </div>
 
                         </div>
-                        <div class="row col-sm-7">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 [translate]="'inventory.diamondDetail.gradingDetail'">Grading Detail</h5>
+                        <div class="row col-sm-8" style="font-size: 12px;line-height: 0px;">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-header" style="padding: 5px;">
+                                    <h6 style="color: #1a5190;" [translate]="'inventory.diamondDetail.gradingDetail'">Grading Detail</h6>
                                 </div>
-                                <div class="card-body">
-                                    <table>
+                                <div class="card-body" style="padding: 0;overflow: auto;">
+                                    <table class="table table-hover table-bordered" style="width: 100%;">
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.packetNo'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.packetNo'" align="left"></td>
                                             <td align="right">
                                                 {{searchResult[0].packetNo}}
                                             </td>
-                                            <td [translate]="'inventory.diamondDetail.shape'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.shape'" align="left"></td>
                                             <td align="right">
                                                 {{searchResult[0].shape}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.size'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.size'" align="left"></td>
                                             <td align="right">{{searchResult[0].wt}}</td>
                                             <td [translate]="'inventory.diamondDetail.color'" align="left"></td>
                                             <td align="right">{{searchResult[0].colour}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.clarity'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.clarity'" align="left"></td>
                                             <td align="right">{{searchResult[0].clarity}}</td>
                                             <td [translate]="'inventory.diamondDetail.cut'" align="left"></td>
                                             <td align="right">{{searchResult[0].cut}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.polish'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.polish'" align="left"></td>
                                             <td align="right">{{searchResult[0].polish}}</td>
                                             <td [translate]="'inventory.diamondDetail.symmetry'" align="left"></td>
                                             <td align="right"> {{searchResult[0].symmetry}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.flourescence'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.flourescence'" align="left"></td>
                                             <td align="right">{{searchResult[0].flourence}}</td>
-                                            <td [translate]="'inventory.diamondDetail.description'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.description'" align="left"></td>
                                             <td align="right"></td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 [translate]="'inventory.diamondDetail.additionalDetail'">Additional Detail</h5>
+                            <div class="card" style="width: 100%;">
+                                <div class="card-header" style="padding: 5;">
+                                    <h6 style="color: #1a5190;" [translate]="'inventory.diamondDetail.additionalDetail'">Additional Detail</h6>
                                 </div>
-                                <div class="card-body">
-                                    <table>
+                                <div class="card-body" style="padding: 0;overflow: auto;">
+                                    <table class="table table-hover table-bordered additionalDetail">
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.measurements'" align="left"></td>
-                                            <td align="right"></td>
-                                            <td rowspan="13" colspan="2">
-                                                <table>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.measurements'" align="left"></td>
+                                            <td align="right">{{searchResult[0].measurements}}</td>
+                                            <td rowspan="13" colspan="2" style="padding: 0;">
+                                                <table style="width: 100%;">
                                                     <tr>
                                                         <th colspan="2" [translate]="'inventory.diamondDetail.blackInclusion'">
 
                                                         </th>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.table'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.table'"></td>
                                                         <td align="right">
                                                             {{searchResult[0].blackTable}}
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.crown'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.crown'"></td>
                                                         <td align="right">{{searchResult[0].blackCrown}}</td>
                                                     </tr>
                                                     <tr>
@@ -180,100 +180,100 @@
                                                         </th>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.table'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.table'"></td>
                                                         <td align="right">{{searchResult[0].openIncTable}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.crown'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.crown'"></td>
                                                         <td align="right">{{searchResult[0].openIncCrown}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.shade'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.shade'"></td>
                                                         <td align="right">{{searchResult[0].shade}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.milky'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.milky'"></td>
                                                         <td align="right">{{searchResult[0].milky}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.eyeClean'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.eyeClean'"></td>
                                                         <td align="right">{{searchResult[0].eyeClean}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.ratio'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.ratio'"></td>
                                                         <td align="right">{{searchResult[0].ratio}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.lab'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.lab'"></td>
                                                         <td align="lab">{{searchResult[0].certificate}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td [translate]="'inventory.diamondDetail.status'"></td>
+                                                        <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.status'"></td>
                                                         <td align="right">{{searchResult[0].status}}</td>
                                                     </tr>
                                                 </table>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.depth%'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.depth%'" align="left"></td>
                                             <td align="right">{{searchResult[0].depthPer}}</td>
 
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.table%'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.table%'" align="left"></td>
                                             <td align="right">{{searchResult[0].tablePer}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.crownHeight'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.crownHeight'" align="left"></td>
                                             <td align="right">{{searchResult[0].crownHeight}}</td>
                                         </tr>
                                         <tr>
 
-                                            <td [translate]="'inventory.diamondDetail.crownAngle'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.crownAngle'" align="left"></td>
                                             <td align="right">{{searchResult[0].crownAngle}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.pavillionHeight'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.pavillionHeight'" align="left"></td>
                                             <td align="right">{{searchResult[0].pavilionDepth}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.pavillionAngle'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.pavillionAngle'" align="left"></td>
                                             <td align="right">{{searchResult[0].pavilionAngle}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.starPer'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.starPer'" align="left"></td>
                                             <td align="right">{{searchResult[0].starPer}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.lowerHalf'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.lowerHalf'" align="left"></td>
                                             <td align="right">{{searchResult[0].lowerHalfPer}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.cutlet'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.cutlet'" align="left"></td>
                                             <td align="right">{{searchResult[0].culet}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.certificateNo'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.certificateNo'" align="left"></td>
                                             <td align="right">{{searchResult[0].certificateNo}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.gridleCondition'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.gridleCondition'" align="left"></td>
                                             <td align="right">{{searchResult[0].girdleCondition}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.girdlePercent'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.girdlePercent'" align="left"></td>
                                             <td align="right">{{searchResult[0].girdlePercent}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.girdle'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.girdle'" align="left"></td>
                                             <td align="right">{{searchResult[0].girdleFrom}} {{searchResult[0].girdleTo}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.reportComment'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.reportComment'" align="left"></td>
                                             <td align="right">{{searchResult[0].reportCommt}}</td>
                                         </tr>
                                         <tr>
-                                            <td [translate]="'inventory.diamondDetail.keytoSyb'" align="left"></td>
+                                            <td style="font-weight: 550;" [translate]="'inventory.diamondDetail.keytoSyb'" align="left"></td>
                                             <td align="right">{{searchResult[0].keytoSyb}}</td>
                                         </tr>
                                     </table>

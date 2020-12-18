@@ -22,7 +22,7 @@ import { ServiceGuestModule } from 'service-guest';
 import { MainComponent } from './index/main.component';
 import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { ServiceInventoryModule } from 'service-inventory';
+import { CartBroadcaster, CartService, ServiceInventoryModule } from 'service-inventory';
 import { ServiceAdminModule } from 'service-admin';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
@@ -97,6 +97,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     , RestService
     , loginService
     , alertserice
+    , CartBroadcaster
+    , CartService
   ],
   bootstrap: [AppComponent],
   schemas: [

@@ -34,7 +34,7 @@
     
     .custom-control {
         &.material-checkbox {
-            --color: #26a69a;
+            --color: #e5803f;
             .material-control-input {
                 display: none;
                 &:checked~.material-control-indicator {
@@ -1336,28 +1336,28 @@
     }
     
     .toast-success {
-        background-color: transparent !important;
+        background-color: white !important;
         color: #51A351 !important;
         border: 2px solid #51A351;
         background-image: none !important;
     }
     
     .toast-error {
-        background-color: transparent !important;
+        background-color: #ccc !important;
         color: #BD362F !important;
         border: 2px solid #BD362F;
         background-image: none !important;
     }
     
     .toast-info {
-        background-color: transparent !important;
+        background-color: white !important;
         color: #2F96B4 !important;
         border: 2px solid #2F96B4;
         background-image: none !important;
     }
     
     .toast-warning {
-        background-color: transparent !important;
+        background-color: white !important;
         color: #F89406 !important;
         border: 2px solid #F89406;
         background-image: none !important;

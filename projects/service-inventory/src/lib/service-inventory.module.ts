@@ -16,6 +16,9 @@ import { SearchComponent } from './component/search/search.component';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DiamondDetailComponent } from './component/diamond-detail/diamond-detail.component';
+import { CartService } from './service/cart.service';
+import { CartBroadcaster } from './service/cartbroadcaster';
+import { MyCartComponent } from './component/my-cart/my-cart.component';
 
 
 
@@ -23,7 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
 }
 @NgModule({
-  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent],
+  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent],
   imports: [
     FormsModule,ReactiveFormsModule,
     TranslateModule.forChild(),
@@ -38,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  exports: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent]
+  exports: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent]
 })
 export class ServiceInventoryModule { 
   static forRoot(): ModuleWithProviders {

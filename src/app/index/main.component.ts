@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EnvironmentService } from 'service-common';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,11 +9,12 @@ import { environment } from 'src/environments/environment';
 })
 export class MainComponent implements OnInit {
   env:any;
-  constructor() {
+  constructor(private environmentservice:EnvironmentService) {
     this.env = JSON.parse(JSON.stringify(environment));
    }
 
   ngOnInit(): void {
+    setInterval(function(){ this.environmentservice.CheckLogin()},30000);
   }
 
 }

@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs/operators';
 import { alertserice, FormValidationService, loaderserice } from 'service-common';
+import { CartModel } from '../../models/cart.model';
 import { diamondsearchResult } from '../../models/diamond.result.model';
 import { EntityModel } from '../../models/entity.model';
+import { CartService } from '../../service/cart.service';
+import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { EntityService } from '../../service/entity.service';
 import { SearchService } from '../../service/search.service';
 declare var $: any;
@@ -14,7 +17,6 @@ declare var $: any;
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
   constructor(private loader: loaderserice
     , private router: Router
     , private alertService: alertserice
@@ -22,7 +24,9 @@ export class SearchComponent implements OnInit {
     , private formvalidationService: FormValidationService
     , private entityService: EntityService
     , private route: ActivatedRoute
-    , private searchService: SearchService) { }
+    , private searchService: SearchService
+    ,private cartService:CartService
+    ,private cartBroadCaster:CartBroadcaster) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -117,7 +121,7 @@ export class SearchComponent implements OnInit {
   selectedtotalAvgDisc: number;
   selectedtotalPrice: number;
   ////summary variable
-
+  cartChange=  new EventEmitter<any>()
   catchRouteParam() {
     if (-1 != this.router.url.indexOf("fancySearch")) {
       this.fancyColor = true;
@@ -137,13 +141,14 @@ export class SearchComponent implements OnInit {
       this.showResult = true;
       this.searchResult = JSON.parse(localStorage.getItem("selectedResult"));
       this.doPagination();
+      this.calculateSummary();
       localStorage.setItem("PacketNo", "");
     } else {
       localStorage.setItem("PacketNo", "");
-    }
-  }
+    } 
+  } 
   ngOnInit(): void {
-
+    this.LoadCart();
     this.selectedPointer = [];
     this.defaultCaratRange = [
       {
@@ -1332,5 +1337,34 @@ export class SearchComponent implements OnInit {
   showDetail(item) {
      localStorage.setItem("detailPacketNo", item.packetNo);
      this.router.navigate([]).then(result => { window.open("/inventory/diamondDetail", '_blank'); }); 
+  }
+  reload(){
+    location.reload();
+  }
+  AddtoCart(item:diamondsearchResult){
+      var cartItem= new CartModel();
+      cartItem.back=item.back;
+      cartItem.price=item.price;
+      cartItem.packetNo=item.packetNo;
+      cartItem.deliveryAt=this.delveryAt;
+      this.loader.show(true);
+      this.cartService.Add(cartItem).subscribe(result=>{
+        this.loader.show(false);
+        this.LoadCart();
+        if(result.status){
+          this.alertService.success(this.translate.instant(result.message),"");
+        }else{
+          this.alertService.Error(this.translate.instant(result.message),"");
+        }
+        
+      },error=>{
+        this.loader.show(false);
+      })
+  }
+  cartCount:number=0;
+  LoadCart(){
+    this.cartService.GetAll().subscribe(result=>{
+      this.cartCount=result.length;
+    })
   }
 }

@@ -22,9 +22,16 @@
     display: inline-block;
 }
 
+.additionalDetail {
+    width: 100%;
+}
+
 @media (max-width:450px) {
     .img-view {
         transform: scale(0.7);
         margin-left: -70px;
+    }
+    .additionalDetail {
+        width: max-content;
     }
 }

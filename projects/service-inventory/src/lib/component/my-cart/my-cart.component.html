@@ -1,0 +1,632 @@
+<inventory-nav [cartCount]="cartCount"></inventory-nav>
+<div class="content">
+    <div class="page-title">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span [translate]="'inventory.cart.title'"> TITLE </span>
+                    <div class="pull-right">
+                        <span style="color: grey;" [translate]="'inventory.search.summary.pcs'">Pieces:</span>
+                        <span style="color: red;">{{selectedtotalPcs}}/</span>
+                        <span style="color: navy;">{{totalPcs}}</span> &nbsp;
+                        <span style="color: grey;" [translate]="'inventory.search.summary.carat'">Cts:</span>
+                        <span style="color: red;">{{selectedtotalCarat | number : '1.2-2'}}/</span>
+                        <span style="color: navy;">{{totalCarat | number : '1.2-2'}}</span>&nbsp;
+                        <span style="color: grey;" [translate]="'inventory.search.summary.avgDisc'">Avg Disc</span>
+                        <span style="color: red;">{{selectedtotalAvgDisc | number : '1.2-2'}}/</span>
+                        <span style="color: navy;">{{totalAvgDisc | number : '1.2-2'}}</span>&nbsp;
+                        <span style="color: grey;" [translate]="'inventory.search.summary.avgPrice'">Avg Price</span>
+                        <span style="color: red;">{{selectedtotalAvgPrice | number : '1.2-2'}}/</span>
+                        <span style="color: navy;">{{totalAvgPrice | number : '1.2-2'}}</span>&nbsp;
+                        <span style="color: grey;" [translate]="'inventory.search.summary.amount'">Amount</span>
+                        <span style="color: red;">{{selectedtotalPrice | number : '1.2-2'}}/</span>
+                        <span style="color: navy;">{{totalPrice | number : '1.2-2'}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- PAGE TITLE END -->
+    <main class="myform" style="height: 87vh;">
+        <div *ngIf="searchResult.length > 0">
+            <div class="card">
+                <div class="card-header">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-primary"> <span [translate]="'inventory.cart.removeAll'"
+                            (click)="RemoveAll()"> RemoveAll </span></button>
+                    </div>
+                    <div class="pull-right delivery-div">
+                        <div class="input-group input-group-sm mb-1">
+                            <div class="input-group-prepend delivery-lable" style="background-color: transparent;border: 0;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                        [translate]="'inventory.search.deliveryAt'"> DeliveryAt </span> </span>
+                            </div>
+                            <select (change)="ChangeDeliveryAt()" [(ngModel)]="delveryAt" name="delveryAt" style="color: black;">
+                                <option *ngFor="let item of deliveryAtList" value="{{item.deliveryAt}}">
+                                    {{item.deliveryAt}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-body" style="padding-top: 0px;padding-bottom: 0px;">
+                    <div #div>
+                        <div class="table-fixed" style="height: 63.3vh;">
+                            <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table " style="width: 100%;height: 450px;">
+                                <thead>
+                                    <tr>
+                                        <th data-toggle="tooltip" data-placement="top" title="" class="fixed-column" style="width:115px;">
+
+                                            <label class="custom-control material-checkbox">
+                                                <input (change)="selectAll()" type="checkbox"
+                                                    class="material-control-input" name="AllReslt"
+                                                    [(ngModel)]="AllSelected">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="material-control-description">All</span>
+                                            </label>
+                                            <span (click)="toggleAllDetail()" style="margin-left: 2px;">
+                                                <i *ngIf="!collapseAll" class="fa fa-plus"></i>
+                                                <i *ngIf="collapseAll" class="fa fa-minus"></i>
+                                            </span>
+                                        </th>
+                                        <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.detail')}}" class="fixed-column" style="width:93.8px;" [translate]="'inventory.search.result.detail'">
+                                            Details
+                                        </th>
+                                        <th (click)="sort('deliveryAt')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.deliveryAt')}}" class="fixed-column" style="width:93.8px;" [translate]="'inventory.search.deliveryAt'">
+                                            DeliveryAt
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='deliveryAt' && {'color':'black'} || sortedColumn!='deliveryAt' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='deliveryAt' && {'color':'black'} || sortedColumn!='deliveryAt' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('packetNo')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.PacketNo')}}" class="fixed-column" style="width:93.8px;" [translate]="'inventory.search.result.PacketNo'">
+                                            PacketNo
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='packetNo' && {'color':'black'} || sortedColumn!='packetNo' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='packetNo' && {'color':'black'} || sortedColumn!='packetNo' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('certificate')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.certificate')}}" class="fixed-column" style="width:55px;" [translate]="'inventory.search.result.certificate'">
+                                            Certificate
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='certificate' && {'color':'black'} || sortedColumn!='certificate' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='certificate' && {'color':'black'} || sortedColumn!='certificate' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('shape')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.shape')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.shape'">
+                                            shape
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='shape' && {'color':'black'} || sortedColumn!='shape' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='shape' && {'color':'black'} || sortedColumn!='shape' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('wt')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.size')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.size'">
+                                            size
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='wt' && {'color':'black'} || sortedColumn!='wt' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='wt' && {'color':'black'} || sortedColumn!='wt' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('price')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.price')}}" class="fixed-column" style="width:81px;" [translate]="'inventory.search.result.price'">
+                                            price
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='price' && {'color':'black'} || sortedColumn!='price' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='price' && {'color':'black'} || sortedColumn!='price' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('back')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.disc')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.disc'">
+                                            disc
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='back' && {'color':'black'} || sortedColumn!='back' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='back' && {'color':'black'} || sortedColumn!='back' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('colour')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.color')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.color'">
+                                            color
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='colour' && {'color':'black'} || sortedColumn!='colour' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='colour' && {'color':'black'} || sortedColumn!='colour' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('clarity')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.clarity')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.clarity'">
+                                            clarity
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='clarity' && {'color':'black'} || sortedColumn!='clarity' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='clarity' && {'color':'black'} || sortedColumn!='clarity' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('cut')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.cut')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.cut'">
+                                            cut
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='cut' && {'color':'black'} || sortedColumn!='cut' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='cut' && {'color':'black'} || sortedColumn!='cut' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('polish')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.polish')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.polish'">
+                                            polish
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='polish' && {'color':'black'} || sortedColumn!='polish' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='polish' && {'color':'black'} || sortedColumn!='polish' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('symmetry')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.symmetry')}}" class="fixed-column" style="width:82px;" [translate]="'inventory.search.result.symmetry'">
+                                            symmetry
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='symmetry' && {'color':'black'} || sortedColumn!='symmetry' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='symmetry' && {'color':'black'} || sortedColumn!='symmetry' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('flourence')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.flour')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.flour'">
+                                            flour
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='flourence' && {'color':'black'} || sortedColumn!='flourence' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='flourence' && {'color':'black'} || sortedColumn!='flourence' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('eyeClean')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.eyeclean')}}" class="fixed-column" style="width:80px;" [translate]="'inventory.search.result.eyeclean'">
+                                            eyeclean
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='eyeClean' && {'color':'black'} || sortedColumn!='eyeClean' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='eyeClean' && {'color':'black'} || sortedColumn!='eyeClean' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('tablePer')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.tablePer')}}" class="fixed-column" style="width:63px;" [translate]="'inventory.search.result.tablePer'">
+                                            Table%
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='tablePer' && {'color':'black'} || sortedColumn!='tablePer' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='tablePer' && {'color':'black'} || sortedColumn!='tablePer' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('depthPer')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.depthPer')}}" class="fixed-column" style="width:72px;" [translate]="'inventory.search.result.depthPer'">
+                                            Depth%
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='depthPer' && {'color':'black'} || sortedColumn!='depthPer' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='depthPer' && {'color':'black'} || sortedColumn!='depthPer' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('measurements')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.meas')}}" class="fixed-column" style="width:103px;" [translate]="'inventory.search.result.meas'">
+                                            meas
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='measurements' && {'color':'black'} || sortedColumn!='measurements' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='measurements' && {'color':'black'} || sortedColumn!='measurements' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('locaion')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.location')}}" class="fixed-column" style="width:79px;" [translate]="'inventory.search.result.location'">
+                                            location
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='locaion' && {'color':'black'} || sortedColumn!='locaion' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='locaion' && {'color':'black'} || sortedColumn!='locaion' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody style="height:70vh;">
+                                    <ng-container *ngFor="let item of Pages[currentPageNo] ">
+                                        <tr style="height: 32px !important;" [ngStyle]="   (item.selected==true && item.newStatus=='A') && {'background':'#ccc','font-weight':'550'}
+                                                       || (item.selected!=true && item.newStatus=='M') && {'color':'#cc0786'}
+                                                       || (item.selected==true && item.newStatus=='M') && {'background':'#f9e1ee','color':'#cc0786','font-weight':'550'}
+                                                       || (item.selected!=true && item.newStatus=='ALAB') && {'color':'orange'}
+                                                       || (item.selected==true && item.newStatus=='ALAB') && {'background':'#f1e9db','color':'orange','font-weight':'550'}
+                                                       || (item.selected!=true && item.newStatus=='MLAB') && {'color':'#7e0101'}
+                                                       || (item.selected==true && item.newStatus=='MLAB') && {'background':'#bc9898ad','color':'#7e0101','font-weight':'550'}
+                                                       || (item.selected!=true && item.newStatus=='N') && {'color':'navy'}
+                                                       || (item.selected==true && item.newStatus=='N') && {'background':'#bee1ff','color':'navy','font-weight':'550'}">
+                                            <th (mouseover)="ShowPopUp(item,false)" data-toggle="tooltip" data-placement="top" class="fixed-column" style="width: 32px;">
+                                                <label class="custom-control material-checkbox">
+                                                    <input (change)="subItemcheckUncheck()" type="checkbox"
+                                                        class="material-control-input" name="AllReslt+{{item.packetNo}}"
+                                                        [(ngModel)]="item.selected">
+                                                    <span class="material-control-indicator"></span>
+                                                </label>
+                                                <span (click)="toggleDetail(item)">
+                                                    <i *ngIf="!item.showDetail && !item.showPopUp"
+                                                        class="fa fa-plus"></i>
+                                                    <i *ngIf="item.showDetail || item.showPopUp"
+                                                        class="fa fa-minus"></i>
+                                                </span>
+                                                <img (click)="RemoveItem(item)" style="width: 17px;margin-left: 2px;" src="/assets/img/remove.png">
+                                            </th>
+                                            <td (mouseover)="ShowPopUp(item,false)">
+                                                <img (click)="showDetail(item)" style="width: 17px;margin-left: 5px;" src="/assets/img/camera.dd556904.svg">
+                                                <a style="color: #ccc;" target="_blank" href="{{'http://www.pkstone.co.in/video.aspx?vstr='+item.packetNo }}" type="button" *ngIf="item.videoCD !='' && item.videoCD !=undefined && item.videoCD !=null ">
+                                                    <img style="width: 17px;margin-left: 2px;" src="/assets/img/video.2c019c60.svg">
+                                                </a>
+                                                <span *ngIf="item.ifspecial=='Y'" data-toggle="tooltip" title="Jewelers Choice" data-placement="top" data-original-title=""><i class="fa fa-star"></i></span>
+                                                <a style="margin-top: -3px;margin-left: 4px; margin-top: 1%;color:black;" href="" type="button" [ngStyle]="(item.jpCut!='' && item.jpCut!=null) && {'color' : '#39b1ff'} " *ngIf="item.haPer=='100'">H/A</a>
+                                                <img *ngIf="item.originFlag !='' && item.originFlag !=null" src="/assets/img/CanadaFlag.png" />
+                                                <a href="~/home/SarinJourney" target="_blank" *ngIf="item.serinjourney == true ">
+                                                    <img src="/assets/img/sdj_11.jpg" style="width:18px;" data-toggle="tooltip" data-html="true" title="Sarine Diamond Journey" data-placement="top" data-original-title="" />
+                                                </a>
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)">
+                                                {{item.deliveryAt}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,true)">
+                                                {{item.packetNo}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)">
+                                                <a *ngIf="item.imageCerti!=null && item.imageCerti!='' && item.imageCerti!=undefined" [href]="item.imageCerti" target="_blank">{{item.certificate}}</a>
+                                                <span *ngIf="!(item.imageCerti!=null && item.imageCerti!='' && item.imageCerti!=undefined)">{{item.certificate}}</span>
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.shape}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" style="text-align: right !important;">
+                                                {{item.wt | number : '1.2-2'}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" style="text-align: right !important;">
+                                                {{item.price | number : '1.2-2'}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" style="text-align: right !important;">
+                                                {{item.back | number : '1.2-2'}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" data-toggle="tooltip" title="{{item.fancyColorOvertone}} {{item.fancyColor}} {{item.fancyColorIntensity}}">
+                                                {{item.colour}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.clarity}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.cut}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.polish}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.symmetry}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.flourence}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.eyeClean}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.tablePer | number : '1.2-2'}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.depthPer | number : '1.2-2'}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.measurements}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.locaion}}
+                                            </td>
+
+
+                                        </tr>
+                                        <tr *ngIf="item.showDetail || item.showPopUp">
+                                            <td colspan="19">
+                                                <table class="table table-hover table-condensed table-bordered custTable" cellspacing="1" style="font-size: 12px;width: 100%;margin-bottom: 0px!important;background-color: white;">
+                                                    <tr style="background-color: white;">
+                                                        <td colspan="2" rowspan="3">
+                                                            <table class="table table-hover table-condensed" cellspacing="1" style="border:1px dashed black;margin-bottom: 0px;display: inherit;">
+                                                                <tr style="background-color: white;">
+                                                                    <td align="center" style="border:1px dashed black;" colspan="2"><strong><a
+                                                                                style="color:blue !important">Black
+                                                                                Inc.</a></strong></td>
+                                                                    <td align="center" style="border:1px dashed black;" colspan="2"><strong><a
+                                                                                style="color:blue !important">White
+                                                                                Inc.</a></strong></td>
+                                                                    <td align="center" style="border:1px dashed black;" colspan="2"><strong><a
+                                                                                style="color:blue !important">Open
+                                                                                Inc.</a></strong></td>
+                                                                </tr>
+                                                                <tr style="background-color: white;">
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <a href="javascript:void(0)">Table</a>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <span>{{item.blackTable}}</span>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <a href="javascript:void(0)">Table</a>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <span>{{item.whiteTable}}</span>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <a href="javascript:void(0)">Table</a>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <span>{{item.openIncTable}}</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr style="background-color: white;">
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <a href="javascript:void(0)">Crown</a>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <span>{{item.blackCrown}}</span>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <a href="javascript:void(0)">Crown</a>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <span>{{item.whiteCrown}}</span>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <a href="javascript:void(0)">Crown</a>
+                                                                    </td>
+                                                                    <td align="left" style="border:1px dashed black;">
+                                                                        <span>{{item.openIncCrown}}</span>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a style="color:blue !important;">Milky</a></td>
+                                                        <td align="left"><span>{{item.milky}}</span></td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Girdle</a></td>
+                                                        <td align="left"><span>{{item.girdleCondition}}</span></td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Certificate No</a></td>
+                                                        <td align="left" class="contextTd"><span class="contextTd">{{item.certificateNo}}</span></td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Wt. Dora</a></td>
+                                                        <td align="left"><span>{{item.dora}}</span></td>
+                                                    </tr>
+                                                    <tr style="background-color: white;">
+
+                                                        <td align="left" style="background-color: #f2f2f2;"><a style="color:blue !important;float:left;">EyeClean</a>
+                                                        </td>
+                                                        <td align="left"><span>{{item.eyeClean}}</span></td>
+                                                        <td align="left" colspan="2">{{item.girdleFrom}} {{item.girdleTo}} {{item.girdlePercent}}%</td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Diagram Center Clean</a>
+                                                        </td>
+                                                        <td align="left"><span style="color:blue !important;" ng-click="ShowCertificateDiagramModal(detail);">{{((item.diagClean
+                                                                =='Y' || item.diagClean =='y') ?'YES':'') }}</span></td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Star</a></td>
+                                                        <td align="left"><span>{{item.starPer}}%</span></td>
+                                                    </tr>
+                                                    <tr style="background-color: white;">
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Shade</a></td>
+                                                        <td align="left"><span>{{item.shade}}</span></td>
+                                                        <td align="left" style="background-color: #f2f2f2;" *ngIf="item.shape.toUpperCase() == 'RBC' "><a href="javascript:void(0)" style="float:left;color:black;">Heart & Arrow</a></td>
+                                                        <td align="left" *ngIf="item.shape.toUpperCase() == 'RBC' ">
+                                                            <span>{{item.haDetail}}</span>
+                                                        </td>
+                                                        <td align="left" style="background-color: #f2f2f2;" *ngIf="item.shape.toUpperCase() != 'RBC' "><a href="javascript:void(0)" style="float:left;color:black;">Ratio</a></td>
+                                                        <td align="left" *ngIf="item.shape.toUpperCase() != 'RBC' ">
+                                                            <span>{{item.ratio}}</span>
+                                                        </td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Culet</a></td>
+                                                        <td align="left"><span>{{item.culet}}</span></td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">LowerHal</a></td>
+                                                        <td align="left"><span>{{item.lowerHalfPer}}%</span></td>
+                                                    </tr>
+                                                    <tr style="background-color: white;">
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Crown Height</a> </td>
+                                                        <td align="left" style="width: 150px;">{{item.crownHeight}}%</td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Pavilion Depth</a> </td>
+                                                        <td align="left">{{item.pavilionDepth}}%</td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Natural</a></td>
+                                                        <td align="left"><span>Gd:{{item.naturalGr}}
+                                                                /Pv:{{item.naturalPv}} /Cr:{{item.naturalCr}}</span>
+                                                        </td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Key to Symbol</a></td>
+                                                        <td align="left" colspan="5"><span>{{item.keytoSyb}}</span></td>
+                                                    </tr>
+                                                    <tr style="background-color: white;">
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Crown Angle</a> </td>
+                                                        <td align="left">{{item.crownAngle}}°</td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Pavilion Angle</a> </td>
+                                                        <td align="left">{{item.pavilionAngle}}°</td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Ex. Facet</a> </td>
+                                                        <td align="left">Pv:{{item.extraFacetPv}} /Cr:{{item.extraFacetCv}}
+                                                        </td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Certificate Comm.</a>
+                                                        </td>
+                                                        <td align="left" colspan="5"><span>{{item.reportCommt}}</span>
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr style="background-color: white;">
+
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">RapPrice</a></td>
+                                                        <td align="left"><span>{{item.rapPrice}}</span></td>
+                                                        <td align="left" style="background-color: #f2f2f2;"><a href="javascript:void(0)" style="float:left;color:black;">Sealed</a></td>
+                                                        <td align="left"><span>{{(item.stoneInfo==null?'':item.stoneInfo).toLowerCase() =='seal'
+                                                                ? 'Yes':'No' }}</span></td>
+
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                    <tr style="height:70vh !important;">
+                                        <td colspan="19"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination pull-left" *ngIf="PageCount >1">
+                            <a class="btn btn-secondary" (click)="FirstPage()">
+                                << </a>
+                                    <a class="btn btn-secondary" (click)="PrevPage()">
+                                        < </a>
+                                            <a class="btn btn-secondary"> {{currentPageNo+1}} / {{Pages.length}} </a>
+                                            <a class="btn btn-secondary" (click)="NextPage()">></a>
+                                            <a class="btn btn-secondary" (click)="LastPage()">>></a>
+                        </div>
+                        <div class="pull-right">
+                            <div class="" wfd-id="521">
+                                <span class="footer-mobile-status-item" wfd-id="528"> &nbsp;
+                                    <img src="/assets/img/Available.png" alt=""> &nbsp;
+                                    <span wfd-id="529" [translate]="'inventory.search.result.stockstatus.avialable'">
+                                        Available </span>
+                                </span>
+                                <span class="footer-mobile-status-item" wfd-id="526"> &nbsp;
+                                    <img src="/assets/img/Bussiness.png" alt=""> &nbsp;
+                                    <span wfd-id="527" [translate]="'inventory.search.result.stockstatus.memo'">
+                                        Business Process </span>
+                                </span>
+                                <span class="footer-mobile-status-item" wfd-id="524"> &nbsp;
+                                    <img src="/assets/img/NewStock.png" alt=""> &nbsp;
+                                    <span wfd-id="525" [translate]="'inventory.search.result.stockstatus.new'"> New
+                                    </span>
+                                </span>
+                                <span class="footer-mobile-status-item" wfd-id="522"> &nbsp;
+                                    <img src="/assets/img/InLab.png" alt=""> &nbsp;
+                                    <span wfd-id="523" [translate]="'inventory.search.result.stockstatus.inLab'"> In
+                                        Lab</span>
+                                </span>
+                                <span class="footer-mobile-status-item" wfd-id="522"> &nbsp;
+                                    <img src="/assets/img/InLabBussiness.png" alt=""> &nbsp;
+                                    <span wfd-id="523"
+                                        [translate]="'inventory.search.result.stockstatus.inLabBusiness'">Business
+                                        Process In Lab</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<!-- MAIN END -->
+<!-- SIDEBAR START -->

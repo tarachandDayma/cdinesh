@@ -417,6 +417,13 @@
         },
         "bestofcd": {
             "title": "Best Of CD"
+        },
+        "cart": {
+            "success": "Success",
+            "already_error": "Already exists in cart ",
+            "notfound_error": "Not found",
+            "title": "My Cart",
+            "removeAll": "Remove Selected"
         }
     },
     "controlpanel": {

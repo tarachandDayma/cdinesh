@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BestOfCDComponent } from './component/best-of-cd/best-of-cd.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { DiamondDetailComponent } from './component/diamond-detail/diamond-detail.component';
+import { MyCartComponent } from './component/my-cart/my-cart.component';
 import { NewgoodsComponent } from './component/newgoods/newgoods.component';
 import { RecommendedComponent } from './component/recommended/recommended.component';
 import { SearchComponent } from './component/search/search.component';
@@ -57,6 +58,10 @@ const routes: Routes = [
     {
       path:"diamondDetail",
       component:DiamondDetailComponent
+    },
+    {
+      path:"mycart",
+      component:MyCartComponent
     }
   ];
   @NgModule({

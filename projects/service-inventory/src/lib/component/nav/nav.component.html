@@ -1,5 +1,5 @@
 <style>
-    body{
+    body {
         overflow: hidden;
     }
 </style>
@@ -51,23 +51,10 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item dropdown ">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-calendar-o icon"></i>
+                        <li>
+                            <a class="nav-link" routerLink="/inventory/mycart" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-shopping-cart icon" style="font-size: 16px;">{{cartCount}}</i>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <div class="header">
-
-                                </div>
-                                <div class="body">
-
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-
-                                </div>
-
-                            </div>
                         </li>
                         <li class="nav-item dropdown profile">
                             <a *ngIf="User!=undefined" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

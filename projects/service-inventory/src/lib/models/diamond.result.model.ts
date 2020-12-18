@@ -111,4 +111,5 @@ export class diamondsearchResult{
     showDetail:boolean;
     showPopUp:boolean;
     newStatus:string;
+    deliveryAt:string;
 }

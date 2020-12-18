@@ -14,3 +14,6 @@ export * from "./lib/component/upcoming/upcoming.component";
 export * from './lib/component/nav/nav.component';
 export * from './lib/service/user.service';
 export * from './lib/component/diamond-detail/diamond-detail.component';
+export * from './lib/service/cart.service';
+export * from './lib/service/cartbroadcaster';
+export * from './lib/component/my-cart/my-cart.component';

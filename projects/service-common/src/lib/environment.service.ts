@@ -81,7 +81,9 @@ export class EnvironmentService {
       'Content-Type': 'application/json',
       'Authorization': "Bearer " + this.Authtoken
     });
-    this.http.get<any>(this.ApiGateway + "/IsLoggedIn", { headers: header }).toPromise().then(result=>returnflag=true,error=>returnflag=false);
+    this.http.get<any>(this.ApiGateway + "/IsLoggedIn", { headers: header }).toPromise().then(result=>returnflag=true,error=>{
+      this.CheckGuestLogin();
+    });
     return returnflag;
   }
   CheckGuestLogin() : boolean {
@@ -90,9 +92,12 @@ export class EnvironmentService {
       'Content-Type': 'application/json',
       'Authorization': "Bearer " + this.Authtoken
     });
-    this.http.get<any>(this.ApiGateway + "/IsGuestLoggedIn", { headers: header }).toPromise().then(result=> returnflag=true,error=>returnflag=false);
+    this.http.get<any>(this.ApiGateway + "/IsGuestLoggedIn", { headers: header }).toPromise().then(result=> returnflag=true,error=>{
+      location.reload();
+    });
     return returnflag;
   }
+  
   public get IsLogin(): boolean {
     // return this.CheckLogin();
     var flag = false;
@@ -155,6 +160,7 @@ export class EnvironmentService {
     }
     return flag;
   }
+
   
 
   public logout() {
