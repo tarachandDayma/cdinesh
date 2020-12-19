@@ -53,8 +53,11 @@
                         </li>
                         <li>
                             <a class="nav-link" routerLink="/inventory/mycart" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-shopping-cart icon" style="font-size: 16px;">{{cartCount}}</i>
+                                <i class="fa fa-shopping-cart icon" style="font-size: 16px;"></i>
+                                <!-- <img style="width: 35px;" src="/assets/img/cart.ad9bc51e.png"> -->
+                                <sup data-show="true" class="ant-scroll-number ant-badge-count" title="1" style="background-color: transparent; color: rgb(255, 255, 255); box-shadow: none; width: 20px; padding: 0px;"><span class="ant-scroll-number-only" style="transform: translateY(-1100%);">{{cartCount}}</span></sup>
                             </a>
+
                         </li>
                         <li class="nav-item dropdown profile">
                             <a *ngIf="User!=undefined" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

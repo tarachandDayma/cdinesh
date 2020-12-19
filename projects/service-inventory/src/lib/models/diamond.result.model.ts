@@ -79,7 +79,7 @@ export class diamondsearchResult{
     arrow:number;
     haPer:number;
     haDetail:string;
-    locaion:string;
+    location:string;
     specialCategory:string;
     certificateId:number;
     boxCode:string;

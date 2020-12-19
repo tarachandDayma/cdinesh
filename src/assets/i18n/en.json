@@ -404,7 +404,8 @@
             "status": "Status"
         },
         "dashboard": {
-            "title": "Dashboard"
+            "title": "Dashboard",
+            "recentSearch": "Recent Search"
         },
         "newgoods": {
             "title": "New Goods"

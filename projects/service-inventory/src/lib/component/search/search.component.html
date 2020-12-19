@@ -1171,8 +1171,7 @@
                                     <option value="">ALL</option>
                                     <option value="A">AVAILABLE</option>
                                     <option value="ALAB">IN LAB</option>
-                                    <option value="M">IN BUSINESS</option>
-                                    <option value="MLAB">IN LAB BUSINESS</option>   
+                                    <option value="M,MLAB">IN BUSINESS</option>
                                     <option value="N">NEW</option>
                             </select>
                         </div>
@@ -1441,17 +1440,32 @@
                                             </span>
                                             </span>
                                         </th>
-                                        <th (click)="sort('locaion')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.location')}}" class="fixed-column" style="width:79px;" [translate]="'inventory.search.result.location'">
+                                        <th (click)="sort('location')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.location')}}" class="fixed-column" style="width:79px;" [translate]="'inventory.search.result.location'">
                                             location
                                             <span style="margin-right: 10px;margin-top: 7px;">
                                                 <span class="default-sort-arrow"
                                                     style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
                                                     data-reactroot="" wfd-id="3710">
                                                     <span
-                                                        [ngStyle]="sortedColumn=='locaion' && {'color':'black'} || sortedColumn!='locaion' && {'color':'#999999'}"
+                                                        [ngStyle]="sortedColumn=='location' && {'color':'black'} || sortedColumn!='location' && {'color':'#999999'}"
                                                         style="color:#999999;    top: -11px!important;
                                                     position: absolute;" wfd-id="3712">▲</span>
-                                            <span [ngStyle]="sortedColumn=='locaion' && {'color':'black'} || sortedColumn!='locaion' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                            <span [ngStyle]="sortedColumn=='location' && {'color':'black'} || sortedColumn!='location' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('status')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.status')}}" class="fixed-column" style="width:79px;" [translate]="'inventory.search.result.status'">
+                                            location
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='status' && {'color':'black'} || sortedColumn!='status' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='status' && {'color':'black'} || sortedColumn!='status' && {'color':'#999999'}" style="color:#999999;top: -1px;
                                                         position: absolute;" wfd-id="3711">▼</span>
                                             </span>
                                             </span>
@@ -1461,14 +1475,12 @@
                                 <tbody style="height:70vh;">
                                     <ng-container *ngFor="let item of Pages[currentPageNo] ">
                                         <tr style="height: 32px !important;" [ngStyle]="   (item.selected==true && item.newStatus=='A') && {'background':'#ccc','font-weight':'550'}
-                                                       || (item.selected!=true && item.newStatus=='M') && {'color':'#cc0786'}
-                                                       || (item.selected==true && item.newStatus=='M') && {'background':'#f9e1ee','color':'#cc0786','font-weight':'550'}
-                                                       || (item.selected!=true && item.newStatus=='ALAB') && {'color':'orange'}
-                                                       || (item.selected==true && item.newStatus=='ALAB') && {'background':'#f1e9db','color':'orange','font-weight':'550'}
-                                                       || (item.selected!=true && item.newStatus=='MLAB') && {'color':'#7e0101'}
-                                                       || (item.selected==true && item.newStatus=='MLAB') && {'background':'#bc9898ad','color':'#7e0101','font-weight':'550'}
-                                                       || (item.selected!=true && item.newStatus=='N') && {'color':'navy'}
-                                                       || (item.selected==true && item.newStatus=='N') && {'background':'#bee1ff','color':'navy','font-weight':'550'}">
+                                        || (item.selected!=true && (item.newStatus=='M' || item.newStatus=='MLAB')) && {'color':'#cc0786'}
+                                        || (item.selected==true && (item.newStatus=='M' || item.newStatus=='MLAB')) && {'background':'#f9e1ee','color':'#cc0786','font-weight':'550'}
+                                        || (item.selected!=true && item.newStatus=='ALAB') && {'color':'orange'}
+                                        || (item.selected==true && item.newStatus=='ALAB') && {'background':'#f1e9db','color':'orange','font-weight':'550'}
+                                        || (item.selected!=true && item.newStatus=='N') && {'color':'navy'}
+                                        || (item.selected==true && item.newStatus=='N') && {'background':'#bee1ff','color':'navy','font-weight':'550'}">
                                             <th (mouseover)="ShowPopUp(item,false)" data-toggle="tooltip" data-placement="top" class="fixed-column" style="width: 32px;">
                                                 <label class="custom-control material-checkbox">
                                                     <input (change)="subItemcheckUncheck()" type="checkbox"
@@ -1549,13 +1561,15 @@
                                                 {{item.measurements}}
                                             </td>
                                             <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
-                                                {{item.locaion}}
+                                                {{item.location}}
                                             </td>
-
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)">
+                                                {{item.newStatus}}
+                                            </td>
 
                                         </tr>
                                         <tr *ngIf="item.showDetail || item.showPopUp">
-                                            <td colspan="19">
+                                            <td colspan="20">
                                                 <table class="table table-hover table-condensed table-bordered custTable" cellspacing="1" style="font-size: 12px;width: 100%;margin-bottom: 0px!important;background-color: white;">
                                                     <tr style="background-color: white;">
                                                         <td colspan="2" rowspan="3">
@@ -1691,7 +1705,9 @@
                                         </tr>
                                     </ng-container>
                                     <tr style="height:70vh !important;">
-                                        <td colspan="19"></td>
+                                        <td colspan="20" style="text-align: center !important;">
+                                            <img *ngIf="searchResult.length<=0 || searchResult==undefined" src="/assets/img/NoRecordFound.png">
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1726,12 +1742,6 @@
                                     <img src="/assets/img/InLab.png" alt=""> &nbsp;
                                     <span wfd-id="523" [translate]="'inventory.search.result.stockstatus.inLab'"> In
                                         Lab</span>
-                                </span>
-                                <span class="footer-mobile-status-item" wfd-id="522"> &nbsp;
-                                    <img src="/assets/img/InLabBussiness.png" alt=""> &nbsp;
-                                    <span wfd-id="523"
-                                        [translate]="'inventory.search.result.stockstatus.inLabBusiness'">Business
-                                        Process In Lab</span>
                                 </span>
                             </div>
                         </div>

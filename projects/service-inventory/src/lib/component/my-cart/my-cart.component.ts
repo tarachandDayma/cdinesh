@@ -60,55 +60,59 @@ export class MyCartComponent implements OnInit {
 
   ///Search Diamond
   searchDiamond() {
-    this.loader.show(true);
-    var obj = {
-      ShapeList: [],
-      ColorList: [],
-      FancyColorList: [],
-      FancyOvertoneList: [],
-      FancyIntensityList: [],
-      ClarityList: [],
-      CutList: [],
-      PolishList: [],
-      SymList: [],
-      LocationList: [],
-      FlourenceList: [],
-      MilkyList: [],
-      ShadeList: [],
-      BlackIncTblList: [],
-      BlackIncCrnList: [],
-      WhiteIncTblList: [],
-      WhiteIncCrnList: [],
-      CuletList: [],
-      EyeCleanList: [],
-      NaturalGirdleList: [],
-      NaturalPavList: [],
-      NaturalCrnList: [],
-      ExtraFacetPavList: [],
-      ExtraFacetCrnList: [],
-      FromgirdleList: [],
-      TogirdleList: [],
-      FromhaList: [],
-      TohaList: [],
-      KeytoSymbolList: [],
-      CertificateList: [],
-      LusterList: [],
-      SelectedPointer: [],
-      FancyColor: false,
-      DelveryAt: this.delveryAt,
-      PacketNos: this.PacketNos,
-      Status: '',
-      IsPriority: ''
-    }
-    this.searchService.Search(obj).subscribe(result => {
-      this.loader.show(false);
-      this.searchResult = result;
-      this.calculateSummary();
+    if (this.CartResult.length > 0) {
+      this.loader.show(true);
+      var obj = {
+        ShapeList: [],
+        ColorList: [],
+        FancyColorList: [],
+        FancyOvertoneList: [],
+        FancyIntensityList: [],
+        ClarityList: [],
+        CutList: [],
+        PolishList: [],
+        SymList: [],
+        LocationList: [],
+        FlourenceList: [],
+        MilkyList: [],
+        ShadeList: [],
+        BlackIncTblList: [],
+        BlackIncCrnList: [],
+        WhiteIncTblList: [],
+        WhiteIncCrnList: [],
+        CuletList: [],
+        EyeCleanList: [],
+        NaturalGirdleList: [],
+        NaturalPavList: [],
+        NaturalCrnList: [],
+        ExtraFacetPavList: [],
+        ExtraFacetCrnList: [],
+        FromgirdleList: [],
+        TogirdleList: [],
+        FromhaList: [],
+        TohaList: [],
+        KeytoSymbolList: [],
+        CertificateList: [],
+        LusterList: [],
+        SelectedPointer: [],
+        FancyColor: false,
+        DelveryAt: this.delveryAt,
+        PacketNos: this.PacketNos,
+        Status: '',
+        IsPriority: ''
+      }
+      this.searchService.Search(obj).subscribe(result => {
+        this.loader.show(false);
+        this.searchResult = result;
+        this.calculateSummary();
+        this.doPagination();
+      }, error => {
+        this.loader.show(false);
+      })
+    }else{
+      this.searchResult=[];
       this.doPagination();
-    }, error => {
-      this.loader.show(false);
-    })
-
+    }
   }
 
   sortedColumn: string;
@@ -340,7 +344,8 @@ export class MyCartComponent implements OnInit {
           this.PacketNos = this.PacketNos + "," + element.packetNo;
         }
       });
-      this.searchDiamond();
+      
+        this.searchDiamond();
     })
   }
   UpdateCart() {
@@ -424,11 +429,11 @@ export class MyCartComponent implements OnInit {
       this.loader.show(false);
     })
   }
-  RemoveItem(item:diamondsearchResult){
-   
+  RemoveItem(item: diamondsearchResult) {
+
     this.loader.show(true);
     var packetStr = item.packetNo;
-   
+
     var obj = {
       ShapeList: [],
       ColorList: [],
@@ -479,13 +484,13 @@ export class MyCartComponent implements OnInit {
           cartItem.back = element.price;
           cartItem.deliveryAt = this.delveryAt;
           this.cartService.Delete(cartItem).subscribe(updateResult => {
-            
-              this.loader.show(false);
-              this.LoadCart();
-            
+
+            this.loader.show(false);
+            this.LoadCart();
+
           }, error => {
-              this.loader.show(false);
-              this.LoadCart();
+            this.loader.show(false);
+            this.LoadCart();
           })
         });
       }
@@ -549,24 +554,94 @@ export class MyCartComponent implements OnInit {
       this.loader.show(false);
       var cnt = 0;
       if (result.length > 0) {
+        this.loader.show(true);
+        result.forEach(element => {
+          var cartItem = this.CartResult.filter(x => x.packetNo == element.packetNo)[0];
+          if (cartItem != undefined) {
+            cartItem.price = element.price;
+            cartItem.back = element.price;
+            cartItem.deliveryAt = this.delveryAt;
+            this.cartService.Delete(cartItem).subscribe(updateResult => {
+              cnt++;
+              if (cnt == result.length - 1) {
+                this.loader.show(false);
+                this.LoadCart();
+              }
+            }, error => {
+              cnt++;
+              if (cnt == result.length - 1) {
+                this.loader.show(false);
+                this.LoadCart();
+              }
+            })
+          }
+        });
+      }
+    }, error => {
+      this.loader.show(false);
+    })
+  }
+  ChangeItemDeliveryAt(item) {
+    this.loader.show(true);
+    var packetStr = item.packetNo;
+
+    var obj = {
+      ShapeList: [],
+      ColorList: [],
+      FancyColorList: [],
+      FancyOvertoneList: [],
+      FancyIntensityList: [],
+      ClarityList: [],
+      CutList: [],
+      PolishList: [],
+      SymList: [],
+      LocationList: [],
+      FlourenceList: [],
+      MilkyList: [],
+      ShadeList: [],
+      BlackIncTblList: [],
+      BlackIncCrnList: [],
+      WhiteIncTblList: [],
+      WhiteIncCrnList: [],
+      CuletList: [],
+      EyeCleanList: [],
+      NaturalGirdleList: [],
+      NaturalPavList: [],
+      NaturalCrnList: [],
+      ExtraFacetPavList: [],
+      ExtraFacetCrnList: [],
+      FromgirdleList: [],
+      TogirdleList: [],
+      FromhaList: [],
+      TohaList: [],
+      KeytoSymbolList: [],
+      CertificateList: [],
+      LusterList: [],
+      SelectedPointer: [],
+      FancyColor: false,
+      DelveryAt: item.deliveryAt,
+      PacketNos: packetStr,
+      Status: '',
+      IsPriority: ''
+    }
+    this.searchService.Search(obj).subscribe(result => {
+      this.loader.show(false);
+      var cnt = 0;
+      if (result.length > 0) {
         result.forEach(element => {
           this.loader.show(true);
           var cartItem = this.CartResult.filter(x => x.packetNo == element.packetNo)[0];
           cartItem.price = element.price;
           cartItem.back = element.price;
-          cartItem.deliveryAt = this.delveryAt;
-          this.cartService.Delete(cartItem).subscribe(updateResult => {
-            cnt++;
-            if (cnt == result.length - 1) {
-              this.loader.show(false);
-              this.LoadCart();
-            }
+          cartItem.deliveryAt = item.deliveryAt;
+          this.cartService.Update(cartItem).subscribe(updateResult => {
+
+            this.loader.show(false);
+            this.LoadCart();
+
           }, error => {
-            cnt++;
-            if (cnt == result.length - 1) {
-              this.loader.show(false);
-              this.LoadCart();
-            }
+            this.loader.show(false);
+            this.LoadCart();
           })
         });
       }
