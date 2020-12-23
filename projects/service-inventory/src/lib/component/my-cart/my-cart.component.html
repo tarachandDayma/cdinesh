@@ -178,6 +178,21 @@
                                             </span>
                                             </span>
                                         </th>
+                                        <th (click)="sort('amount')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.amount')}}" class="fixed-column" style="width:81px;" [translate]="'inventory.search.result.amount'">
+                                            price
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='price' && {'color':'amount'} || sortedColumn!='amount' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='price' && {'color':'amount'} || sortedColumn!='amount' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
                                         <th (click)="sort('colour')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.color')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.color'">
                                             color
                                             <span style="margin-right: 10px;margin-top: 7px;">
@@ -362,7 +377,7 @@
                                 </thead>
                                 <tbody style="height:70vh;">
                                     <ng-container *ngFor="let item of Pages[currentPageNo] ">
-                                        <tr style="height: 32px !important;" [ngStyle]="   (item.selected==true && item.newStatus=='A') && {'background':'#ccc','font-weight':'550'}
+                                        <tr [ngStyle]="   (item.selected==true && item.newStatus=='A') && {'background':'#ccc','font-weight':'550'}
                                                        || (item.selected!=true && (item.newStatus=='M' || item.newStatus=='MLAB')) && {'color':'#cc0786'}
                                                        || (item.selected==true && (item.newStatus=='M' || item.newStatus=='MLAB')) && {'background':'#f9e1ee','color':'#cc0786','font-weight':'550'}
                                                        || (item.selected!=true && item.newStatus=='ALAB') && {'color':'orange'}
@@ -421,6 +436,9 @@
                                             </td>
                                             <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" style="text-align: right !important;">
                                                 {{item.back | number : '1.2-2'}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" style="text-align: right !important;">
+                                                {{item.amount | number : '1.2-2'}}
                                             </td>
                                             <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" data-toggle="tooltip" title="{{item.fancyColorOvertone}} {{item.fancyColor}} {{item.fancyColorIntensity}}">
                                                 {{item.colour}}

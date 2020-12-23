@@ -1160,6 +1160,7 @@
                 <div class="card-header">
                     <div class="pull-left button-div">
                         <span (click)="showSelected()"><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span>
+                        <span (click)="Export(content)"><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span>
                     </div>
                     <div class="pull-right status-div ">
                         <div class="input-group input-group-sm mb-1">
@@ -1275,6 +1276,7 @@
                                             </span>
                                             </span>
                                         </th>
+
                                         <th (click)="sort('back')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.disc')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.disc'">
                                             disc
                                             <span style="margin-right: 10px;margin-top: 7px;">
@@ -1286,6 +1288,21 @@
                                                         style="color:#999999;    top: -11px!important;
                                                     position: absolute;" wfd-id="3712">▲</span>
                                             <span [ngStyle]="sortedColumn=='back' && {'color':'black'} || sortedColumn!='back' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                        position: absolute;" wfd-id="3711">▼</span>
+                                            </span>
+                                            </span>
+                                        </th>
+                                        <th (click)="sort('amount')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.amount')}}" class="fixed-column" style="width:81px;" [translate]="'inventory.search.result.amount'">
+                                            price
+                                            <span style="margin-right: 10px;margin-top: 7px;">
+                                                <span class="default-sort-arrow"
+                                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                    data-reactroot="" wfd-id="3710">
+                                                    <span
+                                                        [ngStyle]="sortedColumn=='price' && {'color':'amount'} || sortedColumn!='amount' && {'color':'#999999'}"
+                                                        style="color:#999999;    top: -11px!important;
+                                                    position: absolute;" wfd-id="3712">▲</span>
+                                            <span [ngStyle]="sortedColumn=='price' && {'color':'amount'} || sortedColumn!='amount' && {'color':'#999999'}" style="color:#999999;top: -1px;
                                                         position: absolute;" wfd-id="3711">▼</span>
                                             </span>
                                             </span>
@@ -1474,7 +1491,7 @@
                                 </thead>
                                 <tbody style="height:70vh;">
                                     <ng-container *ngFor="let item of Pages[currentPageNo] ">
-                                        <tr style="height: 32px !important;" [ngStyle]="   (item.selected==true && item.newStatus=='A') && {'background':'#ccc','font-weight':'550'}
+                                        <tr [ngStyle]="   (item.selected==true && item.newStatus=='A') && {'background':'#ccc','font-weight':'550'}
                                         || (item.selected!=true && (item.newStatus=='M' || item.newStatus=='MLAB')) && {'color':'#cc0786'}
                                         || (item.selected==true && (item.newStatus=='M' || item.newStatus=='MLAB')) && {'background':'#f9e1ee','color':'#cc0786','font-weight':'550'}
                                         || (item.selected!=true && item.newStatus=='ALAB') && {'color':'orange'}
@@ -1529,6 +1546,9 @@
                                             </td>
                                             <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" style="text-align: right !important;">
                                                 {{item.back | number : '1.2-2'}}
+                                            </td>
+                                            <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" style="text-align: right !important;">
+                                                {{item.amount | number : '1.2-2'}}
                                             </td>
                                             <td (mouseover)="ShowPopUp(item,false)" (click)="selectRow(item)" data-toggle="tooltip" title="{{item.fancyColorOvertone}} {{item.fancyColor}} {{item.fancyColorIntensity}}">
                                                 {{item.colour}}
@@ -1751,5 +1771,110 @@
         </div>
     </main>
 </div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" [translate]="'inventory.search.result.downloadModalTitle'"> Export</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <nav class="nav">
+                <a class="nav-link" [ngClass]="ExportType =='Download' ? 'active': ''">
+                    <label class="custom-control material-checkbox">
+                        <input (change)="subItemcheckUncheck()" type="radio" value="Download"
+                            class="material-control-input" name="ExportType"
+                            [(ngModel)]="ExportType">
+                        <span class="material-control-indicator"></span>
+                        <span class="material-control-description" [translate]="'inventory.search.result.exportType1'">All</span>
+                    </label>
+                </a>
+                <a class="nav-link" [ngClass]="ExportType =='DownloadSelected' ? 'active': ''">
+                    <label class="custom-control material-checkbox">
+                        <input (change)="subItemcheckUncheck()" type="radio" value="DownloadSelected"
+                            class="material-control-input" name="ExportType"
+                            [(ngModel)]="ExportType">
+                        <span class="material-control-indicator"></span>
+                        <span class="material-control-description" [translate]="'inventory.search.result.exportType2'">All</span>
+                    </label>
+                </a>
+                <a class="nav-link" [ngClass]="ExportType =='Email' ? 'active': ''">
+                    <label class="custom-control material-checkbox">
+                        <input (change)="subItemcheckUncheck()" type="radio" value="Email"
+                            class="material-control-input" name="ExportType"
+                            [(ngModel)]="ExportType">
+                        <span class="material-control-indicator"></span>
+                        <span class="material-control-description" [translate]="'inventory.search.result.exportType3'">All</span>
+                    </label>
+                </a>
+            </nav>
+        </div>
+        <div class="col-sm-12">
+            <div class="card" *ngIf="ExportType =='Download'">
+                <div class="card-body">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                <span [translate]="'inventory.search.result.markup'"> MarkUp </span>
+                            </span>
+                        </div>
+                        <input name="markup" [(ngModel)]="markup" type="number" class="form-control carat-input" min="0" placeholder="101 FOR 1% AS ON">
+                    </div>
+                </div>
+            </div>
+            <div class="card" *ngIf="ExportType =='DownloadSelected'">
+                <div class="card-body">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                <span [translate]="'inventory.search.result.markup'"> MarkUp </span>
+                            </span>
+                        </div>
+                        <input name="markup" [(ngModel)]="markup" type="number" class="form-control carat-input" min="0" placeholder="101 FOR 1% AS ON">
+                    </div>
+                </div>
+            </div>
+            <div class="card" *ngIf="ExportType =='Email'">
+                <div class="card-body">
+
+                    <form [formGroup]="emailformgroup" (ngSubmit)="sendEmail()" autocomplete="off">
+                        <div class="col-md-12">
+                            <label [translate]="'inventory.search.result.emailForm.subject'" for="subject"></label>
+                            <input maxlength="50" formControlName="subject" [(ngModel)]="emailModel.subject" name="subject" type="text" class="form-control" id="subject" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="emailformgroup.get('subject').errors?.required && (emailformgroup.get('subject').touched  || submited)" [translate]="'inventory.search.result.subject_error'" class="form-text text-danger"></label>
+                            <label *ngIf="emailformgroup.get('subject').errors?.serverError" class="form-text text-danger"> {{translate.instant(emailformgroup.get('subject').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-12">
+                            <label [translate]="'inventory.search.result.emailForm.mailTo'" for="subject"></label>
+                            <input maxlength="50" formControlName="mailTo" [(ngModel)]="emailModel.mailTo" name="subject" type="text" class="form-control" id="mailTo" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="emailformgroup.get('mailTo').errors?.required && (emailformgroup.get('mailTo').touched  || submited)" [translate]="'inventory.search.result.mailTo_error'" class="form-text text-danger"></label>
+                            <label *ngIf="emailformgroup.get('mailTo').errors?.serverError" class="form-text text-danger"> {{translate.instant(emailformgroup.get('mailTo').errors?.serverError)}} </label>
+                            <label *ngIf="emailformgroup.get('mailTo').errors?.email && (emailformgroup.get('mailTo').touched || submited)" [translate]="'inventory.search.result.emailForm.emailId_error'" class="form-text text-danger"></label>
+                        </div>
+                        <div class="col-md-12">
+                            <label [translate]="'inventory.search.result.emailForm.mailCC'" for="subject"></label>
+                            <input maxlength="50" formControlName="mailCC" [(ngModel)]="emailModel.mailCC" name="mailCC" type="text" class="form-control" id="mailCC" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="emailformgroup.get('mailCC').errors?.email && (emailformgroup.get('mailCC').touched || submited)" [translate]="'inventory.search.result.emailForm.emailId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="emailformgroup.get('mailCC').errors?.serverError" class="form-text text-danger"> {{translate.instant(emailformgroup.get('mailCC').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-12">
+                            <label [translate]="'inventory.search.result.emailForm.message'" for="message"></label>
+                            <textarea maxlength="50" formControlName="message" [(ngModel)]="emailModel.message" name="mailCC" class="form-control" id="message" placeholder="" aria-describedby="emailHelp"></textarea>
+                            <label *ngIf="emailformgroup.get('message').errors?.required && (emailformgroup.get('message').touched  || submited)" [translate]="'inventory.search.result.message_error'" class="form-text text-danger"></label>
+                            <label *ngIf="emailformgroup.get('message').errors?.serverError" class="form-text text-danger"> {{translate.instant(emailformgroup.get('message').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" type="submit" [translate]="'inventory.search.result.emailForm.sendMail'"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button *ngIf="ExportType !='Email'" type="button" [translate]="'inventory.search.result.download'" class="btn btn-outline-dark" (click)="modal.close('Download')">Save</button>
+    </div>
+</ng-template>
 <!-- MAIN END -->
 <!-- SIDEBAR START -->

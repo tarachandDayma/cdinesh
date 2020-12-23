@@ -1,0 +1,54 @@
+<inventory-nav></inventory-nav>
+<div class="content">
+    <!-- PAGE TITLE END -->
+    <main class="myform" style="padding-top: 0px;padding-bottom: 0px;">
+        <div class="controlPanelContainer">
+            <div class="row col-sm-12">
+                <lib-profile-navigation></lib-profile-navigation>
+
+            </div>
+            <div class="row col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="pull-right">
+                            <button class="btn btn-primary" type="button" [translate]="'inventory.profile.downloadSetup.save'" (click)="saveFields()"></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table" style="user-select:none;">
+                            <thead>
+                                <tr>
+                                    <th [translate]="'inventory.profile.downloadSetup.isActive'"></th>
+                                    <th [translate]=" 'inventory.profile.downloadSetup.fieldName'"></th>
+                                    <th [translate]="'inventory.profile.downloadSetup.label'"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let indx=index;let item of Fields;" [ngClass]="dragIndex==indx ? 'selected' :'' " (mouseup)="mouseUp(indx)" (mousemove)="mouseMove(indx)">
+                                    <td>
+                                        <i class="fa fa-arrows" (mousedown)="mouseDown(indx)"></i>
+                                        <label class="custom-control material-checkbox">
+                                            <input type="checkbox"
+                                                class="material-control-input" name="AllReslt"
+                                                [(ngModel)]="item.isActive">
+                                            <span class="material-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="FieldName" [(ngModel)]="item.fieldName" disabled>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="label" [(ngModel)]="item.label">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+<!-- MAIN END -->
+<!-- SIDEBAR START -->

@@ -19,6 +19,9 @@ import { DiamondDetailComponent } from './component/diamond-detail/diamond-detai
 import { CartService } from './service/cart.service';
 import { CartBroadcaster } from './service/cartbroadcaster';
 import { MyCartComponent } from './component/my-cart/my-cart.component';
+import { DownloadSetupComponent } from './component/download-setup/download-setup.component';
+import { ProfileNavigationComponent } from './component/profile-navigation/profile-navigation.component';
+import { PersonalDetailComponent } from './component/personal-detail/personal-detail.component';
 
 
 
@@ -26,7 +29,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
 }
 @NgModule({
-  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent],
+  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent],
   imports: [
     FormsModule,ReactiveFormsModule,
     TranslateModule.forChild(),

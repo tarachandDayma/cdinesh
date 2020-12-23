@@ -330,6 +330,7 @@
                 "shape": "Shape",
                 "size": "Size",
                 "price": "Price",
+                "amount": "Amount",
                 "disc": "Disc.",
                 "color": "Color",
                 "clarity": "Clarity",
@@ -351,9 +352,29 @@
                     "new": "New",
                     "inLab": "In Lab",
                     "inLabBusiness": "Business Process In Lab"
+                },
+                "downloadModalTitle": "Export",
+                "markup": "Markup",
+                "download": "Download",
+                "exportType1": "Download",
+                "exportType2": "Download Selected",
+                "exportType3": "Email",
+                "subject_error": "Required",
+                "mailTo_error": "Required",
+                "message_error": "required",
+                "error": "something went wrong",
+                "emailForm": {
+                    "subject": "Subject",
+                    "mailTo": "MailTo",
+                    "mailCC": "Mail CC",
+                    "message": "Message",
+                    "emailId_error": "Please enter valid emailid",
+                    "sendMail": "Send",
+                    "success": "Success"
                 }
             },
-            "showSelected": "Show Selected"
+            "showSelected": "Show Selected",
+            "export": "Export"
         },
         "diamondDetail": {
             "title": "Diamond Detail",
@@ -425,6 +446,24 @@
             "notfound_error": "Not found",
             "title": "My Cart",
             "removeAll": "Remove Selected"
+        },
+        "profile": {
+            "nav": {
+                "personalDetail": "Personal detail",
+                "downloadSetup": "Download Setup"
+            },
+            "personalDetail": {
+                "title": "Personal Detail"
+            },
+            "downloadSetup": {
+                "title": "Download Setup",
+                "isActive": "IsActive",
+                "fieldName": "FieldName",
+                "label": "Label",
+                "success": "Success",
+                "error": "Something went wrong",
+                "save": "Update"
+            }
         }
     },
     "controlpanel": {

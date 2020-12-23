@@ -66,7 +66,7 @@ export class NavComponent implements OnInit {
     this.userService.GetUser().subscribe(result => {
       this.User = result;
     });
-    
+    this.LoadCart();
   }
   logout() {
     this.environment.logout();
@@ -83,5 +83,10 @@ export class NavComponent implements OnInit {
       this.router.navigateByUrl("/inventory/SearchPacket");
     }
   } 
+  LoadCart(){
+    this.cartService.GetAll().subscribe(result=>{
+      this.cartCount=result.length;
+    })
+  }
  
 }

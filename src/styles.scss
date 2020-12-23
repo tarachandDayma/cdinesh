@@ -6,6 +6,44 @@
  *  STYLE 9
  */
     
+    .btn-secondary:hover {
+        color: grey !important;
+        background-color: #ffffff !important;
+        border: none;
+    }
+    
+    .btn-secondary.focus,
+    .btn-secondary:focus {
+        box-shadow: 0 0 0 .2rem rgba(108, 117, 125, .5) !important
+    }
+    
+    .btn-secondary.disabled,
+    .btn-secondary:disabled {
+        color: grey !important;
+        background-color: #ffffff !important;
+        border: none;
+        cursor: not-allowed;
+    }
+    
+    .btn-secondary:not(:disabled):not(.disabled).active,
+    .btn-secondary:not(:disabled):not(.disabled):active,
+    .show>.btn-secondary.dropdown-toggle {
+        color: grey !important;
+        background-color: #ffffff !important;
+        border: none;
+    }
+    
+    .table-fixed td,
+    .table-fixed th {
+        border-style: solid !important;
+        border-color: #ececec !important;
+        border-width: thin !important;
+    }
+    
+    .table-fixed tbody tr:nth-of-type(odd) {
+        background-color: #f3f3f3 !important;
+    }
+    
     .custom-control {
         min-height: 0.5rem !important;
         position: sticky !important;
@@ -48,7 +86,7 @@
             .material-control-indicator {
                 display: inline-block;
                 position: absolute;
-                top: 4px;
+                top: 0px;
                 left: 0;
                 width: 16px;
                 height: 16px;
@@ -70,7 +108,7 @@
                 border-radius: 3px;
                 display: inline-block;
                 position: absolute;
-                top: 4px;
+                top: 0px;
                 left: 0;
                 width: 16px;
                 height: 16px;
@@ -101,7 +139,7 @@
                 border-radius: 3px;
                 display: inline-block;
                 position: absolute;
-                top: 4px;
+                top: 0px;
                 left: 0;
                 width: 16px;
                 height: 16px;
@@ -154,7 +192,7 @@
                 display: inline-block;
                 position: relative;
                 margin: 0 10px;
-                top: 4px;
+                top: 0px;
                 width: 32px;
                 height: 16px;
                 background: #ddd;
@@ -204,7 +242,7 @@
                 display: inline-block;
                 position: relative;
                 margin: 0 10px;
-                top: 4px;
+                top: 0px;
                 width: 32px;
                 height: 20px;
                 background: #fff;
@@ -243,7 +281,7 @@
                 display: inline-block;
                 position: relative;
                 margin: 0 10px;
-                top: 4px;
+                top: 0px;
                 width: 32px;
                 height: 20px;
                 background: #fff;
@@ -284,7 +322,7 @@
                 display: inline-block;
                 position: relative;
                 margin: 0 10px;
-                top: 4px;
+                top: 0px;
                 width: 32px;
                 height: 20px;
                 background: #fff;

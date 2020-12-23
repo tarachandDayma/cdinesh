@@ -11,6 +11,16 @@ main {
     display: table;
 }
 
+.table-fixed td,
+.table-fixed th {
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.table-fixed tr {
+    height: 26px !important;
+}
+
 .table-fixed {
     position: relative;
     width: 100%;
@@ -19,6 +29,10 @@ main {
     overflow: auto;
     height: 63vh;
     display: block;
+}
+
+.table-fixed img {
+    width: 14px !important;
 }
 
 .box {

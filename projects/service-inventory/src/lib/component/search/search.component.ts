@@ -1,16 +1,21 @@
 import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs/operators';
-import { alertserice, FormValidationService, loaderserice } from 'service-common';
+import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
 import { CartModel } from '../../models/cart.model';
 import { diamondsearchResult } from '../../models/diamond.result.model';
 import { EntityModel } from '../../models/entity.model';
+import { ExportToEmailModel } from '../../models/exportToEmail.model';
 import { UserSearchModel } from '../../models/user.search.model';
 import { CartService } from '../../service/cart.service';
 import { CartBroadcaster } from '../../service/cartbroadcaster';
+import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
 import { SearchService } from '../../service/search.service';
+import { UserService } from '../../service/user.service';
 declare var $: any;
 @Component({
   selector: 'lib-search',
@@ -27,7 +32,11 @@ export class SearchComponent implements OnInit {
     , private route: ActivatedRoute
     , private searchService: SearchService
     , private cartService: CartService
-    , private cartBroadCaster: CartBroadcaster) { }
+    , private cartBroadCaster: CartBroadcaster
+    , private modalService: NgbModal
+    , private downloadService: DownloadService
+    , private environmentService: EnvironmentService
+    , private userService: UserService) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -151,7 +160,7 @@ export class SearchComponent implements OnInit {
         var SearchFilter = JSON.parse(recentSearch.searchData);
         this.IsRecentSearch = true;
         this.SetFilterObject(SearchFilter);
-        localStorage.setItem("recentSearch","")
+        localStorage.setItem("recentSearch", "")
       } else
         localStorage.setItem("PacketNo", "");
     }
@@ -606,7 +615,7 @@ export class SearchComponent implements OnInit {
       this.LoadDbParameter();
     }
     this.catchRouteParam();
-    
+
     this.entityService.GetDeliveryAt().subscribe(result => {
 
       this.deliveryAtList = result;
@@ -616,175 +625,175 @@ export class SearchComponent implements OnInit {
     })
 
   }
-  LoadDbParameter(){
-    
-      this.entityService.GetEntity("Shape").subscribe(result => {
+  LoadDbParameter() {
 
-        this.shapeList.list = result;
-      }, error => {
+    this.entityService.GetEntity("Shape").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("Colour").subscribe(result => {
+      this.shapeList.list = result;
+    }, error => {
 
-        this.colorList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("Colour").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("Clarity").subscribe(result => {
+      this.colorList.list = result;
+    }, error => {
 
-        this.clarityList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("Clarity").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("cut").subscribe(result => {
+      this.clarityList.list = result;
+    }, error => {
 
-        this.cutList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("cut").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("polish").subscribe(result => {
+      this.cutList.list = result;
+    }, error => {
 
-        this.polishList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("polish").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("Symmetry").subscribe(result => {
+      this.polishList.list = result;
+    }, error => {
 
-        this.symList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("Symmetry").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("Location").subscribe(result => {
+      this.symList.list = result;
+    }, error => {
 
-        this.locationList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("Location").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("FancyColor").subscribe(result => {
+      this.locationList.list = result;
+    }, error => {
 
-        this.fancycolorList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("FancyColor").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("FancyColorOvertone").subscribe(result => {
+      this.fancycolorList.list = result;
+    }, error => {
 
-        this.fancyOvertoneList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("FancyColorOvertone").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("FancyColorIntensity").subscribe(result => {
+      this.fancyOvertoneList.list = result;
+    }, error => {
 
-        this.fancyIntensityList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("FancyColorIntensity").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("Flourence").subscribe(result => {
+      this.fancyIntensityList.list = result;
+    }, error => {
 
-        this.flourenceList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("Flourence").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("shade").subscribe(result => {
+      this.flourenceList.list = result;
+    }, error => {
 
-        this.shadeList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("shade").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("milky").subscribe(result => {
+      this.shadeList.list = result;
+    }, error => {
 
-        this.milkyList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("milky").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("Lusture").subscribe(result => {
+      this.milkyList.list = result;
+    }, error => {
 
-        this.lusterList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("Lusture").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("BlackCrown").subscribe(result => {
+      this.lusterList.list = result;
+    }, error => {
 
-        this.blackIncCrnList.list = result;
-        this.whiteIncCrnList.list = JSON.parse(JSON.stringify(result));
-      }, error => {
+    })
+    this.entityService.GetEntity("BlackCrown").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("BlackTable").subscribe(result => {
+      this.blackIncCrnList.list = result;
+      this.whiteIncCrnList.list = JSON.parse(JSON.stringify(result));
+    }, error => {
 
-        this.blackIncTblList.list = result;
-        this.whiteIncTblList.list = JSON.parse(JSON.stringify(result));
-      }, error => {
+    })
+    this.entityService.GetEntity("BlackTable").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("Culet").subscribe(result => {
+      this.blackIncTblList.list = result;
+      this.whiteIncTblList.list = JSON.parse(JSON.stringify(result));
+    }, error => {
 
-        this.culetList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("Culet").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("ExtraFacetCrown").subscribe(result => {
+      this.culetList.list = result;
+    }, error => {
 
-        this.extraFacetCrnList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("ExtraFacetCrown").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("ExtraFacetPavilion").subscribe(result => {
+      this.extraFacetCrnList.list = result;
+    }, error => {
 
-        this.extraFacetPavList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("ExtraFacetPavilion").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("EyeClean").subscribe(result => {
+      this.extraFacetPavList.list = result;
+    }, error => {
 
-        this.eyeCleanList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("EyeClean").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("NaturalGirdle").subscribe(result => {
+      this.eyeCleanList.list = result;
+    }, error => {
 
-        this.naturalGirdleList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("NaturalGirdle").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("NaturalPavilion").subscribe(result => {
+      this.naturalGirdleList.list = result;
+    }, error => {
 
-        this.naturalPavList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("NaturalPavilion").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("NaturalCrown").subscribe(result => {
+      this.naturalPavList.list = result;
+    }, error => {
 
-        this.naturalCrnList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("NaturalCrown").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("Girdle").subscribe(result => {
+      this.naturalCrnList.list = result;
+    }, error => {
 
-        this.fromgirdleList.list = result;
-        this.togirdleList.list = JSON.parse(JSON.stringify(result));
-      }, error => {
+    })
+    this.entityService.GetEntity("Girdle").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("HNA").subscribe(result => {
+      this.fromgirdleList.list = result;
+      this.togirdleList.list = JSON.parse(JSON.stringify(result));
+    }, error => {
 
-        this.fromhaList.list = result;
-        this.tohaList.list = JSON.parse(JSON.stringify(result));
-      }, error => {
+    })
+    this.entityService.GetEntity("HNA").subscribe(result => {
 
-      })
-      this.entityService.GetEntity("Certificate").subscribe(result => {
+      this.fromhaList.list = result;
+      this.tohaList.list = JSON.parse(JSON.stringify(result));
+    }, error => {
 
-        this.certificateList.list = result;
-      }, error => {
+    })
+    this.entityService.GetEntity("Certificate").subscribe(result => {
 
-      })
-      this.entityService.GetAdvanceEntity("Keytosymbol").subscribe(result => {
+      this.certificateList.list = result;
+    }, error => {
 
-        this.keytoSymbolList.list = result;
-      }, error => {
+    })
+    this.entityService.GetAdvanceEntity("Keytosymbol").subscribe(result => {
 
-      })
-    
+      this.keytoSymbolList.list = result;
+    }, error => {
+
+    })
+
   }
   toggleKeyToSymbol() {
     this.keytoSymbolContains = !this.keytoSymbolContains;
@@ -1151,7 +1160,7 @@ export class SearchComponent implements OnInit {
     this.searchService.AddSearch(obj).subscribe(result => { }, error => { });
   }
   SetFilterObject(filter) {
-    this.searchService.GetSearch(filter).subscribe(item=>{
+    this.searchService.GetSearch(filter).subscribe(item => {
       this.shapeList.list = item.shapeList;
       this.colorList.list = item.colorList;
       this.fancycolorList.list = item.fancyColorList;
@@ -1179,7 +1188,7 @@ export class SearchComponent implements OnInit {
       this.fromgirdleList.list = item.fromgirdleList;
       this.togirdleList.list = item.togirdleList;
       this.fromhaList.list = item.fromhaList;
-      this.tohaList.list = item.tohaList; 
+      this.tohaList.list = item.tohaList;
       this.keytoSymbolList.list = item.keytoSymbolList;
       this.certificateList.list = item.certificateList;
       this.lusterList.list = item.lusterList;
@@ -1217,18 +1226,18 @@ export class SearchComponent implements OnInit {
       this.jewellerChoice = item.jewellerChoice;
       this.sarineDiamondJourney = item.sarineDiamondJourney;
       this.delveryAt = item.delveryAt;
-      this.PacketNos = (item.packetNos !="" && item.packetNos!=undefined ? item.packetNos.replace("'","") :"" );
+      this.PacketNos = (item.packetNos != "" && item.packetNos != undefined ? item.packetNos.replace("'", "") : "");
       this.Status = item.status;
       this.IsPriority = item.isPriority;
-      this.searchDiamond(); 
+      this.searchDiamond();
     });
-    
+
 
   }
   backtoSearch() {
     this.showResult = false;
     this.PacketNos = '';
-    if(this.shapeList.list.length <=0)
+    if (this.shapeList.list.length <= 0)
       this.LoadDbParameter();
     this.IsRecentSearch = false;
   }
@@ -1468,5 +1477,240 @@ export class SearchComponent implements OnInit {
       this.cartCount = result.length;
     })
   }
+  markup: number;
+  ExportType: string = "Download";
+  emailformgroup: FormGroup;
+  emailModel: ExportToEmailModel;
+  submited:boolean=false;
+  Export(content) {
+    this.emailModel = new ExportToEmailModel();
+    this.emailModel.subject = "CD-Stock";
+    this.userService.GetUser().subscribe(result => {
+      this.emailModel.mailTo = result.emailId;
+      this.emailModel.message = `Hello ` + result.userBasicInfo.firstName + `
+Greetings of the day `;
+    });
 
+    this.emailformgroup = new FormGroup({
+      subject: new FormControl('', Validators.required),
+      mailTo: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+      mailCC: new FormControl('', Validators.compose([Validators.email])),
+      message: new FormControl('', Validators.required)
+    });
+    this.modalService.open(content, { size: "lg", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.DownloadResult();
+    }, (reason) => {
+
+    });
+  }
+ 
+  DownloadResult() {
+    var strPacketNos = "";
+    if (this.ExportType == "DownloadSelected") {
+
+      this.searchResult.forEach(element => {
+        if (element.selected) {
+          if (strPacketNos == "") {
+            strPacketNos = element.packetNo;
+          } else {
+            strPacketNos = strPacketNos + "," + element.packetNo;
+          }
+        }
+      });
+      if (strPacketNos == "") {
+        this.alertService.Error("Please select packetNo", "");
+        return;
+      }
+    }
+    var obj = {
+      ShapeList: this.shapeList.list,
+      ColorList: this.colorList.list,
+      FancyColorList: this.fancycolorList.list,
+      FancyOvertoneList: this.fancyOvertoneList.list,
+      FancyIntensityList: this.fancyIntensityList.list,
+      ClarityList: this.clarityList.list,
+      CutList: this.cutList.list,
+      PolishList: this.polishList.list,
+      SymList: this.symList.list,
+      LocationList: this.locationList.list,
+      FlourenceList: this.flourenceList.list,
+      MilkyList: this.milkyList.list,
+      ShadeList: this.shadeList.list,
+      BlackIncTblList: this.blackIncTblList.list,
+      BlackIncCrnList: this.blackIncCrnList.list,
+      WhiteIncTblList: this.whiteIncTblList.list,
+      WhiteIncCrnList: this.whiteIncCrnList.list,
+      CuletList: this.culetList.list,
+      EyeCleanList: this.eyeCleanList.list,
+      NaturalGirdleList: this.naturalGirdleList.list,
+      NaturalPavList: this.naturalPavList.list,
+      NaturalCrnList: this.naturalCrnList.list,
+      ExtraFacetPavList: this.extraFacetPavList.list,
+      ExtraFacetCrnList: this.extraFacetCrnList.list,
+      FromgirdleList: this.fromgirdleList.list,
+      TogirdleList: this.togirdleList.list,
+      FromhaList: this.fromhaList.list,
+      TohaList: this.tohaList.list,
+      KeytoSymbolList: this.keytoSymbolList.list,
+      CertificateList: this.certificateList.list,
+      LusterList: this.lusterList.list,
+      SelectedPointer: this.selectedPointer,
+      FancyColor: this.fancyColor,
+      FromPrice: this.fromPrice,
+      ToPrice: this.toPrice,
+      FromTotalPrice: this.fromTotalPrice,
+      ToTotalPrice: this.toTotalPrice,
+      FromLength: this.fromLength,
+      ToLength: this.toLength,
+      FromWidth: this.fromWidth,
+      ToWidth: this.toWidth,
+      FromDepth: this.fromDepth,
+      ToDepth: this.toDepth,
+      FromRatio: this.fromRatio,
+      ToRatio: this.toRatio,
+      FromTablePer: this.fromTablePer,
+      ToTablePer: this.toTablePer,
+      FromDepthPer: this.fromDepthPer,
+      ToDepthPer: this.toDepthPer,
+      FromGirdlePer: this.fromGirdlePer,
+      ToGirdlePer: this.toGirdlePer,
+      FromCrownHeight: this.fromCrownHeight,
+      ToCrownHeight: this.toCrownHeight,
+      FromPavDepth: this.fromPavDepth,
+      ToPevDepth: this.toPevDepth,
+      FromPavAngle: this.fromPavAngle,
+      ToPevAngle: this.toPevAngle,
+      FromCrownAngle: this.fromCrownAngle,
+      ToCrownAngle: this.toCrownAngle,
+      Video: this.video,
+      SealdStone: this.sealdStone,
+      KeytoSymbolContains: this.keytoSymbolContains,
+      JewellerChoice: this.jewellerChoice,
+      SarineDiamondJourney: this.sarineDiamondJourney,
+      DelveryAt: this.delveryAt,
+      PacketNos: (strPacketNos == "" ? this.PacketNos : strPacketNos),
+      Status: this.Status,
+      IsPriority: this.IsPriority,
+      IsRecentSearch: this.IsRecentSearch,
+      Percentage: this.markup
+    };
+
+    this.loader.show(true);
+    this.downloadService.Download(obj).subscribe(result => {
+      this.loader.show(false);
+      window.open(result.path, "_blank");
+    }, error => {
+      this.loader.show(false);
+    });
+  }
+  sendEmail() {
+    this.submited = true;
+    if (this.emailformgroup.valid) {
+      var strPacketNos = "";
+      if (this.ExportType == "DownloadSelected") {
+  
+        this.searchResult.forEach(element => {
+          if (element.selected) {
+            if (strPacketNos == "") {
+              strPacketNos = element.packetNo;
+            } else {
+              strPacketNos = strPacketNos + "," + element.packetNo;
+            }
+          }
+        });
+        if (strPacketNos == "") {
+          this.alertService.Error("Please select packetNo", "");
+          return;
+        }
+      }
+      var obj = {
+        ShapeList: this.shapeList.list,
+        ColorList: this.colorList.list,
+        FancyColorList: this.fancycolorList.list,
+        FancyOvertoneList: this.fancyOvertoneList.list,
+        FancyIntensityList: this.fancyIntensityList.list,
+        ClarityList: this.clarityList.list,
+        CutList: this.cutList.list,
+        PolishList: this.polishList.list,
+        SymList: this.symList.list,
+        LocationList: this.locationList.list,
+        FlourenceList: this.flourenceList.list,
+        MilkyList: this.milkyList.list,
+        ShadeList: this.shadeList.list,
+        BlackIncTblList: this.blackIncTblList.list,
+        BlackIncCrnList: this.blackIncCrnList.list,
+        WhiteIncTblList: this.whiteIncTblList.list,
+        WhiteIncCrnList: this.whiteIncCrnList.list,
+        CuletList: this.culetList.list,
+        EyeCleanList: this.eyeCleanList.list,
+        NaturalGirdleList: this.naturalGirdleList.list,
+        NaturalPavList: this.naturalPavList.list,
+        NaturalCrnList: this.naturalCrnList.list,
+        ExtraFacetPavList: this.extraFacetPavList.list,
+        ExtraFacetCrnList: this.extraFacetCrnList.list,
+        FromgirdleList: this.fromgirdleList.list,
+        TogirdleList: this.togirdleList.list,
+        FromhaList: this.fromhaList.list,
+        TohaList: this.tohaList.list,
+        KeytoSymbolList: this.keytoSymbolList.list,
+        CertificateList: this.certificateList.list,
+        LusterList: this.lusterList.list,
+        SelectedPointer: this.selectedPointer,
+        FancyColor: this.fancyColor,
+        FromPrice: this.fromPrice,
+        ToPrice: this.toPrice,
+        FromTotalPrice: this.fromTotalPrice,
+        ToTotalPrice: this.toTotalPrice,
+        FromLength: this.fromLength,
+        ToLength: this.toLength,
+        FromWidth: this.fromWidth,
+        ToWidth: this.toWidth,
+        FromDepth: this.fromDepth,
+        ToDepth: this.toDepth,
+        FromRatio: this.fromRatio,
+        ToRatio: this.toRatio,
+        FromTablePer: this.fromTablePer,
+        ToTablePer: this.toTablePer,
+        FromDepthPer: this.fromDepthPer,
+        ToDepthPer: this.toDepthPer,
+        FromGirdlePer: this.fromGirdlePer,
+        ToGirdlePer: this.toGirdlePer,
+        FromCrownHeight: this.fromCrownHeight,
+        ToCrownHeight: this.toCrownHeight,
+        FromPavDepth: this.fromPavDepth,
+        ToPevDepth: this.toPevDepth,
+        FromPavAngle: this.fromPavAngle,
+        ToPevAngle: this.toPevAngle,
+        FromCrownAngle: this.fromCrownAngle,
+        ToCrownAngle: this.toCrownAngle,
+        Video: this.video,
+        SealdStone: this.sealdStone,
+        KeytoSymbolContains: this.keytoSymbolContains,
+        JewellerChoice: this.jewellerChoice,
+        SarineDiamondJourney: this.sarineDiamondJourney,
+        DelveryAt: this.delveryAt,
+        PacketNos: (strPacketNos == "" ? this.PacketNos : strPacketNos),
+        Status: this.Status,
+        IsPriority: this.IsPriority,
+        IsRecentSearch: this.IsRecentSearch,
+        Percentage: this.markup
+      };
+      this.emailModel.filter = obj;
+      this.loader.show(true);
+      this.downloadService.SendEmail(this.emailModel).subscribe(result => {
+        this.loader.show(false);
+        if(result.status){
+          this.alertService.success("", this.translate.instant(result.message));
+        }
+      }, error => {
+        this.loader.show(false);
+        this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+        try {
+          this.formvalidationService.BindServerErrors(this.emailformgroup, error);
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    }
+  }
 }
