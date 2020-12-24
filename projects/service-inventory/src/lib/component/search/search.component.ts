@@ -132,6 +132,7 @@ export class SearchComponent implements OnInit {
   selectedtotalPrice: number;
   ////summary variable
   IsRecentSearch: boolean = false;
+  PairSearch:boolean=false;
   catchRouteParam() {
 
     if (-1 != this.router.url.indexOf("fancySearch")) {
@@ -1142,7 +1143,8 @@ export class SearchComponent implements OnInit {
       PacketNos: this.PacketNos,
       Status: this.Status,
       IsPriority: this.IsPriority,
-      IsRecentSearch: this.IsRecentSearch
+      IsRecentSearch: this.IsRecentSearch,
+      PairSearch:this.PairSearch
     };
   }
   searchDiamond() {
@@ -1158,6 +1160,14 @@ export class SearchComponent implements OnInit {
       this.loader.show(false);
     })
     this.searchService.AddSearch(obj).subscribe(result => { }, error => { });
+  }
+  pairSearch(){
+    this.PairSearch=true;
+    this.searchDiamond();
+  }
+  noramlSearch(){
+    this.PairSearch=false;
+    this.searchDiamond();
   }
   SetFilterObject(filter) {
     this.searchService.GetSearch(filter).subscribe(item => {

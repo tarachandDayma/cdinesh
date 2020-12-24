@@ -113,4 +113,5 @@ export class diamondsearchResult{
     newStatus:string;
     deliveryAt:string;
     amount:number;
+    pairSeparator:string;
 }

@@ -17,6 +17,9 @@ export class ProfileNavigationComponent implements OnInit {
     if (-1 != this.router.url.indexOf("downloadSetup")) {
       this.currentMenu = "downloadSetup";
     }
+    if (-1 != this.router.url.indexOf("pairSetup")) {
+      this.currentMenu = "pairSetup";
+    }
   }
 
 }

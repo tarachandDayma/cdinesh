@@ -316,6 +316,7 @@
             "modifysearch": "Modify Search",
             "searchresult": "Search Result",
             "status": "Status",
+            "pairsearch": "Pair Search",
             "summary": {
                 "pcs": "Pieces : ",
                 "carat": "Cts. : ",
@@ -450,7 +451,8 @@
         "profile": {
             "nav": {
                 "personalDetail": "Personal detail",
-                "downloadSetup": "Download Setup"
+                "downloadSetup": "Download Setup",
+                "pairSetup": "Pair Setup"
             },
             "personalDetail": {
                 "title": "Personal Detail"
@@ -460,6 +462,19 @@
                 "isActive": "IsActive",
                 "fieldName": "FieldName",
                 "label": "Label",
+                "success": "Success",
+                "error": "Something went wrong",
+                "save": "Update"
+            },
+            "pairSetup": {
+                "title": "Pair Setup",
+                "isActive": "IsActive",
+                "fieldName": "FieldName",
+                "label": "Label",
+                "up": "Up",
+                "down": "Down",
+                "priority": "Priority",
+                "equal": "Equal",
                 "success": "Success",
                 "error": "Something went wrong",
                 "save": "Update"

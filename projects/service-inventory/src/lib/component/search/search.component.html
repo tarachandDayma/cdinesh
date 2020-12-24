@@ -1120,7 +1120,9 @@
                         </div>
                         <div class="pull-right">
                             <button type="button" class="btn btn-primary"> <span [translate]="'inventory.search.search'"
-                                    (click)="searchDiamond()"> Search </span></button>
+                                    (click)="noramlSearch()"> Search </span></button>
+                            <button type="button" class="btn btn-primary"> <span [translate]="'inventory.search.pairsearch'"
+                                        (click)="pairSearch()"> Search Pair </span></button>
                             <button type="button" class="btn btn-primary"><span
                                     [translate]="'inventory.search.save&search'"> Save & Search </span></button>
                             <button type="button" class="btn btn-primary"><i class="fa fa-download"
@@ -1491,13 +1493,13 @@
                                 </thead>
                                 <tbody style="height:70vh;">
                                     <ng-container *ngFor="let item of Pages[currentPageNo] ">
-                                        <tr [ngStyle]="   (item.selected==true && item.newStatus=='A') && {'background':'#ccc','font-weight':'550'}
+                                        <tr [ngStyle]="   (item.selected==true && item.newStatus=='A') && {'background-color':'#ccc','font-weight':'550'}
                                         || (item.selected!=true && (item.newStatus=='M' || item.newStatus=='MLAB')) && {'color':'#cc0786'}
-                                        || (item.selected==true && (item.newStatus=='M' || item.newStatus=='MLAB')) && {'background':'#f9e1ee','color':'#cc0786','font-weight':'550'}
+                                        || (item.selected==true && (item.newStatus=='M' || item.newStatus=='MLAB')) && {'background-color':'#f9e1ee','color':'#cc0786','font-weight':'550'}
                                         || (item.selected!=true && item.newStatus=='ALAB') && {'color':'orange'}
-                                        || (item.selected==true && item.newStatus=='ALAB') && {'background':'#f1e9db','color':'orange','font-weight':'550'}
+                                        || (item.selected==true && item.newStatus=='ALAB') && {'background-color':'#f1e9db','color':'orange','font-weight':'550'}
                                         || (item.selected!=true && item.newStatus=='N') && {'color':'navy'}
-                                        || (item.selected==true && item.newStatus=='N') && {'background':'#bee1ff','color':'navy','font-weight':'550'}">
+                                        || (item.selected==true && item.newStatus=='N') && {'background-color':'#bee1ff','color':'navy','font-weight':'550'}">
                                             <th (mouseover)="ShowPopUp(item,false)" data-toggle="tooltip" data-placement="top" class="fixed-column" style="width: 32px;">
                                                 <label class="custom-control material-checkbox">
                                                     <input (change)="subItemcheckUncheck()" type="checkbox"
@@ -1589,7 +1591,7 @@
 
                                         </tr>
                                         <tr *ngIf="item.showDetail || item.showPopUp">
-                                            <td colspan="20">
+                                            <td colspan="21">
                                                 <table class="table table-hover table-condensed table-bordered custTable" cellspacing="1" style="font-size: 12px;width: 100%;margin-bottom: 0px!important;background-color: white;">
                                                     <tr style="background-color: white;">
                                                         <td colspan="2" rowspan="3">
@@ -1723,9 +1725,12 @@
                                                 </table>
                                             </td>
                                         </tr>
+                                        <tr *ngIf="item.pairSeparator=='Y'" style="background-color: orange !important;height: 6px !important;">
+                                            <td colspan="21"></td>
+                                        </tr>
                                     </ng-container>
                                     <tr style="height:70vh !important;">
-                                        <td colspan="20" style="text-align: center !important;">
+                                        <td colspan="21" style="text-align: center !important;">
                                             <img *ngIf="searchResult.length<=0 || searchResult==undefined" src="/assets/img/NoRecordFound.png">
                                         </td>
                                     </tr>

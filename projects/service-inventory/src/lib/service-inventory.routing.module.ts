@@ -6,6 +6,7 @@ import { DiamondDetailComponent } from './component/diamond-detail/diamond-detai
 import { DownloadSetupComponent } from './component/download-setup/download-setup.component';
 import { MyCartComponent } from './component/my-cart/my-cart.component';
 import { NewgoodsComponent } from './component/newgoods/newgoods.component';
+import { PairSetupComponent } from './component/pair-setup/pair-setup.component';
 import { PersonalDetailComponent } from './component/personal-detail/personal-detail.component';
 import { RecommendedComponent } from './component/recommended/recommended.component';
 import { SearchComponent } from './component/search/search.component';
@@ -70,6 +71,10 @@ const routes: Routes = [
     },{
       path:"downloadSetup",
       component:DownloadSetupComponent
+    }
+    ,{
+      path:"pairSetup",
+      component:PairSetupComponent
     }
   ];
   @NgModule({
