@@ -18,3 +18,4 @@ export * from './lib/service/cart.service';
 export * from './lib/service/cartbroadcaster';
 export * from './lib/component/my-cart/my-cart.component';
 export * from './lib/service/download.service';
+export * from './lib/service/diamond.comment.service';

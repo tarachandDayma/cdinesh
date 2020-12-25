@@ -1137,7 +1137,7 @@
     </footer>
     <main class="myform" style="height: 87vh;" *ngIf="showResult">
         <div>
-            <div class="card">
+            <div class="card" style="overflow: hidden;">
                 <div class="card-header">
                     <div class="pull-right">
                         <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
@@ -1159,10 +1159,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-header">
+                <div class="card-header" style="overflow: hidden;">
                     <div class="pull-left button-div">
-                        <span (click)="showSelected()"><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span>
-                        <span (click)="Export(content)"><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span>
+                        <ul class="tool-buttons">
+                            <li>
+                                <span (click)="showSelected()"><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span>
+                            </li>
+                            <li>
+                                <span (click)="AddtoCartMultiple()"><img style="width: 16px;" src="/assets/img/add-to-cart.4a5821ad.svg" alt=""><span  [translate]="'inventory.search.addtocart'">Add To Cart </span></span>
+                            </li>
+                            <li>
+                                <span (click)="Export(content)"><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span>
+                            </li>
+                        </ul>
+
+
+
                     </div>
                     <div class="pull-right status-div ">
                         <div class="input-group input-group-sm mb-1">
@@ -1514,7 +1526,7 @@
                                                         class="fa fa-minus"></i>
                                                 </span>
                                                 <img (click)="AddtoCart(item)" style="width: 17px;margin-left: 2px;" src="/assets/img/add-to-cart.4a5821ad.svg">
-                                                <img style="width: 17px;margin-left: 2px;" src="/assets/img/comment.7713a555.svg">
+                                                <img (click)="LoadComment(contentComment,item.packetNo)" style="width: 17px;margin-left: 2px;" src="/assets/img/comment.7713a555.svg">
                                                 <img style="width: 17px;margin-left: 2px;" src="/assets/img/add-watchList.02894315.svg">
                                                 <img style="width: 17px;margin-left: 2px;" src="/assets/img/reminder.32af6dae.svg">
                                             </th>
@@ -1879,6 +1891,59 @@
     </div>
     <div class="modal-footer">
         <button *ngIf="ExportType !='Email'" type="button" [translate]="'inventory.search.result.download'" class="btn btn-outline-dark" (click)="modal.close('Download')">Save</button>
+    </div>
+</ng-template>
+<ng-template #contentComment let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> <span [translate]="'inventory.search.result.commentModal.title'">Comment</span> {{commentModel.packetNo}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="commentformgroup" (ngSubmit)="saveComment()" autocomplete="off">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm mb-1">
+                                <div class="input-group-prepend delivery-lable" style="background-color: transparent;border: 0;">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                            [translate]="'inventory.search.result.commentModal.title'"> DeliveryAt </span> </span>
+                                </div>
+                                <input maxlength="50" formControlName="comment" [(ngModel)]="commentModel.comment" name="comment" type="text" class="form-control" id="subject" placeholder="" aria-describedby="emailHelp">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit" [translate]="'inventory.search.result.commentModal.save'"></button>
+                                </div>
+                            </div>
+                            <label *ngIf="commentformgroup.get('comment').errors?.required && (commentformgroup.get('comment').touched  || submited)" [translate]="'inventory.search.result.commentModal.comment_error'" class="form-text text-danger"></label>
+                            <label *ngIf="commentformgroup.get('comment').errors?.serverError" class="form-text text-danger"> {{translate.instant(commentformgroup.get('comment').errors?.serverError)}} </label>
+                            <label *ngIf="commentformgroup.get('packetNo').errors?.serverError" class="form-text text-danger"> {{translate.instant(commentformgroup.get('comment').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th [translate]="'inventory.search.result.commentModal.title'">
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of diamondComments;">
+                                        <td>
+                                            {{item.comment}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
     </div>
 </ng-template>
 <!-- MAIN END -->

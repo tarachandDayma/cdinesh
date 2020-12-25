@@ -317,6 +317,7 @@
             "searchresult": "Search Result",
             "status": "Status",
             "pairsearch": "Pair Search",
+            "addtocart": "Add To Cart",
             "summary": {
                 "pcs": "Pieces : ",
                 "carat": "Cts. : ",
@@ -372,6 +373,14 @@
                     "emailId_error": "Please enter valid emailid",
                     "sendMail": "Send",
                     "success": "Success"
+                },
+                "commentModal": {
+                    "success": "Comment added success",
+                    "error": "Something went wrong",
+                    "title": "Comment",
+                    "comment_error": "Required",
+                    "save": "Add",
+                    "packetNo_error": "Packet No Required"
                 }
             },
             "showSelected": "Show Selected",

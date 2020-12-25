@@ -7,11 +7,13 @@ import { first } from 'rxjs/operators';
 import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
 import { CartModel } from '../../models/cart.model';
 import { diamondsearchResult } from '../../models/diamond.result.model';
+import { DiamondCommentModel } from '../../models/diamondComment.model';
 import { EntityModel } from '../../models/entity.model';
 import { ExportToEmailModel } from '../../models/exportToEmail.model';
 import { UserSearchModel } from '../../models/user.search.model';
 import { CartService } from '../../service/cart.service';
 import { CartBroadcaster } from '../../service/cartbroadcaster';
+import { DiamondCommentService } from '../../service/diamond.comment.service';
 import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
 import { SearchService } from '../../service/search.service';
@@ -36,7 +38,8 @@ export class SearchComponent implements OnInit {
     , private modalService: NgbModal
     , private downloadService: DownloadService
     , private environmentService: EnvironmentService
-    , private userService: UserService) { }
+    , private userService: UserService
+    ,private diamondCommentService:DiamondCommentService) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -956,7 +959,7 @@ export class SearchComponent implements OnInit {
         }
       }
       if (flag == true) {
-        this.selectedPointer.push({ from: this.fromCarat, to: this.toCarat });
+        this.selectedPointer.push({ from: this.fromCarat, to:this.toCarat});
       }
     }
     this.fromCarat = 0;
@@ -1481,6 +1484,31 @@ export class SearchComponent implements OnInit {
       this.loader.show(false);
     })
   }
+  AddtoCartMultiple() {
+    var selectedPackets = this.searchResult.filter(x=>x.selected);
+    if(selectedPackets.length > 0)
+    {
+        selectedPackets.forEach(item => {
+          var cartItem = new CartModel();
+          cartItem.back = item.back;
+          cartItem.price = item.price;
+          cartItem.packetNo = item.packetNo;
+          cartItem.deliveryAt = this.delveryAt;
+          this.loader.show(true);
+          this.cartService.Add(cartItem).subscribe(result => {
+            this.loader.show(false);
+            this.LoadCart();
+            if (result.status) {
+              this.alertService.success(this.translate.instant(result.message), "");
+            } else {
+              this.alertService.Error(this.translate.instant(result.message), "");
+            }
+          }, error => {
+            this.loader.show(false);
+          })
+        });
+    }   
+  }
   cartCount: number = 0;
   LoadCart() {
     this.cartService.GetAll().subscribe(result => {
@@ -1711,12 +1739,60 @@ Greetings of the day `;
         this.loader.show(false);
         if(result.status){
           this.alertService.success("", this.translate.instant(result.message));
+          this.modalService.dismissAll();
         }
       }, error => {
         this.loader.show(false);
         this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
         try {
           this.formvalidationService.BindServerErrors(this.emailformgroup, error);
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    }
+  }
+  commentformgroup: FormGroup;
+  commentModel: DiamondCommentModel;
+  diamondComments:DiamondCommentModel[];
+  LoadComment(content,PacketNo:string) {
+    this.LoadCommentData(PacketNo);
+    this.commentModel = new DiamondCommentModel();
+    this.commentModel.packetNo=PacketNo;
+    this.commentformgroup = new FormGroup({
+      packetNo:new FormControl(PacketNo, Validators.required), 
+      comment: new FormControl('', Validators.required),
+    });
+    this.modalService.open(content, { size: "lg", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      
+    }, (reason) => {
+
+    });
+  }
+  LoadCommentData(PacketNo:string){
+    this.loader.show(true);
+    this.diamondCommentService.Load(PacketNo).subscribe(result=> {
+      this.loader.show(false);
+      this.diamondComments=result;
+    },error=>{
+      this.loader.show(false);
+    })
+  }
+  saveComment(){
+    this.submited = true;
+    if(this.commentformgroup.valid){
+      this.loader.show(true);
+      this.diamondCommentService.Save(this.commentModel).subscribe(result => {
+        this.loader.show(false);
+        if(result.status){
+          this.alertService.success("", this.translate.instant(result.message));
+          this.modalService.dismissAll();
+        }
+      }, error => {
+        this.loader.show(false);
+        this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+        try {
+          this.formvalidationService.BindServerErrors(this.commentformgroup, error);
         } catch (error) {
           console.log(error);
         }
