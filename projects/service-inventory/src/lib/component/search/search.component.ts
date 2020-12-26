@@ -959,7 +959,7 @@ export class SearchComponent implements OnInit {
         }
       }
       if (flag == true) {
-        this.selectedPointer.push({ from: this.fromCarat, to:this.toCarat});
+        this.selectedPointer.push({ from: this.fromCarat.toString(), to:this.toCarat.toString()});
       }
     }
     this.fromCarat = 0;
