@@ -1799,4 +1799,23 @@ Greetings of the day `;
       });
     }
   }
+  offerDiamonds:diamondsearchResult[]=[];
+  LoadOfferModel(content){
+      this.offerDiamonds= JSON.parse(JSON.stringify(this.searchResult.filter(x=>x.selected))) ;
+      this.offerDiamonds.forEach(element => {
+         element._offerBack=element.back; 
+         element._offerPrice=element.price;
+         element.selected=false;
+         element.deliveryAt=this.delveryAt; 
+         element.showDetail=false;
+      });
+      if(this.offerDiamonds.length > 0){
+        
+        this.modalService.open(content, { backdrop:"static",size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      
+        }, (reason) => {
+    
+        });
+      }
+  }
 }

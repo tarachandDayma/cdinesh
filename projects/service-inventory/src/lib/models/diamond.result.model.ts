@@ -114,4 +114,6 @@ export class diamondsearchResult{
     deliveryAt:string;
     amount:number;
     pairSeparator:string;
+    _offerPrice:number;
+    _offerBack:number;
 }

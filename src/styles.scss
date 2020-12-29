@@ -1443,6 +1443,7 @@
     .tool-buttons {
         list-style: none;
         display: inline-flex!important;
+        cursor: pointer;
     }
     
     .tool-buttons li:after {
@@ -1455,4 +1456,9 @@
         right: -5px;
         bottom: 0;
         margin: auto;
+    }
+    
+    .custTable {
+        border: 2px solid black !important;
+        border-radius: 5px !important;
     }

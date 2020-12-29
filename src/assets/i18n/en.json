@@ -332,6 +332,8 @@
                 "shape": "Shape",
                 "size": "Size",
                 "price": "Price",
+                "offerPrice": "Offer Price",
+                "offerDisc": "Offer Disc",
                 "amount": "Amount",
                 "disc": "Disc.",
                 "color": "Color",
@@ -385,6 +387,16 @@
             },
             "showSelected": "Show Selected",
             "export": "Export"
+        },
+        "offer": {
+            "title": "Offer",
+            "avgPrice": "Avg Price",
+            "avgBack": "Avg Back",
+            "comment": "Comment",
+            "save": "Save Offer",
+            "success": "Success",
+            "error": "Something went wrong",
+            "comment_error": "Please enter comment"
         },
         "diamondDetail": {
             "title": "Diamond Detail",

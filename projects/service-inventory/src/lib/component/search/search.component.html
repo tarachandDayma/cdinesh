@@ -1165,11 +1165,17 @@
                             <li>
                                 <span (click)="showSelected()"><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span>
                             </li>
+                            <li> <strong style="margin-left: 4px;margin-right: 4px;"> |</strong></li>
                             <li>
                                 <span (click)="AddtoCartMultiple()"><img style="width: 16px;" src="/assets/img/add-to-cart.4a5821ad.svg" alt=""><span  [translate]="'inventory.search.addtocart'">Add To Cart </span></span>
                             </li>
+                            <li> <strong style="margin-left: 4px;margin-right: 4px;"> |</strong></li>
                             <li>
                                 <span (click)="Export(content)"><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span>
+                            </li>
+                            <li> <strong style="margin-left: 4px;margin-right: 4px;"> |</strong></li>
+                            <li>
+                                <span (click)="LoadOfferModel(contentOffer)"><img style="width: 16px;" src="/assets/img/offer.webp" alt=""><span  [translate]="'inventory.offer.title'">Offer</span></span>
                             </li>
                         </ul>
 
@@ -1941,6 +1947,21 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</ng-template>
+<ng-template #contentOffer let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> <span [translate]="'inventory.offer.title'">Offer</span> </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <lib-diamond-offer [diamonds]="offerDiamonds"></lib-diamond-offer>
         </div>
     </div>
     <div class="modal-footer">
