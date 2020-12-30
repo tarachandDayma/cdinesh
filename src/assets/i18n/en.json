@@ -386,7 +386,8 @@
                 }
             },
             "showSelected": "Show Selected",
-            "export": "Export"
+            "export": "Export",
+            "inquiryButton": "Inquiry"
         },
         "offer": {
             "title": "Offer",
@@ -394,6 +395,14 @@
             "avgBack": "Avg Back",
             "comment": "Comment",
             "save": "Save Offer",
+            "success": "Success",
+            "error": "Something went wrong",
+            "comment_error": "Please enter comment"
+        },
+        "inquiry": {
+            "title": "Inquiry",
+            "comment": "Comment",
+            "save": "Save Inquiry",
             "success": "Success",
             "error": "Something went wrong",
             "comment_error": "Please enter comment"

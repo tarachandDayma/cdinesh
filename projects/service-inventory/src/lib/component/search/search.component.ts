@@ -1630,7 +1630,8 @@ Greetings of the day `;
       Status: this.Status,
       IsPriority: this.IsPriority,
       IsRecentSearch: this.IsRecentSearch,
-      Percentage: this.markup
+      Percentage: this.markup,
+      PairSearch:this.PairSearch
     };
 
     this.loader.show(true);
@@ -1810,6 +1811,23 @@ Greetings of the day `;
          element.showDetail=false;
       });
       if(this.offerDiamonds.length > 0){
+        
+        this.modalService.open(content, { backdrop:"static",size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      
+        }, (reason) => {
+    
+        });
+      }
+  }
+  inquiryDiamonds:diamondsearchResult[]=[];
+  LoadInquiryModel(content){
+      this.inquiryDiamonds= JSON.parse(JSON.stringify(this.searchResult.filter(x=>x.selected))) ;
+      this.inquiryDiamonds.forEach(element => {
+         element.selected=false;
+         element.deliveryAt=this.delveryAt; 
+         element.showDetail=false;
+      });
+      if(this.inquiryDiamonds.length > 0){
         
         this.modalService.open(content, { backdrop:"static",size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       

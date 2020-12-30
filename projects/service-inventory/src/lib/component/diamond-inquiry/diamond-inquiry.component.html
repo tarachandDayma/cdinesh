@@ -4,19 +4,14 @@
             <div class="col-sm-12">
                 <div class="pull-right">
                     <span style="color: grey;" [translate]="'inventory.search.summary.pcs'">Pieces:</span>
-                    <span style="color: red;">{{selectedtotalPcs}}/</span>
                     <span style="color: navy;">{{totalPcs}}</span> &nbsp;
                     <span style="color: grey;" [translate]="'inventory.search.summary.carat'">Cts:</span>
-                    <span style="color: red;">{{selectedtotalCarat | number : '1.2-2'}}/</span>
                     <span style="color: navy;">{{totalCarat | number : '1.2-2'}}</span>&nbsp;
                     <span style="color: grey;" [translate]="'inventory.search.summary.avgDisc'">Avg Disc</span>
-                    <span style="color: red;">{{selectedtotalAvgDisc | number : '1.2-2'}}/</span>
                     <span style="color: navy;">{{totalAvgDisc | number : '1.2-2'}}</span>&nbsp;
                     <span style="color: grey;" [translate]="'inventory.search.summary.avgPrice'">Avg Price</span>
-                    <span style="color: red;">{{selectedtotalAvgPrice | number : '1.2-2'}}/</span>
                     <span style="color: navy;">{{totalAvgPrice | number : '1.2-2'}}</span>&nbsp;
                     <span style="color: grey;" [translate]="'inventory.search.summary.amount'">Amount</span>
-                    <span style="color: red;">{{selectedtotalPrice | number : '1.2-2'}}/</span>
                     <span style="color: navy;">{{totalPrice | number : '1.2-2'}}</span>
                 </div>
             </div>
@@ -24,31 +19,13 @@
                 <div class="input-group input-group-sm mb-1">
                     <div class="input-group-prepend " style="background-color: transparent;border: 0;">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span
-                        [translate]="'inventory.offer.avgPrice'"> Avg Price </span> </span>
-                    </div>
-                    <input (change)="changeAvgPrice()" class="form-control" type="number" name="avgPrice" [(ngModel)]="avgPrice">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="input-group input-group-sm mb-1">
-                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
-                        [translate]="'inventory.offer.avgBack'"> Avg Back </span> </span>
-                    </div>
-                    <input (change)="changeAvgBack()" class="form-control" type="number" name="avgBack" [(ngModel)]="avgBack">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="input-group input-group-sm mb-1">
-                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
-                        [translate]="'inventory.offer.comment'"> Comment </span> </span>
+                        [translate]="'inventory.inquiry.comment'"> Comment </span> </span>
                     </div>
                     <input class="form-control" type="text" name="comment" [(ngModel)]="comment">
                 </div>
             </div>
             <div class="col-ms3">
-                <button class="btn btn-primary" (click)="saveOffer()" type="button" [translate]="'inventory.offer.save'">Save</button>
+                <button class="btn btn-primary" (click)="saveInquiry()" type="button" [translate]="'inventory.inquiry.save'">Save</button>
             </div>
         </div>
     </div>
@@ -148,36 +125,6 @@
                                         style="color:#999999;    top: -11px!important;
                                     position: absolute;" wfd-id="3712">▲</span>
                             <span [ngStyle]="sortedColumn=='back' && {'color':'black'} || sortedColumn!='back' && {'color':'#999999'}" style="color:#999999;top: -1px;
-                                        position: absolute;" wfd-id="3711">▼</span>
-                            </span>
-                            </span>
-                        </th>
-                        <th (click)="sort('_offerPrice')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.offerPrice')}}" class="fixed-column" style="width:81px;" [translate]="'inventory.search.result.offerPrice'">
-                            price
-                            <span style="margin-right: 10px;margin-top: 7px;">
-                                <span class="default-sort-arrow"
-                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
-                                    data-reactroot="" wfd-id="3710">
-                                    <span
-                                        [ngStyle]="sortedColumn=='_offerPrice' && {'color':'black'} || sortedColumn!='price' && {'color':'#999999'}"
-                                        style="color:#999999;    top: -11px!important;
-                                    position: absolute;" wfd-id="3712">▲</span>
-                            <span [ngStyle]="sortedColumn=='_offerPrice' && {'color':'black'} || sortedColumn!='price' && {'color':'#999999'}" style="color:#999999;top: -1px;
-                                        position: absolute;" wfd-id="3711">▼</span>
-                            </span>
-                            </span>
-                        </th>
-                        <th (click)="sort('_offerBack')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('inventory.search.result.offerDisc')}}" class="fixed-column" style="width:60px;" [translate]="'inventory.search.result.offerDisc'">
-                            disc
-                            <span style="margin-right: 10px;margin-top: 7px;">
-                                <span class="default-sort-arrow"
-                                    style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
-                                    data-reactroot="" wfd-id="3710">
-                                    <span
-                                        [ngStyle]="sortedColumn=='_offerBack' && {'color':'black'} || sortedColumn!='back' && {'color':'#999999'}"
-                                        style="color:#999999;    top: -11px!important;
-                                    position: absolute;" wfd-id="3712">▲</span>
-                            <span [ngStyle]="sortedColumn=='_offerBack' && {'color':'black'} || sortedColumn!='back' && {'color':'#999999'}" style="color:#999999;top: -1px;
                                         position: absolute;" wfd-id="3711">▼</span>
                             </span>
                             </span>
@@ -431,12 +378,6 @@
                                 {{item.back | number : '1.2-2'}}
                             </td>
                             <td (mouseover)="ShowPopUp(item,false)" style="text-align: right !important;">
-                                <input (change)="changeOfferPrice(item)" type="number" name="offerPrice" [(ngModel)]="item._offerPrice">
-                            </td>
-                            <td (mouseover)="ShowPopUp(item,false)" style="text-align: right !important;">
-                                <input (change)="changeOfferBack(item)" type="number" name="_offerBack" [(ngModel)]="item._offerBack">
-                            </td>
-                            <td (mouseover)="ShowPopUp(item,false)" style="text-align: right !important;">
                                 {{item.amount | number : '1.2-2'}}
                             </td>
                             <td (mouseover)="ShowPopUp(item,false)" data-toggle="tooltip" title="{{item.fancyColorOvertone}} {{item.fancyColor}} {{item.fancyColorIntensity}}">
@@ -478,7 +419,7 @@
 
                         </tr>
                         <tr *ngIf="item.showDetail || item.showPopUp">
-                            <td colspan="23">
+                            <td colspan="21">
                                 <table class="table table-hover table-condensed table-bordered custTable" cellspacing="1" style="font-size: 12px;width: 100%;margin-bottom: 0px!important;background-color: white;">
                                     <tr style="background-color: white;">
                                         <td colspan="2" rowspan="3">
@@ -613,11 +554,11 @@
                             </td>
                         </tr>
                         <tr *ngIf="item.pairSeparator=='Y'" style="background-color: orange !important;height: 6px !important;">
-                            <td colspan="23"></td>
+                            <td colspan="21"></td>
                         </tr>
                     </ng-container>
                     <tr style="height:70vh !important;">
-                        <td colspan="23" style="text-align: center !important;">
+                        <td colspan="21" style="text-align: center !important;">
                             <img *ngIf="diamonds.length<=0 || diamonds==undefined" src="/assets/img/NoRecordFound.png">
                         </td>
                     </tr>
