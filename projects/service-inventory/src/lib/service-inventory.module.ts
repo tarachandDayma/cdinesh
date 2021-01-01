@@ -25,6 +25,7 @@ import { PersonalDetailComponent } from './component/personal-detail/personal-de
 import { PairSetupComponent } from './component/pair-setup/pair-setup.component';
 import { DiamondOfferComponent } from './component/diamond-offer/diamond-offer.component';
 import { DiamondInquiryComponent } from './component/diamond-inquiry/diamond-inquiry.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 
 
 
@@ -32,7 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
 }
 @NgModule({
-  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent],
+  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent],
   imports: [
     FormsModule,ReactiveFormsModule,
     TranslateModule.forChild(),

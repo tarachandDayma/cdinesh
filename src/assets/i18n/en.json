@@ -482,7 +482,8 @@
             "nav": {
                 "personalDetail": "Personal detail",
                 "downloadSetup": "Download Setup",
-                "pairSetup": "Pair Setup"
+                "pairSetup": "Pair Setup",
+                "changePassword": "Change Password"
             },
             "personalDetail": {
                 "title": "Personal Detail"

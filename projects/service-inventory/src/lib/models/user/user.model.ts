@@ -15,6 +15,7 @@ export class UserModel {
             this.userAccountInfo= new UserAccountInfoModel();
             this.userReferralInfo=[];
     }
+    id:string;
     userName: string;
     password: string;
     confirmPassword: string;
@@ -24,4 +25,5 @@ export class UserModel {
     userAddressInfo: UserAddressInfoModel;
     userAccountInfo: UserAccountInfoModel;
     userReferralInfo: UserReferralInfo[];
+    
 }

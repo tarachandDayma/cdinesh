@@ -20,6 +20,10 @@ export class ProfileNavigationComponent implements OnInit {
     if (-1 != this.router.url.indexOf("pairSetup")) {
       this.currentMenu = "pairSetup";
     }
+    if (-1 != this.router.url.indexOf("changePassword")) {
+      this.currentMenu = "changePassword";
+    }
+    
   }
 
 }
