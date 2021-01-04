@@ -3,5 +3,11 @@
 }
 
 .img-fluid {
-    width: 100% !important;
+    width: 100%;
+}
+
+@media screen and (max-width: 1600px) and (min-width: 320px) and (orientation: landscape) {
+    .brndintro img {
+        width: 200px;
+    }
 }
