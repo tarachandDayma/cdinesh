@@ -42,7 +42,7 @@ main {
 
 header {
     /* padding: 10px 0; */
-    background: linear-gradient(to right, #192b4a, #1b579a);
+    background: linear-gradient(to right, #192b4a, #192b4a);
 }
 
 header .logo img {

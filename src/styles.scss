@@ -553,9 +553,9 @@
         color: #fbfbfb !important;
         border: 1px solid #e5803f;
         margin-right: 5px;
-        font-size: 10px !important;
-        height: 30px;
-        min-width: 30px;
+        font-size: 11px !important;
+        height: 35px;
+        min-width: 35px;
         padding-right: 4px;
         font-weight: bold;
         margin-top: 5px;
@@ -569,9 +569,9 @@
         color: grey !important;
         border: 1.5px solid #cac2c2;
         margin-right: 5px;
-        font-size: 10px !important;
-        height: 30px;
-        min-width: 30px;
+        font-size: 12px !important;
+        height: 35px;
+        min-width: 35px;
         padding-right: 4px;
         font-weight: 600;
         margin-top: 5px;
@@ -902,8 +902,10 @@
     
     .controlPanelContainer {
         max-width: 100%;
-        padding-left: 25px;
-        padding-right: 25px;
+        // padding-left: 25px;
+        // padding-right: 25px;
+        padding-left: 15px;
+        padding-right: 15px
     }
     
     .btn-sm {

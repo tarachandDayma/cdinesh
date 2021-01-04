@@ -152,7 +152,7 @@
                 </div>
 
                 <div class="row col-md-12">
-                    <div class=" col-sm-7 col-sm-color-6 " *ngIf="!fancyColor">
+                    <div class=" col-sm-12 " *ngIf="!fancyColor">
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="  col-sm-7 col-sm-color-6 " *ngIf="fancyColor">
+                    <div class="  col-sm-12 " *ngIf="fancyColor">
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -188,7 +188,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" col-sm-5 col-sm-clarity-6 ">
+                    <div class=" col-sm-12 ">
                         <div class="box">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -1142,7 +1142,7 @@
                     <div class="pull-right">
                         <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
                                 [translate]="'inventory.search.modifysearch'" (click)="backtoSearch()"> Modify Search
-                            </span></button>
+                            </span></button> &nbsp;
                         <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.inquiryButton'" (click)="LoadInquiryModel(contentInquiry)"> Inquiry
                         </span></button>
@@ -1167,15 +1167,15 @@
                             <li>
                                 <span (click)="showSelected()"><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span>
                             </li>
-                            <li> <strong style="margin-left: 4px;margin-right: 4px;"> |</strong></li>
+                            <li> <strong style="margin-left: 6px;margin-right: 6px;"> |</strong></li>
                             <li>
                                 <span (click)="AddtoCartMultiple()"><img style="width: 16px;" src="/assets/img/add-to-cart.4a5821ad.svg" alt=""><span  [translate]="'inventory.search.addtocart'">Add To Cart </span></span>
                             </li>
-                            <li> <strong style="margin-left: 4px;margin-right: 4px;"> |</strong></li>
+                            <li> <strong style="margin-left: 6px;margin-right: 6px;"> |</strong></li>
                             <li>
                                 <span (click)="Export(content)"><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span>
                             </li>
-                            <li> <strong style="margin-left: 4px;margin-right: 4px;"> |</strong></li>
+                            <li> <strong style="margin-left: 6px;margin-right: 6px;"> |</strong></li>
                             <li>
                                 <span (click)="LoadOfferModel(contentOffer)"><img style="width: 16px;" src="/assets/img/offer.webp" alt=""><span  [translate]="'inventory.offer.title'">Offer</span></span>
                             </li>
@@ -1545,7 +1545,7 @@
                                                 </a>
                                                 <span *ngIf="item.ifspecial=='Y'" data-toggle="tooltip" title="Jewelers Choice" data-placement="top" data-original-title=""><i class="fa fa-star"></i></span>
                                                 <a style="margin-top: -3px;margin-left: 4px; margin-top: 1%;color:black;" href="" type="button" [ngStyle]="(item.jpCut!='' && item.jpCut!=null) && {'color' : '#39b1ff'} " *ngIf="item.haPer=='100'">H/A</a>
-                                                <img *ngIf="item.originFlag !='' && item.originFlag !=null" src="/assets/img/CanadaFlag.png" />
+                                                <img style="width: 20px!important;margin-left: 2px;" *ngIf="item.originFlag !='' && item.originFlag !=null" src="/assets/img/CanadaFlag.png" />
                                                 <a href="~/home/SarinJourney" target="_blank" *ngIf="item.serinjourney == true ">
                                                     <img src="/assets/img/sdj_11.jpg" style="width:18px;" data-toggle="tooltip" data-html="true" title="Sarine Diamond Journey" data-placement="top" data-original-title="" />
                                                 </a>
@@ -1615,7 +1615,7 @@
                                                 <table class="table table-hover table-condensed table-bordered custTable" cellspacing="1" style="font-size: 12px;width: 100%;margin-bottom: 0px!important;background-color: white;">
                                                     <tr style="background-color: white;">
                                                         <td colspan="2" rowspan="3">
-                                                            <table class="table table-hover table-condensed" cellspacing="1" style="border:1px dashed black;margin-bottom: 0px;display: inherit;">
+                                                            <table class="table table-hover table-condensed" cellspacing="1" style="border:none;margin-bottom: 0px;display: inherit;">
                                                                 <tr style="background-color: white;">
                                                                     <td align="center" style="border:1px dashed black;" colspan="2"><strong><a
                                                                                 style="color:blue !important">Black
@@ -1629,19 +1629,19 @@
                                                                 </tr>
                                                                 <tr style="background-color: white;">
                                                                     <td align="left" style="border:1px dashed black;">
-                                                                        <a href="javascript:void(0)">Table</a>
+                                                                        <a href="javascript:void(0)">Tbl</a>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
                                                                         <span>{{item.blackTable}}</span>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
-                                                                        <a href="javascript:void(0)">Table</a>
+                                                                        <a href="javascript:void(0)">Tbl</a>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
                                                                         <span>{{item.whiteTable}}</span>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
-                                                                        <a href="javascript:void(0)">Table</a>
+                                                                        <a href="javascript:void(0)">Tbl</a>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
                                                                         <span>{{item.openIncTable}}</span>
@@ -1649,19 +1649,19 @@
                                                                 </tr>
                                                                 <tr style="background-color: white;">
                                                                     <td align="left" style="border:1px dashed black;">
-                                                                        <a href="javascript:void(0)">Crown</a>
+                                                                        <a href="javascript:void(0)">Crn</a>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
                                                                         <span>{{item.blackCrown}}</span>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
-                                                                        <a href="javascript:void(0)">Crown</a>
+                                                                        <a href="javascript:void(0)">Crn</a>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
                                                                         <span>{{item.whiteCrown}}</span>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
-                                                                        <a href="javascript:void(0)">Crown</a>
+                                                                        <a href="javascript:void(0)">Crn</a>
                                                                     </td>
                                                                     <td align="left" style="border:1px dashed black;">
                                                                         <span>{{item.openIncCrown}}</span>

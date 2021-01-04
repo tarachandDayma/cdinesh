@@ -1,3 +1,1 @@
-ng build service-account &&
-cd dist/service-account
-npm pack
+ng build service-account --watch
