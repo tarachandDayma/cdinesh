@@ -2,6 +2,10 @@ main {
     padding: 0px;
 }
 
+.no-record-img {
+    width: auto !important;
+}
+
 .custTable>tbody>tr>td,
 .table>tbody>tr>th,
 .table>tfoot>tr>td,

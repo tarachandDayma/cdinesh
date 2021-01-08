@@ -476,7 +476,9 @@
             "already_error": "Already exists in cart ",
             "notfound_error": "Not found",
             "title": "My Cart",
-            "removeAll": "Remove Selected"
+            "removeAll": "Remove Selected",
+            "offerBtn": "Offer",
+            "inquiryBtn": "Inquiry"
         },
         "profile": {
             "nav": {

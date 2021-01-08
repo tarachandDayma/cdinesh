@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs/operators';
 import { alertserice, FormValidationService, loaderserice } from 'service-common';
@@ -28,7 +29,8 @@ export class MyCartComponent implements OnInit {
     , private route: ActivatedRoute
     , private searchService: SearchService
     , private cartService: CartService
-    , private cartBroadCaster: CartBroadcaster) { }
+    , private cartBroadCaster: CartBroadcaster
+    , private modalService: NgbModal) { }
   PacketNos: string = '';
   deliveryAtList = [];
   ////summary variable
@@ -648,5 +650,41 @@ export class MyCartComponent implements OnInit {
     }, error => {
       this.loader.show(false);
     })
+  }
+  offerDiamonds:diamondsearchResult[]=[];
+  LoadOfferModel(content){
+      this.offerDiamonds= JSON.parse(JSON.stringify(this.searchResult.filter(x=>x.selected))) ;
+      this.offerDiamonds.forEach(element => {
+         element._offerBack=element.back; 
+         element._offerPrice=element.price;
+         element.selected=false;
+         element.deliveryAt=this.delveryAt; 
+         element.showDetail=false;
+      });
+      if(this.offerDiamonds.length > 0){
+        
+        this.modalService.open(content, { backdrop:"static",size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      
+        }, (reason) => {
+    
+        });
+      }
+  }
+  inquiryDiamonds:diamondsearchResult[]=[];
+  LoadInquiryModel(content){
+      this.inquiryDiamonds= JSON.parse(JSON.stringify(this.searchResult.filter(x=>x.selected))) ;
+      this.inquiryDiamonds.forEach(element => {
+         element.selected=false;
+         element.deliveryAt=this.delveryAt; 
+         element.showDetail=false;
+      });
+      if(this.inquiryDiamonds.length > 0){
+        
+        this.modalService.open(content, { backdrop:"static",size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      
+        }, (reason) => {
+    
+        });
+      }
   }
 }
