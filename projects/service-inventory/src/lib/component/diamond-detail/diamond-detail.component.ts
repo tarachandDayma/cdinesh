@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,7 +6,7 @@ import { alertserice, FormValidationService, loaderserice } from 'service-common
 import { diamondsearchResult } from '../../models/diamond.result.model';
 import { EntityService } from '../../service/entity.service';
 import { SearchService } from '../../service/search.service';
-
+declare var window: any;
 @Component({
   selector: 'lib-diamond-detail',
   templateUrl: './diamond-detail.component.html',
@@ -22,7 +22,8 @@ export class DiamondDetailComponent implements OnInit {
     , private entityService: EntityService
     , private route: ActivatedRoute
     , private searchService: SearchService
-    , private dom: DomSanitizer) { }
+    , private dom: DomSanitizer
+    , private ngZone: NgZone) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -641,9 +642,32 @@ export class DiamondDetailComponent implements OnInit {
       this.loader.show(false);
       this.searchResult = result;
       this.myUrl = this.dom.bypassSecurityTrustResourceUrl(this.searchResult[0].videoCD)
+      // setTimeout(() => {
+      //   window.nativeConstructor("jvp", {
+      //     mediaFormat: 'sets',
+      //     controlsPosition: 'bottom',
+      //     mediaSize: 460,
+      //     disable3D: true,
+      //     disableSettings: true,
+      //     autoPlay: true,
+      //     fourViews: true,
+      //     insidePlayCtrl: true,
+      //     baseUrl: "https://www.pkstone.co.in",
+      //     s3Metadata: {
+      //       "frame0": "/pk/video/" + this.searchResult[0].packetNo + "/preview.jpg",
+      //       //"frame0": "/pk/bwcopy/" + vname + "B.jpg",
+      //       "set0_460": "/pk/video/" + this.searchResult[0].packetNo + "/sets/set0.json",
+      //       "set1_460": "/pk/video/" + this.searchResult[0].packetNo + "/sets/set1.json",
+      //       "set2_460": "/pk/video/" + this.searchResult[0].packetNo + "/sets/set2.json",
+      //       "set3_460": "/pk/video/" + this.searchResult[0].packetNo + "/sets/set3.json"
+      //     }
+      //   });
+      // }, 1000);
+
+
     }, error => {
       this.loader.show(false);
     })
   }
-  myUrl:any;
+  myUrl: any;
 }

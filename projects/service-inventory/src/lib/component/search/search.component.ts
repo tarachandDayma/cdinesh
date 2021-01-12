@@ -18,6 +18,7 @@ import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
 import { SearchService } from '../../service/search.service';
 import { UserService } from '../../service/user.service';
+import { UserSaveSearchService } from '../../service/userSaveSearch.service';
 declare var $: any;
 @Component({
   selector: 'lib-search',
@@ -39,7 +40,8 @@ export class SearchComponent implements OnInit {
     , private downloadService: DownloadService
     , private environmentService: EnvironmentService
     , private userService: UserService
-    ,private diamondCommentService:DiamondCommentService) { }
+    , private diamondCommentService: DiamondCommentService
+    , private userSaveSearchService: UserSaveSearchService) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -135,7 +137,7 @@ export class SearchComponent implements OnInit {
   selectedtotalPrice: number;
   ////summary variable
   IsRecentSearch: boolean = false;
-  PairSearch:boolean=false;
+  PairSearch: boolean = false;
   catchRouteParam() {
 
     if (-1 != this.router.url.indexOf("fancySearch")) {
@@ -170,6 +172,7 @@ export class SearchComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.userSaveSearchService.Syncy().subscribe(result=>{},error=>{});
     this.LoadCart();
     this.selectedPointer = [];
     this.defaultCaratRange = [
@@ -959,7 +962,7 @@ export class SearchComponent implements OnInit {
         }
       }
       if (flag == true) {
-        this.selectedPointer.push({ from: this.fromCarat.toString(), to:this.toCarat.toString()});
+        this.selectedPointer.push({ from: this.fromCarat.toString(), to: this.toCarat.toString() });
       }
     }
     this.fromCarat = 0;
@@ -1147,7 +1150,7 @@ export class SearchComponent implements OnInit {
       Status: this.Status,
       IsPriority: this.IsPriority,
       IsRecentSearch: this.IsRecentSearch,
-      PairSearch:this.PairSearch
+      PairSearch: this.PairSearch
     };
   }
   searchDiamond() {
@@ -1164,12 +1167,12 @@ export class SearchComponent implements OnInit {
     })
     this.searchService.AddSearch(obj).subscribe(result => { }, error => { });
   }
-  pairSearch(){
-    this.PairSearch=true;
+  pairSearch() {
+    this.PairSearch = true;
     this.searchDiamond();
   }
-  noramlSearch(){
-    this.PairSearch=false;
+  noramlSearch() {
+    this.PairSearch = false;
     this.searchDiamond();
   }
   SetFilterObject(filter) {
@@ -1485,29 +1488,28 @@ export class SearchComponent implements OnInit {
     })
   }
   AddtoCartMultiple() {
-    var selectedPackets = this.searchResult.filter(x=>x.selected);
-    if(selectedPackets.length > 0)
-    {
-        selectedPackets.forEach(item => {
-          var cartItem = new CartModel();
-          cartItem.back = item.back;
-          cartItem.price = item.price;
-          cartItem.packetNo = item.packetNo;
-          cartItem.deliveryAt = this.delveryAt;
-          this.loader.show(true);
-          this.cartService.Add(cartItem).subscribe(result => {
-            this.loader.show(false);
-            this.LoadCart();
-            if (result.status) {
-              this.alertService.success(this.translate.instant(result.message), "");
-            } else {
-              this.alertService.Error(this.translate.instant(result.message), "");
-            }
-          }, error => {
-            this.loader.show(false);
-          })
-        });
-    }   
+    var selectedPackets = this.searchResult.filter(x => x.selected);
+    if (selectedPackets.length > 0) {
+      selectedPackets.forEach(item => {
+        var cartItem = new CartModel();
+        cartItem.back = item.back;
+        cartItem.price = item.price;
+        cartItem.packetNo = item.packetNo;
+        cartItem.deliveryAt = this.delveryAt;
+        this.loader.show(true);
+        this.cartService.Add(cartItem).subscribe(result => {
+          this.loader.show(false);
+          this.LoadCart();
+          if (result.status) {
+            this.alertService.success(this.translate.instant(result.message), "");
+          } else {
+            this.alertService.Error(this.translate.instant(result.message), "");
+          }
+        }, error => {
+          this.loader.show(false);
+        })
+      });
+    }
   }
   cartCount: number = 0;
   LoadCart() {
@@ -1519,7 +1521,7 @@ export class SearchComponent implements OnInit {
   ExportType: string = "Download";
   emailformgroup: FormGroup;
   emailModel: ExportToEmailModel;
-  submited:boolean=false;
+  submited: boolean = false;
   Export(content) {
     this.emailModel = new ExportToEmailModel();
     this.emailModel.subject = "CD-Stock";
@@ -1541,7 +1543,7 @@ Greetings of the day `;
 
     });
   }
- 
+
   DownloadResult() {
     var strPacketNos = "";
     if (this.ExportType == "DownloadSelected") {
@@ -1631,7 +1633,7 @@ Greetings of the day `;
       IsPriority: this.IsPriority,
       IsRecentSearch: this.IsRecentSearch,
       Percentage: this.markup,
-      PairSearch:this.PairSearch
+      PairSearch: this.PairSearch
     };
 
     this.loader.show(true);
@@ -1647,7 +1649,7 @@ Greetings of the day `;
     if (this.emailformgroup.valid) {
       var strPacketNos = "";
       if (this.ExportType == "DownloadSelected") {
-  
+
         this.searchResult.forEach(element => {
           if (element.selected) {
             if (strPacketNos == "") {
@@ -1738,7 +1740,7 @@ Greetings of the day `;
       this.loader.show(true);
       this.downloadService.SendEmail(this.emailModel).subscribe(result => {
         this.loader.show(false);
-        if(result.status){
+        if (result.status) {
           this.alertService.success("", this.translate.instant(result.message));
           this.modalService.dismissAll();
         }
@@ -1755,37 +1757,37 @@ Greetings of the day `;
   }
   commentformgroup: FormGroup;
   commentModel: DiamondCommentModel;
-  diamondComments:DiamondCommentModel[];
-  LoadComment(content,PacketNo:string) {
+  diamondComments: DiamondCommentModel[];
+  LoadComment(content, PacketNo: string) {
     this.LoadCommentData(PacketNo);
     this.commentModel = new DiamondCommentModel();
-    this.commentModel.packetNo=PacketNo;
+    this.commentModel.packetNo = PacketNo;
     this.commentformgroup = new FormGroup({
-      packetNo:new FormControl(PacketNo, Validators.required), 
+      packetNo: new FormControl(PacketNo, Validators.required),
       comment: new FormControl('', Validators.required),
     });
     this.modalService.open(content, { size: "lg", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      
+
     }, (reason) => {
 
     });
   }
-  LoadCommentData(PacketNo:string){
+  LoadCommentData(PacketNo: string) {
     this.loader.show(true);
-    this.diamondCommentService.Load(PacketNo).subscribe(result=> {
+    this.diamondCommentService.Load(PacketNo).subscribe(result => {
       this.loader.show(false);
-      this.diamondComments=result;
-    },error=>{
+      this.diamondComments = result;
+    }, error => {
       this.loader.show(false);
     })
   }
-  saveComment(){
+  saveComment() {
     this.submited = true;
-    if(this.commentformgroup.valid){
+    if (this.commentformgroup.valid) {
       this.loader.show(true);
       this.diamondCommentService.Save(this.commentModel).subscribe(result => {
         this.loader.show(false);
-        if(result.status){
+        if (result.status) {
           this.alertService.success("", this.translate.instant(result.message));
           this.modalService.dismissAll();
         }
@@ -1800,40 +1802,40 @@ Greetings of the day `;
       });
     }
   }
-  offerDiamonds:diamondsearchResult[]=[];
-  LoadOfferModel(content){
-      this.offerDiamonds= JSON.parse(JSON.stringify(this.searchResult.filter(x=>x.selected))) ;
-      this.offerDiamonds.forEach(element => {
-         element._offerBack=element.back; 
-         element._offerPrice=element.price;
-         element.selected=false;
-         element.deliveryAt=this.delveryAt; 
-         element.showDetail=false;
+  offerDiamonds: diamondsearchResult[] = [];
+  LoadOfferModel(content) {
+    this.offerDiamonds = JSON.parse(JSON.stringify(this.searchResult.filter(x => x.selected)));
+    this.offerDiamonds.forEach(element => {
+      element._offerBack = element.back;
+      element._offerPrice = element.price;
+      element.selected = false;
+      element.deliveryAt = this.delveryAt;
+      element.showDetail = false;
+    });
+    if (this.offerDiamonds.length > 0) {
+
+      this.modalService.open(content, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+      }, (reason) => {
+
       });
-      if(this.offerDiamonds.length > 0){
-        
-        this.modalService.open(content, { backdrop:"static",size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      
-        }, (reason) => {
-    
-        });
-      }
+    }
   }
-  inquiryDiamonds:diamondsearchResult[]=[];
-  LoadInquiryModel(content){
-      this.inquiryDiamonds= JSON.parse(JSON.stringify(this.searchResult.filter(x=>x.selected))) ;
-      this.inquiryDiamonds.forEach(element => {
-         element.selected=false;
-         element.deliveryAt=this.delveryAt; 
-         element.showDetail=false;
+  inquiryDiamonds: diamondsearchResult[] = [];
+  LoadInquiryModel(content) {
+    this.inquiryDiamonds = JSON.parse(JSON.stringify(this.searchResult.filter(x => x.selected)));
+    this.inquiryDiamonds.forEach(element => {
+      element.selected = false;
+      element.deliveryAt = this.delveryAt;
+      element.showDetail = false;
+    });
+    if (this.inquiryDiamonds.length > 0) {
+
+      this.modalService.open(content, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+      }, (reason) => {
+
       });
-      if(this.inquiryDiamonds.length > 0){
-        
-        this.modalService.open(content, { backdrop:"static",size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      
-        }, (reason) => {
-    
-        });
-      }
+    }
   }
 }
