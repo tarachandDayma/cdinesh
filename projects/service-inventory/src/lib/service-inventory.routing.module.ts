@@ -10,6 +10,7 @@ import { PairSetupComponent } from './component/pair-setup/pair-setup.component'
 import { PersonalDetailComponent } from './component/personal-detail/personal-detail.component';
 import { RecommendedComponent } from './component/recommended/recommended.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { SaveSearchComponent } from './component/save-search/save-search.component';
 import { SearchComponent } from './component/search/search.component';
 import { UpcomingComponent } from './component/upcoming/upcoming.component';
 
@@ -80,6 +81,9 @@ const routes: Routes = [
     ,{
       path:"changePassword",
       component:ResetPasswordComponent
+    },{
+      path:"saveSearch",
+      component:SaveSearchComponent
     }
   ];
   @NgModule({

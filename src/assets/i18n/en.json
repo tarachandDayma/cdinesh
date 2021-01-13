@@ -249,7 +249,8 @@
             "recommended": "Recomm-ended",
             "newgoods": "New goods",
             "bestofcd": "Best Of CD",
-            "upcoming": "Upcoming"
+            "upcoming": "Upcoming",
+            "saveSearch": "Save Search"
         },
         "search": {
             "title": "Search",
@@ -367,6 +368,7 @@
                 "mailTo_error": "Required",
                 "message_error": "required",
                 "error": "something went wrong",
+                "success": "Success",
                 "emailForm": {
                     "subject": "Subject",
                     "mailTo": "MailTo",
@@ -485,7 +487,8 @@
                 "personalDetail": "Personal detail",
                 "downloadSetup": "Download Setup",
                 "pairSetup": "Pair Setup",
-                "changePassword": "Change Password"
+                "changePassword": "Change Password",
+                "saveSearch": "Save Search"
             },
             "personalDetail": {
                 "title": "Personal Detail"
@@ -603,6 +606,15 @@
                 "errorMessage": "Something went wrong",
                 "captchCode_error": "Invalid captch code",
                 "captchCode": "Captcha Code"
+            },
+            "saveSearch": {
+                "title": "Save Search",
+                "name": "Name",
+                "action": "Action",
+                "modify": "Modify",
+                "search": "Search",
+                "remove": "Remove",
+                "save": "Save"
             }
         }
     },

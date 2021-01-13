@@ -16,17 +16,22 @@ export class UserSaveSearchService extends RestService {
         super(http);
     }
 
-    public AddSearch(filter:any): Observable<any[]> {
+    public AddSearch(item:any): Observable<any> {
         var url = "";
         url = this.env.ApiGateway + "/UserSaveSearch/AddSearch";
-        return super.post(url,filter);
+        return super.post(url,item);
+    }
+    public RemoveSearch(item:UserSearchModel): Observable<any[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/UserSaveSearch/RemoveSearch";
+        return super.post(url,item);
     }
     public GetSearch(filter:any): Observable<any> {
         var url = "";
         url = this.env.ApiGateway + "/UserSaveSearch/GetFilters";
         return super.post(url,filter);
     }
-    public LoadRecentSearch(): Observable<UserSearchModel[]> {
+    public LoadSearch(): Observable<UserSearchModel[]> {
         var url = "";
         url = this.env.ApiGateway + "/UserSaveSearch/LoadSearch";
         return super.Get(url);

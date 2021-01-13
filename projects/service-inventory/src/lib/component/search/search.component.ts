@@ -138,6 +138,7 @@ export class SearchComponent implements OnInit {
   ////summary variable
   IsRecentSearch: boolean = false;
   PairSearch: boolean = false;
+  currentSearch:UserSearchModel= new UserSearchModel();
   catchRouteParam() {
 
     if (-1 != this.router.url.indexOf("fancySearch")) {
@@ -167,12 +168,24 @@ export class SearchComponent implements OnInit {
         this.IsRecentSearch = true;
         this.SetFilterObject(SearchFilter);
         localStorage.setItem("recentSearch", "")
-      } else
+      } else if(localStorage.getItem("saveSearch") != undefined && localStorage.getItem("saveSearch") != ""){
+        this.currentSearch = JSON.parse(localStorage.getItem("saveSearch"));
+        var SearchFilter = JSON.parse(this.currentSearch.searchData);
+        this.IsRecentSearch = true;
+        this.SetFilterObject(SearchFilter);
+        localStorage.setItem("saveSearch", "");
+      }else if(localStorage.getItem("modifySearch") != undefined && localStorage.getItem("modifySearch") != ""){
+        this.currentSearch = JSON.parse(localStorage.getItem("modifySearch"));
+        var SearchFilter = JSON.parse(this.currentSearch.searchData);
+        this.IsRecentSearch = true;
+        this.ModifyFilterObject(SearchFilter);
+        localStorage.setItem("modifySearch", "");
+      }
+      else
         localStorage.setItem("PacketNo", "");
     }
   }
   ngOnInit(): void {
-    this.userSaveSearchService.Syncy().subscribe(result=>{},error=>{});
     this.LoadCart();
     this.selectedPointer = [];
     this.defaultCaratRange = [
@@ -1250,6 +1263,80 @@ export class SearchComponent implements OnInit {
 
 
   }
+  ModifyFilterObject(filter) {
+    this.searchService.GetSearch(filter).subscribe(item => {
+      this.shapeList.list = item.shapeList;
+      this.colorList.list = item.colorList;
+      this.fancycolorList.list = item.fancyColorList;
+      this.fancyOvertoneList.list = item.fancyOvertoneList;
+      this.fancyIntensityList.list = item.fancyIntensityList;
+      this.clarityList.list = item.clarityList;
+      this.cutList.list = item.cutList;
+      this.polishList.list = item.polishList
+      this.symList.list = item.symList;
+      this.locationList.list = item.locationList;
+      this.flourenceList.list = item.flourenceList;
+      this.milkyList.list = item.milkyList;
+      this.shadeList.list = item.shadeList;
+      this.blackIncTblList.list = item.blackIncTblList;
+      this.blackIncCrnList.list = item.blackIncCrnList;
+      this.whiteIncTblList.list = item.whiteIncTblList;
+      this.whiteIncCrnList.list = item.whiteIncCrnList
+      this.culetList.list = item.culetList;
+      this.eyeCleanList.list = item.eyeCleanList;
+      this.naturalGirdleList.list = item.naturalGirdleList;
+      this.naturalPavList.list = item.naturalPavList;
+      this.naturalCrnList.list = item.naturalCrnList;
+      this.extraFacetPavList.list = item.extraFacetPavList;
+      this.extraFacetCrnList.list = item.extraFacetCrnList;
+      this.fromgirdleList.list = item.fromgirdleList;
+      this.togirdleList.list = item.togirdleList;
+      this.fromhaList.list = item.fromhaList;
+      this.tohaList.list = item.tohaList;
+      this.keytoSymbolList.list = item.keytoSymbolList;
+      this.certificateList.list = item.certificateList;
+      this.lusterList.list = item.lusterList;
+      this.selectedPointer = item.selectedPointer;
+      this.fancyColor = item.fancyColor;
+      this.fromPrice = item.fromPrice;
+      this.toPrice = item.toPrice;
+      this.fromTotalPrice = item.fromTotalPrice;
+      this.toTotalPrice = item.toTotalPrice;
+      this.fromLength = item.fromLength;
+      this.toLength = item.toLength;
+      this.fromWidth = item.fromWidth;
+      this.toWidth = item.toWidth;
+      this.fromDepth = item.fromDepth;
+      this.toDepth = item.toDepth;
+      this.fromRatio = item.fromRatio;
+      this.toRatio = item.toRatio;
+      this.fromTablePer = item.fromTablePer;
+      this.toTablePer = item.toTablePer;
+      this.fromDepthPer = item.fromDepthPer;
+      this.toDepthPer = item.toDepthPer;
+      this.fromGirdlePer = item.fromGirdlePer;
+      this.toGirdlePer = item.toGirdlePer;
+      this.fromCrownHeight = item.fromCrownHeight;
+      this.toCrownHeight = item.toCrownHeight;
+      this.fromPavDepth = item.fromPavDepth;
+      this.toPevDepth = item.toPevDepth;
+      this.fromPavAngle = item.fromPavAngle;
+      this.toPevAngle = item.toPevAngle;
+      this.fromCrownAngle = item.fromCrownAngle;
+      this.toCrownAngle = item.toCrownAngle;
+      this.video = item.video;
+      this.sealdStone = item.sealdStone;
+      this.keytoSymbolContains = item.keytoSymbolContains;
+      this.jewellerChoice = item.jewellerChoice;
+      this.sarineDiamondJourney = item.sarineDiamondJourney;
+      this.delveryAt = item.delveryAt;
+      this.PacketNos = (item.packetNos != "" && item.packetNos != undefined ? item.packetNos.replace("'", "") : "");
+      this.Status = item.status;
+      this.IsPriority = item.isPriority;
+    });
+
+
+  }
   backtoSearch() {
     this.showResult = false;
     this.PacketNos = '';
@@ -1837,5 +1924,40 @@ Greetings of the day `;
 
       });
     }
+  }
+  LoadSaveSearchModel(content) {
+    if(this.currentSearch==undefined || this.currentSearch==null){
+      this.currentSearch = new UserSearchModel();
+    }
+    this.modalService.open(content, { backdrop: "static", size: "sm", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+  }
+  saveSearch() {
+    this.submited = true;
+    this.userSaveSearchService.Syncy().subscribe(result=>{},error=>{});
+      this.loader.show(true);
+      var item={
+        filter:this.GetFilterObject(),
+        model:this.currentSearch
+      };
+      this.userSaveSearchService.AddSearch(item).subscribe(result => {
+        this.loader.show(false);
+        if (result.status) {
+          this.alertService.success("", this.translate.instant("inventory.search.result.success"));
+          this.modalService.dismissAll();
+        }
+      }, error => {
+        this.loader.show(false);
+        this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+        try {
+          this.formvalidationService.BindServerErrors(this.commentformgroup, error);
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    
   }
 }

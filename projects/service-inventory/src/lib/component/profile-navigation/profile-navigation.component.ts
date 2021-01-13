@@ -22,6 +22,9 @@ export class ProfileNavigationComponent implements OnInit {
     }
     if (-1 != this.router.url.indexOf("changePassword")) {
       this.currentMenu = "changePassword";
+    } 
+    if (-1 != this.router.url.indexOf("saveSearch")) {
+      this.currentMenu = "saveSearch";
     }
     
   }
