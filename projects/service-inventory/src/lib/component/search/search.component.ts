@@ -1259,6 +1259,7 @@ export class SearchComponent implements OnInit {
       this.Status = item.status;
       this.IsPriority = item.isPriority;
       this.searchDiamond();
+      this.reshapeLists();
     });
 
 
@@ -1266,6 +1267,7 @@ export class SearchComponent implements OnInit {
   ModifyFilterObject(filter) {
     this.searchService.GetSearch(filter).subscribe(item => {
       this.shapeList.list = item.shapeList;
+      
       this.colorList.list = item.colorList;
       this.fancycolorList.list = item.fancyColorList;
       this.fancyOvertoneList.list = item.fancyOvertoneList;
@@ -1333,9 +1335,43 @@ export class SearchComponent implements OnInit {
       this.PacketNos = (item.packetNos != "" && item.packetNos != undefined ? item.packetNos.replace("'", "") : "");
       this.Status = item.status;
       this.IsPriority = item.isPriority;
+      this.reshapeLists();
     });
 
 
+  }
+  reshapeLists(){
+    this.shapeList.allSelected= this.shapeList.list.filter(x=>x.selected == true).length <= 0;
+    this.colorList.allSelected= this.colorList.list.filter(x=>x.selected == true).length <= 0;
+    this.clarityList.allSelected= this.clarityList.list.filter(x=>x.selected == true).length <= 0;
+    this.fancycolorList.allSelected= this.fancycolorList.list.filter(x=>x.selected == true).length <= 0;
+    this.fancyIntensityList.allSelected= this.fancyIntensityList.list.filter(x=>x.selected == true).length <= 0;
+    this.fancyOvertoneList.allSelected= this.fancyOvertoneList.list.filter(x=>x.selected == true).length <= 0;
+    this.cutList.allSelected= this.cutList.list.filter(x=>x.selected == true).length <= 0;
+    this.symList.allSelected= this.symList.list.filter(x=>x.selected == true).length <= 0;
+    this.tohaList.allSelected= this.tohaList.list.filter(x=>x.selected == true).length <= 0;
+    this.culetList.allSelected= this.culetList.list.filter(x=>x.selected == true).length <= 0;
+    this.milkyList.allSelected= this.milkyList.list.filter(x=>x.selected == true).length <= 0;
+    this.shadeList.allSelected= this.shadeList.list.filter(x=>x.selected == true).length <= 0;
+    this.lusterList.allSelected= this.lusterList.list.filter(x=>x.selected == true).length <= 0;
+    this.fromhaList.allSelected= this.fromhaList.list.filter(x=>x.selected == true).length <= 0;
+    this.polishList.allSelected= this.polishList.list.filter(x=>x.selected == true).length <= 0;
+    this.locationList.allSelected= this.locationList.list.filter(x=>x.selected == true).length <= 0;
+    this.eyeCleanList.allSelected= this.eyeCleanList.list.filter(x=>x.selected == true).length <= 0;
+    this.togirdleList.allSelected= this.togirdleList.list.filter(x=>x.selected == true).length <= 0;
+    this.flourenceList.allSelected= this.flourenceList.list.filter(x=>x.selected == true).length <= 0;
+    this.fromgirdleList.allSelected= this.fromgirdleList.list.filter(x=>x.selected == true).length <= 0;
+    this.naturalCrnList.allSelected= this.naturalCrnList.list.filter(x=>x.selected == true).length <= 0;
+    this.naturalPavList.allSelected= this.naturalPavList.list.filter(x=>x.selected == true).length <= 0;
+    this.blackIncCrnList.allSelected= this.blackIncCrnList.list.filter(x=>x.selected == true).length <= 0;
+    this.blackIncTblList.allSelected= this.blackIncTblList.list.filter(x=>x.selected == true).length <= 0;
+    this.certificateList.allSelected= this.certificateList.list.filter(x=>x.selected == true).length <= 0;
+    this.keytoSymbolList.allSelected= this.keytoSymbolList.list.filter(x=>x.selected == true).length <= 0;
+    this.whiteIncCrnList.allSelected= this.whiteIncCrnList.list.filter(x=>x.selected == true).length <= 0;
+    this.whiteIncTblList.allSelected= this.whiteIncTblList.list.filter(x=>x.selected == true).length <= 0;
+    this.naturalGirdleList.allSelected= this.naturalGirdleList.list.filter(x=>x.selected == true).length <= 0;
+    this.extraFacetCrnList.allSelected= this.extraFacetCrnList.list.filter(x=>x.selected == true).length <= 0;
+    this.extraFacetPavList.allSelected= this.extraFacetPavList.list.filter(x=>x.selected == true).length <= 0;
   }
   backtoSearch() {
     this.showResult = false;
@@ -1937,7 +1973,7 @@ Greetings of the day `;
   }
   saveSearch() {
     this.submited = true;
-    this.userSaveSearchService.Syncy().subscribe(result=>{},error=>{});
+    
       this.loader.show(true);
       var item={
         filter:this.GetFilterObject(),

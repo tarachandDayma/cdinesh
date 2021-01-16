@@ -45,4 +45,13 @@ export class SaveSearchComponent implements OnInit {
     localStorage.setItem("modifySearch",JSON.stringify(item));
     this.router.navigate(["/inventory/search"]);
   }
+  SyncSearches(){
+    this.loader.show(true);
+    this.userSaveSearchService.Syncy().subscribe(result=>{
+      this.loader.show(false);
+      this.LoadSearches();
+    },error=>{
+      this.loader.show(false);
+    });
+  }
 }
