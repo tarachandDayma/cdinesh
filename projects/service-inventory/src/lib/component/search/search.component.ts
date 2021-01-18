@@ -11,6 +11,7 @@ import { DiamondCommentModel } from '../../models/diamondComment.model';
 import { EntityModel } from '../../models/entity.model';
 import { ExportToEmailModel } from '../../models/exportToEmail.model';
 import { UserSearchModel } from '../../models/user.search.model';
+import { UserWishModel } from '../../models/userWish.model';
 import { CartService } from '../../service/cart.service';
 import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { DiamondCommentService } from '../../service/diamond.comment.service';
@@ -18,6 +19,7 @@ import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
 import { SearchService } from '../../service/search.service';
 import { UserService } from '../../service/user.service';
+import { UserWishService } from '../../service/user.wish.service';
 import { UserSaveSearchService } from '../../service/userSaveSearch.service';
 declare var $: any;
 @Component({
@@ -41,7 +43,8 @@ export class SearchComponent implements OnInit {
     , private environmentService: EnvironmentService
     , private userService: UserService
     , private diamondCommentService: DiamondCommentService
-    , private userSaveSearchService: UserSaveSearchService) { }
+    , private userSaveSearchService: UserSaveSearchService
+    , private userWishService: UserWishService) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -139,6 +142,7 @@ export class SearchComponent implements OnInit {
   IsRecentSearch: boolean = false;
   PairSearch: boolean = false;
   currentSearch:UserSearchModel= new UserSearchModel();
+  currentWish:UserWishModel= new UserWishModel();
   catchRouteParam() {
 
     if (-1 != this.router.url.indexOf("fancySearch")) {
@@ -180,6 +184,18 @@ export class SearchComponent implements OnInit {
         this.IsRecentSearch = true;
         this.ModifyFilterObject(SearchFilter);
         localStorage.setItem("modifySearch", "");
+      }else if(localStorage.getItem("saveUserWish") != undefined && localStorage.getItem("saveUserWish") != ""){
+        this.currentWish = JSON.parse(localStorage.getItem("saveUserWish"));
+        var SearchFilter = JSON.parse(this.currentWish.searchData);
+        this.IsRecentSearch = true;
+        this.SetFilterObject(SearchFilter);
+        localStorage.setItem("saveUserWish", "");
+      }else if(localStorage.getItem("modifyUserWish") != undefined && localStorage.getItem("modifyUserWish") != ""){
+        this.currentWish = JSON.parse(localStorage.getItem("modifyUserWish"));
+        var SearchFilter = JSON.parse(this.currentWish.searchData);
+        this.IsRecentSearch = true;
+        this.ModifyFilterObject(SearchFilter);
+        localStorage.setItem("modifyUserWish", "");
       }
       else
         localStorage.setItem("PacketNo", "");
@@ -1980,6 +1996,41 @@ Greetings of the day `;
         model:this.currentSearch
       };
       this.userSaveSearchService.AddSearch(item).subscribe(result => {
+        this.loader.show(false);
+        if (result.status) {
+          this.alertService.success("", this.translate.instant("inventory.search.result.success"));
+          this.modalService.dismissAll();
+        }
+      }, error => {
+        this.loader.show(false);
+        this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+        try {
+          this.formvalidationService.BindServerErrors(this.commentformgroup, error);
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    
+  }
+  LoadUserWishModal(content) {
+    if(this.currentWish==undefined || this.currentWish==null){
+      this.currentWish = new UserWishModel();
+    }
+    this.modalService.open(content, { backdrop: "static", size: "lg", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+  }
+  saveUserWish() {
+    this.submited = true;
+    
+      this.loader.show(true);
+      var item={
+        filter:this.GetFilterObject(),
+        model:this.currentWish
+      };
+      this.userWishService.AddSearch(item).subscribe(result => {
         this.loader.show(false);
         if (result.status) {
           this.alertService.success("", this.translate.instant("inventory.search.result.success"));

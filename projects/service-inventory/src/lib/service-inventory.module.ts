@@ -27,6 +27,7 @@ import { DiamondOfferComponent } from './component/diamond-offer/diamond-offer.c
 import { DiamondInquiryComponent } from './component/diamond-inquiry/diamond-inquiry.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { SaveSearchComponent } from './component/save-search/save-search.component';
+import { UserWishComponent } from './component/user-wish/user-wish.component';
 
 
 
@@ -34,7 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
 }
 @NgModule({
-  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent],
+  declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
+  ,UserWishComponent],
   imports: [
     FormsModule,ReactiveFormsModule,
     TranslateModule.forChild(),

@@ -250,7 +250,8 @@
             "newgoods": "New goods",
             "bestofcd": "Best Of CD",
             "upcoming": "Upcoming",
-            "saveSearch": "Save Search"
+            "saveSearch": "Save Search",
+            "userWish": "My Wish List"
         },
         "search": {
             "title": "Search",
@@ -488,7 +489,8 @@
                 "downloadSetup": "Download Setup",
                 "pairSetup": "Pair Setup",
                 "changePassword": "Change Password",
-                "saveSearch": "Save Search"
+                "saveSearch": "Save Search",
+                "userWish": "My Wish List"
             },
             "personalDetail": {
                 "title": "Personal Detail"
@@ -615,6 +617,16 @@
                 "search": "Search",
                 "remove": "Remove",
                 "save": "Save"
+            },
+            "userWish": {
+                "title": "Wish",
+                "name": "Name",
+                "action": "Action",
+                "modify": "Modify",
+                "search": "Search",
+                "remove": "Remove",
+                "save": "Save",
+                "addWish": "Add Wish"
             }
         }
     },

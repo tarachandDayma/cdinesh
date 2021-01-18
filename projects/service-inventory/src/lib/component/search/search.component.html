@@ -1179,6 +1179,10 @@
                             <li>
                                 <span (click)="LoadOfferModel(contentOffer)"><img style="width: 16px;" src="/assets/img/offer.webp" alt=""><span  [translate]="'inventory.offer.title'">Offer</span></span>
                             </li>
+                            <li> <strong style="margin-left: 6px;margin-right: 6px;"> |</strong></li>
+                            <li>
+                                <span (click)="LoadUserWishModal(contentUserWish)"><img style="width: 16px;" src="/assets/img/wish.png" alt=""><span  [translate]="'inventory.profile.userWish.addWish'">Add Wish</span></span>
+                            </li>
                         </ul>
 
 
@@ -2001,6 +2005,30 @@
                 <input class="form-control" type="text" maxlength="100" name="searchName" [(ngModel)]="currentSearch.label">
                 <div class="input-group-append " style="background-color: transparent;border: 0;">
                     <button (click)="saveSearch()" class="btn btn-outline-secondary" type="button" [translate]="'inventory.profile.saveSearch.save'">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</ng-template>
+<ng-template #contentUserWish let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> <span [translate]="'inventory.profile.userWish.title'">Save Search</span> </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                    [translate]="'inventory.profile.userWish.name'"> Name </span> </span>
+                </div>
+                <input class="form-control" type="text" maxlength="100" name="searchName" [(ngModel)]="currentWish.label">
+                <div class="input-group-append " style="background-color: transparent;border: 0;">
+                    <button (click)="saveUserWish()" class="btn btn-outline-secondary" type="button" [translate]="'inventory.profile.userWish.save'">Save</button>
                 </div>
             </div>
         </div>
