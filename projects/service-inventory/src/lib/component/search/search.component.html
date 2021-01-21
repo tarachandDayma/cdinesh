@@ -1145,6 +1145,9 @@
                             </span></button> &nbsp;
                         <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.inquiryButton'" (click)="LoadInquiryModel(contentInquiry)"> Inquiry
+                        </span></button> &nbsp;
+                        <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
+                            [translate]="'inventory.search.holdButton'" (click)="LoadHoldModel(contentHold)"> Hold
                         </span></button>
                     </div>
                     <div class="pull-right delivery-div">
@@ -2031,6 +2034,21 @@
                     <button (click)="saveUserWish()" class="btn btn-outline-secondary" type="button" [translate]="'inventory.profile.userWish.save'">Save</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</ng-template>
+<ng-template #contentHold let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> <span [translate]="'inventory.hold.title'">Hold</span> </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <lib-diamond-hold [diamonds]="HoldDiamonds"></lib-diamond-hold>
         </div>
     </div>
     <div class="modal-footer">

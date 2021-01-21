@@ -505,6 +505,7 @@ export class SearchComponent implements OnInit {
     this.clarityList = {
       allSelected: true,
       selectedOther: false,
+      RangeSelection: true,
       list: []
     };
     this.cutList = {
@@ -2046,5 +2047,22 @@ Greetings of the day `;
         }
       });
     
+  }
+  HoldDiamonds: diamondsearchResult[] = [];
+  LoadHoldModel(content) {
+    this.HoldDiamonds = JSON.parse(JSON.stringify(this.searchResult.filter(x => x.selected)));
+    this.HoldDiamonds.forEach(element => {
+      element.selected = false;
+      element.deliveryAt = this.delveryAt;
+      element.showDetail = false;
+    });
+    if (this.HoldDiamonds.length > 0) {
+
+      this.modalService.open(content, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+      }, (reason) => {
+
+      });
+    }
   }
 }

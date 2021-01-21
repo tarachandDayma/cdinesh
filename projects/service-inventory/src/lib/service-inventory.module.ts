@@ -28,6 +28,7 @@ import { DiamondInquiryComponent } from './component/diamond-inquiry/diamond-inq
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { SaveSearchComponent } from './component/save-search/save-search.component';
 import { UserWishComponent } from './component/user-wish/user-wish.component';
+import { DiamondHoldComponent } from './component/diamond-hold/diamond-hold.component';
 
 
 
@@ -36,7 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 @NgModule({
   declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
-  ,UserWishComponent],
+  ,UserWishComponent,DiamondHoldComponent],
   imports: [
     FormsModule,ReactiveFormsModule,
     TranslateModule.forChild(),

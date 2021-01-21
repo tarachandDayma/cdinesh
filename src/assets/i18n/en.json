@@ -390,7 +390,8 @@
             },
             "showSelected": "Show Selected",
             "export": "Export",
-            "inquiryButton": "Inquiry"
+            "inquiryButton": "Inquiry",
+            "holdButton": "Hold"
         },
         "offer": {
             "title": "Offer",
@@ -406,6 +407,14 @@
             "title": "Inquiry",
             "comment": "Comment",
             "save": "Save Inquiry",
+            "success": "Success",
+            "error": "Something went wrong",
+            "comment_error": "Please enter comment"
+        },
+        "hold": {
+            "title": "Hold Stone",
+            "comment": "Comment",
+            "save": "Save Hold",
             "success": "Success",
             "error": "Something went wrong",
             "comment_error": "Please enter comment"
