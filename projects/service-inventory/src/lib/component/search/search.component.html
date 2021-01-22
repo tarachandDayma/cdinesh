@@ -1148,6 +1148,9 @@
                         </span></button> &nbsp;
                         <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.holdButton'" (click)="LoadHoldModel(contentHold)"> Hold
+                        </span></button>&nbsp;
+                        <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
+                            [translate]="'inventory.search.confirmButton'" (click)="LoadConfirmModel(contentConfirm)"> Place Order
                         </span></button>
                     </div>
                     <div class="pull-right delivery-div">
@@ -2049,6 +2052,21 @@
     <div class="modal-body">
         <div class="col-sm-12">
             <lib-diamond-hold [diamonds]="HoldDiamonds"></lib-diamond-hold>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</ng-template>
+<ng-template #contentConfirm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> <span [translate]="'inventory.confirm.title'">Hold</span> </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <lib-diamond-hold [diamonds]="ConfirmDiamonds"></lib-diamond-hold>
         </div>
     </div>
     <div class="modal-footer">

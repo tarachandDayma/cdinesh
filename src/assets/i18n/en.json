@@ -391,7 +391,8 @@
             "showSelected": "Show Selected",
             "export": "Export",
             "inquiryButton": "Inquiry",
-            "holdButton": "Hold"
+            "holdButton": "Hold",
+            "confirmButton": "Hold"
         },
         "offer": {
             "title": "Offer",
@@ -415,6 +416,14 @@
             "title": "Hold Stone",
             "comment": "Comment",
             "save": "Save Hold",
+            "success": "Success",
+            "error": "Something went wrong",
+            "comment_error": "Please enter comment"
+        },
+        "confirm": {
+            "title": "Place Order",
+            "comment": "Comment",
+            "save": "Place Order",
             "success": "Success",
             "error": "Something went wrong",
             "comment_error": "Please enter comment"
