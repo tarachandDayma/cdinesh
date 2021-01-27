@@ -2,9 +2,6 @@ import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/cor
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { EntityService } from 'dist/service-inventory/lib/service/entity.service';
-import { HoldService } from 'dist/service-inventory/lib/service/hold.service';
-import { SearchService } from 'dist/service-inventory/lib/service/search.service';
 import { loaderserice, alertserice, FormValidationService, EnvironmentService } from 'service-common';
 
 import { CartModel } from '../../models/cart.model';
@@ -15,6 +12,8 @@ import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { ConfirmService } from '../../service/confirm.service';
 import { DiamondCommentService } from '../../service/diamond.comment.service';
 import { DownloadService } from '../../service/download.service';
+import { EntityService } from '../../service/entity.service';
+import { SearchService } from '../../service/search.service';
 import { UserService } from '../../service/user.service';
 declare var $: any;
 @Component({

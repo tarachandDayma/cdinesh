@@ -26,6 +26,7 @@
     "bootstrap": "^4.5.3",
     "i18n": "^0.13.2",
     "jquery": "^3.5.1",
+    "ng-multiselect-dropdown": "^0.2.14",
     "ngx-toastr": "^13.1.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",

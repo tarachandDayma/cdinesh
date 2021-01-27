@@ -1107,7 +1107,7 @@
             </div>
         </div>
     </main>
-    <footer style="z-index: 10000;" id="colophon" class="footer" *ngIf="!showResult">
+    <footer style="z-index: 1050;" id="colophon" class="footer" *ngIf="!showResult">
         <div class="page-title">
             <div class="container-fluid">
                 <div class="row">
@@ -1125,8 +1125,7 @@
                                         (click)="pairSearch()"> Search Pair </span></button>
                             <button (click)="LoadSaveSearchModel(contentSaveSearch)" type="button" class="btn btn-primary"><span
                                     [translate]="'inventory.search.save&search'"> Save & Search </span></button>
-                            <button type="button" class="btn btn-primary"><i class="fa fa-download"
-                                    aria-hidden="true"></i></button>
+                            <button (click)="LoadScheduleModal(contentSchedule)" type="button" class="btn btn-primary" [translate]="'inventory.search.addSchedule'"></button>
                             <button (click)="reload()" type="button" class="btn btn-primary"><i class="fa fa-refresh"
                                     aria-hidden="true"></i></button>
                         </div>
@@ -2070,6 +2069,99 @@
         </div>
     </div>
     <div class="modal-footer">
+    </div>
+</ng-template>
+<ng-template #contentSchedule let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" [translate]="'inventory.profile.schedule.title'"> Schedule</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="col-sm-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <form [formGroup]="scheduleformgroup" (ngSubmit)="saveSchedule()" autocomplete="off">
+                        <div class="col-md-12">
+                            <label [translate]="'inventory.profile.schedule.name'" for="scheduleName"></label>
+                            <input maxlength="50" formControlName="scheduleName" [(ngModel)]="currentSchedule.scheduleName" name="scheduleName" type="text" class="form-control" id="scheduleName" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="scheduleformgroup.get('scheduleName').errors?.required && (scheduleformgroup.get('scheduleName').touched  || submited)" [translate]="'inventory.profile.schedule.name_error'" class="form-text text-danger"></label>
+                            <label *ngIf="scheduleformgroup.get('scheduleName').errors?.serverError" class="form-text text-danger"> {{translate.instant(scheduleformgroup.get('scheduleName').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-12">
+                            <label [translate]="'inventory.profile.schedule.additionalEmail'" for="additionalEmail"></label>
+                            <input maxlength="50" formControlName="additionalEmailId" [(ngModel)]="currentSchedule.additionalEmailId" name="additionalEmailId" type="text" class="form-control" id="additionalEmailId" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="scheduleformgroup.get('additionalEmailId').errors?.required && (scheduleformgroup.get('additionalEmailId').touched  || submited)" [translate]="'inventory.profile.schedule.additionalEmailId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="scheduleformgroup.get('additionalEmailId').errors?.email && (scheduleformgroup.get('additionalEmailId').touched  || submited)" [translate]="'inventory.profile.schedule.additionalEmailId_email_error'" class="form-text text-danger"></label>
+                            <label *ngIf="scheduleformgroup.get('additionalEmailId').errors?.serverError" class="form-text text-danger"> {{translate.instant(scheduleformgroup.get('additionalEmailId').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-12">
+                            <label [translate]="'inventory.profile.schedule.bccEmail'" for="bccEmailId"></label>
+                            <input maxlength="50" formControlName="bccEmailId" [(ngModel)]="currentSchedule.bccEmailId" name="bccEmailId" type="text" class="form-control" id="bccEmailId" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="scheduleformgroup.get('bccEmailId').errors?.required && (scheduleformgroup.get('bccEmailId').touched  || submited)" [translate]="'inventory.profile.schedule.additionalEmailId_error'" class="form-text text-danger"></label>
+                            <label *ngIf="scheduleformgroup.get('bccEmailId').errors?.email && (scheduleformgroup.get('bccEmailId').touched  || submited)" [translate]="'inventory.profile.schedule.additionalEmailId_email_error'" class="form-text text-danger"></label>
+                            <label *ngIf="scheduleformgroup.get('bccEmailId').errors?.serverError" class="form-text text-danger"> {{translate.instant(scheduleformgroup.get('bccEmailId').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-12">
+                            <label [translate]="'inventory.profile.schedule.additionalPer'" for="additionalPer"></label>
+                            <input maxlength="50" formControlName="additionalPer" [(ngModel)]="currentSchedule.additionalPer" name="additionalPer" type="number" class="form-control" id="additionalPer" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="scheduleformgroup.get('additionalPer').errors?.serverError" class="form-text text-danger"> {{translate.instant(scheduleformgroup.get('additionalPer').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-12">
+                            <hr>
+                            <label class="custom-control material-checkbox">
+                                <input type="checkbox"
+                                    class="material-control-input" formControlName="notifyCopyEmail" name="notifyCopyEmail"
+                                    [(ngModel)]="currentSchedule.notifyCopyEmail">
+                                <span class="material-control-indicator"></span>
+                                <span class="material-control-description" [translate]="'inventory.profile.schedule.notifyMeCopyEmail'">notifyMeCopyEmail</span>
+                            </label>
+                        </div>
+                        <div class="col-md-12">
+                            <hr>
+                            <label class="custom-control material-checkbox">
+                                <input type="checkbox"
+                                    class="material-control-input" formControlName="isNewStock" name="isNewStock"
+                                    [(ngModel)]="currentSchedule.isNewStock">
+                                <span class="material-control-indicator"></span>
+                                <span class="material-control-description" [translate]="'inventory.profile.schedule.isNewStock'">isNewStock</span>
+                            </label>
+                        </div>
+                        <div class="col-md-12">
+                            <div (click)="toggleTypeOfSchedule()" class="radio-button-label" [translate]="'inventory.profile.schedule.daily'">
+                                Daily</div> <button type="button" [ngClass]="currentSchedule.typeOfSchedule !='Daily' ? 'radio-button': 'radio-button-selected'" (click)="toggleTypeOfSchedule()"> </button>
+                            <div (click)="toggleTypeOfSchedule()" class="radio-button-label" [translate]="'inventory.profile.schedule.weekly'">
+                                Weekly</div> <button type="button" [ngClass]="currentSchedule.typeOfSchedule =='Daily' ? 'radio-button': 'radio-button-selected'" (click)="toggleTypeOfSchedule()"></button>
+                        </div>
+                        <div class="col-md-12" *ngIf="currentSchedule.typeOfSchedule !='Daily'">
+
+                            <ng-multiselect-dropdown name="daysSelectedItems" [placeholder]="''" [settings]="dropdownSettings" [data]="daysDropdownList" formControlName="daysSelectedItems" [(ngModel)]="daysSelectedItems">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-md-12">
+                            <label [translate]="'inventory.profile.schedule.country'" for="daysSelectedItems"></label>
+                            <ng-multiselect-dropdown name="countrySelectedItem" formControlName="countrySelectedItem" name="countrySelectedItem" [settings]="countrydropdownSettings" [data]="countryList" [(ngModel)]="countrySelectedItem"></ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="custom-control material-checkbox">
+                                <input type="checkbox"
+                                    class="material-control-input" formControlName="isActive" name="isActive"
+                                    [(ngModel)]="currentSchedule.isActive">
+                                <span class="material-control-indicator"></span>
+                                <span class="material-control-description" [translate]="'inventory.profile.schedule.activeDeactive'">activeDeactive</span>
+                            </label>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" type="submit" [translate]="'inventory.profile.schedule.save'"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </ng-template>
 <!-- MAIN END -->

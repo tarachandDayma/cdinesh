@@ -251,7 +251,8 @@
             "bestofcd": "Best Of CD",
             "upcoming": "Upcoming",
             "saveSearch": "Save Search",
-            "userWish": "My Wish List"
+            "userWish": "My Wish List",
+            "schedule": "Schedule"
         },
         "search": {
             "title": "Search",
@@ -392,7 +393,8 @@
             "export": "Export",
             "inquiryButton": "Inquiry",
             "holdButton": "Hold",
-            "confirmButton": "Hold"
+            "confirmButton": "Hold",
+            "addSchedule": "Add Schedule"
         },
         "offer": {
             "title": "Offer",
@@ -508,7 +510,8 @@
                 "pairSetup": "Pair Setup",
                 "changePassword": "Change Password",
                 "saveSearch": "Save Search",
-                "userWish": "My Wish List"
+                "userWish": "My Wish List",
+                "schedule": "Schedule"
             },
             "personalDetail": {
                 "title": "Personal Detail"
@@ -645,6 +648,29 @@
                 "remove": "Remove",
                 "save": "Save",
                 "addWish": "Add Wish"
+            },
+            "schedule": {
+                "title": "Schedule",
+                "name": "Name",
+                "action": "Action",
+                "modify": "Modify",
+                "search": "Search",
+                "remove": "Remove",
+                "save": "Save",
+                "additionalEmail": "Additional Email",
+                "bccEmail": "Bcc Email",
+                "additionalPer": "Additional(%)",
+                "notifyMeCopyEmail": "Notify Me CopyEmail",
+                "activeDeactive": "Active / Deactive",
+                "stockType": "Stock Type",
+                "selectScheduleType": "Select Schedule Type",
+                "weekDays": "Week Days",
+                "country": "Country",
+                "name_error": "required",
+                "additionalEmailId_email_error": "Invalid email",
+                "isNewStock": "New Stock",
+                "daily": "Daily",
+                "weekly": "Weekly"
             }
         }
     },

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { first } from 'rxjs/operators';
 import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
 import { CartModel } from '../../models/cart.model';
@@ -10,6 +11,7 @@ import { diamondsearchResult } from '../../models/diamond.result.model';
 import { DiamondCommentModel } from '../../models/diamondComment.model';
 import { EntityModel } from '../../models/entity.model';
 import { ExportToEmailModel } from '../../models/exportToEmail.model';
+import { ScheduleModel } from '../../models/schedule.model';
 import { UserSearchModel } from '../../models/user.search.model';
 import { UserWishModel } from '../../models/userWish.model';
 import { CartService } from '../../service/cart.service';
@@ -17,10 +19,13 @@ import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { DiamondCommentService } from '../../service/diamond.comment.service';
 import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
+import { ScheduleService } from '../../service/schedule.service';
 import { SearchService } from '../../service/search.service';
 import { UserService } from '../../service/user.service';
 import { UserWishService } from '../../service/user.wish.service';
 import { UserSaveSearchService } from '../../service/userSaveSearch.service';
+
+
 declare var $: any;
 @Component({
   selector: 'lib-search',
@@ -44,7 +49,8 @@ export class SearchComponent implements OnInit {
     , private userService: UserService
     , private diamondCommentService: DiamondCommentService
     , private userSaveSearchService: UserSaveSearchService
-    , private userWishService: UserWishService) { }
+    , private userWishService: UserWishService
+    , private scheduleService: ScheduleService) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -141,8 +147,10 @@ export class SearchComponent implements OnInit {
   ////summary variable
   IsRecentSearch: boolean = false;
   PairSearch: boolean = false;
-  currentSearch:UserSearchModel= new UserSearchModel();
-  currentWish:UserWishModel= new UserWishModel();
+  currentSearch: UserSearchModel = new UserSearchModel();
+  currentWish: UserWishModel = new UserWishModel();
+  currentSchedule: ScheduleModel = new ScheduleModel();
+
   catchRouteParam() {
 
     if (-1 != this.router.url.indexOf("fancySearch")) {
@@ -172,36 +180,53 @@ export class SearchComponent implements OnInit {
         this.IsRecentSearch = true;
         this.SetFilterObject(SearchFilter);
         localStorage.setItem("recentSearch", "")
-      } else if(localStorage.getItem("saveSearch") != undefined && localStorage.getItem("saveSearch") != ""){
+      } else if (localStorage.getItem("saveSearch") != undefined && localStorage.getItem("saveSearch") != "") {
         this.currentSearch = JSON.parse(localStorage.getItem("saveSearch"));
         var SearchFilter = JSON.parse(this.currentSearch.searchData);
         this.IsRecentSearch = true;
         this.SetFilterObject(SearchFilter);
         localStorage.setItem("saveSearch", "");
-      }else if(localStorage.getItem("modifySearch") != undefined && localStorage.getItem("modifySearch") != ""){
+      } else if (localStorage.getItem("modifySearch") != undefined && localStorage.getItem("modifySearch") != "") {
         this.currentSearch = JSON.parse(localStorage.getItem("modifySearch"));
         var SearchFilter = JSON.parse(this.currentSearch.searchData);
         this.IsRecentSearch = true;
         this.ModifyFilterObject(SearchFilter);
         localStorage.setItem("modifySearch", "");
-      }else if(localStorage.getItem("saveUserWish") != undefined && localStorage.getItem("saveUserWish") != ""){
+      } else if (localStorage.getItem("saveUserWish") != undefined && localStorage.getItem("saveUserWish") != "") {
         this.currentWish = JSON.parse(localStorage.getItem("saveUserWish"));
         var SearchFilter = JSON.parse(this.currentWish.searchData);
         this.IsRecentSearch = true;
         this.SetFilterObject(SearchFilter);
         localStorage.setItem("saveUserWish", "");
-      }else if(localStorage.getItem("modifyUserWish") != undefined && localStorage.getItem("modifyUserWish") != ""){
+      } else if (localStorage.getItem("modifyUserWish") != undefined && localStorage.getItem("modifyUserWish") != "") {
         this.currentWish = JSON.parse(localStorage.getItem("modifyUserWish"));
         var SearchFilter = JSON.parse(this.currentWish.searchData);
         this.IsRecentSearch = true;
         this.ModifyFilterObject(SearchFilter);
         localStorage.setItem("modifyUserWish", "");
+      } else if (localStorage.getItem("saveUserSchedule") != undefined && localStorage.getItem("saveUserSchedule") != "") {
+        this.currentSchedule = JSON.parse(localStorage.getItem("saveUserSchedule"));
+        var SearchFilter = JSON.parse(this.currentSchedule.queryJson);
+        this.IsRecentSearch = true;
+        this.SetFilterObject(SearchFilter);
+        localStorage.setItem("saveUserSchedule", "");
+      } else if (localStorage.getItem("modifyUserSchedule") != undefined && localStorage.getItem("modifyUserSchedule") != "") {
+        this.currentSchedule = JSON.parse(localStorage.getItem("modifyUserSchedule"));
+        var SearchFilter = JSON.parse(this.currentSchedule.queryJson);
+        this.IsRecentSearch = true;
+        this.ModifyFilterObject(SearchFilter);
+        localStorage.setItem("modifyUserSchedule", "");
       }
       else
         localStorage.setItem("PacketNo", "");
     }
   }
   ngOnInit(): void {
+    this.scheduleService.GetCountry().subscribe(result => {
+      this.countryList = result;
+    }, error => {
+
+    });
     this.LoadCart();
     this.selectedPointer = [];
     this.defaultCaratRange = [
@@ -1284,7 +1309,7 @@ export class SearchComponent implements OnInit {
   ModifyFilterObject(filter) {
     this.searchService.GetSearch(filter).subscribe(item => {
       this.shapeList.list = item.shapeList;
-      
+
       this.colorList.list = item.colorList;
       this.fancycolorList.list = item.fancyColorList;
       this.fancyOvertoneList.list = item.fancyOvertoneList;
@@ -1357,38 +1382,38 @@ export class SearchComponent implements OnInit {
 
 
   }
-  reshapeLists(){
-    this.shapeList.allSelected= this.shapeList.list.filter(x=>x.selected == true).length <= 0;
-    this.colorList.allSelected= this.colorList.list.filter(x=>x.selected == true).length <= 0;
-    this.clarityList.allSelected= this.clarityList.list.filter(x=>x.selected == true).length <= 0;
-    this.fancycolorList.allSelected= this.fancycolorList.list.filter(x=>x.selected == true).length <= 0;
-    this.fancyIntensityList.allSelected= this.fancyIntensityList.list.filter(x=>x.selected == true).length <= 0;
-    this.fancyOvertoneList.allSelected= this.fancyOvertoneList.list.filter(x=>x.selected == true).length <= 0;
-    this.cutList.allSelected= this.cutList.list.filter(x=>x.selected == true).length <= 0;
-    this.symList.allSelected= this.symList.list.filter(x=>x.selected == true).length <= 0;
-    this.tohaList.allSelected= this.tohaList.list.filter(x=>x.selected == true).length <= 0;
-    this.culetList.allSelected= this.culetList.list.filter(x=>x.selected == true).length <= 0;
-    this.milkyList.allSelected= this.milkyList.list.filter(x=>x.selected == true).length <= 0;
-    this.shadeList.allSelected= this.shadeList.list.filter(x=>x.selected == true).length <= 0;
-    this.lusterList.allSelected= this.lusterList.list.filter(x=>x.selected == true).length <= 0;
-    this.fromhaList.allSelected= this.fromhaList.list.filter(x=>x.selected == true).length <= 0;
-    this.polishList.allSelected= this.polishList.list.filter(x=>x.selected == true).length <= 0;
-    this.locationList.allSelected= this.locationList.list.filter(x=>x.selected == true).length <= 0;
-    this.eyeCleanList.allSelected= this.eyeCleanList.list.filter(x=>x.selected == true).length <= 0;
-    this.togirdleList.allSelected= this.togirdleList.list.filter(x=>x.selected == true).length <= 0;
-    this.flourenceList.allSelected= this.flourenceList.list.filter(x=>x.selected == true).length <= 0;
-    this.fromgirdleList.allSelected= this.fromgirdleList.list.filter(x=>x.selected == true).length <= 0;
-    this.naturalCrnList.allSelected= this.naturalCrnList.list.filter(x=>x.selected == true).length <= 0;
-    this.naturalPavList.allSelected= this.naturalPavList.list.filter(x=>x.selected == true).length <= 0;
-    this.blackIncCrnList.allSelected= this.blackIncCrnList.list.filter(x=>x.selected == true).length <= 0;
-    this.blackIncTblList.allSelected= this.blackIncTblList.list.filter(x=>x.selected == true).length <= 0;
-    this.certificateList.allSelected= this.certificateList.list.filter(x=>x.selected == true).length <= 0;
-    this.keytoSymbolList.allSelected= this.keytoSymbolList.list.filter(x=>x.selected == true).length <= 0;
-    this.whiteIncCrnList.allSelected= this.whiteIncCrnList.list.filter(x=>x.selected == true).length <= 0;
-    this.whiteIncTblList.allSelected= this.whiteIncTblList.list.filter(x=>x.selected == true).length <= 0;
-    this.naturalGirdleList.allSelected= this.naturalGirdleList.list.filter(x=>x.selected == true).length <= 0;
-    this.extraFacetCrnList.allSelected= this.extraFacetCrnList.list.filter(x=>x.selected == true).length <= 0;
-    this.extraFacetPavList.allSelected= this.extraFacetPavList.list.filter(x=>x.selected == true).length <= 0;
+  reshapeLists() {
+    this.shapeList.allSelected = this.shapeList.list.filter(x => x.selected == true).length <= 0;
+    this.colorList.allSelected = this.colorList.list.filter(x => x.selected == true).length <= 0;
+    this.clarityList.allSelected = this.clarityList.list.filter(x => x.selected == true).length <= 0;
+    this.fancycolorList.allSelected = this.fancycolorList.list.filter(x => x.selected == true).length <= 0;
+    this.fancyIntensityList.allSelected = this.fancyIntensityList.list.filter(x => x.selected == true).length <= 0;
+    this.fancyOvertoneList.allSelected = this.fancyOvertoneList.list.filter(x => x.selected == true).length <= 0;
+    this.cutList.allSelected = this.cutList.list.filter(x => x.selected == true).length <= 0;
+    this.symList.allSelected = this.symList.list.filter(x => x.selected == true).length <= 0;
+    this.tohaList.allSelected = this.tohaList.list.filter(x => x.selected == true).length <= 0;
+    this.culetList.allSelected = this.culetList.list.filter(x => x.selected == true).length <= 0;
+    this.milkyList.allSelected = this.milkyList.list.filter(x => x.selected == true).length <= 0;
+    this.shadeList.allSelected = this.shadeList.list.filter(x => x.selected == true).length <= 0;
+    this.lusterList.allSelected = this.lusterList.list.filter(x => x.selected == true).length <= 0;
+    this.fromhaList.allSelected = this.fromhaList.list.filter(x => x.selected == true).length <= 0;
+    this.polishList.allSelected = this.polishList.list.filter(x => x.selected == true).length <= 0;
+    this.locationList.allSelected = this.locationList.list.filter(x => x.selected == true).length <= 0;
+    this.eyeCleanList.allSelected = this.eyeCleanList.list.filter(x => x.selected == true).length <= 0;
+    this.togirdleList.allSelected = this.togirdleList.list.filter(x => x.selected == true).length <= 0;
+    this.flourenceList.allSelected = this.flourenceList.list.filter(x => x.selected == true).length <= 0;
+    this.fromgirdleList.allSelected = this.fromgirdleList.list.filter(x => x.selected == true).length <= 0;
+    this.naturalCrnList.allSelected = this.naturalCrnList.list.filter(x => x.selected == true).length <= 0;
+    this.naturalPavList.allSelected = this.naturalPavList.list.filter(x => x.selected == true).length <= 0;
+    this.blackIncCrnList.allSelected = this.blackIncCrnList.list.filter(x => x.selected == true).length <= 0;
+    this.blackIncTblList.allSelected = this.blackIncTblList.list.filter(x => x.selected == true).length <= 0;
+    this.certificateList.allSelected = this.certificateList.list.filter(x => x.selected == true).length <= 0;
+    this.keytoSymbolList.allSelected = this.keytoSymbolList.list.filter(x => x.selected == true).length <= 0;
+    this.whiteIncCrnList.allSelected = this.whiteIncCrnList.list.filter(x => x.selected == true).length <= 0;
+    this.whiteIncTblList.allSelected = this.whiteIncTblList.list.filter(x => x.selected == true).length <= 0;
+    this.naturalGirdleList.allSelected = this.naturalGirdleList.list.filter(x => x.selected == true).length <= 0;
+    this.extraFacetCrnList.allSelected = this.extraFacetCrnList.list.filter(x => x.selected == true).length <= 0;
+    this.extraFacetPavList.allSelected = this.extraFacetPavList.list.filter(x => x.selected == true).length <= 0;
   }
   backtoSearch() {
     this.showResult = false;
@@ -1660,6 +1685,7 @@ export class SearchComponent implements OnInit {
   markup: number;
   ExportType: string = "Download";
   emailformgroup: FormGroup;
+
   emailModel: ExportToEmailModel;
   submited: boolean = false;
   Export(content) {
@@ -1979,7 +2005,7 @@ Greetings of the day `;
     }
   }
   LoadSaveSearchModel(content) {
-    if(this.currentSearch==undefined || this.currentSearch==null){
+    if (this.currentSearch == undefined || this.currentSearch == null) {
       this.currentSearch = new UserSearchModel();
     }
     this.modalService.open(content, { backdrop: "static", size: "sm", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -1990,31 +2016,31 @@ Greetings of the day `;
   }
   saveSearch() {
     this.submited = true;
-    
-      this.loader.show(true);
-      var item={
-        filter:this.GetFilterObject(),
-        model:this.currentSearch
-      };
-      this.userSaveSearchService.AddSearch(item).subscribe(result => {
-        this.loader.show(false);
-        if (result.status) {
-          this.alertService.success("", this.translate.instant("inventory.search.result.success"));
-          this.modalService.dismissAll();
-        }
-      }, error => {
-        this.loader.show(false);
-        this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
-        try {
-          this.formvalidationService.BindServerErrors(this.commentformgroup, error);
-        } catch (error) {
-          console.log(error);
-        }
-      });
-    
+
+    this.loader.show(true);
+    var item = {
+      filter: this.GetFilterObject(),
+      model: this.currentSearch
+    };
+    this.userSaveSearchService.AddSearch(item).subscribe(result => {
+      this.loader.show(false);
+      if (result.status) {
+        this.alertService.success("", this.translate.instant("inventory.search.result.success"));
+        this.modalService.dismissAll();
+      }
+    }, error => {
+      this.loader.show(false);
+      this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+      try {
+        this.formvalidationService.BindServerErrors(this.commentformgroup, error);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
   }
   LoadUserWishModal(content) {
-    if(this.currentWish==undefined || this.currentWish==null){
+    if (this.currentWish == undefined || this.currentWish == null) {
       this.currentWish = new UserWishModel();
     }
     this.modalService.open(content, { backdrop: "static", size: "lg", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -2025,28 +2051,28 @@ Greetings of the day `;
   }
   saveUserWish() {
     this.submited = true;
-    
-      this.loader.show(true);
-      var item={
-        filter:this.GetFilterObject(),
-        model:this.currentWish
-      };
-      this.userWishService.AddSearch(item).subscribe(result => {
-        this.loader.show(false);
-        if (result.status) {
-          this.alertService.success("", this.translate.instant("inventory.search.result.success"));
-          this.modalService.dismissAll();
-        }
-      }, error => {
-        this.loader.show(false);
-        this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
-        try {
-          this.formvalidationService.BindServerErrors(this.commentformgroup, error);
-        } catch (error) {
-          console.log(error);
-        }
-      });
-    
+
+    this.loader.show(true);
+    var item = {
+      filter: this.GetFilterObject(),
+      model: this.currentWish
+    };
+    this.userWishService.AddSearch(item).subscribe(result => {
+      this.loader.show(false);
+      if (result.status) {
+        this.alertService.success("", this.translate.instant("inventory.search.result.success"));
+        this.modalService.dismissAll();
+      }
+    }, error => {
+      this.loader.show(false);
+      this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+      try {
+        this.formvalidationService.BindServerErrors(this.commentformgroup, error);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
   }
   HoldDiamonds: diamondsearchResult[] = [];
   LoadHoldModel(content) {
@@ -2081,5 +2107,123 @@ Greetings of the day `;
 
       });
     }
+  }
+  scheduleformgroup: FormGroup;
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    allowSearchFilter: true
+  };
+  countrydropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    allowSearchFilter: true
+  };
+  daysDropdownList = [];
+  daysSelectedItems = [];
+  countrySelectedItem = [];
+  countryList = [];
+  LoadScheduleModal(content) {
+    this.daysDropdownList = [
+      { item_id: "Sunday", item_text: 'Sunday' },
+      { item_id: "Monday", item_text: 'Monday' },
+      { item_id: "Tuesday", item_text: 'Tuesday' },
+      { item_id: "Wednesday", item_text: 'Wednesday' },
+      { item_id: "Thursday", item_text: 'Thursday' },
+      { item_id: "Friday", item_text: 'Friday' },
+      { item_id: "Saturday", item_text: 'Saturday' }
+    ];
+    if (this.currentSchedule == undefined || this.currentSchedule == null) {
+      this.currentSchedule = new ScheduleModel();
+      this.currentSchedule.scheduleType = "Daily";
+      this.currentSchedule.typeOfSchedule = "Daily";
+    }
+
+    if (this.currentSchedule.scheduleType == "Daily") {
+      this.currentSchedule.typeOfSchedule = "Daily";
+    } else {
+      this.daysSelectedItems = [];
+      this.currentSchedule.typeOfSchedule = "Weekly";
+      if (this.currentSchedule.scheduleType != undefined && this.currentSchedule.scheduleType != null) {
+        this.currentSchedule.scheduleType.split(",").forEach(element => {
+          if (this.daysDropdownList.filter(x => x.item_id == element).length > 0) {
+            this.daysSelectedItems.push(this.daysDropdownList.filter(x => x.item_id == element)[0]);
+          }
+        });
+      }
+    }
+    this.countrySelectedItem = [];
+    this.countryList.forEach(element => {
+      if (element.id == this.currentSchedule.countryId) {
+        this.countrySelectedItem.push(element);
+      }
+    });
+    this.scheduleformgroup = new FormGroup({
+      scheduleName: new FormControl('', Validators.required),
+      isActive: new FormControl('', Validators.compose([Validators.email])),
+      additionalEmailId: new FormControl('', Validators.compose([Validators.email])),
+      additionalPer: new FormControl(''),
+      isNewStock: new FormControl(''),
+      bccEmailId: new FormControl('', Validators.compose([Validators.email])),
+      notifyCopyEmail: new FormControl(''),
+      typeOfSchedule: new FormControl(''),
+      daysSelectedItems: new FormControl(this.daysSelectedItems),
+      countrySelectedItem: new FormControl(this.countrySelectedItem)
+    });
+    this.modalService.open(content, { backdrop: "static", size: "lg", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+  }
+  toggleTypeOfSchedule() {
+    if (this.currentSchedule.typeOfSchedule == "Daily") {
+      this.currentSchedule.typeOfSchedule = "Weekly";
+    } else {
+      this.currentSchedule.typeOfSchedule = "Daily";
+    }
+  }
+  saveSchedule() {
+    this.submited = true;
+    this.loader.show(true);
+    if (this.currentSchedule.typeOfSchedule == "Daily") {
+      this.currentSchedule.scheduleType = "Daily";
+    } else {
+      this.currentSchedule.scheduleType = "";
+      this.daysSelectedItems.forEach(element => {
+        if (this.currentSchedule.scheduleType == "") {
+          this.currentSchedule.scheduleType = element.item_id;
+        } else {
+          this.currentSchedule.scheduleType += "," + element.item_id;
+        }
+      });
+    }
+    this.currentSchedule.countryId = this.countrySelectedItem[0].id;
+    var item = {
+      filter: this.GetFilterObject(),
+      model: this.currentSchedule
+    };
+    this.scheduleService.AddSearch(item).subscribe(result => {
+      this.loader.show(false);
+      if (result.status) {
+        this.alertService.success("", this.translate.instant("inventory.search.result.success"));
+        this.modalService.dismissAll();
+      }
+    }, error => {
+      this.loader.show(false);
+      this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+      try {
+        this.formvalidationService.BindServerErrors(this.commentformgroup, error);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
   }
 }

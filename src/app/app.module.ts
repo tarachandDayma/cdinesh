@@ -26,6 +26,7 @@ import { CartBroadcaster, CartService, ServiceInventoryModule } from 'service-in
 import { ServiceAdminModule } from 'service-admin';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 
@@ -86,7 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       disableTimeOut:false,
       autoDismiss:false,
       timeOut:600000
-    })
+    }),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     GlobleService

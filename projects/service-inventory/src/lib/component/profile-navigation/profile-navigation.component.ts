@@ -29,6 +29,9 @@ export class ProfileNavigationComponent implements OnInit {
     if (-1 != this.router.url.indexOf("myWish")) {
       this.currentMenu = "myWish";
     }
+    if (-1 != this.router.url.indexOf("schedule")) {
+      this.currentMenu = "schedule";
+    }
     
   }
 

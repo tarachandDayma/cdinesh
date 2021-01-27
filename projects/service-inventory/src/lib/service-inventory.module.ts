@@ -30,6 +30,8 @@ import { SaveSearchComponent } from './component/save-search/save-search.compone
 import { UserWishComponent } from './component/user-wish/user-wish.component';
 import { DiamondHoldComponent } from './component/diamond-hold/diamond-hold.component';
 import { DiamondConfirmComponent } from './component/diamond-confirm/diamond-confirm.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DiamondScheduleComponent } from './component/diamond-schedule/diamond-schedule.component';
 
 
 
@@ -38,7 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 @NgModule({
   declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
-  ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent],
+  ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent],
   imports: [
     FormsModule,ReactiveFormsModule,
     TranslateModule.forChild(),
@@ -52,6 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    NgMultiSelectDropDownModule
   ],
   exports: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent]
 })

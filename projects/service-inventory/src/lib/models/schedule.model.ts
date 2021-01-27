@@ -1,0 +1,24 @@
+export class ScheduleModel{
+    id:number;
+    scheduleName:string;
+    dBQuery:string;
+    queryJson:string;
+    isActive:boolean;
+    ownerEmailId:string;
+    additionalEmailId:string;
+    additionalPer:number;
+    scheduleType:string;
+    lastRun:Date;
+    addDays:number;
+    nextRun:Date;
+    isNewStock:boolean;
+    isRegStock:boolean;
+    countryId:number;
+    bccEmailId:string;
+    notifyCopyEmail:boolean;
+    defaultTop:number;
+    userId:string;
+    createdBy:string;
+    createdDate:Date;
+    typeOfSchedule:string;
+}

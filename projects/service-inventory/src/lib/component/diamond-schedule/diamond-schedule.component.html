@@ -1,0 +1,45 @@
+<inventory-nav></inventory-nav>
+<div class="content">
+    <!-- PAGE TITLE END -->
+    <main class="myform" style="padding-top: 0px;padding-bottom: 0px;">
+        <div class="controlPanelContainer">
+            <div class="row col-sm-12">
+                <lib-profile-navigation></lib-profile-navigation>
+
+            </div>
+            <div class="row col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="pull-right">
+                            <button class="btn btn-sm btn-primary" type="button" (click)="SyncSearches()"> <i class="fa fa-refresh" aria-hidden="true"></i> </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table" style="user-select:none;">
+                            <thead>
+                                <tr>
+                                    <th [translate]="'inventory.profile.schedule.name'"></th>
+                                    <th [translate]=" 'inventory.profile.schedule.action'"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let indx=index;let item of searches;">
+                                    <td>
+                                        {{item.scheduleName}}
+                                    </td>
+                                    <td>
+                                        <div class="btn-toolbar">
+                                            <button class="btn btn-sm btn-primary" (click)="Modify(item)" type="button" [translate]=" 'inventory.profile.schedule.modify'"></button>
+                                            <button class="btn btn-sm btn-primary" (click)="Load(item)" type="button" [translate]=" 'inventory.profile.schedule.search'"></button>
+                                            <button class="btn btn-sm btn-primary" (click)="RemoveSearch(item)" type="button" [translate]=" 'inventory.profile.schedule.remove'"></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
