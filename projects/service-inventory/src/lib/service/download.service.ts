@@ -8,6 +8,7 @@ import { diamondsearchResult } from '../models/diamond.result.model';
 import { UserSearchModel } from '../models/user.search.model';
 import { UserDownloadFieldsModel } from '../models/user.download.fields.model';
 import { ExportToEmailModel } from '../models/exportToEmail.model';
+import { UserDownloadMasterModel } from '../models/user.download.master.model';
 
 @Injectable({
     providedIn: 'root'
@@ -18,14 +19,24 @@ export class DownloadService extends RestService {
         super(http);
     }
 
-    public LoadFields(): Observable<UserDownloadFieldsModel[]> {
+    public LoadFields(): Observable<UserDownloadMasterModel[]> {
         var url = "";
         url = this.env.ApiGateway + "/Download/LoadFields";
         return super.Get(url);
     }
-    public SaveFields(Fields:UserDownloadFieldsModel[]): Observable<any> {
+    public AddNew(): Observable<UserDownloadMasterModel> {
+        var url = "";
+        url = this.env.ApiGateway + "/Download/New";
+        return super.Get(url);
+    }
+    public SaveFields(Fields:UserDownloadMasterModel[]): Observable<any> {
         var url = "";
         url = this.env.ApiGateway + "/Download/Insert";
+        return super.post(url,Fields);
+    }
+    public RemoveFields(Fields:UserDownloadMasterModel[]): Observable<any> {
+        var url = "";
+        url = this.env.ApiGateway + "/Download/Remove";
         return super.post(url,Fields);
     }
     public Download(Filter:any): Observable<any> {

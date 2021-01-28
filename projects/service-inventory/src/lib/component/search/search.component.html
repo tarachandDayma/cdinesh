@@ -1813,6 +1813,18 @@
       </button>
     </div>
     <div class="modal-body">
+        <div class="row col-sm-12">
+            <div class="button-div">
+                <ul class="tool-buttons">
+                    <ng-container *ngFor="let item of downloadFormat;">
+                        <li (click)="selectDownloadFormat(item)" [ngStyle]="selectedDownloadFormat.id==item.id && {'background': '#e5803f','color': '#ffffff'}">
+                            <span> {{item.name}} </span>
+                        </li>
+                        <li> <strong style="margin-left: 6px;margin-right: 6px;"> |</strong></li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
         <div class="col-sm-12">
             <nav class="nav">
                 <a class="nav-link" [ngClass]="ExportType =='Download' ? 'active': ''">
@@ -1844,7 +1856,9 @@
                 </a>
             </nav>
         </div>
+
         <div class="col-sm-12">
+
             <div class="card" *ngIf="ExportType =='Download'">
                 <div class="card-body">
                     <div class="input-group input-group-sm mb-3">

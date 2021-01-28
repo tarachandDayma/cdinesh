@@ -1,5 +1,6 @@
 export class UserDownloadFieldsModel{
     id:number;
+    masterId:number;
     fieldName:string;
     label:string;
     isActive:boolean;

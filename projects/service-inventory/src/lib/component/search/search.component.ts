@@ -12,6 +12,7 @@ import { DiamondCommentModel } from '../../models/diamondComment.model';
 import { EntityModel } from '../../models/entity.model';
 import { ExportToEmailModel } from '../../models/exportToEmail.model';
 import { ScheduleModel } from '../../models/schedule.model';
+import { UserDownloadMasterModel } from '../../models/user.download.master.model';
 import { UserSearchModel } from '../../models/user.search.model';
 import { UserWishModel } from '../../models/userWish.model';
 import { CartService } from '../../service/cart.service';
@@ -1688,6 +1689,8 @@ export class SearchComponent implements OnInit {
 
   emailModel: ExportToEmailModel;
   submited: boolean = false;
+  downloadFormat:UserDownloadMasterModel[]=[];
+  selectedDownloadFormat:UserDownloadMasterModel;
   Export(content) {
     this.emailModel = new ExportToEmailModel();
     this.emailModel.subject = "CD-Stock";
@@ -1696,7 +1699,10 @@ export class SearchComponent implements OnInit {
       this.emailModel.message = `Hello ` + result.userBasicInfo.firstName + `
 Greetings of the day `;
     });
-
+    this.downloadService.LoadFields().subscribe(result=> {
+        this.downloadFormat=result;
+        this.selectedDownloadFormat=this.downloadFormat[0];
+    },error=>{})
     this.emailformgroup = new FormGroup({
       subject: new FormControl('', Validators.required),
       mailTo: new FormControl('', Validators.compose([Validators.required, Validators.email])),
@@ -1709,7 +1715,9 @@ Greetings of the day `;
 
     });
   }
-
+  selectDownloadFormat(item){
+    this.selectedDownloadFormat=item;
+  }
   DownloadResult() {
     var strPacketNos = "";
     if (this.ExportType == "DownloadSelected") {
@@ -1728,7 +1736,7 @@ Greetings of the day `;
         return;
       }
     }
-    var obj = {
+    var objFilter = {
       ShapeList: this.shapeList.list,
       ColorList: this.colorList.list,
       FancyColorList: this.fancycolorList.list,
@@ -1801,6 +1809,10 @@ Greetings of the day `;
       Percentage: this.markup,
       PairSearch: this.PairSearch
     };
+    var obj={
+      filter:objFilter,
+      UserDownload:this.selectedDownloadFormat
+    }
 
     this.loader.show(true);
     this.downloadService.Download(obj).subscribe(result => {
@@ -1903,6 +1915,7 @@ Greetings of the day `;
         Percentage: this.markup
       };
       this.emailModel.filter = obj;
+      this.emailModel.UserDownload=this.selectedDownloadFormat;
       this.loader.show(true);
       this.downloadService.SendEmail(this.emailModel).subscribe(result => {
         this.loader.show(false);

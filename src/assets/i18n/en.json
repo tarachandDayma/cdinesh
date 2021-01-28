@@ -523,7 +523,12 @@
                 "label": "Label",
                 "success": "Success",
                 "error": "Something went wrong",
-                "save": "Update"
+                "save": "Update",
+                "formatName": "Format",
+                "percentage": "%",
+                "formatName_error": "Please enter download formatName",
+                "addNewFormat": "Add New Format",
+                "remove": "Remove"
             },
             "pairSetup": {
                 "title": "Pair Setup",

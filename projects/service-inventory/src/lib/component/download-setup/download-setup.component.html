@@ -10,12 +10,42 @@
             <div class="row col-sm-12">
                 <div class="card">
                     <div class="card-header">
+                        <div class="pull-left">
+                            <button class="btn btn-primary" type="button" [translate]="'inventory.profile.downloadSetup.addNewFormat'" (click)="AddNewItem()"></button>
+
+                        </div>
                         <div class="pull-right">
                             <button class="btn btn-primary" type="button" [translate]="'inventory.profile.downloadSetup.save'" (click)="saveFields()"></button>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <table class="table" style="user-select:none;">
+                    <div *ngFor="let item of Fields;" class="card-body">
+                        <div class="row col-sm-12">
+                            <div class="col-sm-1">
+                                <button class="btn btn-sm btn-primary" type="button" (click)="toggleDetail(item)"> <i *ngIf="!item.showDetail" class="fa fa-plus"></i> <i  *ngIf="item.showDetail" class="fa fa-minus"></i>   </button>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                [translate]="'inventory.profile.downloadSetup.formatName'"> Name </span>
+                                            </span>
+                                        </div>
+                                        <input name="formatName" [(ngModel)]="item.name" type="text" min="0">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                [translate]="'inventory.profile.downloadSetup.percentage'"> Percentage </span>
+                                            </span>
+                                        </div>
+                                        <input name="percentage" [(ngModel)]="item.percentage" type="number" min="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="btn btn-sm btn-primary" type="button" (click)="Remove(item)" [translate]="'inventory.profile.downloadSetup.remove'">   </button>
+                            </div>
+                        </div>
+                        <table *ngIf="item.showDetail" class="table" style="user-select:none;">
                             <thead>
                                 <tr>
                                     <th [translate]="'inventory.profile.downloadSetup.isActive'"></th>
@@ -24,21 +54,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let indx=index;let item of Fields;" [ngClass]="dragIndex==indx ? 'selected' :'' " (mouseup)="mouseUp(indx)" (mousemove)="mouseMove(indx)">
+                                <tr *ngFor="let indx=index;let subItem of item.fieldsModels;" [ngClass]="dragIndex==indx ? 'selected' :'' " (mouseup)="mouseUp(item,indx)" (mousemove)="mouseMove(item,indx)">
                                     <td>
                                         <i class="fa fa-arrows" (mousedown)="mouseDown(indx)"></i>
                                         <label class="custom-control material-checkbox">
                                             <input type="checkbox"
                                                 class="material-control-input" name="AllReslt"
-                                                [(ngModel)]="item.isActive">
+                                                [(ngModel)]="subItem.isActive">
                                             <span class="material-control-indicator"></span>
                                         </label>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" name="FieldName" [(ngModel)]="item.fieldName" disabled>
+                                        <input type="text" class="form-control" name="FieldName" [(ngModel)]="subItem.fieldName" disabled>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" name="label" [(ngModel)]="item.label">
+                                        <input type="text" class="form-control" name="label" [(ngModel)]="subItem.label">
                                     </td>
                                 </tr>
                             </tbody>
