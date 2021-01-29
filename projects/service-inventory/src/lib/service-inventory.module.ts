@@ -32,6 +32,7 @@ import { DiamondHoldComponent } from './component/diamond-hold/diamond-hold.comp
 import { DiamondConfirmComponent } from './component/diamond-confirm/diamond-confirm.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DiamondScheduleComponent } from './component/diamond-schedule/diamond-schedule.component';
+import { InquiryDetailComponent } from './component/inquiry-detail/inquiry-detail.component';
 
 
 
@@ -40,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 @NgModule({
   declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
-  ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent],
+  ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent,InquiryDetailComponent],
   imports: [
     FormsModule,ReactiveFormsModule,
     TranslateModule.forChild(),

@@ -35,4 +35,9 @@ export class SearchService extends RestService {
         url = this.env.ApiGateway + "/RecentSearch/LoadRecentSearch";
         return super.Get(url);
     }
+    public GetNewGoodsCount(): Observable<any> {
+        var url = "";
+        url = this.env.ApiGateway + "/NewGoodsCount";
+        return super.Get(url);
+    }
 }

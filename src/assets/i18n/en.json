@@ -252,7 +252,8 @@
             "upcoming": "Upcoming",
             "saveSearch": "Save Search",
             "userWish": "My Wish List",
-            "schedule": "Schedule"
+            "schedule": "Schedule",
+            "inquiry": "Inquiry"
         },
         "search": {
             "title": "Search",
@@ -480,7 +481,10 @@
         },
         "dashboard": {
             "title": "Dashboard",
-            "recentSearch": "Recent Search"
+            "recentSearch": "Recent Search",
+            "featuredDiamond": "Featured Diamond",
+            "newGoods": "New Goods",
+            "inquiry": "Inquiry"
         },
         "newgoods": {
             "title": "New Goods"
@@ -511,7 +515,8 @@
                 "changePassword": "Change Password",
                 "saveSearch": "Save Search",
                 "userWish": "My Wish List",
-                "schedule": "Schedule"
+                "schedule": "Schedule",
+                "inquiry": "Inquiry"
             },
             "personalDetail": {
                 "title": "Personal Detail"
@@ -676,6 +681,15 @@
                 "isNewStock": "New Stock",
                 "daily": "Daily",
                 "weekly": "Weekly"
+            },
+            "inquiry": {
+                "title": "Inquiry",
+                "packetNo": "PacketNo",
+                "price": "Price",
+                "back": "Disc.",
+                "deliveryAt": "DeliveryAt",
+                "comment": "Comment",
+                "entryDate": "Date"
             }
         }
     },

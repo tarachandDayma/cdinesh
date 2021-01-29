@@ -29,4 +29,9 @@ export class InquiryService extends RestService {
         url = this.env.ApiGateway + "/Inquiry/Insert";
         return super.post(url,obj);
     }
+    public GetInquiries(): Observable<InquiryModel[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/Inquiry/LoadInquiries";
+        return super.Get(url);
+    }
 }

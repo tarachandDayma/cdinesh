@@ -687,4 +687,38 @@ export class MyCartComponent implements OnInit {
         });
       }
   }
+  HoldDiamonds: diamondsearchResult[] = [];
+  LoadHoldModel(content) {
+    this.HoldDiamonds = JSON.parse(JSON.stringify(this.searchResult.filter(x => x.selected)));
+    this.HoldDiamonds.forEach(element => {
+      element.selected = false;
+      element.deliveryAt = this.delveryAt;
+      element.showDetail = false;
+    });
+    if (this.HoldDiamonds.length > 0) {
+
+      this.modalService.open(content, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+      }, (reason) => {
+
+      });
+    }
+  }
+  ConfirmDiamonds: diamondsearchResult[] = [];
+  LoadConfirmModel(content) {
+    this.ConfirmDiamonds = JSON.parse(JSON.stringify(this.searchResult.filter(x => x.selected)));
+    this.ConfirmDiamonds.forEach(element => {
+      element.selected = false;
+      element.deliveryAt = this.delveryAt;
+      element.showDetail = false;
+    });
+    if (this.ConfirmDiamonds.length > 0) {
+
+      this.modalService.open(content, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+      }, (reason) => {
+
+      });
+    }
+  }
 }

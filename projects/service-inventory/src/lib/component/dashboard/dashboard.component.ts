@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { diamondsearchResult } from '../../models/diamond.result.model';
 import { UserSearchModel } from '../../models/user.search.model';
 import { CartService } from '../../service/cart.service';
+import { InquiryService } from '../../service/inquirt.service';
 import { SearchService } from '../../service/search.service';
+import { TopStoneService } from '../../service/topstone.service';
 
 @Component({
   selector: 'lib-dashboard',
@@ -13,11 +16,17 @@ export class DashboardComponent implements OnInit {
 
   cartCount:number;
   recnetSearches:UserSearchModel[];
-  constructor(private router:Router,private cartService: CartService,private searchService: SearchService) { }
+  topStones:diamondsearchResult[]=[];
+  NewGoodsCount:number=0;
+  InquiryCount:number=0;
+  constructor(private router:Router,private cartService: CartService,private searchService: SearchService,private topStoneService:TopStoneService,private inquiryservice:InquiryService) { }
 
   ngOnInit(): void {
     this.LoadCart();
     this.LoadRecentSearch();
+    this.GetAllFeaturedStones();
+    this.GetNewGoodCount();
+    this.GetInquiryCount();
   }
   LoadCart() {
     this.cartService.GetAll().subscribe(result => {
@@ -32,5 +41,26 @@ export class DashboardComponent implements OnInit {
   search(item){
     localStorage.setItem("recentSearch",JSON.stringify(item));
     this.router.navigate(["/inventory/search"]);
+  }
+  GetAllFeaturedStones(){
+    this.topStoneService.GetAll().subscribe(result=>{
+        this.topStones= result;
+    },error=>{
+
+    })
+  }
+  GetNewGoodCount(){
+    this.searchService.GetNewGoodsCount().subscribe(result=>{
+        this.NewGoodsCount= result;
+    },error=>{
+
+    })
+  }
+  GetInquiryCount(){
+    this.inquiryservice.GetInquiries().subscribe(result=>{
+        this.InquiryCount= result.length;
+    },error=>{
+
+    })
   }
 }

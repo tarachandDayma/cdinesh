@@ -5,6 +5,7 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { DiamondDetailComponent } from './component/diamond-detail/diamond-detail.component';
 import { DiamondScheduleComponent } from './component/diamond-schedule/diamond-schedule.component';
 import { DownloadSetupComponent } from './component/download-setup/download-setup.component';
+import { InquiryDetailComponent } from './component/inquiry-detail/inquiry-detail.component';
 import { MyCartComponent } from './component/my-cart/my-cart.component';
 import { NewgoodsComponent } from './component/newgoods/newgoods.component';
 import { PairSetupComponent } from './component/pair-setup/pair-setup.component';
@@ -94,7 +95,11 @@ const routes: Routes = [
     ,{
       path:"schedule",
       component:DiamondScheduleComponent
+    },{
+      path:"inquiry",
+      component:InquiryDetailComponent
     }
+
   ];
   @NgModule({
     imports: [RouterModule.forChild(routes)],
