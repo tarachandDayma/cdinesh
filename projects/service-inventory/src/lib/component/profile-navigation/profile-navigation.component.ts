@@ -35,7 +35,9 @@ export class ProfileNavigationComponent implements OnInit {
     if (-1 != this.router.url.indexOf("inquiry")) {
       this.currentMenu = "inquiry";
     }
-    
+    setTimeout(() => {
+        document.getElementById(this.currentMenu).focus();
+    }, 1000);  
   }
 
 }

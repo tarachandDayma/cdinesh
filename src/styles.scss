@@ -420,8 +420,8 @@
     }
     
      ::-webkit-scrollbar-thumb {
-        background-color: #e5803f;
-        background-image: -webkit-linear-gradient(90deg, #e5803f 25%, transparent 25%, transparent 50%, #e5803f 50%, #e5803f 75%, transparent 75%, transparent)
+        background-color: #dad5d5;
+        background-image: -webkit-linear-gradient( 90deg, #dad5d5 25%, transparent 25%, transparent 50%, #dad5d5 50%, #dad5d5 75%, transparent 75%, transparent);
     }
     
      ::-webkit-scrollbar-track {
@@ -436,8 +436,8 @@
     }
     
      ::-webkit-scrollbar-thumb {
-        background-color: #e5803f;
-        background-image: -webkit-linear-gradient(90deg, #e5803f 25%, transparent 25%, transparent 50%, #e5803f 50%, #e5803f 75%, transparent 75%, transparent)
+        background-color: #dad5d5;
+        background-image: -webkit-linear-gradient( 90deg, #dad5d5 25%, transparent 25%, transparent 50%, #dad5d5 50%, #dad5d5 75%, transparent 75%, transparent);
     }
     
     .footer {
@@ -914,6 +914,12 @@
         // padding-right: 25px;
         padding-left: 15px;
         padding-right: 15px
+    }
+    
+    .setupContainer {
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 0px !important;
     }
     
     .btn-sm {

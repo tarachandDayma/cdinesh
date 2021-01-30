@@ -394,7 +394,7 @@
             "export": "Export",
             "inquiryButton": "Inquiry",
             "holdButton": "Hold",
-            "confirmButton": "Hold",
+            "confirmButton": "Place Order",
             "addSchedule": "Add Schedule"
         },
         "offer": {
@@ -516,7 +516,8 @@
                 "saveSearch": "Save Search",
                 "userWish": "My Wish List",
                 "schedule": "Schedule",
-                "inquiry": "Inquiry"
+                "inquiry": "Inquiry",
+                "menu": "Menu"
             },
             "personalDetail": {
                 "title": "Personal Detail"

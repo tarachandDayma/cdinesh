@@ -5,6 +5,17 @@
             <div class="row">
                 <div class="col-sm-12">
                     <span [translate]="'inventory.search.title'"> TITLE </span>
+                    <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary ml-1"> <span [translate]="'inventory.search.search'"
+                            (click)="noramlSearch()"> Search </span></button>
+                        <button type="button" class="btn btn-primary ml-1"> <span [translate]="'inventory.search.pairsearch'"
+                                (click)="pairSearch()"> Search Pair </span></button>
+                        <button (click)="LoadSaveSearchModel(contentSaveSearch)" type="button" class="btn btn-primary ml-1"><span
+                            [translate]="'inventory.search.save&search'"> Save & Search </span></button>
+                        <button (click)="LoadScheduleModal(contentSchedule)" type="button" class="btn btn-primary ml-1" [translate]="'inventory.search.addSchedule'"></button>
+                        <button (click)="reload()" type="button" class="btn btn-primary ml-1"><i class="fa fa-refresh"
+                            aria-hidden="true"></i></button>
+                    </div>
                     <div class="pull-right delivery-div">
                         <div class="input-group input-group-sm mb-1">
                             <div class="input-group-prepend delivery-lable" style="background-color: transparent;border: 0;">
@@ -29,21 +40,42 @@
                 <div class="col-sm-12">
                     <span [translate]="'inventory.search.searchresult'"> TITLE </span>
                     <div class="pull-right">
-                        <span style="color: grey;" [translate]="'inventory.search.summary.pcs'">Pieces:</span>
-                        <span style="color: red;">{{selectedtotalPcs}}/</span>
-                        <span style="color: navy;">{{totalPcs}}</span> &nbsp;
-                        <span style="color: grey;" [translate]="'inventory.search.summary.carat'">Cts:</span>
-                        <span style="color: red;">{{selectedtotalCarat | number : '1.2-2'}}/</span>
-                        <span style="color: navy;">{{totalCarat | number : '1.2-2'}}</span>&nbsp;
-                        <span style="color: grey;" [translate]="'inventory.search.summary.avgDisc'">Avg Disc</span>
-                        <span style="color: red;">{{selectedtotalAvgDisc | number : '1.2-2'}}/</span>
-                        <span style="color: navy;">{{totalAvgDisc | number : '1.2-2'}}</span>&nbsp;
-                        <span style="color: grey;" [translate]="'inventory.search.summary.avgPrice'">Avg Price</span>
-                        <span style="color: red;">{{selectedtotalAvgPrice | number : '1.2-2'}}/</span>
-                        <span style="color: navy;">{{totalAvgPrice | number : '1.2-2'}}</span>&nbsp;
-                        <span style="color: grey;" [translate]="'inventory.search.summary.amount'">Amount</span>
-                        <span style="color: red;">{{selectedtotalPrice | number : '1.2-2'}}/</span>
-                        <span style="color: navy;">{{totalPrice | number : '1.2-2'}}</span>
+                        <div class="d-none d-sm-none d-md-block" role="group" aria-label="Basic example">
+                            <span style="color: grey;" [translate]="'inventory.search.summary.pcs'">Pieces:</span>
+                            <span style="color: red;">{{selectedtotalPcs}}/</span>
+                            <span style="color: navy;">{{totalPcs}}</span> &nbsp;
+                            <span style="color: grey;" [translate]="'inventory.search.summary.carat'">Cts:</span>
+                            <span style="color: red;">{{selectedtotalCarat | number : '1.2-2'}}/</span>
+                            <span style="color: navy;">{{totalCarat | number : '1.2-2'}}</span>&nbsp;
+                            <span style="color: grey;" [translate]="'inventory.search.summary.avgDisc'">Avg Disc</span>
+                            <span style="color: red;">{{selectedtotalAvgDisc | number : '1.2-2'}}/</span>
+                            <span style="color: navy;">{{totalAvgDisc | number : '1.2-2'}}</span>&nbsp;
+                            <span style="color: grey;" [translate]="'inventory.search.summary.avgPrice'">Avg Price</span>
+                            <span style="color: red;">{{selectedtotalAvgPrice | number : '1.2-2'}}/</span>
+                            <span style="color: navy;">{{totalAvgPrice | number : '1.2-2'}}</span>&nbsp;
+                            <span style="color: grey;" [translate]="'inventory.search.summary.amount'">Amount</span>
+                            <span style="color: red;">{{selectedtotalPrice | number : '1.2-2'}}/</span>
+                            <span style="color: navy;">{{totalPrice | number : '1.2-2'}}</span>
+                        </div>
+                        <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
+                            <small>
+                                <span style="color: grey;" [translate]="'inventory.search.summary.pcs'">Pieces:</span>
+                            <span style="color: red;">{{selectedtotalPcs}}/</span>
+                            <span style="color: navy;">{{totalPcs}}</span> &nbsp;
+                            <span style="color: grey;" [translate]="'inventory.search.summary.carat'">Cts:</span>
+                            <span style="color: red;">{{selectedtotalCarat | number : '1.2-2'}}/</span>
+                            <span style="color: navy;">{{totalCarat | number : '1.2-2'}}</span>&nbsp;
+                            <span style="color: grey;" [translate]="'inventory.search.summary.avgDisc'">Avg Disc</span>
+                            <span style="color: red;">{{selectedtotalAvgDisc | number : '1.2-2'}}/</span>
+                            <span style="color: navy;">{{totalAvgDisc | number : '1.2-2'}}</span>&nbsp;
+                            <span style="color: grey;" [translate]="'inventory.search.summary.avgPrice'">Avg Price</span>
+                            <span style="color: red;">{{selectedtotalAvgPrice | number : '1.2-2'}}/</span>
+                            <span style="color: navy;">{{totalAvgPrice | number : '1.2-2'}}</span>&nbsp;
+                            <span style="color: grey;" [translate]="'inventory.search.summary.amount'">Amount</span>
+                            <span style="color: red;">{{selectedtotalPrice | number : '1.2-2'}}/</span>
+                            <span style="color: navy;">{{totalPrice | number : '1.2-2'}}</span>
+                            </small>
+                        </div>
                     </div>
                 </div>
 
@@ -1113,44 +1145,64 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="pull-left">
-                            <button (click)="select3Ex()" [ngClass]="_3Ex?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.3ex'"> 3EX </span></button>
-                            <button (click)="select2Ex()" [ngClass]="_2Ex?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.2ex'"> 2EX </span></button>
-                            <button (click)="select3VG()" [ngClass]="_3Vg?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.3vg'"> 3VG+ </span></button>
-                            <button (click)="toggleNoBGM()" [ngClass]="nobgm?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.nobgm'"> NO BGM </span></button>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button (click)="select3Ex()" [ngClass]="_3Ex?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.3ex'"> 3EX </span></button>
+                                <button (click)="select2Ex()" [ngClass]="_2Ex?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.2ex'"> 2EX </span></button>
+                                <button (click)="select3VG()" [ngClass]="_3Vg?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.3vg'"> 3VG+ </span></button>
+                                <button (click)="toggleNoBGM()" [ngClass]="nobgm?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'inventory.search.nobgm'"> NO BGM </span></button>
+                            </div>
                         </div>
                         <div class="pull-right">
-                            <button type="button" class="btn btn-primary"> <span [translate]="'inventory.search.search'"
+                            <div class="btn-group d-none btn-group d-sm-none d-md-block" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary ml-1"> <span [translate]="'inventory.search.search'"
                                     (click)="noramlSearch()"> Search </span></button>
-                            <button type="button" class="btn btn-primary"> <span [translate]="'inventory.search.pairsearch'"
+                                <button type="button" class="btn btn-primary ml-1"> <span [translate]="'inventory.search.pairsearch'"
                                         (click)="pairSearch()"> Search Pair </span></button>
-                            <button (click)="LoadSaveSearchModel(contentSaveSearch)" type="button" class="btn btn-primary"><span
+                                <button (click)="LoadSaveSearchModel(contentSaveSearch)" type="button" class="btn btn-primary ml-1"><span
                                     [translate]="'inventory.search.save&search'"> Save & Search </span></button>
-                            <button (click)="LoadScheduleModal(contentSchedule)" type="button" class="btn btn-primary" [translate]="'inventory.search.addSchedule'"></button>
-                            <button (click)="reload()" type="button" class="btn btn-primary"><i class="fa fa-refresh"
+                                <button (click)="LoadScheduleModal(contentSchedule)" type="button" class="btn btn-primary ml-1" [translate]="'inventory.search.addSchedule'"></button>
+                                <button (click)="reload()" type="button" class="btn btn-primary"><i class="fa fa-refresh"
                                     aria-hidden="true"></i></button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-    <main class="myform" style="height: 87vh;" *ngIf="showResult">
+    <main class="myform" style="height: 85vh;" *ngIf="showResult">
         <div>
             <div class="card" style="overflow: hidden;">
                 <div class="card-header">
                     <div class="pull-right">
-                        <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
+                        <div class="d-none d-sm-none d-md-block" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                                 [translate]="'inventory.search.modifysearch'" (click)="backtoSearch()"> Modify Search
-                            </span></button> &nbsp;
-                        <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
+                            </span></button>
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.inquiryButton'" (click)="LoadInquiryModel(contentInquiry)"> Inquiry
-                        </span></button> &nbsp;
-                        <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
+                        </span></button>
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.holdButton'" (click)="LoadHoldModel(contentHold)"> Hold
-                        </span></button>&nbsp;
-                        <button type="button" class="btn btn-primary" style="font-weight: 550;"> <span
+                        </span></button>
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.confirmButton'" (click)="LoadConfirmModel(contentConfirm)"> Place Order
                         </span></button>
+                        </div>
+                        <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                                [translate]="'inventory.search.modifysearch'" (click)="backtoSearch()"> Modify Search
+                            </span></button>
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            [translate]="'inventory.search.inquiryButton'" (click)="LoadInquiryModel(contentInquiry)"> Inquiry</span></button>
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            [translate]="'inventory.search.holdButton'" (click)="LoadHoldModel(contentHold)"> Hold
+                        </span></button>
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            [translate]="'inventory.search.confirmButton'" (click)="LoadConfirmModel(contentConfirm)"> Place Order
+                        </span></button>
+                        </div>
                     </div>
                     <div class="pull-right delivery-div">
                         <div class="input-group input-group-sm mb-1">
@@ -1168,30 +1220,21 @@
                 </div>
                 <div class="card-header" style="overflow: hidden;">
                     <div class="pull-left button-div">
-                        <ul class="tool-buttons">
-                            <li>
-                                <span (click)="showSelected()"><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span>
-                            </li>
-                            <li> <strong style="margin-left: 6px;margin-right: 6px;"> |</strong></li>
-                            <li>
-                                <span (click)="AddtoCartMultiple()"><img style="width: 16px;" src="/assets/img/add-to-cart.4a5821ad.svg" alt=""><span  [translate]="'inventory.search.addtocart'">Add To Cart </span></span>
-                            </li>
-                            <li> <strong style="margin-left: 6px;margin-right: 6px;"> |</strong></li>
-                            <li>
-                                <span (click)="Export(content)"><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span>
-                            </li>
-                            <li> <strong style="margin-left: 6px;margin-right: 6px;"> |</strong></li>
-                            <li>
-                                <span (click)="LoadOfferModel(contentOffer)"><img style="width: 16px;" src="/assets/img/offer.webp" alt=""><span  [translate]="'inventory.offer.title'">Offer</span></span>
-                            </li>
-                            <li> <strong style="margin-left: 6px;margin-right: 6px;"> |</strong></li>
-                            <li>
-                                <span (click)="LoadUserWishModal(contentUserWish)"><img style="width: 16px;" src="/assets/img/wish.png" alt=""><span  [translate]="'inventory.profile.userWish.addWish'">Add Wish</span></span>
-                            </li>
-                        </ul>
 
-
-
+                        <div class="btn-group d-none btn-group d-sm-none d-md-block" role="group" aria-label="Basic example">
+                            <button type="button" class="btn ml-1" style="color: black;font-weight: 600;background-color: #dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="showSelected()"><span ><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span> </button>
+                            <button type="button" class="btn ml-1" style="color: black;font-weight: 600;background-color: #dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="AddtoCartMultiple()"><span ><img style="width: 16px;" src="/assets/img/add-to-cart.4a5821ad.svg" alt=""><span  [translate]="'inventory.search.addtocart'">Add To Cart </span></span> </button>
+                            <button type="button" class="btn ml-1" style="color: black;font-weight: 600;background-color: #dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="LoadOfferModel(contentOffer)"><span ><img style="width: 16px;" src="/assets/img/offer.webp" alt=""><span  [translate]="'inventory.offer.title'">Offer</span></span></button>
+                            <button type="button" class="btn ml-1" style="color: black;font-weight: 600;background-color: #dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="Export(content)"><span ><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span></button>
+                            <button type="button" class="btn ml-1" style="color: black; font-weight: 600;background-color:#dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="LoadUserWishModal(contentUserWish)"><span ><img style="width: 16px;" src="/assets/img/wish.png" alt=""><span  [translate]="'inventory.profile.userWish.addWish'">Add Wish</span></span></button>
+                        </div>
+                        <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
+                            <button type="button" class="btn bg-transparent ml-1" style="color: black;font-weight: 600;background-color: #dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="showSelected()"><span ><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span> </button>
+                            <button type="button" class="btn bg-transparent ml-1" style="color: black;font-weight: 600;background-color: #dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="AddtoCartMultiple()"><span ><img style="width: 16px;" src="/assets/img/add-to-cart.4a5821ad.svg" alt=""><span  [translate]="'inventory.search.addtocart'">Add To Cart </span></span> </button>
+                            <button type="button" class="btn bg-transparent ml-1" style="color: black;font-weight: 600;background-color: #dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="LoadOfferModel(contentOffer)"><span ><img style="width: 16px;" src="/assets/img/offer.webp" alt=""><span  [translate]="'inventory.offer.title'">Offer</span></span></button>
+                            <button type="button" class="btn bg-transparent ml-1" style="color: black;font-weight: 600;background-color: #dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="Export(content)"><span ><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span></button>
+                            <button type="button" class="btn bg-transparent ml-1" style="color: black;font-weight: 600;background-color: #dad5d5 !important;border: grey solid 0.5px !important;border-radius: 0 !important;" (click)="LoadUserWishModal(contentUserWish)"><span ><img style="width: 16px;" src="/assets/img/wish.png" alt=""><span  [translate]="'inventory.profile.userWish.addWish'">Add Wish</span></span></button>
+                        </div>
                     </div>
                     <div class="pull-right status-div ">
                         <div class="input-group input-group-sm mb-1">
@@ -1776,27 +1819,55 @@
                                             <a class="btn btn-secondary" (click)="LastPage()">>></a>
                         </div>
                         <div class="pull-right">
-                            <div class="" wfd-id="521">
-                                <span class="footer-mobile-status-item" wfd-id="528"> &nbsp;
-                                    <img src="/assets/img/Available.png" alt=""> &nbsp;
-                                    <span wfd-id="529" [translate]="'inventory.search.result.stockstatus.avialable'">
-                                        Available </span>
-                                </span>
-                                <span class="footer-mobile-status-item" wfd-id="526"> &nbsp;
-                                    <img src="/assets/img/Bussiness.png" alt=""> &nbsp;
-                                    <span wfd-id="527" [translate]="'inventory.search.result.stockstatus.memo'">
-                                        Business Process </span>
-                                </span>
-                                <span class="footer-mobile-status-item" wfd-id="524"> &nbsp;
-                                    <img src="/assets/img/NewStock.png" alt=""> &nbsp;
-                                    <span wfd-id="525" [translate]="'inventory.search.result.stockstatus.new'"> New
+                            <div class="d-none d-sm-none d-md-block" role="group" aria-label="Basic example">
+                                <div class="" wfd-id="521">
+                                    <span class="footer-mobile-status-item" wfd-id="528"> &nbsp;
+                                        <img src="/assets/img/Available.png" alt=""> &nbsp;
+                                        <span wfd-id="529" [translate]="'inventory.search.result.stockstatus.avialable'">
+                                            Available </span>
                                     </span>
-                                </span>
-                                <span class="footer-mobile-status-item" wfd-id="522"> &nbsp;
-                                    <img src="/assets/img/InLab.png" alt=""> &nbsp;
-                                    <span wfd-id="523" [translate]="'inventory.search.result.stockstatus.inLab'"> In
-                                        Lab</span>
-                                </span>
+                                    <span class="footer-mobile-status-item" wfd-id="526"> &nbsp;
+                                        <img src="/assets/img/Bussiness.png" alt=""> &nbsp;
+                                        <span wfd-id="527" [translate]="'inventory.search.result.stockstatus.memo'">
+                                            Business Process </span>
+                                    </span>
+                                    <span class="footer-mobile-status-item" wfd-id="524"> &nbsp;
+                                        <img src="/assets/img/NewStock.png" alt=""> &nbsp;
+                                        <span wfd-id="525" [translate]="'inventory.search.result.stockstatus.new'"> New
+                                        </span>
+                                    </span>
+                                    <span class="footer-mobile-status-item" wfd-id="522"> &nbsp;
+                                        <img src="/assets/img/InLab.png" alt=""> &nbsp;
+                                        <span wfd-id="523" [translate]="'inventory.search.result.stockstatus.inLab'"> In
+                                            Lab</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
+                                <div class="" wfd-id="521">
+                                    <small>
+                                    <span class="footer-mobile-status-item" wfd-id="528"> &nbsp;
+                                        <img src="/assets/img/Available.png" alt=""> &nbsp;
+                                        <span wfd-id="529" [translate]="'inventory.search.result.stockstatus.avialable'">
+                                            Available </span>
+                                    </span>
+                                    <span class="footer-mobile-status-item" wfd-id="526"> &nbsp;
+                                        <img src="/assets/img/Bussiness.png" alt=""> &nbsp;
+                                        <span wfd-id="527" [translate]="'inventory.search.result.stockstatus.memo'">
+                                            Business Process </span>
+                                    </span>
+                                    <span class="footer-mobile-status-item" wfd-id="524"> &nbsp;
+                                        <img src="/assets/img/NewStock.png" alt=""> &nbsp;
+                                        <span wfd-id="525" [translate]="'inventory.search.result.stockstatus.new'"> New
+                                        </span>
+                                    </span>
+                                    <span class="footer-mobile-status-item" wfd-id="522"> &nbsp;
+                                        <img src="/assets/img/InLab.png" alt=""> &nbsp;
+                                        <span wfd-id="523" [translate]="'inventory.search.result.stockstatus.inLab'"> In
+                                            Lab</span>
+                                    </span>
+                                     </small>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -37,17 +37,17 @@ export class DownloadSetupComponent implements OnInit {
   }
   mouseMove(field,indx) {
     if (this.dragStar) {
-      var _oldFields = JSON.parse(JSON.stringify(field));
-      field.splice(this.dragIndex, 1);
-      field.splice(indx, 0, _oldFields[this.dragIndex]);
+      var _oldFields = JSON.parse(JSON.stringify(field.fieldsModels));
+      field.fieldsModels.splice(this.dragIndex, 1);
+      field.fieldsModels.splice(indx, 0, _oldFields[this.dragIndex]);
       this.dragIndex = indx;
     }
   }
   mouseUp(field,indx) {
     if (this.dragStar) {
-      var _oldFields = JSON.parse(JSON.stringify(field));
-      field.splice(this.dragIndex, 1);
-      field.splice(indx, 0, _oldFields[this.dragIndex]);
+      var _oldFields = JSON.parse(JSON.stringify(field.fieldsModels));
+      field.fieldsModels.splice(this.dragIndex, 1);
+      field.fieldsModels.splice(indx, 0, _oldFields[this.dragIndex]);
       this.dragIndex = indx;
       this.dragStar = false;
       this.dragIndex = null;
