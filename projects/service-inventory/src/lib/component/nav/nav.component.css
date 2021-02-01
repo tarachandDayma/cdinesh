@@ -82,3 +82,51 @@ body {
         margin-top: 8px !important;
     }
 }
+
+.navbar-badge {
+    font-size: .8rem;
+    font-weight: 600;
+    padding: 4px 5px;
+    position: absolute;
+    right: 5px;
+    top: 6px;
+}
+
+.badge-warning {
+    color: #192b4a;
+    background-color: #e5803f;
+}
+
+.navbar-nav li {
+    position: relative;
+}
+
+.navbar-nav .subli {
+    position: relative;
+    margin-left: 25px;
+}
+
+.subli .nav-link {
+    color: white;
+    text-transform: capitalize;
+}
+
+.subli div {
+    color: black;
+}
+
+.subli div>a {
+    color: black !important;
+}
+
+header .fa.icon {
+    font-size: 24px;
+    background: #192b4a;
+    /* padding: 5px; */
+    border-radius: 100px;
+    line-height: 42px;
+    width: 42px;
+    text-align: center;
+    display: inline-block;
+    color: white;
+}

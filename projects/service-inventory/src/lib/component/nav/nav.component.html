@@ -20,9 +20,10 @@
                             </div>
                         </div>
                     </form>
-                    <ul class="navbar-nav ml-auto navbar-nav flex-row ml-md-auto d-md-flex">
+
+                    <ul class="navbar-nav ml-auto navbar-nav flex-row ml-md-auto d-md-flex d-none d-sm-none d-md-block">
                         <li class="nav-item dropdown ">
-                            <a class="nav-link" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="#" class="nav-link dropdown-toggle mt-2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{Language.toUpperCase()}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -54,14 +55,12 @@
                         <li>
                             <a class="nav-link" routerLink="/inventory/mycart" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-shopping-cart icon" style="font-size: 16px;"></i>
-                                <!-- <img style="width: 35px;" src="/assets/img/cart.ad9bc51e.png"> -->
-                                <sup data-show="true" class="ant-scroll-number ant-badge-count cart-count" title="1"><span class="ant-scroll-number-only" style="transform: translateY(-1100%);">{{cartCount}}</span></sup>
                             </a>
-
+                            <span class="badge badge-warning navbar-badge">{{cartCount}}</span>
                         </li>
                         <li class="nav-item dropdown profile">
-                            <a *ngIf="User!=undefined" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="./assets/img/1.jpg" /> {{User.userName}}
+                            <a *ngIf="User!=undefined" class="nav-link dropdown-toggle mt-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{User.userName}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <div class="header">
@@ -85,6 +84,69 @@
                 </div>
             </nav>
         </div>
+    </div>
+    <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
+
+        <ul class="navbar-nav ml-auto navbar-nav flex-row ml-md-auto d-md-flex">
+            <li class="nav-item dropdown subli">
+                <a href="#" class="nav-link dropdown-toggle mt-2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{Language.toUpperCase()}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="body">
+                        <span (click)="LangChange('en')" class="dropdown-item">EN</span>
+                        <span (click)="LangChange('zh')" class="dropdown-item">ZH</span>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown subli">
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-bell-o icon"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="header">
+
+                    </div>
+                    <div class="body">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="footer">
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </div>
+            </li>
+            <li class="subli">
+                <a class="nav-link " routerLink="/inventory/mycart" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-shopping-cart icon"></i>
+                </a>
+                <span class="badge badge-warning navbar-badge">{{cartCount}}</span>
+            </li>
+            <li class="nav-item dropdown profile subli">
+                <a *ngIf="User!=undefined" class="nav-link dropdown-toggle mt-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{User.userName}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="header">
+
+                    </div>
+                    <div class="body">
+                        <a class="dropdown-item" routerLink="/inventory/personalDetail" [translate]="'inventory.nav.profile'">Profile</a>
+                        <a class="dropdown-item" routerLink="/inventory/saveSearch" [translate]="'inventory.nav.saveSearch'">SaveSearch</a>
+                        <a class="dropdown-item" routerLink="/inventory/myWish" [translate]="'inventory.nav.userWish'">Wish</a>
+                        <a class="dropdown-item" routerLink="/inventory/schedule" [translate]="'inventory.nav.schedule'">Schedule</a>
+                        <a class="dropdown-item" routerLink="/inventory/inquiry" [translate]="'inventory.nav.inquiry'">Inquiry</a>
+                        <a *ngIf="AllowControlPanel" class="dropdown-item" href="/controlpanel" [translate]="'inventory.nav.controlpanel'" target="blank">ControlPanel</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="footer">
+                        <a class="dropdown-item" (click)="logout()" [translate]="'inventory.nav.logout'">Logout</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </header>
 <div class="sidebar collapse navbar-collapse" id="navbarSupportedContent">

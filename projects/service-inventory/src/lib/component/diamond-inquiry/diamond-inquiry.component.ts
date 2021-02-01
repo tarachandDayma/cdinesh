@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -38,7 +38,7 @@ export class DiamondInquiryComponent implements OnInit,OnChanges {
   selectedtotalAvgDisc: number;
   selectedtotalPrice: number;
   comment: string;
-
+  onsave:EventEmitter<any>= new EventEmitter<any>();
   ////summary variable
   constructor(private loader: loaderserice
     , private router: Router
@@ -276,6 +276,7 @@ export class DiamondInquiryComponent implements OnInit,OnChanges {
       this.loader.show(false);
       this.modalService.dismissAll();
       this.alertService.success(this.translate.instant("inventory.inquiry.success"), "");
+      this.onsave.emit();
 
     }, erro => {
       this.loader.show(false);

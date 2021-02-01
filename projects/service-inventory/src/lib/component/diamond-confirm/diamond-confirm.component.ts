@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -39,7 +39,7 @@ export class DiamondConfirmComponent implements OnInit {
   selectedtotalAvgDisc: number;
   selectedtotalPrice: number;
   comment: string;
-
+  onsave:EventEmitter<any>= new EventEmitter<any>();
   ////summary variable
   constructor(private loader: loaderserice
     , private router: Router
@@ -277,7 +277,7 @@ export class DiamondConfirmComponent implements OnInit {
       this.loader.show(false);
       this.modalService.dismissAll();
       this.alertService.success(this.translate.instant("inventory.confirm.success"), "");
-
+      this.onsave.emit();
     }, erro => {
       this.loader.show(false);
       this.alertService.Error(this.translate.instant("inventory.confirm.error"), "");

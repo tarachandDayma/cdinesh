@@ -2239,4 +2239,13 @@ Greetings of the day `;
     });
 
   }
+  InquirySave(data){
+      this.searchDiamond();
+  }
+  HoldSave(data){
+    this.searchDiamond();
+  }
+  ConfirmSave(data){
+    this.searchDiamond();
+  }
 }

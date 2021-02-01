@@ -2075,7 +2075,7 @@
     </div>
     <div class="modal-body">
         <div class="col-sm-12">
-            <lib-diamond-inquiry [diamonds]="inquiryDiamonds"></lib-diamond-inquiry>
+            <lib-diamond-inquiry (onsave)="InquirySave($event)" [diamonds]="inquiryDiamonds"></lib-diamond-inquiry>
         </div>
     </div>
     <div class="modal-footer">
@@ -2138,7 +2138,7 @@
     </div>
     <div class="modal-body">
         <div class="col-sm-12">
-            <lib-diamond-hold [diamonds]="HoldDiamonds"></lib-diamond-hold>
+            <lib-diamond-hold (onsave)="HoldSave($event)" [diamonds]="HoldDiamonds"></lib-diamond-hold>
         </div>
     </div>
     <div class="modal-footer">
@@ -2153,7 +2153,7 @@
     </div>
     <div class="modal-body">
         <div class="col-sm-12">
-            <lib-diamond-hold [diamonds]="ConfirmDiamonds"></lib-diamond-hold>
+            <lib-diamond-confirm (onsave)="ConfirmSave($event)" [diamonds]="ConfirmDiamonds"></lib-diamond-confirm>
         </div>
     </div>
     <div class="modal-footer">
