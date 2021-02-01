@@ -499,6 +499,11 @@ table td {
 
 main .btn {
     font-size: 12px;
+    border-radius: 0px !important;
+}
+
+.btn {
+    border-radius: 0px !important;
 }
 
 .bg-primary,

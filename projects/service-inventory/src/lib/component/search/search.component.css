@@ -343,3 +343,11 @@ footer button i {
     border-bottom: 3px solid orange;
     color: orange;
 }
+
+.tool-button {
+    color: black;
+    font-weight: 600;
+    background-color: #dad5d5 !important;
+    border: grey solid 0.5px !important;
+    border-radius: 0 !important;
+}

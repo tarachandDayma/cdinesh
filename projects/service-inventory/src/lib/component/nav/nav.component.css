@@ -1,4 +1,4 @@
-body{
+body {
     overflow: hidden;
 }
 
@@ -36,6 +36,18 @@ body{
 .sidebar a:hover:not(.active) {
     background-color: #555;
     color: white;
+}
+
+.cart-count {
+    background-color: transparent;
+    box-shadow: none;
+    width: 20px;
+    padding: 0px;
+    margin-left: -30px;
+    color: black;
+    font-size: 11px;
+    /* margin-top: 31px; */
+    top: 10px;
 }
 
 @media screen and (min-width: 701px) {
