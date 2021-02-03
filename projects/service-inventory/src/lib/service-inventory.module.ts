@@ -33,6 +33,7 @@ import { DiamondConfirmComponent } from './component/diamond-confirm/diamond-con
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DiamondScheduleComponent } from './component/diamond-schedule/diamond-schedule.component';
 import { InquiryDetailComponent } from './component/inquiry-detail/inquiry-detail.component';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 
 
@@ -55,7 +56,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    NgxImageZoomModule 
   ],
   exports: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent]
 })

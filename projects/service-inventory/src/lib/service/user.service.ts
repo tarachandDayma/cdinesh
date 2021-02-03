@@ -41,4 +41,9 @@ export class UserService extends RestService {
         var url = this.env.authServerUrl + "/api/Captch/Getcaptcha";
         return super.Get(url);
     }
+    public GetSeller(): Observable<UserModel[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/GetSalesExecutive";
+        return super.Get(url);
+    }
 }

@@ -90,6 +90,24 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card" style="text-transform: capitalize;">
+                        <div class="card-header">
+                            <h5 [translate]="'inventory.dashboard.seller.title'"></h5>
+                        </div>
+                        <div>
+                            <div class="row" *ngFor="let item of sellers">
+                                <div class="col-sm-12">
+                                    <strong [translate]="'inventory.dashboard.seller.name'"></strong> : <span>{{item.userBasicInfo.firstName +' '+ item.userBasicInfo.lastName}}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <strong [translate]="'inventory.dashboard.seller.email'"></strong> : <span>{{item.userBasicInfo.emailId }}</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <strong [translate]="'inventory.dashboard.seller.contactNo'"></strong> : <span>{{item.userBasicInfo.contactNo }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { diamondsearchResult } from '../../models/diamond.result.model';
 import { UserSearchModel } from '../../models/user.search.model';
+import { UserModel } from '../../models/user/user.model';
 import { CartService } from '../../service/cart.service';
 import { InquiryService } from '../../service/inquirt.service';
 import { SearchService } from '../../service/search.service';
 import { TopStoneService } from '../../service/topstone.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'lib-dashboard',
@@ -19,7 +21,9 @@ export class DashboardComponent implements OnInit {
   topStones:diamondsearchResult[]=[];
   NewGoodsCount:number=0;
   InquiryCount:number=0;
-  constructor(private router:Router,private cartService: CartService,private searchService: SearchService,private topStoneService:TopStoneService,private inquiryservice:InquiryService) { }
+  sellers:UserModel[]=[];
+  constructor(private router:Router,private cartService: CartService,private searchService: SearchService,private topStoneService:TopStoneService,private inquiryservice:InquiryService,
+    private userService:UserService) { }
 
   ngOnInit(): void {
     this.LoadCart();
@@ -27,6 +31,7 @@ export class DashboardComponent implements OnInit {
     this.GetAllFeaturedStones();
     this.GetNewGoodCount();
     this.GetInquiryCount();
+    this.GetSeller();
   }
   LoadCart() {
     this.cartService.GetAll().subscribe(result => {
@@ -59,6 +64,13 @@ export class DashboardComponent implements OnInit {
   GetInquiryCount(){
     this.inquiryservice.GetInquiries().subscribe(result=>{
         this.InquiryCount= result.length;
+    },error=>{
+
+    })
+  }
+  GetSeller(){
+    this.userService.GetSeller().subscribe(result=>{
+        this.sellers= result;
     },error=>{
 
     })

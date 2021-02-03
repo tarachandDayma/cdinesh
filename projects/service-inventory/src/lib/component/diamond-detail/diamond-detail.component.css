@@ -22,6 +22,15 @@
     display: inline-block;
 }
 
+.img-div img {
+    width: 60px !important;
+    text-align: inherit;
+}
+
+.img-div-parent {
+    text-align: center;
+}
+
 .additionalDetail {
     width: 100%;
 }
@@ -29,9 +38,91 @@
 @media (max-width:450px) {
     .img-view {
         transform: scale(0.7);
-        margin-left: -70px;
+        margin-left: -127px;
     }
     .additionalDetail {
         width: max-content;
     }
+}
+
+.menu-wrapper {
+    position: relative;
+    max-width: 500px;
+    height: 71px;
+    margin: 1em auto;
+    /* border: 2px solid #192b4a; */
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.menu {
+    height: 80px;
+    /* background: #808080; */
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.item {
+    display: inline-block;
+    width: 100px;
+    height: 100%;
+    /* outline: #192b4a solid 1px; */
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 5px;
+    background-color: #f3cab0;
+    border-radius: 6px;
+}
+
+.paddles {}
+
+.paddle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 25px;
+}
+
+.left-paddle {
+    left: 0;
+    border-radius: 100px;
+    height: 30px;
+    width: 30px;
+    margin-top: 16px;
+    margin-left: 0px;
+}
+
+.right-paddle {
+    right: 0;
+    border-radius: 100px;
+    height: 30px;
+    width: 30px;
+    margin-top: 16px;
+    margin-right: 0px;
+}
+
+.hidden {
+    display: none;
+}
+
+::ng-deep .ngxImageZoomThumbnail {
+    height: 325px !important;
+}
+
+::ng-deep .ngxImageZoomFullContainer.ngxImageZoomLensEnabled {
+    border: 2px solid #192b4a !important;
+}
+
+iframe {
+    width: 100vh;
+    height: 62vh;
+    transform: scale(0.70);
+    margin-left: -112px;
+    margin-top: -69px;
 }

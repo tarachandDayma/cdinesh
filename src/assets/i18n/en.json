@@ -484,7 +484,13 @@
             "recentSearch": "Recent Search",
             "featuredDiamond": "Featured Diamond",
             "newGoods": "New Goods",
-            "inquiry": "Inquiry"
+            "inquiry": "Inquiry",
+            "seller": {
+                "title": "Sales Executive",
+                "name": "Name",
+                "email": "Email",
+                "contactNo": "ContactNo"
+            }
         },
         "newgoods": {
             "title": "New Goods"
