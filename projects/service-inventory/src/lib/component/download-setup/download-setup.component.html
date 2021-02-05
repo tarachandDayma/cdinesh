@@ -48,10 +48,10 @@
                                                 <input name="percentage" [(ngModel)]="item.percentage" type="number" min="0">
                                             </td>
                                             <td>
-                                                <button class="btn btn-sm btn-primary" type="button" (click)="Remove(item)" [translate]="'inventory.profile.downloadSetup.remove'">   </button>
+                                                <button *ngIf="!item.readOnly" class="btn btn-sm btn-primary" type="button" (click)="Remove(item)" [translate]="'inventory.profile.downloadSetup.remove'">   </button>
                                             </td>
                                         </tr>
-                                        <tr *ngIf="item.showDetail">
+                                        <tr *ngIf="item.showDetail && !item.readOnly">
                                             <td colspan="4" style="overflow: auto;">
                                                 <table style="min-width: 100% !important;user-select:none;" class="table table-bordered table-sm table-striped table-hover font-12 cd-table">
                                                     <thead>
@@ -69,7 +69,7 @@
                                                             <td>
                                                                 <i class="fa fa-arrows" (mousedown)="mouseDown(indx)"></i>
                                                                 <label class="custom-control material-checkbox">
-                                                            <input type="checkbox"
+                                                            <input (change)="checkChange(item)" type="checkbox"
                                                                 class="material-control-input" name="AllReslt"
                                                                 [(ngModel)]="subItem.isActive">
                                                             <span class="material-control-indicator"></span>
@@ -80,6 +80,40 @@
                                                             </td>
                                                             <td>
                                                                 <input type="text" class="form-control" name="label" [(ngModel)]="subItem.label">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="item.showDetail && item.readOnly">
+                                            <td colspan="4" style="overflow: auto;">
+                                                <table style="min-width: 100% !important;user-select:none;" class="table table-bordered table-sm table-striped table-hover font-12 cd-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <td style="width: 60px;" [translate]="'inventory.profile.downloadSetup.isActive'">
+                                                            </td>
+                                                            <td style="width: 150px;" [translate]=" 'inventory.profile.downloadSetup.fieldName'">
+                                                            </td>
+                                                            <td style="width: 150px;" [translate]="'inventory.profile.downloadSetup.label'">
+                                                            </td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let indx=index;let subItem of item.fieldsModels;">
+                                                            <td>
+                                                                <label class="custom-control material-checkbox">
+                                                            <input [disabled]="true" type="checkbox"
+                                                                class="material-control-input" name="AllReslt"
+                                                                [(ngModel)]="subItem.isActive">
+                                                            <span class="material-control-indicator"></span>
+                                                        </label>
+                                                            </td>
+                                                            <td>
+                                                                <input [disabled]="true" type="text" class="form-control" name="FieldName" [(ngModel)]="subItem.fieldName" disabled>
+                                                            </td>
+                                                            <td>
+                                                                <input [disabled]="true" type="text" class="form-control" name="label" [(ngModel)]="subItem.label">
                                                             </td>
                                                         </tr>
                                                     </tbody>

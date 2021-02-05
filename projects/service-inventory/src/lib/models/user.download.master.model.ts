@@ -6,4 +6,6 @@ export class UserDownloadMasterModel{
     percentage:number;
     userId:string;
     fieldsModels:UserDownloadFieldsModel[]=[];
+    showDetail:boolean;  
+    readOnly:boolean;  
 }

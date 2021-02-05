@@ -13,8 +13,9 @@
 }
 
 .img-lable {
-    margin-left: 5px;
-    font-size: 10px;
+    font-size: 13px;
+    font-weight: 100;
+    color: grey;
 }
 
 .img-div {
@@ -45,10 +46,51 @@
     }
 }
 
+.ImageViewer {
+    height: 325px;
+}
+
+@media (max-width:700px) {
+    .paddle {
+        display: none!important;
+    }
+    .ImageViewer {
+        height: 310px;
+    }
+}
+
+::ng-deep .ngxImageZoomThumbnail {
+    height: 325px !important;
+}
+
+@media (min-width:320px) {
+     ::ng-deep .ngxImageZoomThumbnail {
+        height: 270px !important;
+    }
+}
+
+@media (min-width:481px) {
+     ::ng-deep .ngxImageZoomThumbnail {
+        height: 270px !important;
+    }
+}
+
+@media (min-width:641px) {
+     ::ng-deep .ngxImageZoomThumbnail {
+        height: 270px !important;
+    }
+}
+
+@media (min-width:961px) {
+     ::ng-deep .ngxImageZoomThumbnail {
+        height: 325px !important;
+    }
+}
+
 .menu-wrapper {
     position: relative;
     max-width: 500px;
-    height: 71px;
+    height: 89px;
     margin: 1em auto;
     /* border: 2px solid #192b4a; */
     overflow-x: hidden;
@@ -56,7 +98,7 @@
 }
 
 .menu {
-    height: 80px;
+    height: 100px;
     /* background: #808080; */
     box-sizing: border-box;
     white-space: nowrap;
@@ -67,23 +109,23 @@
 
 .item {
     display: inline-block;
-    width: 100px;
+    width: 75px;
     height: 100%;
     /* outline: #192b4a solid 1px; */
-    padding: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
     box-sizing: border-box;
     text-align: center;
     font-size: 13px;
     font-weight: bold;
     margin-right: 5px;
-    background-color: #f3cab0;
     border-radius: 6px;
 }
 
 .paddles {}
 
 .paddle {
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     bottom: 0;
     width: 25px;
@@ -94,8 +136,9 @@
     border-radius: 100px;
     height: 30px;
     width: 30px;
-    margin-top: 16px;
+    margin-top: 35px;
     margin-left: 0px;
+    float: left;
 }
 
 .right-paddle {
@@ -103,16 +146,9 @@
     border-radius: 100px;
     height: 30px;
     width: 30px;
-    margin-top: 16px;
+    margin-top: 35px;
     margin-right: 0px;
-}
-
-.hidden {
-    display: none;
-}
-
-::ng-deep .ngxImageZoomThumbnail {
-    height: 325px !important;
+    float: right;
 }
 
 ::ng-deep .ngxImageZoomFullContainer.ngxImageZoomLensEnabled {
@@ -121,7 +157,7 @@
 
 iframe {
     width: 100vh;
-    height: 62vh;
+    height: 64vh;
     transform: scale(0.70);
     margin-left: -112px;
     margin-top: -69px;

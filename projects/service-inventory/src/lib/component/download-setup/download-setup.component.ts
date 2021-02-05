@@ -25,17 +25,32 @@ export class DownloadSetupComponent implements OnInit {
     this.downloadService.LoadFields().subscribe(result => {
       this.loader.show(false);
       this.Fields = result;
+      this.Fields[0].showDetail = true;
+      this.Fields[0].readOnly = true;
+      this.Fields.forEach(element => {
+        element.fieldsModels = element.fieldsModels.sort(this.compare);
+      });
     }, error => {
       this.loader.show(false);
     })
   }
+  compare(a: UserDownloadFieldsModel, b: UserDownloadFieldsModel) {
+    if (a.isActive < b.isActive) {
+      return 1;
+    }
+    if (a.isActive > b.isActive) {
+      return -1;
+    }
+    return 0;
+  }
+
   dragIndex: number;
   dragStar: boolean = false;
   mouseDown(indx) {
     this.dragIndex = indx;
     this.dragStar = true;
   }
-  mouseMove(field,indx) {
+  mouseMove(field, indx) {
     if (this.dragStar) {
       var _oldFields = JSON.parse(JSON.stringify(field.fieldsModels));
       field.fieldsModels.splice(this.dragIndex, 1);
@@ -43,7 +58,7 @@ export class DownloadSetupComponent implements OnInit {
       this.dragIndex = indx;
     }
   }
-  mouseUp(field,indx) {
+  mouseUp(field, indx) {
     if (this.dragStar) {
       var _oldFields = JSON.parse(JSON.stringify(field.fieldsModels));
       field.fieldsModels.splice(this.dragIndex, 1);
@@ -83,6 +98,7 @@ export class DownloadSetupComponent implements OnInit {
       this.alertService.Error(this.translate.instant("inventory.profile.downloadSetup.formatName_error"), "");
     }
   }
+
   AddNewItem() {
     this.loader.show(true);
     this.downloadService.AddNew().subscribe(result => {
@@ -99,7 +115,10 @@ export class DownloadSetupComponent implements OnInit {
     this.RemovedFields.push(JSON.parse(JSON.stringify(item)));
     this.Fields.splice(indx, 1);
   }
-  toggleDetail(item){
-    item.showDetail=!item.showDetail;
+  toggleDetail(item) {
+    item.showDetail = !item.showDetail;
+  }
+  checkChange(item:UserDownloadMasterModel){
+    item.fieldsModels=item.fieldsModels.sort(this.compare);
   }
 }

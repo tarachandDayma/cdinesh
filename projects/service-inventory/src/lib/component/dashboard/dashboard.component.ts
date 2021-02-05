@@ -75,4 +75,7 @@ export class DashboardComponent implements OnInit {
 
     })
   }
+  goToStoneDetail(item){
+    window.open("/inventory/diamondDetail?packetNos="+item.packetNo,"_blank")
+  }
 }

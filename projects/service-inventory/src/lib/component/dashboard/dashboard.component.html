@@ -53,7 +53,7 @@
                             <div id="carouselTopStone" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <ng-container *ngFor="let item of topStones;let indx=index;">
-                                        <div class="carousel-item" [ngClass]="indx==0?'active' : '' ">
+                                        <div (click)="goToStoneDetail(item)" class="carousel-item" [ngClass]="indx==0?'active' : '' ">
                                             <img class="d-block w-100" [src]="item.imageB" alt="First slide">
                                             <div class="col-sm-12" style="text-align: center;color: navy;">
                                                 <strong>{{item.packetNo}}</strong> | <strong>{{item.wt}}</strong> | <strong>{{item.shape}}</strong> | <strong>{{item.colour}}</strong>| <strong>{{item.clarity}}</strong> | <strong> <a target="_blank" [href]="item.imageCerti" > {{item.certificate}} </a> </strong>

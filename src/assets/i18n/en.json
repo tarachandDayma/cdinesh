@@ -394,7 +394,7 @@
             "export": "Export",
             "inquiryButton": "Inquiry",
             "holdButton": "Hold",
-            "confirmButton": "Place Order",
+            "confirmButton": "Buy Now",
             "addSchedule": "Add Schedule"
         },
         "offer": {
@@ -426,7 +426,7 @@
         "confirm": {
             "title": "Place Order",
             "comment": "Comment",
-            "save": "Place Order",
+            "save": "Buy Now",
             "success": "Success",
             "error": "Something went wrong",
             "comment_error": "Please enter comment"

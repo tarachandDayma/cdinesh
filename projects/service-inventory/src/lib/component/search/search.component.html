@@ -1189,6 +1189,12 @@
                             <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.confirmButton'" (click)="LoadConfirmModel(contentConfirm)"> Place Order
                         </span></button>
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            [translate]="'inventory.search.addtocart'" (click)="AddtoCartMultiple()"> Add To Cart
+                        </span></button>
+                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            [translate]="'inventory.offer.title'" (click)="LoadOfferModel(contentOffer)"> Add To Cart
+                        </span></button>
                         </div>
                         <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
@@ -1202,6 +1208,7 @@
                             <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.confirmButton'" (click)="LoadConfirmModel(contentConfirm)"> Place Order
                         </span></button>
+
                         </div>
                     </div>
                     <div class="pull-right delivery-div">
@@ -1223,8 +1230,7 @@
 
                         <div class="btn-group d-none btn-group d-sm-none d-md-block" role="group" aria-label="Basic example">
                             <button type="button" class="btn ml-1 tool-button" (click)="showSelected()"><span ><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span> </button>
-                            <button type="button" class="btn ml-1 tool-button" (click)="AddtoCartMultiple()"><span ><img style="width: 16px;" src="/assets/img/add-to-cart.4a5821ad.svg" alt=""><span  [translate]="'inventory.search.addtocart'">Add To Cart </span></span> </button>
-                            <button type="button" class="btn ml-1 tool-button" (click)="LoadOfferModel(contentOffer)"><span ><img style="width: 16px;" src="/assets/img/offer.webp" alt=""><span  [translate]="'inventory.offer.title'">Offer</span></span></button>
+
                             <button type="button" class="btn ml-1 tool-button" (click)="Export(content)"><span ><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span></button>
                             <button type="button" class="btn ml-1 tool-button" (click)="LoadUserWishModal(contentUserWish)"><span ><img style="width: 16px;" src="/assets/img/wish.png" alt=""><span  [translate]="'inventory.profile.userWish.addWish'">Add Wish</span></span></button>
                         </div>
@@ -1585,10 +1591,10 @@
                                                     <i *ngIf="item.showDetail || item.showPopUp"
                                                         class="fa fa-minus"></i>
                                                 </span>
-                                                <img (click)="AddtoCart(item)" style="width: 17px;margin-left: 2px;" src="/assets/img/add-to-cart.4a5821ad.svg">
+                                                <!-- <img (click)="AddtoCart(item)" style="width: 17px;margin-left: 2px;" src="/assets/img/add-to-cart.4a5821ad.svg"> -->
                                                 <img (click)="LoadComment(contentComment,item.packetNo)" style="width: 17px;margin-left: 2px;" src="/assets/img/comment.7713a555.svg">
-                                                <img style="width: 17px;margin-left: 2px;" src="/assets/img/add-watchList.02894315.svg">
-                                                <img style="width: 17px;margin-left: 2px;" src="/assets/img/reminder.32af6dae.svg">
+                                                <!-- <img style="width: 17px;margin-left: 2px;" src="/assets/img/add-watchList.02894315.svg">
+                                                <img style="width: 17px;margin-left: 2px;" src="/assets/img/reminder.32af6dae.svg"> -->
                                             </th>
                                             <td (mouseover)="ShowPopUp(item,false)">
                                                 <img (click)="showDetail(item)" style="width: 17px;margin-left: 5px;" src="/assets/img/camera.dd556904.svg">
