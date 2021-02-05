@@ -4,7 +4,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <span [translate]="'inventory.search.title'"> TITLE </span>
+                    <span *ngIf="isUpcommingSearch" [translate]="'inventory.search.titleUcoming'"> TITLE </span>
+                    <span *ngIf="!isUpcommingSearch" [translate]="'inventory.search.title'"> TITLE </span>
                     <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-primary ml-1"> <span [translate]="'inventory.search.search'"
                             (click)="noramlSearch()"> Search </span></button>
@@ -1183,16 +1184,16 @@
                             <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.inquiryButton'" (click)="LoadInquiryModel(contentInquiry)"> Inquiry
                         </span></button>
-                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            <button *ngIf="!isUpcommingSearch" type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.holdButton'" (click)="LoadHoldModel(contentHold)"> Hold
                         </span></button>
-                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            <button *ngIf="!isUpcommingSearch" type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.confirmButton'" (click)="LoadConfirmModel(contentConfirm)"> Place Order
                         </span></button>
-                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            <button *ngIf="!isUpcommingSearch" type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.addtocart'" (click)="AddtoCartMultiple()"> Add To Cart
                         </span></button>
-                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            <button *ngIf="!isUpcommingSearch" type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.offer.title'" (click)="LoadOfferModel(contentOffer)"> Add To Cart
                         </span></button>
                         </div>
@@ -1202,10 +1203,10 @@
                             </span></button>
                             <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.inquiryButton'" (click)="LoadInquiryModel(contentInquiry)"> Inquiry</span></button>
-                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            <button *ngIf="!isUpcommingSearch" type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.holdButton'" (click)="LoadHoldModel(contentHold)"> Hold
                         </span></button>
-                            <button type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
+                            <button *ngIf="!isUpcommingSearch" type="button" class="btn btn-primary ml-1" style="font-weight: 550;"> <span
                             [translate]="'inventory.search.confirmButton'" (click)="LoadConfirmModel(contentConfirm)"> Place Order
                         </span></button>
 
@@ -1236,8 +1237,8 @@
                         </div>
                         <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
                             <button type="button" class="btn bg-transparent ml-1 tool-button " (click)="showSelected()"><span ><img src="/assets/img/showSelect.svg" alt=""><span  [translate]="'inventory.search.showSelected'">Show Selected </span></span> </button>
-                            <button type="button" class="btn bg-transparent ml-1 tool-button " (click)="AddtoCartMultiple()"><span ><img style="width: 16px;" src="/assets/img/add-to-cart.4a5821ad.svg" alt=""><span  [translate]="'inventory.search.addtocart'">Add To Cart </span></span> </button>
-                            <button type="button" class="btn bg-transparent ml-1 tool-button " (click)="LoadOfferModel(contentOffer)"><span ><img style="width: 16px;" src="/assets/img/offer.webp" alt=""><span  [translate]="'inventory.offer.title'">Offer</span></span></button>
+                            <button *ngIf="!isUpcommingSearch" type="button" class="btn bg-transparent ml-1 tool-button " (click)="AddtoCartMultiple()"><span ><img style="width: 16px;" src="/assets/img/add-to-cart.4a5821ad.svg" alt=""><span  [translate]="'inventory.search.addtocart'">Add To Cart </span></span> </button>
+                            <button *ngIf="!isUpcommingSearch" type="button" class="btn bg-transparent ml-1 tool-button " (click)="LoadOfferModel(contentOffer)"><span ><img style="width: 16px;" src="/assets/img/offer.webp" alt=""><span  [translate]="'inventory.offer.title'">Offer</span></span></button>
                             <button type="button" class="btn bg-transparent ml-1 tool-button " (click)="Export(content)"><span ><img style="width: 16px;" src="/assets/img/export.svg" alt=""><span  [translate]="'inventory.search.export'">Export </span></span></button>
                             <button type="button" class="btn bg-transparent ml-1 tool-button " (click)="LoadUserWishModal(contentUserWish)"><span ><img style="width: 16px;" src="/assets/img/wish.png" alt=""><span  [translate]="'inventory.profile.userWish.addWish'">Add Wish</span></span></button>
                         </div>

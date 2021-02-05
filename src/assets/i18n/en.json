@@ -257,6 +257,7 @@
         },
         "search": {
             "title": "Search",
+            "titleUcoming": "Upcoming",
             "save&search": "Save & Search",
             "search": "Search",
             "nobgm": "NO BGM",

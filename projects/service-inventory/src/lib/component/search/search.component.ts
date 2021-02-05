@@ -151,7 +151,7 @@ export class SearchComponent implements OnInit {
   currentSearch: UserSearchModel = new UserSearchModel();
   currentWish: UserWishModel = new UserWishModel();
   currentSchedule: ScheduleModel = new ScheduleModel();
-
+  isUpcommingSearch:boolean=false;
   catchRouteParam() {
 
     if (-1 != this.router.url.indexOf("fancySearch")) {
@@ -164,7 +164,12 @@ export class SearchComponent implements OnInit {
       this.Status = "N";
       this.searchDiamond();
       localStorage.setItem("PacketNo", "");
-    } else if (-1 != this.router.url.indexOf("bestofcd")) {
+    } else if (-1 != this.router.url.indexOf("upcoming")) {
+      this.isUpcommingSearch = true;
+      this.searchDiamond();
+      localStorage.setItem("PacketNo", "");
+    }
+     else if (-1 != this.router.url.indexOf("bestofcd")) {
       this.IsPriority = 'Y'
       this.searchDiamond();
       localStorage.setItem("PacketNo", "");
@@ -1206,7 +1211,8 @@ export class SearchComponent implements OnInit {
       Status: this.Status,
       IsPriority: this.IsPriority,
       IsRecentSearch: this.IsRecentSearch,
-      PairSearch: this.PairSearch
+      PairSearch: this.PairSearch,
+      isUpcommingSearch:this.isUpcommingSearch
     };
   }
   searchDiamond() {

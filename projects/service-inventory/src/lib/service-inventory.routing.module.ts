@@ -43,7 +43,7 @@ const routes: Routes = [
     ,
     {
       path: 'upcoming',
-      component:UpcomingComponent
+      component:SearchComponent
     },
     {
       path: 'bestofcd',
