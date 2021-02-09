@@ -6,11 +6,35 @@ import { EnvironmentService } from 'service-common';
 import { CartService } from '../../service/cart.service';
 import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { UserService } from '../../service/user.service';
-
+import { trigger, style, animate, transition } from '@angular/animations';
+declare var $:any;
 @Component({
   selector: 'inventory-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
+  animations: [
+    trigger(
+      'inOutAnimation', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({  opacity: 0 }),
+            animate('1ms ease-out', 
+                    style({ opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave', 
+          [
+            style({  opacity: 1 }),
+            animate('1ms ease-in', 
+                    style({ opacity: 0 }))
+          ]
+        )
+      ]
+    )
+  ]
 })
 export class NavComponent implements OnInit {
   AppLogo: string;
@@ -88,5 +112,17 @@ export class NavComponent implements OnInit {
       this.cartCount=result.length;
     })
   }
- 
+  toggleMenu:boolean=false;
+  ToggleMenu(){
+    this.toggleMenu=!this.toggleMenu;
+    if(this.toggleMenu){
+      // var element :any = document.getElementsByClassName("content")[0]
+      // element.classList.add("toggleMenuContent")
+      $(".content").animate({marginLeft:'0px'})
+    }else {
+      // var element :any = document.getElementsByClassName("content")[0]
+      // element.classList.remove("toggleMenuContent")
+      $(".content").animate({marginLeft:'103px'})
+    }
+  }
 }

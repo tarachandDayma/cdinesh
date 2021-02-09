@@ -149,7 +149,8 @@
         </ul>
     </div>
 </header>
-<div class="sidebar collapse navbar-collapse" id="navbarSupportedContent">
+
+<div class="sidebar collapse navbar-collapse " id="navbarSupportedContent" [ngClass]="toggleMenu ? 'toggleMenu' :'toggleMenu1'">
     <a routerLink="/inventory/dashboard" [ngClass]="currentMenu =='dashboard' ? 'active': ''"> <i class="fa fa-tachometer" aria-hidden="true"> </i> <br> <span [translate]="'inventory.nav.dashboard'"> Dashboard </span></a>
     <a routerLink="/inventory/search" [ngClass]="currentMenu =='search' ? 'active': ''"><i class="fa fa-search" aria-hidden="true"> </i> <br> <span [translate]="'inventory.nav.search'"> Search </span></a>
     <a routerLink="/inventory/fancySearch" [ngClass]="currentMenu =='fancysearch' ? 'active': ''"><i class="fa fa-diamond" aria-hidden="true"></i> <br> <span [translate]="'inventory.nav.fancy'"> Fancy </span></a>
@@ -157,4 +158,10 @@
     <a routerLink="/inventory/newgoods" [ngClass]="currentMenu =='newgoods' ? 'active': ''"><i class="fa fa-diamond" aria-hidden="true"></i> <br> <span [translate]="'inventory.nav.newgoods'">  New goods </span></a>
     <a routerLink="/inventory/bestofcd" [ngClass]="currentMenu =='bestofcd' ? 'active': ''"><i class="fa fa-certificate" aria-hidden="true"></i> <br> <span [translate]="'inventory.nav.bestofcd'">  Best Of CD </span></a>
     <a routerLink="/inventory/upcoming" [ngClass]="currentMenu =='upcoming' ? 'active': ''"><i class="fa fa-gift" aria-hidden="true"></i> <br><span [translate]="'inventory.nav.upcoming'">  Upcoming </span> </a>
+</div>
+<div (click)="ToggleMenu()" *ngIf="!toggleMenu" class="left-toggle-button arrow-left">
+
+</div>
+<div (click)="ToggleMenu()" *ngIf="toggleMenu" class="right-toggle-button arrow-right">
+
 </div>

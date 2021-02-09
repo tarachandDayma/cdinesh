@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -105,6 +105,7 @@ export class DiamondDetailComponent implements OnInit {
   showResult: boolean = false;
   searchResult: diamondsearchResult[] = [];
   AllSelected: boolean = false;
+  @Input("packetno")
   PacketNos: string = '';
   Status: string = '';
   IsPriority: string = '';
@@ -565,16 +566,16 @@ export class DiamondDetailComponent implements OnInit {
       selectedOther: false,
       list: []
     };
-    this.PacketNos = localStorage.getItem("detailPacketNo");
-    this.route
-      .queryParams
-      .subscribe(params => {
+    // this.PacketNos = localStorage.getItem("detailPacketNo");
+    // this.route
+    //   .queryParams
+    //   .subscribe(params => {
         
-        if (params['packetNos'] != null && params['packetNos'] != undefined && params['packetNos'] != "") {
-          this.PacketNos = params['packetNos'];
-          this.searchDiamond();
-        }
-      });
+    //     if (params['packetNos'] != null && params['packetNos'] != undefined && params['packetNos'] != "") {
+    //       this.PacketNos = params['packetNos'];
+    //       this.searchDiamond();
+    //     }
+    //   });
     this.searchDiamond();
   }
   searchDiamond() {

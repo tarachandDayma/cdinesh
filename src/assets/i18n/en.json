@@ -478,7 +478,8 @@
             "eyeClean": "Eye Clean",
             "ratio": "Ratio",
             "lab": "Lab",
-            "status": "Status"
+            "status": "Status",
+            "viewLarge": "View Large"
         },
         "dashboard": {
             "title": "Dashboard",

@@ -162,3 +162,24 @@ iframe {
     margin-left: -112px;
     margin-top: -69px;
 }
+
+.card {
+    border-radius: 0 !important;
+}
+
+table td {
+    border: none !important;
+    white-space: nowrap;
+    padding: 9px !important;
+}
+
+table th {
+    border: none !important;
+    white-space: nowrap;
+    padding: 9px !important;
+}
+
+table {
+    border: none !important;
+    text-transform: uppercase;
+}

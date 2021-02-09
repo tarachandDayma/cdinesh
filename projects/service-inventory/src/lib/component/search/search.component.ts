@@ -151,7 +151,7 @@ export class SearchComponent implements OnInit {
   currentSearch: UserSearchModel = new UserSearchModel();
   currentWish: UserWishModel = new UserWishModel();
   currentSchedule: ScheduleModel = new ScheduleModel();
-  isUpcommingSearch:boolean=false;
+  isUpcommingSearch: boolean = false;
   catchRouteParam() {
 
     if (-1 != this.router.url.indexOf("fancySearch")) {
@@ -169,7 +169,7 @@ export class SearchComponent implements OnInit {
       this.searchDiamond();
       localStorage.setItem("PacketNo", "");
     }
-     else if (-1 != this.router.url.indexOf("bestofcd")) {
+    else if (-1 != this.router.url.indexOf("bestofcd")) {
       this.IsPriority = 'Y'
       this.searchDiamond();
       localStorage.setItem("PacketNo", "");
@@ -1011,20 +1011,20 @@ export class SearchComponent implements OnInit {
     }
   }
   addPointer() {
-    if (this.fromCarat != 0 && this.toCarat != 0) {
+    if (this.fromCarat > 0 && this.toCarat > 0) {
       var newPointerList = [];
-      var flag = true;
-      for (let index = 0; index < this.selectedPointer.length; index++) {
-        const element = this.selectedPointer[index];
-        if (this.fromCarat >= element.from && this.fromCarat <= element.to) {
-          flag = false;
-        } else if (this.toCarat >= element.from && this.toCarat <= element.to) {
-          flag = false;
-        }
-      }
-      if (flag == true) {
+      // var flag = true;
+      // for (let index = 0; index < this.selectedPointer.length; index++) {
+      //   const element = this.selectedPointer[index];
+      //   if (this.fromCarat >= element.from && this.fromCarat <= element.to) {
+      //     flag = false;
+      //   } else if (this.toCarat >= element.from && this.toCarat <= element.to) {
+      //     flag = false;
+      //   }
+      // }
+      // if (flag == true) {
         this.selectedPointer.push({ from: this.fromCarat.toString(), to: this.toCarat.toString() });
-      }
+      // }
     }
     this.fromCarat = 0;
     this.toCarat = 0;
@@ -1051,81 +1051,126 @@ export class SearchComponent implements OnInit {
     }
   }
   select3Ex() {
-
-    this.cutList.list.forEach(element => {
-      element.selected = false;
-    });
-    this.polishList.list.forEach(element => {
-      element.selected = false;
-    });
-    this.symList.list.forEach(element => {
-      element.selected = false;
-    });
-    var _cutList = this.cutList.list.filter(x => x.id == 218 || x.id == 219);
-    var _polishList = this.polishList.list.filter(x => x.id == 161 || x.id == 162);
-    var _symList = this.symList.list.filter(x => x.id == 169 || x.id == 170);
-    _cutList.forEach(element => {
-      this.SelectCriteria(this.cutList, element);
-    });
-    _polishList.forEach(element => {
-      this.SelectCriteria(this.polishList, element);
-    });
-    _symList.forEach(element => {
-      this.SelectCriteria(this.symList, element);
-    });
-    this._3Ex = true;
-    this._2Ex = false;
-    this._3Vg = false;
+    if (this._3Ex) {
+      this._3Ex = false;
+      this.cutList.allSelected=true;
+      this.polishList.allSelected=true;
+      this.symList.allSelected=true;
+      this.cutList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.polishList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.symList.list.forEach(element => {
+        element.selected = false;
+      });
+    } else {
+      this.cutList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.polishList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.symList.list.forEach(element => {
+        element.selected = false;
+      });
+      var _cutList = this.cutList.list.filter(x => x.id == 218 || x.id == 219);
+      var _polishList = this.polishList.list.filter(x => x.id == 161 || x.id == 162);
+      var _symList = this.symList.list.filter(x => x.id == 169 || x.id == 170);
+      _cutList.forEach(element => {
+        this.SelectCriteria(this.cutList, element);
+      });
+      _polishList.forEach(element => {
+        this.SelectCriteria(this.polishList, element);
+      });
+      _symList.forEach(element => {
+        this.SelectCriteria(this.symList, element);
+      });
+      this._3Ex = true;
+      this._2Ex = false;
+      this._3Vg = false;
+    }
   }
   select2Ex() {
-
-    this.cutList.list.forEach(element => {
-      element.selected = false;
-    });
-    this.polishList.list.forEach(element => {
-      element.selected = false;
-    });
-    this.symList.list.forEach(element => {
-      element.selected = false;
-    });
-    var _cutList = this.cutList.list.filter(x => x.id == 218 || x.id == 219);
-    var _polishList = this.polishList.list.filter(x => x.id == 161 || x.id == 162);
-    _cutList.forEach(element => {
-      this.SelectCriteria(this.cutList, element);
-    });
-    _polishList.forEach(element => {
-      this.SelectCriteria(this.polishList, element);
-    });
-    this._3Ex = false;
-    this._2Ex = true;
-    this._3Vg = false;
+    if (this._2Ex) {
+      this._2Ex = false;
+      this.cutList.allSelected=true;
+      this.polishList.allSelected=true;
+      this.symList.allSelected=true;
+      this.cutList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.polishList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.symList.list.forEach(element => {
+        element.selected = false;
+      });
+    } else {
+      this.cutList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.polishList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.symList.list.forEach(element => {
+        element.selected = false;
+      });
+      var _cutList = this.cutList.list.filter(x => x.id == 218 || x.id == 219);
+      var _polishList = this.polishList.list.filter(x => x.id == 161 || x.id == 162);
+      _cutList.forEach(element => {
+        this.SelectCriteria(this.cutList, element);
+      });
+      _polishList.forEach(element => {
+        this.SelectCriteria(this.polishList, element);
+      });
+      this._3Ex = false;
+      this._2Ex = true;
+      this._3Vg = false;
+    }
   }
   select3VG() {
-
-    this.cutList.list.forEach(element => {
-      element.selected = false;
-    });
-    this.polishList.list.forEach(element => {
-      element.selected = false;
-    });
-    this.symList.list.forEach(element => {
-      element.selected = false;
-    });
-    var _cutList = this.cutList.list.filter(x => x.id == 218 || x.id == 219 || x.id == 220);
-    var _polishList = this.polishList.list.filter(x => x.id == 161 || x.id == 162 || x.id == 163);
-    var _symList = this.symList.list.filter(x => x.id == 169 || x.id == 170 || x.id == 171);
-    _cutList.forEach(element => {
-      this.SelectCriteria(this.cutList, element);
-    });
-    _polishList.forEach(element => {
-      this.SelectCriteria(this.polishList, element);
-    });
-    _symList.forEach(element => {
-      this.SelectCriteria(this.symList, element);
-    });
-    this._3Ex = false;
-    this._2Ex = false;
-    this._3Vg = true;
+    if (this._3Vg) {
+      this._3Vg = false;
+      this.cutList.allSelected=true;
+      this.polishList.allSelected=true;
+      this.symList.allSelected=true;
+      this.cutList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.polishList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.symList.list.forEach(element => {
+        element.selected = false;
+      });
+    } else {
+      this.cutList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.polishList.list.forEach(element => {
+        element.selected = false;
+      });
+      this.symList.list.forEach(element => {
+        element.selected = false;
+      });
+      var _cutList = this.cutList.list.filter(x => x.id == 218 || x.id == 219 || x.id == 220);
+      var _polishList = this.polishList.list.filter(x => x.id == 161 || x.id == 162 || x.id == 163);
+      var _symList = this.symList.list.filter(x => x.id == 169 || x.id == 170 || x.id == 171);
+      _cutList.forEach(element => {
+        this.SelectCriteria(this.cutList, element);
+      });
+      _polishList.forEach(element => {
+        this.SelectCriteria(this.polishList, element);
+      });
+      _symList.forEach(element => {
+        this.SelectCriteria(this.symList, element);
+      });
+      this._3Ex = false;
+      this._2Ex = false;
+      this._3Vg = true;
+    }
   }
   videoChange(data) {
     this.video = data;
@@ -1212,7 +1257,7 @@ export class SearchComponent implements OnInit {
       IsPriority: this.IsPriority,
       IsRecentSearch: this.IsRecentSearch,
       PairSearch: this.PairSearch,
-      isUpcommingSearch:this.isUpcommingSearch
+      isUpcommingSearch: this.isUpcommingSearch
     };
   }
   searchDiamond() {
@@ -1695,8 +1740,8 @@ export class SearchComponent implements OnInit {
 
   emailModel: ExportToEmailModel;
   submited: boolean = false;
-  downloadFormat:UserDownloadMasterModel[]=[];
-  selectedDownloadFormat:UserDownloadMasterModel;
+  downloadFormat: UserDownloadMasterModel[] = [];
+  selectedDownloadFormat: UserDownloadMasterModel;
   Export(content) {
     this.emailModel = new ExportToEmailModel();
     this.emailModel.subject = "CD-Stock";
@@ -1705,10 +1750,10 @@ export class SearchComponent implements OnInit {
       this.emailModel.message = `Hello ` + result.userBasicInfo.firstName + `
 Greetings of the day `;
     });
-    this.downloadService.LoadFields().subscribe(result=> {
-        this.downloadFormat=result;
-        this.selectedDownloadFormat=this.downloadFormat[0];
-    },error=>{})
+    this.downloadService.LoadFields().subscribe(result => {
+      this.downloadFormat = result;
+      this.selectedDownloadFormat = this.downloadFormat[0];
+    }, error => { })
     this.emailformgroup = new FormGroup({
       subject: new FormControl('', Validators.required),
       mailTo: new FormControl('', Validators.compose([Validators.required, Validators.email])),
@@ -1721,8 +1766,8 @@ Greetings of the day `;
 
     });
   }
-  selectDownloadFormat(item){
-    this.selectedDownloadFormat=item;
+  selectDownloadFormat(item) {
+    this.selectedDownloadFormat = item;
   }
   DownloadResult() {
     var strPacketNos = "";
@@ -1815,9 +1860,9 @@ Greetings of the day `;
       Percentage: this.markup,
       PairSearch: this.PairSearch
     };
-    var obj={
-      filter:objFilter,
-      UserDownload:this.selectedDownloadFormat
+    var obj = {
+      filter: objFilter,
+      UserDownload: this.selectedDownloadFormat
     }
 
     this.loader.show(true);
@@ -1921,7 +1966,7 @@ Greetings of the day `;
         Percentage: this.markup
       };
       this.emailModel.filter = obj;
-      this.emailModel.UserDownload=this.selectedDownloadFormat;
+      this.emailModel.UserDownload = this.selectedDownloadFormat;
       this.loader.show(true);
       this.downloadService.SendEmail(this.emailModel).subscribe(result => {
         this.loader.show(false);
@@ -2245,13 +2290,22 @@ Greetings of the day `;
     });
 
   }
-  InquirySave(data){
-      this.searchDiamond();
-  }
-  HoldSave(data){
+  InquirySave(data) {
     this.searchDiamond();
   }
-  ConfirmSave(data){
+  HoldSave(data) {
     this.searchDiamond();
+  }
+  ConfirmSave(data) {
+    this.searchDiamond();
+  }
+  packetNo: string;
+  LoadDetail(content, PacketNo: string) {
+    this.packetNo = PacketNo;
+    this.modalService.open(content, { size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    }, (reason) => {
+
+    });
   }
 }

@@ -1265,7 +1265,7 @@
                             <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table " style="width: 100%;height: 450px;">
                                 <thead>
                                     <tr>
-                                        <th data-toggle="tooltip" data-placement="top" title="" class="fixed-column" style="width:115px;">
+                                        <th data-toggle="tooltip" data-placement="top" title="" class="fixed-column" style="width:75px;">
 
                                             <label class="custom-control material-checkbox">
                                                 <input (change)="selectAll()" type="checkbox"
@@ -1598,15 +1598,15 @@
                                                 <img style="width: 17px;margin-left: 2px;" src="/assets/img/reminder.32af6dae.svg"> -->
                                             </th>
                                             <td (mouseover)="ShowPopUp(item,false)">
-                                                <img (click)="showDetail(item)" style="width: 17px;margin-left: 5px;" src="/assets/img/camera.dd556904.svg">
+                                                <img (click)="LoadDetail(contentDetail,item.packetNo)" style="width: 17px;margin-left: 5px;" src="/assets/img/camera.dd556904.svg">
                                                 <a style="color: #ccc;" target="_blank" href="{{'http://www.pkstone.co.in/video.aspx?vstr='+item.packetNo }}" type="button" *ngIf="item.videoCD !='' && item.videoCD !=undefined && item.videoCD !=null ">
                                                     <img style="width: 17px;margin-left: 2px;" src="/assets/img/video.2c019c60.svg">
                                                 </a>
-                                                <span *ngIf="item.ifspecial=='Y'" data-toggle="tooltip" title="Jewelers Choice" data-placement="top" data-original-title=""><i class="fa fa-star"></i></span>
+                                                <span style="margin-left: 3px;" *ngIf="item.ifspecial=='Y'" data-toggle="tooltip" title="Jewelers Choice" data-placement="top" data-original-title=""><i class="fa fa-star"></i></span>
                                                 <a style="margin-top: -3px;margin-left: 4px; margin-top: 1%;color:black;" href="" type="button" [ngStyle]="(item.jpCut!='' && item.jpCut!=null) && {'color' : '#39b1ff'} " *ngIf="item.haPer=='100'">H/A</a>
                                                 <img style="width: 20px!important;margin-left: 2px;" *ngIf="item.originFlag !='' && item.originFlag !=null" src="/assets/img/CanadaFlag.png" />
                                                 <a href="~/home/SarinJourney" target="_blank" *ngIf="item.serinjourney == true ">
-                                                    <img src="/assets/img/sdj_11.jpg" style="width:18px;" data-toggle="tooltip" data-html="true" title="Sarine Diamond Journey" data-placement="top" data-original-title="" />
+                                                    <img src="/assets/img/sdj_11.jpg" style="width: 18px !important;margin-left: 3px;" data-toggle="tooltip" data-html="true" title="Sarine Diamond Journey" data-placement="top" data-original-title="" />
                                                 </a>
                                             </td>
                                             <td (mouseover)="ShowPopUp(item,true)">
@@ -2283,6 +2283,19 @@
                 </div>
             </div>
         </div>
+    </div>
+</ng-template>
+<ng-template #contentDetail let-modal>
+    <div class="modal-body">
+        <div class="row col-sm-12">
+
+            <div class="pull-right" style="position: absolute;right: 0px;z-index: 1000;">
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+        </div>
+        <lib-diamond-detail [packetno]="packetNo"></lib-diamond-detail>
     </div>
 </ng-template>
 <!-- MAIN END -->
