@@ -1,0 +1,26 @@
+.grid {
+    border-radius: 3px;
+    margin-bottom: 4px;
+    padding: 10px 6px;
+    background: #f0f4f9;
+}
+
+.saved-date h3 {
+    font-weight: 400;
+    color: #000;
+    font-size: 14px;
+    line-height: 1;
+    margin-bottom: 7px;
+    word-break: break-word;
+}
+
+.grid a {
+    color: #283895;
+}
+
+.dnt {
+    font-size: 12px;
+    padding-left: 0;
+    color: rgba(0, 0, 0, .55);
+    line-height: 1;
+}

@@ -1,0 +1,135 @@
+<inventory-nav></inventory-nav>
+<div class="content">
+    <!-- PAGE TITLE END -->
+    <main class="myform" style="padding-top: 0px;padding-bottom: 0px;height: 89vh;">
+        <div class="setupContainer">
+            <div class="row col-sm-12">
+                <lib-profile-navigation></lib-profile-navigation>
+
+            </div>
+            <div class="row col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="pull-left">
+                            <button class="btn btn-primary" type="button" [translate]="'admin.profile.downloadSetup.addNewFormat'" (click)="AddNewItem()"></button>
+
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-primary" type="button" [translate]="'admin.profile.downloadSetup.save'" (click)="saveFields()"></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class=" table-fixed " style="height: auto;">
+                            <table style="min-width: 100% !important;" class="table table-bordered table-sm table-striped table-hover font-12 cd-table">
+                                <thead>
+                                    <td>
+
+                                    </td>
+                                    <td [translate]="'admin.profile.downloadSetup.formatName'">
+
+                                    </td>
+                                    <td [translate]="'admin.profile.downloadSetup.percentage'">
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let item of Fields;">
+                                        <tr>
+                                            <td>
+                                                <button class="btn btn-sm btn-primary" type="button" (click)="toggleDetail(item)"> <i *ngIf="!item.showDetail" class="fa fa-plus"></i> <i  *ngIf="item.showDetail" class="fa fa-minus"></i>   </button>
+                                            </td>
+                                            <td>
+                                                <input name="formatName" [(ngModel)]="item.name" type="text" min="0">
+                                            </td>
+                                            <td>
+                                                <input name="percentage" [(ngModel)]="item.percentage" type="number" min="0">
+                                            </td>
+                                            <td>
+                                                <button *ngIf="!item.readOnly" class="btn btn-sm btn-primary" type="button" (click)="Remove(item)" [translate]="'admin.profile.downloadSetup.remove'">   </button>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="item.showDetail && !item.readOnly">
+                                            <td colspan="4" style="overflow: auto;">
+                                                <table style="min-width: 100% !important;user-select:none;" class="table table-bordered table-sm table-striped table-hover font-12 cd-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <td style="width: 60px;" [translate]="'admin.profile.downloadSetup.isActive'">
+                                                            </td>
+                                                            <td style="width: 150px;" [translate]=" 'admin.profile.downloadSetup.fieldName'">
+                                                            </td>
+                                                            <td style="width: 150px;" [translate]="'admin.profile.downloadSetup.label'">
+                                                            </td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let indx=index;let subItem of item.fieldsModels;" [ngClass]="dragIndex==indx ? 'selected' :'' " (mouseup)="mouseUp(item,indx)" (mousemove)="mouseMove(item,indx)">
+                                                            <td>
+                                                                <i class="fa fa-arrows" (mousedown)="mouseDown(indx)"></i>
+                                                                <label class="custom-control material-checkbox">
+                                                            <input (change)="checkChange(item)" type="checkbox"
+                                                                class="material-control-input" name="AllReslt"
+                                                                [(ngModel)]="subItem.isActive">
+                                                            <span class="material-control-indicator"></span>
+                                                        </label>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control" name="FieldName" [(ngModel)]="subItem.fieldName" disabled>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control" name="label" [(ngModel)]="subItem.label">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="item.showDetail && item.readOnly">
+                                            <td colspan="4" style="overflow: auto;">
+                                                <table style="min-width: 100% !important;user-select:none;" class="table table-bordered table-sm table-striped table-hover font-12 cd-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <td style="width: 60px;" [translate]="'admin.profile.downloadSetup.isActive'">
+                                                            </td>
+                                                            <td style="width: 150px;" [translate]=" 'admin.profile.downloadSetup.fieldName'">
+                                                            </td>
+                                                            <td style="width: 150px;" [translate]="'admin.profile.downloadSetup.label'">
+                                                            </td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let indx=index;let subItem of item.fieldsModels;">
+                                                            <td>
+                                                                <label class="custom-control material-checkbox">
+                                                            <input [disabled]="true" type="checkbox"
+                                                                class="material-control-input" name="AllReslt"
+                                                                [(ngModel)]="subItem.isActive">
+                                                            <span class="material-control-indicator"></span>
+                                                        </label>
+                                                            </td>
+                                                            <td>
+                                                                <input [disabled]="true" type="text" class="form-control" name="FieldName" [(ngModel)]="subItem.fieldName" disabled>
+                                                            </td>
+                                                            <td>
+                                                                <input [disabled]="true" type="text" class="form-control" name="label" [(ngModel)]="subItem.label">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+<!-- MAIN END -->
+<!-- SIDEBAR START -->

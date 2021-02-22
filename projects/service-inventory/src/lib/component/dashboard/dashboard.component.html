@@ -85,7 +85,7 @@
                             <div *ngFor="let item of recnetSearches" class="grid d-flex align-items-center j-space-between">
                                 <a (click)="search(item)" target="_blank" rel="noopener noreferrer" class="saved-date">
                                     <h3>{{item.label}}</h3>
-                                    <div class="dnt">{{item.createdDate}}</div>
+                                    <div class="dnt">{{item.createdDate | date: 'dd/MM/yyyy hh:mm'}}</div>
                                 </a>
                             </div>
                         </div>

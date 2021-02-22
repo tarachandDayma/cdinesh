@@ -1,0 +1,17 @@
+<div class="d-none d-sm-none d-md-block" role="group" aria-label="Basic example">
+    <nav class="nav">
+        <a routerLink="/admin/role" class="nav-link" [ngClass]="currentMenu =='role' ? 'active': ''"> <span [translate]="'admin.profile.nav.role'"> Role </span></a>
+    </nav>
+</div>
+<div class="btn-group d-sm-block d-md-none">
+
+    <a *ngIf="currentMenu =='role'" class="btn" id="role" routerLink="/admin/role" [ngClass]="currentMenu =='role' ? 'active': ''"> <span [translate]="'admin.profile.nav.role'"> Role </span></a>
+    <div class="dropdown ml-1">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [translate]="'admin.profile.nav.menu'">
+            </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" id="role" routerLink="/admin/role" [ngClass]="currentMenu =='role' ? 'active': ''"> <span [translate]="'admin.profile.nav.role'"> role </span></a>
+        </div>
+    </div>
+
+</div>

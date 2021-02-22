@@ -15,6 +15,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { SaveSearchComponent } from './component/save-search/save-search.component';
 import { SearchComponent } from './component/search/search.component';
 import { UpcomingComponent } from './component/upcoming/upcoming.component';
+import { UserTrackComponent } from './component/user-track/user-track.component';
 import { UserWishComponent } from './component/user-wish/user-wish.component';
 
 
@@ -98,6 +99,9 @@ const routes: Routes = [
     },{
       path:"inquiry",
       component:InquiryDetailComponent
+    },{
+      path:"track",
+      component:UserTrackComponent
     }
 
   ];

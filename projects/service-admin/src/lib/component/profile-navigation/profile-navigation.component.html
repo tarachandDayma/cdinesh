@@ -1,0 +1,43 @@
+<div class="d-none d-sm-none d-md-block" role="group" aria-label="Basic example">
+    <nav class="nav">
+        <a routerLink="/inventory/personalDetail" class="nav-link" [ngClass]="currentMenu =='personalDetail' ? 'active': ''"> <span [translate]="'admin.profile.nav.personalDetail'"> Personal Detail </span></a>
+        <a routerLink="/inventory/changePassword" class="nav-link" [ngClass]="currentMenu =='changePassword' ? 'active': ''"><span [translate]="'admin.profile.nav.changePassword'"> changePassword </span></a>
+        <a routerLink="/inventory/downloadSetup" class="nav-link" [ngClass]="currentMenu =='downloadSetup' ? 'active': ''"><span [translate]="'admin.profile.nav.downloadSetup'"> Download setup </span></a>
+        <a routerLink="/inventory/pairSetup" class="nav-link" [ngClass]="currentMenu =='pairSetup' ? 'active': ''"><span [translate]="'admin.profile.nav.pairSetup'"> Pair setup </span></a>
+        <a routerLink="/inventory/saveSearch" class="nav-link" [ngClass]="currentMenu =='saveSearch' ? 'active': ''"><span [translate]="'admin.profile.nav.saveSearch'"> SaveSearch </span></a>
+        <a routerLink="/inventory/myWish" class="nav-link" [ngClass]="currentMenu =='myWish' ? 'active': ''"><span [translate]="'admin.profile.nav.userWish'"> Wish List </span></a>
+        <a routerLink="/inventory/schedule" class="nav-link" [ngClass]="currentMenu =='schedule' ? 'active': ''"><span [translate]="'admin.profile.nav.schedule'">Schedule</span></a>
+        <a routerLink="/inventory/inquiry" class="nav-link" [ngClass]="currentMenu =='inquiry' ? 'active': ''"><span [translate]="'admin.profile.nav.inquiry'">inquiry</span></a>
+        <a routerLink="/inventory/track" class="nav-link" [ngClass]="currentMenu =='track' ? 'active': ''"><span [translate]="'admin.profile.nav.trackMenuName'">Track</span></a>
+    </nav>
+</div>
+<div class="btn-group d-sm-block d-md-none">
+
+    <a *ngIf="currentMenu =='personalDetail'" class="btn" id="personalDetail" routerLink="/inventory/personalDetail" [ngClass]="currentMenu =='personalDetail' ? 'active': ''"> <span [translate]="'admin.profile.nav.personalDetail'"> Personal Detail </span></a>
+    <a *ngIf="currentMenu =='changePassword'" class="btn" id="changePassword" routerLink="/inventory/changePassword" [ngClass]="currentMenu =='changePassword' ? 'active': ''"><span [translate]="'admin.profile.nav.changePassword'"> changePassword </span></a>
+    <a *ngIf="currentMenu =='downloadSetup'" class="btn" id="downloadSetup" routerLink="/inventory/downloadSetup" [ngClass]="currentMenu =='downloadSetup' ? 'active': ''"><span [translate]="'admin.profile.nav.downloadSetup'"> Download setup </span></a>
+    <a *ngIf="currentMenu =='pairSetup'" class="btn" id="pairSetup" routerLink="/inventory/pairSetup" [ngClass]="currentMenu =='pairSetup' ? 'active': ''"><span [translate]="'admin.profile.nav.pairSetup'"> Pair setup </span></a>
+    <a *ngIf="currentMenu =='saveSearch'" class="btn" id="saveSearch" routerLink="/inventory/saveSearch" [ngClass]="currentMenu =='saveSearch' ? 'active': ''"><span [translate]="'admin.profile.nav.saveSearch'"> SaveSearch </span></a>
+    <a *ngIf="currentMenu =='myWish'" class="btn" id="myWish" routerLink="/inventory/myWish" [ngClass]="currentMenu =='myWish' ? 'active': ''"><span [translate]="'admin.profile.nav.userWish'"> Wish List </span></a>
+    <a *ngIf="currentMenu =='schedule'" class="btn" id="schedule" routerLink="/inventory/schedule" [ngClass]="currentMenu =='schedule' ? 'active': ''"><span [translate]="'admin.profile.nav.schedule'">Schedule</span></a>
+    <a *ngIf="currentMenu =='inquiry'" class="btn" id="inquiry" routerLink="/inventory/inquiry" [ngClass]="currentMenu =='inquiry' ? 'active': ''"><span [translate]="'admin.profile.nav.inquiry'">inquiry</span></a>
+    <a *ngIf="currentMenu =='track'" routerLink="/inventory/track" class="btn" [ngClass]="currentMenu =='track' ? 'active': ''"><span [translate]="'admin.profile.nav.trackMenuName'">Track</span></a>
+
+
+    <div class="dropdown ml-1">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [translate]="'admin.profile.nav.menu'">
+            </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" id="personalDetail" routerLink="/inventory/personalDetail" [ngClass]="currentMenu =='personalDetail' ? 'active': ''"> <span [translate]="'admin.profile.nav.personalDetail'"> Personal Detail </span></a>
+            <a class="dropdown-item" id="changePassword" routerLink="/inventory/changePassword" [ngClass]="currentMenu =='changePassword' ? 'active': ''"><span [translate]="'admin.profile.nav.changePassword'"> changePassword </span></a>
+            <a class="dropdown-item" id="downloadSetup" routerLink="/inventory/downloadSetup" [ngClass]="currentMenu =='downloadSetup' ? 'active': ''"><span [translate]="'admin.profile.nav.downloadSetup'"> Download setup </span></a>
+            <a class="dropdown-item" id="pairSetup" routerLink="/inventory/pairSetup" [ngClass]="currentMenu =='pairSetup' ? 'active': ''"><span [translate]="'admin.profile.nav.pairSetup'"> Pair setup </span></a>
+            <a class="dropdown-item" id="saveSearch" routerLink="/inventory/saveSearch" [ngClass]="currentMenu =='saveSearch' ? 'active': ''"><span [translate]="'admin.profile.nav.saveSearch'"> SaveSearch </span></a>
+            <a class="dropdown-item" id="myWish" routerLink="/inventory/myWish" [ngClass]="currentMenu =='myWish' ? 'active': ''"><span [translate]="'admin.profile.nav.userWish'"> Wish List </span></a>
+            <a class="dropdown-item" id="schedule" routerLink="/inventory/schedule" [ngClass]="currentMenu =='schedule' ? 'active': ''"><span [translate]="'admin.profile.nav.schedule'">Schedule</span></a>
+            <a class="dropdown-item" id="inquiry" routerLink="/inventory/inquiry" [ngClass]="currentMenu =='inquiry' ? 'active': ''"><span [translate]="'admin.profile.nav.inquiry'">inquiry</span></a>
+            <a class="dropdown-item" id="track" routerLink="/inventory/track" [ngClass]="currentMenu =='track' ? 'active': ''"><span [translate]="'admin.profile.nav.trackMenuName'">track</span></a>
+        </div>
+    </div>
+
+</div>

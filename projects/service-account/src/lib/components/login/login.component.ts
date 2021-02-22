@@ -56,6 +56,9 @@ export class LoginComponent implements OnInit {
           return;
         } 
         this.environment.Authtoken = result.accessToken;
+        if(this.environment.IsAdminLogin){
+          return this.router.navigateByUrl("/admin");
+        }
         if (this.environment.returnUrl == "" || this.environment.returnUrl == undefined || this.environment.returnUrl == null) {
           return this.router.navigateByUrl("/inventory");
         } else {

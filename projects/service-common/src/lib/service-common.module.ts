@@ -19,8 +19,6 @@ import { CdmulitselectComponent } from './component/cdmulitselect/cdmulitselect.
 import { CdGridComponent } from './component/cd-grid/cd-grid.component';
 import { CdDragDropDirective } from './directive/cd-drag-drop.directive';
 import { PaginationComponent } from './component/pagination/pagination.component';
-import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
-import { ConfirmationDialogService } from './component/confirmation-dialog/confirmation-dialog.service';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr/toastr/toastr.module';
 import { AppSwitchComponent } from './component/app-switch/app-switch.component';
@@ -28,12 +26,12 @@ import { AppSwitchComponent } from './component/app-switch/app-switch.component'
 
 
 @NgModule({
-  declarations: [ServiceCommonComponent, loader,alert, CDDropdownComponent, CdmulitselectComponent, CdGridComponent, CdDragDropDirective, PaginationComponent,ConfirmationDialogComponent, AppSwitchComponent],
+  declarations: [ServiceCommonComponent, loader,alert, CDDropdownComponent, CdmulitselectComponent, CdGridComponent, CdDragDropDirective, PaginationComponent, AppSwitchComponent],
   imports: [
     HttpClientModule,
     CommonModule,FormsModule,ReactiveFormsModule
   ],
-  exports: [ServiceCommonComponent, loader,alert,CDDropdownComponent,CdmulitselectComponent,CdGridComponent,PaginationComponent,ConfirmationDialogComponent,AppSwitchComponent]
+  exports: [ServiceCommonComponent, loader,alert,CDDropdownComponent,CdmulitselectComponent,CdGridComponent,PaginationComponent,AppSwitchComponent]
 })
 export class ServiceCommonModule {
   static forRoot(): ModuleWithProviders {
@@ -43,7 +41,7 @@ export class ServiceCommonModule {
         ServiceCommonService,
         EnvironmentService,
         FormValidationService,
-        RestService, loaderserice, loaderBroadcaster,alertserice,AltBroadcaster,DropDownService,ConfirmationDialogService
+        RestService, loaderserice, loaderBroadcaster,alertserice,AltBroadcaster,DropDownService
       ]
     };
   }

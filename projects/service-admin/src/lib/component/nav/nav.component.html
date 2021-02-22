@@ -1,0 +1,168 @@
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
+<header>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand logo" href="/"><img [src]="AppLogo" alt="CD" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="col-md-6" (ngSubmit)="SearchPackets()">
+                        <div class="input-group input-group-sm">
+                            <input style="color: black;" name="searchPackets" [(ngModel)]="PacketNos" class="form-control mr-2 search-control" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <ul class="navbar-nav ml-auto navbar-nav flex-row ml-md-auto d-md-flex d-none d-sm-none d-md-block">
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link" href="#" class="nav-link dropdown-toggle mt-2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{Language.toUpperCase()}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="body">
+                                    <span (click)="LangChange('en')" class="dropdown-item">EN</span>
+                                    <span (click)="LangChange('zh')" class="dropdown-item">ZH</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell-o icon"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="header">
+
+                                </div>
+                                <div class="body">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="footer">
+                                    <a class="dropdown-item" href="#">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="nav-link" routerLink="/admin/mycart" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-shopping-cart icon" style="font-size: 16px;"></i>
+                            </a>
+                            <span class="badge badge-warning navbar-badge">{{cartCount}}</span>
+                        </li>
+                        <li class="nav-item dropdown profile">
+                            <a *ngIf="User!=undefined" class="nav-link dropdown-toggle mt-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{User.userName}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="header">
+
+                                </div>
+                                <div class="body">
+                                    <a class="dropdown-item" routerLink="/admin/personalDetail" [translate]="'admin.nav.profile'">Profile</a>
+                                    <a class="dropdown-item" routerLink="/admin/saveSearch" [translate]="'admin.nav.saveSearch'">SaveSearch</a>
+                                    <a class="dropdown-item" routerLink="/admin/myWish" [translate]="'admin.nav.userWish'">Wish</a>
+                                    <a class="dropdown-item" routerLink="/admin/schedule" [translate]="'admin.nav.schedule'">Schedule</a>
+                                    <a class="dropdown-item" routerLink="/admin/inquiry" [translate]="'admin.nav.inquiry'">Inquiry</a>
+                                    <a class="dropdown-item" routerLink="/admin/track" [translate]="'admin.nav.trackMenuName'">Track</a>
+                                    <a class="dropdown-item" routerLink="/admin/role" [translate]="'admin.nav.role'">Track</a>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="footer">
+                                    <a class="dropdown-item" (click)="logout()" [translate]="'admin.nav.logout'">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="btn-group btn-group-sm d-sm-block d-md-none" role="group" aria-label="Basic example">
+
+        <ul class="navbar-nav ml-auto navbar-nav flex-row ml-md-auto d-md-flex">
+            <li class="nav-item dropdown subli">
+                <a href="#" class="nav-link dropdown-toggle mt-2" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{Language.toUpperCase()}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="body">
+                        <span (click)="LangChange('en')" class="dropdown-item">EN</span>
+                        <span (click)="LangChange('zh')" class="dropdown-item">ZH</span>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown subli">
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-bell-o icon"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="header">
+
+                    </div>
+                    <div class="body">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="footer">
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </div>
+            </li>
+            <li class="subli">
+                <a class="nav-link " routerLink="/admin/mycart" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-shopping-cart icon"></i>
+                </a>
+                <span class="badge badge-warning navbar-badge">{{cartCount}}</span>
+            </li>
+            <li class="nav-item dropdown profile subli">
+                <a *ngIf="User!=undefined" class="nav-link dropdown-toggle mt-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{User.userName}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="header">
+
+                    </div>
+                    <div class="body">
+                        <a class="dropdown-item" routerLink="/admin/personalDetail" [translate]="'admin.nav.profile'">Profile</a>
+                        <a class="dropdown-item" routerLink="/admin/saveSearch" [translate]="'admin.nav.saveSearch'">SaveSearch</a>
+                        <a class="dropdown-item" routerLink="/admin/myWish" [translate]="'admin.nav.userWish'">Wish</a>
+                        <a class="dropdown-item" routerLink="/admin/schedule" [translate]="'admin.nav.schedule'">Schedule</a>
+                        <a class="dropdown-item" routerLink="/admin/inquiry" [translate]="'admin.nav.inquiry'">Inquiry</a>
+                        <a *ngIf="AllowControlPanel" class="dropdown-item" href="/controlpanel" [translate]="'admin.nav.controlpanel'" target="blank">ControlPanel</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="footer">
+                        <a class="dropdown-item" (click)="logout()" [translate]="'admin.nav.logout'">Logout</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<div class="sidebar collapse navbar-collapse " id="navbarSupportedContent" [ngClass]="toggleMenu ? 'toggleMenu' :'toggleMenu1'">
+    <a routerLink="/admin/dashboard" [ngClass]="currentMenu =='dashboard' ? 'active': ''"> <i class="fa fa-tachometer" aria-hidden="true"> </i> <br> <span [translate]="'admin.nav.dashboard'"> Dashboard </span></a>
+    <a routerLink="/admin/search" [ngClass]="currentMenu =='search' ? 'active': ''"><i class="fa fa-search" aria-hidden="true"> </i> <br> <span [translate]="'admin.nav.search'"> Search </span></a>
+    <a routerLink="/admin/fancySearch" [ngClass]="currentMenu =='fancysearch' ? 'active': ''"><i class="fa fa-diamond" aria-hidden="true"></i> <br> <span [translate]="'admin.nav.fancy'"> Fancy </span></a>
+    <a routerLink="/admin/recommended" [ngClass]="currentMenu =='recommended' ? 'active': ''"><i class="fa fa-thumbs-up" aria-hidden="true" style="word-break: break-all;"></i> <br> <span [translate]="'admin.nav.recommended'"> Recomm-ended </span> </a>
+    <a routerLink="/admin/newgoods" [ngClass]="currentMenu =='newgoods' ? 'active': ''"><i class="fa fa-diamond" aria-hidden="true"></i> <br> <span [translate]="'admin.nav.newgoods'">  New goods </span></a>
+    <a routerLink="/admin/bestofcd" [ngClass]="currentMenu =='bestofcd' ? 'active': ''"><i class="fa fa-certificate" aria-hidden="true"></i> <br> <span [translate]="'admin.nav.bestofcd'">  Best Of CD </span></a>
+    <a routerLink="/admin/upcoming" [ngClass]="currentMenu =='upcoming' ? 'active': ''"><i class="fa fa-gift" aria-hidden="true"></i> <br><span [translate]="'admin.nav.upcoming'">  Upcoming </span> </a>
+</div>
+<div (click)="ToggleMenu()" *ngIf="!toggleMenu" class="left-toggle-button arrow-left">
+
+</div>
+<div (click)="ToggleMenu()" *ngIf="toggleMenu" class="right-toggle-button arrow-right">
+
+</div>

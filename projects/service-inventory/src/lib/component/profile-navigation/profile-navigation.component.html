@@ -8,6 +8,7 @@
         <a routerLink="/inventory/myWish" class="nav-link" [ngClass]="currentMenu =='myWish' ? 'active': ''"><span [translate]="'inventory.profile.nav.userWish'"> Wish List </span></a>
         <a routerLink="/inventory/schedule" class="nav-link" [ngClass]="currentMenu =='schedule' ? 'active': ''"><span [translate]="'inventory.profile.nav.schedule'">Schedule</span></a>
         <a routerLink="/inventory/inquiry" class="nav-link" [ngClass]="currentMenu =='inquiry' ? 'active': ''"><span [translate]="'inventory.profile.nav.inquiry'">inquiry</span></a>
+        <a routerLink="/inventory/track" class="nav-link" [ngClass]="currentMenu =='track' ? 'active': ''"><span [translate]="'inventory.profile.nav.trackMenuName'">Track</span></a>
     </nav>
 </div>
 <div class="btn-group d-sm-block d-md-none">
@@ -20,6 +21,7 @@
     <a *ngIf="currentMenu =='myWish'" class="btn" id="myWish" routerLink="/inventory/myWish" [ngClass]="currentMenu =='myWish' ? 'active': ''"><span [translate]="'inventory.profile.nav.userWish'"> Wish List </span></a>
     <a *ngIf="currentMenu =='schedule'" class="btn" id="schedule" routerLink="/inventory/schedule" [ngClass]="currentMenu =='schedule' ? 'active': ''"><span [translate]="'inventory.profile.nav.schedule'">Schedule</span></a>
     <a *ngIf="currentMenu =='inquiry'" class="btn" id="inquiry" routerLink="/inventory/inquiry" [ngClass]="currentMenu =='inquiry' ? 'active': ''"><span [translate]="'inventory.profile.nav.inquiry'">inquiry</span></a>
+    <a *ngIf="currentMenu =='track'" routerLink="/inventory/track" class="btn" [ngClass]="currentMenu =='track' ? 'active': ''"><span [translate]="'inventory.profile.nav.trackMenuName'">Track</span></a>
 
 
     <div class="dropdown ml-1">
@@ -34,6 +36,7 @@
             <a class="dropdown-item" id="myWish" routerLink="/inventory/myWish" [ngClass]="currentMenu =='myWish' ? 'active': ''"><span [translate]="'inventory.profile.nav.userWish'"> Wish List </span></a>
             <a class="dropdown-item" id="schedule" routerLink="/inventory/schedule" [ngClass]="currentMenu =='schedule' ? 'active': ''"><span [translate]="'inventory.profile.nav.schedule'">Schedule</span></a>
             <a class="dropdown-item" id="inquiry" routerLink="/inventory/inquiry" [ngClass]="currentMenu =='inquiry' ? 'active': ''"><span [translate]="'inventory.profile.nav.inquiry'">inquiry</span></a>
+            <a class="dropdown-item" id="track" routerLink="/inventory/track" [ngClass]="currentMenu =='track' ? 'active': ''"><span [translate]="'inventory.profile.nav.trackMenuName'">track</span></a>
         </div>
     </div>
 

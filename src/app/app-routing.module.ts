@@ -16,7 +16,7 @@ const routes: Routes = [
   {path:"home",loadChildren :()=> import("cdinesh-static-pages").then(m=> m.CdineshStaticPagesModule)},
   {path:"auth",loadChildren :()=> import("service-account").then(m=> m.ServiceAccountModule),canActivate:[LoginGuard]},
   {path:"guest",loadChildren :()=> import("service-guest").then(m=> m.ServiceGuestModule),canActivate:[LoginGuard]},
-  {path:"controlpanel",loadChildren :()=> import("service-admin").then(m=> m.ServiceAdminModule),canActivate:[IsAdminGuard]},
+  {path:"admin",loadChildren :()=> import("service-admin").then(m=> m.ServiceAdminModule),canActivate:[IsAdminGuard]},
   {path:"inventory",loadChildren :()=> import("service-inventory").then(m=> m.ServiceInventoryModule),canActivate:[InventoryGuard]},
   {path:"accessdenied",component:AccessdeniedComponent},
   {path:"*",component:NotfoundComponent}

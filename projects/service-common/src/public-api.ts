@@ -21,6 +21,4 @@ export * from "./lib/component/cddropdown/cddropdown.component";
 export * from "./lib/component/cdmulitselect/cdmulitselect.component";
 export * from "./lib/component/cd-grid/cd-grid.component";
 export * from "./lib/component/pagination/pagination.component";
-export * from "./lib/component/confirmation-dialog/confirmation-dialog.service";
-export * from "./lib/component/confirmation-dialog/confirmation-dialog.component";
 export * from "./lib/component/app-switch/app-switch.component";

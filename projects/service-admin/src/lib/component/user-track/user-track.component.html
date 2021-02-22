@@ -1,0 +1,184 @@
+<inventory-nav></inventory-nav>
+<div class="content">
+    <!-- PAGE TITLE END -->
+    <main class="myform" style="padding-top: 0px;padding-bottom: 0px;height: 89vh;">
+        <div class="controlPanelContainer">
+            <div class="row col-sm-12">
+                <lib-profile-navigation></lib-profile-navigation>
+
+            </div>
+            <div class="row col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 [translate]="'admin.profile.diamondTrack.title'"></h4>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div *ngFor="let track of TrackTypes" class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            [attr.data-target]="'#'+track.trackType" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            {{track.trackType}}
+                                        </button>
+                                    </h2>
+                                    <div class="pull-right">
+                                        <div class="btn-group  btn-group " role="group">
+                                            <button type="button" class="btn btn-primary"
+                                                [translate]="'admin.profile.diamondTrack.update'"
+                                                (click)="Update(track)"></button>
+                                            <button type="button" class="btn btn-primary"
+                                                [translate]="'admin.profile.diamondTrack.remove'"
+                                                (click)="Remove(track)"></button>
+                                            <button type="button" class="btn btn-primary"
+                                                [translate]="'admin.profile.diamondTrack.search'"
+                                                (click)="Search(track)"></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="{{track.trackType}}" class="collapse show" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="table-fixed" style="height: 63.3vh;">
+                                            <table
+                                                class="table table-bordered table-sm table-striped table-hover font-12 cd-table "
+                                                style="width: 100%;height: 450px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-toggle="tooltip" data-placement="top" title=""
+                                                            class="fixed-column" style="width:70px;">
+
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="{{translate.instant('admin.profile.diamondTrack.packetNo')}}"
+                                                            class="fixed-column" style="width:93.8px;"
+                                                            [translate]="'admin.profile.diamondTrack.packetNo'">
+                                                            PacketNo
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="{{translate.instant('admin.profile.diamondTrack.price')}}"
+                                                            class="fixed-column" style="width:81px;"
+                                                            [translate]="'admin.profile.diamondTrack.price'">
+                                                            price
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="{{translate.instant('admin.profile.diamondTrack.back')}}"
+                                                            class="fixed-column" style="width:60px;"
+                                                            [translate]="'admin.profile.diamondTrack.result.back'">
+                                                            disc
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="{{translate.instant('admin.search.result.rapPrice')}}"
+                                                            class="fixed-column" style="width:81px;"
+                                                            [translate]="'admin.profile.diamondTrack.rapPrice'">
+                                                            price
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="{{translate.instant('admin.profile.diamondTrack.currentprice')}}"
+                                                            class="fixed-column" style="width:81px;"
+                                                            [translate]="'admin.profile.diamondTrack.currentprice'">
+                                                            price
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="{{translate.instant('admin.profile.diamondTrack.currentback')}}"
+                                                            class="fixed-column" style="width:60px;"
+                                                            [translate]="'admin.profile.diamondTrack.currentback'">
+                                                            disc
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="{{translate.instant('admin.search.result.currentrapPrice')}}"
+                                                            class="fixed-column" style="width:81px;"
+                                                            [translate]="'admin.profile.diamondTrack.currentrapPrice'">
+                                                            price
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="{{translate.instant('admin.search.result.trackDate')}}"
+                                                            class="fixed-column" style="width:81px;"
+                                                            [translate]="'admin.profile.diamondTrack.trackDate'">
+                                                            TrackDate
+                                                        </th>
+                                                        <th data-toggle="tooltip" data-placement="top"
+                                                            title="{{translate.instant('admin.search.result.tilDate')}}"
+                                                            class="fixed-column" style="width:150px;"
+                                                            [translate]="'admin.profile.diamondTrack.tilDate'">
+                                                            TrackTillDate
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="height:70vh;">
+                                                    <ng-container *ngFor="let item of track.diamondTracks;  ">
+                                                        <tr>
+                                                            <th data-toggle="tooltip" data-placement="top"
+                                                                class="fixed-column" style="width: 32px;">
+                                                                <label class="custom-control material-checkbox">
+                                                                    <input type="checkbox"
+                                                                        class="material-control-input"
+                                                                        name="AllReslt+{{item.packetNo}}"
+                                                                        [(ngModel)]="item.isActive">
+                                                                    <span class="material-control-indicator"></span>
+                                                                </label>
+                                                            </th>
+                                                            <td>
+                                                                {{item.packetNo}}
+                                                            </td>
+                                                            <td style="text-align: right !important;">
+                                                                {{item.price | number : '1.2-2'}}
+                                                            </td>
+                                                            <td style="text-align: right !important;">
+                                                                {{item.back | number : '1.2-2'}}
+                                                            </td>
+                                                            <td style="text-align: right !important;">
+                                                                {{item.rapPrice | number : '1.2-2'}}
+                                                            </td>
+                                                            <td style="text-align: right !important;">
+                                                                {{item.currrentPrice | number : '1.2-2'}}
+                                                            </td>
+                                                            <td style="text-align: right !important;">
+                                                                {{item.currrentBack | number : '1.2-2'}}
+                                                            </td>
+                                                            <td style="text-align: right !important;">
+                                                                {{item.currrentRapPrice | number : '1.2-2'}}
+                                                            </td>
+                                                            <td style="text-align: right !important;">
+                                                                {{item.trackDate | date: 'dd/MM/yyyy'}}
+                                                            </td>
+                                                            <td style="text-align: right !important;">
+                                                                <span *ngIf="!item.changeDate"> {{item.trackTillDate |
+                                                                    date: 'dd/MM/yyyy'}} </span>
+                                                                <input (change)="toggleDate(item)"
+                                                                    *ngIf="item.changeDate" type="date"
+                                                                    name="trackTillDate"
+                                                                    [(ngModel)]="item.trackTillDate">
+                                                                <i (click)="toggleDate(item)" class="fa fa-calendar"
+                                                                    aria-hidden="true"></i>
+                                                            </td>
+
+                                                        </tr>
+
+                                                    </ng-container>
+                                                    <tr style="height:70vh !important;">
+                                                        <td colspan="21" style="text-align: center !important;">
+                                                            <img *ngIf="track.diamondTracks.length<=0 || track.diamondTracks==undefined"
+                                                                src="/assets/img/NoRecordFound.png">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -34,6 +34,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DiamondScheduleComponent } from './component/diamond-schedule/diamond-schedule.component';
 import { InquiryDetailComponent } from './component/inquiry-detail/inquiry-detail.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { DiamondTrackComponent } from './component/diamond-track/diamond-track.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserTrackComponent } from './component/user-track/user-track.component';
 
 
 
@@ -42,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 @NgModule({
   declarations: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
-  ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent,InquiryDetailComponent],
+  ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent,InquiryDetailComponent,DiamondTrackComponent,UserTrackComponent],
   imports: [
     FormsModule,ReactiveFormsModule,
     TranslateModule.forChild(),
@@ -57,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     NgMultiSelectDropDownModule,
-    NgxImageZoomModule 
+    NgxImageZoomModule ,
+    NgbModule
   ],
   exports: [ServiceInventoryComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent]
 })

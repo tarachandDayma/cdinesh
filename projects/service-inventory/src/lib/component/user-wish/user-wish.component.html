@@ -18,23 +18,98 @@
                         <table class="table" style="user-select:none;">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th [translate]="'inventory.profile.userWish.name'"></th>
                                     <th [translate]=" 'inventory.profile.userWish.action'"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let indx=index;let item of searches;">
-                                    <td>
-                                        {{item.label}}
-                                    </td>
-                                    <td>
-                                        <div class="btn-toolbar">
-                                            <button class="btn btn-sm btn-primary" (click)="Modify(item)" type="button" [translate]=" 'inventory.profile.userWish.modify'"></button>
-                                            <button class="btn btn-sm btn-primary" (click)="Load(item)" type="button" [translate]=" 'inventory.profile.userWish.search'"></button>
-                                            <button class="btn btn-sm btn-primary" (click)="RemoveSearch(item)" type="button" [translate]=" 'inventory.profile.userWish.remove'"></button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <ng-container *ngFor="let indx=index;let item of searches;">
+                                    <tr>
+                                        <td>
+                                            <i (click)="toggleDetail(item)" *ngIf="item.children.length > 0 && !item.showDetail" class="fa fa-plus"></i>
+                                            <i (click)="toggleDetail(item)" *ngIf="item.children.length > 0 && item.showDetail" class="fa fa-minus"></i>
+                                        </td>
+                                        <td>
+                                            {{item.label}}
+                                        </td>
+                                        <td>
+                                            <div class="btn-toolbar">
+                                                <button class="btn btn-sm btn-primary" (click)="Modify(item)" type="button" [translate]=" 'inventory.profile.userWish.modify'"></button>
+                                                <button class="btn btn-sm btn-primary" (click)="Load(item)" type="button" [translate]=" 'inventory.profile.userWish.search'"></button>
+                                                <button class="btn btn-sm btn-primary" (click)="RemoveSearch(item)" type="button" [translate]=" 'inventory.profile.userWish.remove'"></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="item.children.length > 0 && item.showDetail">
+                                        <td colspan="3">
+                                            <table class="table" style="user-select:none;">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th [translate]="'inventory.profile.userWish.name'"></th>
+                                                        <th [translate]=" 'inventory.profile.userWish.action'"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <ng-container *ngFor="let indx=index;let subitem of item.children;">
+                                                        <tr>
+                                                            <td>
+                                                                <i (click)="toggleDetail(subitem)" *ngIf="subitem.children.length > 0 && !subitem.showDetail" class="fa fa-plus"></i>
+                                                                <i (click)="toggleDetail(subitem)" *ngIf="subitem.children.length > 0 && subitem.showDetail" class="fa fa-minuse"></i>
+                                                            </td>
+                                                            <td>
+                                                                {{subitem.label}}
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-toolbar">
+                                                                    <button class="btn btn-sm btn-primary" (click)="Modify(subitem)" type="button" [translate]=" 'inventory.profile.userWish.modify'"></button>
+                                                                    <button class="btn btn-sm btn-primary" (click)="Load(subitem)" type="button" [translate]=" 'inventory.profile.userWish.search'"></button>
+                                                                    <button class="btn btn-sm btn-primary" (click)="RemoveSearch(subitem)" type="button" [translate]=" 'inventory.profile.userWish.remove'"></button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="subitem.children.length > 0 && subitem.showDetail">
+                                                            <td colspan="3">
+                                                                <table class="table" style="user-select:none;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th></th>
+                                                                            <th [translate]="'inventory.profile.userWish.name'"></th>
+                                                                            <th [translate]=" 'inventory.profile.userWish.action'"></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <ng-container *ngFor="let indx=index;let subsubitem of subitem.children;">
+                                                                            <tr>
+
+                                                                                <td>
+                                                                                    {{subsubitem.label}}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="btn-toolbar">
+                                                                                        <button class="btn btn-sm btn-primary" (click)="Modify(subsubitem)" type="button" [translate]=" 'inventory.profile.userWish.modify'"></button>
+                                                                                        <button class="btn btn-sm btn-primary" (click)="Load(subsubitem)" type="button" [translate]=" 'inventory.profile.userWish.search'"></button>
+                                                                                        <button class="btn btn-sm btn-primary" (click)="RemoveSearch(subsubitem)" type="button" [translate]=" 'inventory.profile.userWish.remove'"></button>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </ng-container>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+
+                                                    </ng-container>
+
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </ng-container>
+
                             </tbody>
                         </table>
                     </div>

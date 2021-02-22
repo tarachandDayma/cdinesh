@@ -14,7 +14,13 @@ export class InventoryGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       this.loaderService.show(true);
-      if(this.environment.IsGuestLogin || this.environment.IsLogin){
+      if(this.environment.IsAdminLogin){
+        this.loaderService.show(false);
+        this.environment.returnUrl=state.url;
+        this.router.navigateByUrl("admin");
+        return false;
+      }
+      else if(this.environment.IsGuestLogin || this.environment.IsLogin){
         this.loaderService.show(false);
         return true;
       }else{
