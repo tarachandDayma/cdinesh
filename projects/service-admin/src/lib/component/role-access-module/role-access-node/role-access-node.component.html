@@ -1,0 +1,72 @@
+<ul id="myUL">
+    <li>
+        <div class="btn-group btn-group-sm">
+            <span class="toggleButton">
+                <span class="ml-2" (click)="toggleNode(node)"
+                    *ngIf="!node.showDetail && node.children !=undefined && node.children.length> 0">
+                    <img src="/assets/img/upArrow.jfif" style="width: 16px;-ms-transform: rotate(90deg); 
+                transform: rotate(180deg);">
+                </span>
+            <span class="ml-2" (click)="toggleNode(node)" *ngIf="node.showDetail && node.children !=undefined && node.children.length> 0">
+                    <img src="/assets/img/upArrow.jfif" style="width: 16px;">
+                </span>
+            </span>
+
+            <span class="ml-2 nodeLabel">{{node.name}}</span>
+            <div class="btn-group btn-group-sm">
+                <button class="btn btn-primary btn-sm  ml-2  " (click)="EditNode(node)"><i
+                        class="fa fa-edit"></i></button>
+            </div>
+        </div>
+        <div>
+            <ul class="nested" style="margin-left: 56px;" *ngIf="node.showDetail && node.children !=undefined && node.children.length> 0">
+                <li>
+                    <ng-container *ngFor="let item of node.children">
+                        <div class="col-sm-12">
+                            <lib-role-node [node]="item" (Edit)="EditNode($event)">
+                            </lib-role-node>
+                        </div>
+                    </ng-container>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>
+
+
+<!-- <table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td style="width: 50px;">
+                <span (click)="toggleNode(node)"
+                    *ngIf="!node.showDetail && node.children !=undefined && node.children.length> 0">
+                    <img src="/assets/img/upArrow.jfif" style="width: 16px;-ms-transform: rotate(90deg); 
+                    transform: rotate(180deg);">
+                </span> <span (click)="toggleNode(node)"
+                    *ngIf="node.showDetail && node.children !=undefined && node.children.length> 0">
+                    <img src="/assets/img/upArrow.jfif" style="width: 16px;">
+                </span>
+            </td>
+            <td style="width: 150px;"><span>{{node.name}}</span></td>
+            <td style="width: 150px;">
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-primary btn-sm " (click)="EditNode(node)"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-primary btn-sm " (click)="RemoveNode(node)"><i
+                            class="fa fa-remove"></i></button>
+
+                </div>
+            </td>
+        </tr>
+
+        <tr *ngIf="node.showDetail && node.children !=undefined && node.children.length> 0">
+            <td colspan="2">
+                <ng-container *ngFor="let item of node.children">
+                    <div class="col-sm-12">
+                        <lib-role-node [node]="item" (Edit)="EditNode($event)" (remove)="RemoveNode($event)">
+                        </lib-role-node>
+                    </div>
+                </ng-container>
+            </td>
+        </tr>
+    </tbody>
+</table> -->

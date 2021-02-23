@@ -1,0 +1,108 @@
+<inventory-nav></inventory-nav>
+<div class="content">
+    <!-- PAGE TITLE END -->
+    <main class="myform" style="padding-top: 0px;padding-bottom: 0px;">
+        <div class="setupContainer">
+            <div class="row col-sm-12">
+                <lib-setting-navigation></lib-setting-navigation>
+            </div>
+            <div class="row">
+                <div class="col-sm-6" *ngIf="roles.length > 0" style="overflow: auto;height: 70vh;">
+                    <ng-container *ngFor="let item of roles">
+                        <ul style="list-style-type:none;">
+                            <LI>
+                                <lib-role-access-node [node]="item" (Edit)="EditNode($event)">
+                                </lib-role-access-node>
+                            </LI>
+                        </ul>
+                    </ng-container>
+                </div>
+                <div *ngIf="CurrentMode=='EDIT'" class="col-sm-6">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary ml-2" type="button" (click)="Update()" [translate]="'admin.roleModuleAccess.updateButton'"></button>
+                        <button class="btn btn-primary ml-2" type="button" [translate]="'admin.roleModuleAccess.close'" (click)="closeMode()"></button>
+                    </div>
+                    <div class="col-md-12">
+                        <div>
+                            <h4 style="text-transform: capitalize;">
+                                {{currentRole.name}}
+                            </h4>
+                        </div>
+                        <div style="overflow: auto;height: 70vh;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+
+
+                                        <th [translate]="'admin.roleModuleAccess.table.active'">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox"
+                                                    class="material-control-input" name="AllReslt"
+                                                    [(ngModel)]="allSelected" (change)="SelectAll()">
+                                                <span class="material-control-indicator"></span>
+                                            </label>
+                                        </th>
+                                        <th [translate]="'admin.roleModuleAccess.table.moduleName'">
+                                        </th>
+                                        <th [translate]="'admin.roleModuleAccess.table.action'">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of roleModuleAccessList">
+                                        <td>
+                                            <label class="custom-control material-checkbox">
+                                            <input type="checkbox"
+                                                class="material-control-input" name="AllReslt"
+                                                [(ngModel)]="item.isActive">
+                                            <span class="material-control-indicator"></span>
+                                        </label>
+                                        </td>
+                                        <td>
+                                            {{item.moduleName}}
+                                        </td>
+                                        <td>
+                                            {{item.action}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #contentUpdateConfirm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" [translate]="'admin.roleModuleAccess.confirm'"> Confirm</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="col-sm-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="col-sm-12"> <span [translate]="'admin.roleModuleAccess.updateConfirm'"></span> </div>
+                    <div class="col-sm-12">
+                        <div class="pull-right">
+                            <button class="btn btn-primary ml-2" (click)="UpdateConfirm()" [translate]="'admin.roleModuleAccess.updateButton'">
+                            </button>
+                            <button type="button" class="btn btn-primary ml-2" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- MAIN END -->
+<!-- SIDEBAR START -->

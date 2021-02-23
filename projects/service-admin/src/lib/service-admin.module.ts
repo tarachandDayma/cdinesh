@@ -39,6 +39,8 @@ import { TreeModule } from '@circlon/angular-tree-component';
 import { SettingNavigationComponent } from './component/setting-navigation/setting-navigation.component';
 import { RolesComponent } from './component/roles/roles.component';
 import { RoleNodeComponent } from './component/roles/role-node/role-node.component';
+import { RoleAccessModuleComponent } from './component/role-access-module/role-access-module.component';
+import { RoleAccessNodeComponent } from './component/role-access-module/role-access-node/role-access-node.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,7 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [ServiceAdminComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
     ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent,InquiryDetailComponent,DiamondTrackComponent,UserTrackComponent
-  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent],
+  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent, RoleAccessModuleComponent, RoleAccessNodeComponent],
     imports: [
       FormsModule,ReactiveFormsModule,
       TranslateModule.forChild(),

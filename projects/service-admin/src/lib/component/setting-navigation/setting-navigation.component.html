@@ -1,6 +1,7 @@
 <div class="d-none d-sm-none d-md-block" role="group" aria-label="Basic example">
     <nav class="nav">
         <a routerLink="/admin/role" class="nav-link" [ngClass]="currentMenu =='role' ? 'active': ''"> <span [translate]="'admin.profile.nav.role'"> Role </span></a>
+        <a routerLink="/admin/roleAccess" class="nav-link" [ngClass]="currentMenu =='roleAccess' ? 'active': ''"> <span [translate]="'admin.roleModuleAccess.title'"> Role Acccess </span></a>
     </nav>
 </div>
 <div class="btn-group d-sm-block d-md-none">
@@ -11,6 +12,7 @@
             </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" id="role" routerLink="/admin/role" [ngClass]="currentMenu =='role' ? 'active': ''"> <span [translate]="'admin.profile.nav.role'"> role </span></a>
+            <a class="dropdown-item" id="role" routerLink="/admin/roleAccess" [ngClass]="currentMenu =='roleAccess' ? 'active': ''"> <span [translate]="'admin.roleModuleAccess.title'"> roleAccess </span></a>
         </div>
     </div>
 

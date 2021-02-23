@@ -12,6 +12,7 @@ import { PairSetupComponent } from './component/pair-setup/pair-setup.component'
 import { PersonalDetailComponent } from './component/personal-detail/personal-detail.component';
 import { RecommendedComponent } from './component/recommended/recommended.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { RoleAccessModuleComponent } from './component/role-access-module/role-access-module.component';
 import { RolesComponent } from './component/roles/roles.component';
 import { SaveSearchComponent } from './component/save-search/save-search.component';
 import { SearchComponent } from './component/search/search.component';
@@ -106,6 +107,10 @@ const routes: Routes = [
   },{
     path:"role",
     component:RolesComponent
+  }
+  ,{
+    path:"roleAccess",
+    component:RoleAccessModuleComponent
   }
 
 ];

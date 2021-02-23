@@ -51,15 +51,18 @@ export class LoginComponent implements OnInit {
       formdata.append("scope", this.environment.Scope);
       this.loginservice.login(formdata).subscribe(result => {
         this.loader.show(false);
+        this.environment.Authtoken = result.accessToken;
         if (result == null) {
+          this.environment.GetModuleAcccess();
           this.alertservice.Error("", this.translate.instant("auth.login.invalidPassword"));
           return;
         } 
-        this.environment.Authtoken = result.accessToken;
         if(this.environment.IsAdminLogin){
+          this.environment.GetModuleAcccess();
           return this.router.navigateByUrl("/admin");
         }
         if (this.environment.returnUrl == "" || this.environment.returnUrl == undefined || this.environment.returnUrl == null) {
+          this.environment.GetModuleAcccess();
           return this.router.navigateByUrl("/inventory");
         } else {
           return this.router.navigateByUrl(this.environment.returnUrl);

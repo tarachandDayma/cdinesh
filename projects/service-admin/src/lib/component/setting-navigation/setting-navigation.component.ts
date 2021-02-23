@@ -15,6 +15,9 @@ export class SettingNavigationComponent implements OnInit {
     if (-1 != this.router.url.indexOf("role")) {
       this.currentMenu = "role";
     }
+    if (-1 != this.router.url.indexOf("roleAccess")) {
+      this.currentMenu = "roleAccess";
+    }
     setTimeout(() => {
         document.getElementById(this.currentMenu).focus();
     }, 1000);  

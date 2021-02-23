@@ -11,16 +11,17 @@ import { diamondsearchResult } from '../../models/diamond.result.model';
 import { DiamondCommentModel } from '../../models/diamondComment.model';
 import { EntityModel } from '../../models/entity.model';
 import { ExportToEmailModel } from '../../models/exportToEmail.model';
+import { RoleModuleAccessModel } from '../../models/role.module.access.model';
 import { ScheduleModel } from '../../models/schedule.model';
 import { UserDownloadMasterModel } from '../../models/user.download.master.model';
 import { UserSearchModel } from '../../models/user.search.model';
 import { UserWishModel } from '../../models/userWish.model';
 import { CartService } from '../../service/cart.service';
-import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { DiamondCommentService } from '../../service/diamond.comment.service';
 import { DiamondTrackService } from '../../service/diamond.track.service';
 import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
+import { RoleModuleAccessService } from '../../service/role.module.access.service';
 import { ScheduleService } from '../../service/schedule.service';
 import { SearchService } from '../../service/search.service';
 import { TrackTypeService } from '../../service/track.type.service';
@@ -45,7 +46,6 @@ export class SearchComponent implements OnInit {
     , private route: ActivatedRoute
     , private searchService: SearchService
     , private cartService: CartService
-    , private cartBroadCaster: CartBroadcaster
     , private modalService: NgbModal
     , private downloadService: DownloadService
     , private environmentService: EnvironmentService
@@ -54,8 +54,11 @@ export class SearchComponent implements OnInit {
     , private userSaveSearchService: UserSaveSearchService
     , private userWishService: UserWishService
     , private scheduleService: ScheduleService
-    , private diamondTrackService:DiamondTrackService
-    , private trackTypeService:TrackTypeService) { }
+    , private diamondTrackService: DiamondTrackService
+    , private trackTypeService: TrackTypeService
+    , private roleModuleAccessService: RoleModuleAccessService
+    ) { }
+  roleModuleAccessList: RoleModuleAccessModel[] = [];
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -234,6 +237,7 @@ export class SearchComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+   
     this.scheduleService.GetCountry().subscribe(result => {
       this.countryList = result;
     }, error => {
@@ -700,6 +704,18 @@ export class SearchComponent implements OnInit {
 
   }
   
+  CheckModuleAccess( ModuleName:string,action: string): boolean {
+    if (this.environmentService.RoleModuleAccessList != null) {
+      var access = this.environmentService.RoleModuleAccessList.filter(x => x.action == action && x.moduleName==ModuleName)[0];
+      if (access == null || access == undefined) {
+        return true;
+      } else {
+        return access.isActive;
+      }
+    } else {
+      return true;
+    }
+  }
   LoadDbParameter() {
 
     this.entityService.GetEntity("Shape").subscribe(result => {
@@ -2202,7 +2218,7 @@ Greetings of the day `;
       });
     }
   }
-  TrackDiamonds:diamondsearchResult[]=[];
+  TrackDiamonds: diamondsearchResult[] = [];
   LoadTrackModel(content) {
     this.TrackDiamonds = JSON.parse(JSON.stringify(this.searchResult.filter(x => x.selected)));
     this.TrackDiamonds.forEach(element => {
@@ -2217,7 +2233,7 @@ Greetings of the day `;
       }, (reason) => {
 
       });
-    }else{
+    } else {
       this.alertService.Error(this.translate.instant("inventory.profile.diamondTrack.selectDiamonderror"), "");
     }
   }
@@ -2357,5 +2373,5 @@ Greetings of the day `;
 
     });
   }
-  
+
 }

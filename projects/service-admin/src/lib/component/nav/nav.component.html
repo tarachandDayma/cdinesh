@@ -34,6 +34,25 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle mt-2" [translate]="'admin.nav.setting'" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="header">
+
+                                </div>
+                                <div class="body">
+                                    <a class="dropdown-item" routerLink="/admin/saveSearch" [translate]="'admin.nav.saveSearch'">SaveSearch</a>
+                                    <a class="dropdown-item" routerLink="/admin/myWish" [translate]="'admin.nav.userWish'">Wish</a>
+                                    <a class="dropdown-item" routerLink="/admin/schedule" [translate]="'admin.nav.schedule'">Schedule</a>
+                                    <a class="dropdown-item" routerLink="/admin/inquiry" [translate]="'admin.nav.inquiry'">Inquiry</a>
+                                    <a class="dropdown-item" routerLink="/admin/track" [translate]="'admin.nav.trackMenuName'">Track</a>
+                                    <a class="dropdown-item" routerLink="/admin/role" [translate]="'admin.nav.role'">Track</a>
+                                    <a class="dropdown-item" routerLink="/admin/roleAccess" [translate]="'admin.roleModuleAccess.title'">roleModuleAccess</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown ">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell-o icon"></i>
                             </a>
@@ -68,12 +87,7 @@
                                 </div>
                                 <div class="body">
                                     <a class="dropdown-item" routerLink="/admin/personalDetail" [translate]="'admin.nav.profile'">Profile</a>
-                                    <a class="dropdown-item" routerLink="/admin/saveSearch" [translate]="'admin.nav.saveSearch'">SaveSearch</a>
-                                    <a class="dropdown-item" routerLink="/admin/myWish" [translate]="'admin.nav.userWish'">Wish</a>
-                                    <a class="dropdown-item" routerLink="/admin/schedule" [translate]="'admin.nav.schedule'">Schedule</a>
-                                    <a class="dropdown-item" routerLink="/admin/inquiry" [translate]="'admin.nav.inquiry'">Inquiry</a>
-                                    <a class="dropdown-item" routerLink="/admin/track" [translate]="'admin.nav.trackMenuName'">Track</a>
-                                    <a class="dropdown-item" routerLink="/admin/role" [translate]="'admin.nav.role'">Track</a>
+
                                 </div>
                                 <div class="dropdown-divider"></div>
                                 <div class="footer">

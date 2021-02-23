@@ -759,13 +759,27 @@
             "error": "Something went wrong",
             "name": "Role Name",
             "parentRoleName": "Parent Role",
-            "name_error":"Role name required",
-            "save":"Save",
-            "add":"Add Role",
-            "close":"Close",
-            "confirmDelete":"Are you sure to delete",
-            "deleteButton":"Delete",
-            "deleteConfirm":"Confirm"
+            "name_error": "Role name required",
+            "save": "Save",
+            "add": "Add Role",
+            "close": "Close",
+            "confirmDelete": "Are you sure to delete",
+            "deleteButton": "Delete",
+            "deleteConfirm": "Confirm"
+        },
+        "roleModuleAccess": {
+            "success": "Update success",
+            "updateConfirm": "Are you sure to update",
+            "confirm": "Confirm",
+            "title": "Role Acccess",
+            "updateButton": "Update",
+            "close": "Close",
+            "table": {
+                "active": "Active",
+                "moduleName": "Module Name",
+                "action": "Action"
+            },
+            "error": "Something went wrong"
         },
         "search": {
             "title": "Search",
