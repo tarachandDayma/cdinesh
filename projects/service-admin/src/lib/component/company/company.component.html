@@ -1,0 +1,114 @@
+<inventory-nav></inventory-nav>
+<div class="content">
+    <!-- PAGE TITLE END -->
+    <main class="myform" style="padding-top: 0px;padding-bottom: 0px;">
+        <div class="setupContainer">
+            <div class="row col-sm-12">
+                <lib-setting-navigation></lib-setting-navigation>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-primary" type="button" (click)="Add()" [translate]="'admin.company.add'">Add</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <form (ngSubmit)="searchCompnies()">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                        [translate]="'admin.company.search'" > </span>
+                                </span>
+                            </div>
+                            <input maxlength="50" [(ngModel)]="searchText" name="name" type="text" class="form-control" id="searchText" placeholder="" aria-describedby="emailHelp">
+                            <div class="input-group-append">
+                                <button class="btn btn-outlet" type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-6" *ngIf="companies.length > 0" style="overflow: auto;height: 70vh;">
+                    <ng-container *ngFor="let company of companies">
+                        <ul style="list-style-type:none;">
+                            <LI>
+                                <lib-company-node [company]="company" (Edit)="EditNode($event)" (remove)="RemoveNode($event)">
+
+                                </lib-company-node>
+                            </LI>
+                        </ul>
+                    </ng-container>
+                </div>
+                <div *ngIf="CurrentMode=='ADD'" class="col-sm-6" style="overflow: auto;height: 70vh;">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <form [formGroup]="formGroup" (ngSubmit)="saveRole()" autocomplete="off">
+                                <div class="col-md-12">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                    [translate]="'admin.company.name'"> </span>
+                                            </span>
+                                        </div>
+                                        <input maxlength="50" formControlName="companyName" [(ngModel)]="currentCompany.companyName" name="name" type="text" class="form-control" id="scheduleName" placeholder="" aria-describedby="emailHelp">
+                                    </div>
+                                    <label *ngIf="formGroup.get('companyName').errors?.required && (formGroup.get('companyName').touched  || submited)" [translate]="'admin.company.name_error'" class="form-text text-danger"></label>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                    [translate]="'admin.company.parentCompany'"> </span>
+                                            </span>
+                                        </div>
+                                        <select class="form-control" name="parentCompanyId" formControlName="parentCompanyId" [(ngModel)]="currentCompany.parentCompanyId">
+                                            <option [value]="null">--select--</option>
+                                            <option *ngFor="let companyItem of companyList" [value]="companyItem.companyId">
+                                                {{companyItem.companyName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary ml-2" type="submit" [translate]="'admin.company.save'"></button>
+                                    <button class="btn btn-primary ml-2" type="button" [translate]="'admin.company.close'" (click)="closeMode()"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #contentDeleteConfirm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" [translate]="'admin.company.deleteConfirm'"> Confirm</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="col-sm-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="col-sm-12"> <span [translate]="'admin.company.confirmDelete'"></span> </div>
+                    <div class="col-sm-12">
+                        <div class="pull-right">
+                            <button class="btn btn-primary ml-2" (click)="RemoveConfirm()" [translate]="'admin.company.deleteButton'">
+                            </button>
+                            <button type="button" class="btn btn-primary ml-2" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- MAIN END -->
+<!-- SIDEBAR START -->

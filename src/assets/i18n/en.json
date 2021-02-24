@@ -750,6 +750,26 @@
             "trackMenuName": "Track",
             "role": "Roles"
         },
+        "company": {
+            "title": "Company",
+            "success": "Add success",
+            "updatesuccess": "Update success",
+            "alreadyexists": "Company already exists with same name",
+            "delete": "Delete success",
+            "companyhasUsers": "Company has users you can not delete",
+            "notFound": "Company not found",
+            "error": "Something went wrong",
+            "name": "Company Name",
+            "parentCompany": "Parent Company",
+            "save": "Save",
+            "add": "Add Company",
+            "confirmDelete": "Are you sure to delete",
+            "deleteButton": "Delete",
+            "deleteConfirm": "Confirm",
+            "name_error": "Company name required",
+            "search": "Search",
+            "close": "Close"
+        },
         "role": {
             "addupdatesuccess": "success",
             "rolealreadyExistsWithSameName": "Role already exists with same name",

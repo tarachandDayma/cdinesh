@@ -1,0 +1,37 @@
+<ul id="myUL">
+    <li>
+        <div class="btn-group btn-group-sm">
+            <span class="toggleButton">
+                <span class="ml-2" (click)="toggleNode(company)"
+                    *ngIf="!company.showDetail && company.children !=undefined && company.children.length> 0">
+                    <img src="/assets/img/upArrow.jfif" style="width: 16px;-ms-transform: rotate(90deg); 
+                transform: rotate(180deg);">
+                </span>
+            <span class="ml-2" (click)="toggleNode(company)" *ngIf="company.showDetail && company.children !=undefined && company.children.length> 0">
+                    <img src="/assets/img/upArrow.jfif" style="width: 16px;">
+                </span>
+            </span>
+            <span class="ml-2 nodeLabel">{{company.companyName}}</span>
+            <div class="btn-group btn-group-sm">
+                <button class="btn btn-primary btn-sm  ml-2  " (click)="EditNode(company)"><i
+                        class="fa fa-edit"></i></button>
+                <button class="btn btn-primary btn-sm ml-2" (click)="RemoveNode(company)"><i
+                        class="fa fa-remove"></i></button>
+
+            </div>
+        </div>
+        <div>
+            <ul class="nested" style="margin-left: 56px;" *ngIf="company.showDetail && company.children !=undefined && company.children.length> 0">
+                <li>
+                    <ng-container *ngFor="let item of company.children">
+
+                        <div class="col-sm-12">
+                            <lib-company-node [company]="item" (Edit)="EditNode($event)" (remove)="RemoveNode($event)">
+                            </lib-company-node>
+                        </div>
+                    </ng-container>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BestOfCDComponent } from './component/best-of-cd/best-of-cd.component';
+import { CompanyComponent } from './component/company/company.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { DiamondDetailComponent } from './component/diamond-detail/diamond-detail.component';
 import { DiamondScheduleComponent } from './component/diamond-schedule/diamond-schedule.component';
@@ -111,6 +112,9 @@ const routes: Routes = [
   ,{
     path:"roleAccess",
     component:RoleAccessModuleComponent
+  },{
+    path:"company",
+    component:CompanyComponent
   }
 
 ];
