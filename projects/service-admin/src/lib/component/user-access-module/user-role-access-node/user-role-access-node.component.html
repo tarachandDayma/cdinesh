@@ -1,0 +1,34 @@
+<ul id="myUL">
+    <li>
+        <div class="btn-group btn-group-sm">
+            <span class="toggleButton">
+                <span class="ml-2" (click)="toggleNode(node)"
+                    *ngIf="!node.showDetail && node.children !=undefined && node.children.length> 0">
+                    <img src="/assets/img/upArrow.jfif" style="width: 16px;-ms-transform: rotate(90deg); 
+                transform: rotate(180deg);">
+                </span>
+            <span class="ml-2" (click)="toggleNode(node)" *ngIf="node.showDetail && node.children !=undefined && node.children.length> 0">
+                    <img src="/assets/img/upArrow.jfif" style="width: 16px;">
+                </span>
+            </span>
+
+            <span class="ml-2 nodeLabel">{{node.name}}</span>
+            <div class="btn-group btn-group-sm">
+                <a (click)="EditNode(node)" style="cursor: pointer;text-decoration: underline;color: blue;" [translate]="'admin.userModuleAccess.showUser'"></a>
+
+            </div>
+        </div>
+        <div>
+            <ul class="nested" style="margin-left: 56px;" *ngIf="node.showDetail && node.children !=undefined && node.children.length> 0">
+                <li>
+                    <ng-container *ngFor="let item of node.children">
+                        <div class="col-sm-12">
+                            <lib-user-role-access-node [node]="item" (Edit)="EditNode($event)">
+                            </lib-user-role-access-node>
+                        </div>
+                    </ng-container>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>

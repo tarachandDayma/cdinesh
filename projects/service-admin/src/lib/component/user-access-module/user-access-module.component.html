@@ -1,0 +1,303 @@
+<inventory-nav></inventory-nav>
+<div class="content">
+    <!-- PAGE TITLE END -->
+    <main class="myform" style="padding-top: 0px;padding-bottom: 0px;">
+        <div class="setupContainer">
+            <div class="row col-sm-12">
+                <lib-setting-navigation></lib-setting-navigation>
+            </div>
+            <div class="row">
+                <div class="col-sm-6" *ngIf="roles.length > 0" style="overflow: auto;height: 70vh;">
+                    <ng-container *ngFor="let item of roles">
+                        <ul style="list-style-type:none;">
+                            <LI>
+                                <lib-user-role-access-node [node]="item" (Edit)="EditNode($event)">
+                                </lib-user-role-access-node>
+                            </LI>
+                        </ul>
+                    </ng-container>
+                </div>
+                <div *ngIf="CurrentMode=='EDIT'" class="col-sm-6">
+                    <div class="col-md-12">
+                        <form (ngSubmit)="loadUser()">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                            [translate]="'admin.company.search'" > </span>
+                                    </span>
+                                </div>
+                                <input maxlength="50" [(ngModel)]="searchText" name="name" type="text" class="form-control" id="searchText" placeholder="" aria-describedby="emailHelp">
+                                <div class="input-group-append">
+                                    <span class="inputGroup-sizing-sm">
+                                    <button class="btn btn-outlet" type="submit"><i class="fa fa-search"></i></button>
+                                </span>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="inputGroup-sizing-sm">
+                                    <button class="btn btn-outlet " type="button" [translate]="'admin.userModuleAccess.close'" (click)="closeMode()"></button>
+                                </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-12">
+                        <div #div>
+                            <div class="table-fixed" style="height: 63.3vh;">
+                                <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table " style="width: 100%;height: 150px;">
+                                    <thead>
+                                        <tr>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.companyName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.companyName'">
+                                                companyName
+                                                <span style="margin-right: 10px;margin-top: 7px;">
+                                                    <span (click)="sort('companyName')" class="default-sort-arrow"
+                                                        style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                        data-reactroot="" wfd-id="3710">
+                                                        <span
+                                                            [ngStyle]="sortedColumn=='companyName' && {'color':'black'} || sortedColumn!='companyName' && {'color':'#999999'}"
+                                                            style="color:#999999;    top: -11px!important;
+                                                        position: absolute;" wfd-id="3712">▲</span>
+                                                <span [ngStyle]="sortedColumn=='companyName' && {'color':'black'} || sortedColumn!='companyName' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                            position: absolute;" wfd-id="3711">▼</span>
+                                                </span>
+                                                </span>
+                                            </th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.userName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.userName'">
+                                                UserName
+                                                <span style="margin-right: 10px;margin-top: 7px;">
+                                                    <span (click)="sort('userName')" class="default-sort-arrow"
+                                                        style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                        data-reactroot="" wfd-id="3710">
+                                                        <span
+                                                            [ngStyle]="sortedColumn=='userName' && {'color':'black'} || sortedColumn!='userName' && {'color':'#999999'}"
+                                                            style="color:#999999;    top: -11px!important;
+                                                        position: absolute;" wfd-id="3712">▲</span>
+                                                <span [ngStyle]="sortedColumn=='userName' && {'color':'black'} || sortedColumn!='userName' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                            position: absolute;" wfd-id="3711">▼</span>
+                                                </span>
+                                                </span>
+                                            </th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.fullName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.companyName'">
+                                                fullName
+                                                <span style="margin-right: 10px;margin-top: 7px;">
+                                                    <span (click)="sort('fullName')" class="default-sort-arrow"
+                                                        style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                        data-reactroot="" wfd-id="3710">
+                                                        <span
+                                                            [ngStyle]="sortedColumn=='fullName' && {'color':'black'} || sortedColumn!='fullName' && {'color':'#999999'}"
+                                                            style="color:#999999;    top: -11px!important;
+                                                        position: absolute;" wfd-id="3712">▲</span>
+                                                <span [ngStyle]="sortedColumn=='fullName' && {'color':'black'} || sortedColumn!='fullName' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                            position: absolute;" wfd-id="3711">▼</span>
+                                                </span>
+                                                </span>
+                                            </th>
+
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.emailId')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.emailId'">
+                                                emailId
+                                                <span style="margin-right: 10px;margin-top: 7px;">
+                                                    <span (click)="sort('emailId')" class="default-sort-arrow"
+                                                        style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                        data-reactroot="" wfd-id="3710">
+                                                        <span
+                                                            [ngStyle]="sortedColumn=='emailId' && {'color':'black'} || sortedColumn!='emailId' && {'color':'#999999'}"
+                                                            style="color:#999999;    top: -11px!important;
+                                                        position: absolute;" wfd-id="3712">▲</span>
+                                                <span [ngStyle]="sortedColumn=='emailId' && {'color':'black'} || sortedColumn!='emailId' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                            position: absolute;" wfd-id="3711">▼</span>
+                                                </span>
+                                                </span>
+                                            </th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.isActive')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.isActive'">
+                                                isActive
+                                                <span style="margin-right: 10px;margin-top: 7px;">
+                                                    <span (click)="sort('isActive')" class="default-sort-arrow"
+                                                        style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                        data-reactroot="" wfd-id="3710">
+                                                        <span
+                                                            [ngStyle]="sortedColumn=='isActive' && {'color':'black'} || sortedColumn!='isActive' && {'color':'#999999'}"
+                                                            style="color:#999999;    top: -11px!important;
+                                                        position: absolute;" wfd-id="3712">▲</span>
+                                                <span [ngStyle]="sortedColumn=='isActive' && {'color':'black'} || sortedColumn!='isActive' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                            position: absolute;" wfd-id="3711">▼</span>
+                                                </span>
+                                                </span>
+                                            </th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.allowStockAPI')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.allowStockAPI'">
+                                                allowStockAPI
+                                                <span style="margin-right: 10px;margin-top: 7px;">
+                                                    <span (click)="sort('allowStockAPI')" class="default-sort-arrow"
+                                                        style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                        data-reactroot="" wfd-id="3710">
+                                                        <span
+                                                            [ngStyle]="sortedColumn=='allowStockAPI' && {'color':'black'} || sortedColumn!='allowStockAPI' && {'color':'#999999'}"
+                                                            style="color:#999999;    top: -11px!important;
+                                                        position: absolute;" wfd-id="3712">▲</span>
+                                                <span [ngStyle]="sortedColumn=='allowStockAPI' && {'color':'black'} || sortedColumn!='allowStockAPI' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                            position: absolute;" wfd-id="3711">▼</span>
+                                                </span>
+                                                </span>
+                                            </th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.allowWebsite')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.allowWebsite'">
+                                                allowWebsite
+                                                <span style="margin-right: 10px;margin-top: 7px;">
+                                                    <span (click)="sort('allowWebsite')" class="default-sort-arrow"
+                                                        style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                        data-reactroot="" wfd-id="3710">
+                                                        <span
+                                                            [ngStyle]="sortedColumn=='allowWebsite' && {'color':'black'} || sortedColumn!='allowWebsite' && {'color':'#999999'}"
+                                                            style="color:#999999;    top: -11px!important;
+                                                        position: absolute;" wfd-id="3712">▲</span>
+                                                <span [ngStyle]="sortedColumn=='allowWebsite' && {'color':'black'} || sortedColumn!='allowWebsite' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                            position: absolute;" wfd-id="3711">▼</span>
+                                                </span>
+                                                </span>
+                                            </th>
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.isAutoMail')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.isAutoMail'">
+                                                isAutoMail
+                                                <span style="margin-right: 10px;margin-top: 7px;">
+                                                    <span (click)="sort('isAutoMail')" class="default-sort-arrow"
+                                                        style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
+                                                        data-reactroot="" wfd-id="3710">
+                                                        <span
+                                                            [ngStyle]="sortedColumn=='isAutoMail' && {'color':'black'} || sortedColumn!='isAutoMail' && {'color':'#999999'}"
+                                                            style="color:#999999;    top: -11px!important;
+                                                        position: absolute;" wfd-id="3712">▲</span>
+                                                <span [ngStyle]="sortedColumn=='isAutoMail' && {'color':'black'} || sortedColumn!='isAutoMail' && {'color':'#999999'}" style="color:#999999;top: -1px;
+                                                            position: absolute;" wfd-id="3711">▼</span>
+                                                </span>
+                                                </span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="height:55vh;">
+                                        <ng-container *ngFor="let item of Pages[currentPageNo] ">
+                                            <tr>
+                                                <th data-toggle="tooltip" data-placement="top" class="fixed-column" style="width: 32px;">
+                                                    {{item.companyName}}
+                                                </th>
+                                                <td>
+                                                    {{item.userName}}
+                                                </td>
+                                                <td>
+                                                    {{item.fullName}}
+                                                </td>
+                                                <td>
+                                                    {{item.emailId}}
+                                                </td>
+                                                <td [ngStyle]="item.isActive && {'color':'green'} || !item.isActive && {'color':'red'}">
+                                                    {{item.isActive?"Y":"N"}}
+                                                </td>
+                                                <td [ngStyle]="item.allowStockAPI && {'color':'green'} || !item.allowStockAPI && {'color':'red'}">
+                                                    {{item.allowStockAPI?"Y":"N"}}
+                                                </td>
+                                                <td [ngStyle]="item.allowWebsite && {'color':'green'} || !item.allowWebsite && {'color':'red'}">
+                                                    {{item.allowWebsite?"Y":"N"}}
+                                                </td>
+                                                <td [ngStyle]="item.isAutoMail && {'color':'green'} || !item.isAutoMail && {'color':'red'}">
+                                                    {{item.isAutoMail?"Y":"N"}}
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                        <tr style="height:70vh !important;">
+                                            <td colspan="8" style="text-align: center !important;">
+                                                <img class="no-record-img" style="width: auto!important;" *ngIf="userList.length<=0 || userList==undefined" src="/assets/img/NoRecordFound.png">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination pull-left" *ngIf="PageCount >1">
+                                <a class="btn btn-secondary" (click)="FirstPage()">
+                                    << </a>
+                                        <a class="btn btn-secondary" (click)="PrevPage()">
+                                            < </a>
+                                                <a class="btn btn-secondary"> {{currentPageNo+1}} / {{Pages.length}} </a>
+                                                <a class="btn btn-secondary" (click)="NextPage()">></a>
+                                                <a class="btn btn-secondary" (click)="LastPage()">>></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-12">
+                        <div>
+                            <h4 style="text-transform: capitalize;">
+                                {{currentRole.name}}
+                            </h4>
+                        </div>
+                        <div style="overflow: auto;height: 70vh;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+
+
+                                        <th [translate]="'admin.userModuleAccess.table.active'">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox"
+                                                    class="material-control-input" name="AllReslt"
+                                                    [(ngModel)]="allSelected" (change)="SelectAll()">
+                                                <span class="material-control-indicator"></span>
+                                            </label>
+                                        </th>
+                                        <th [translate]="'admin.userModuleAccess.table.moduleName'">
+                                        </th>
+                                        <th [translate]="'admin.userModuleAccess.table.action'">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of roleModuleAccessList">
+                                        <td>
+                                            <label class="custom-control material-checkbox">
+                                            <input type="checkbox"
+                                                class="material-control-input" name="AllReslt"
+                                                [(ngModel)]="item.isActive">
+                                            <span class="material-control-indicator"></span>
+                                        </label>
+                                        </td>
+                                        <td>
+                                            {{item.moduleName}}
+                                        </td>
+                                        <td>
+                                            {{item.action}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #contentUpdateConfirm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" [translate]="'admin.userModuleAccess.confirm'"> Confirm</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="col-sm-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="col-sm-12"> <span [translate]="'admin.userModuleAccess.updateConfirm'"></span> </div>
+                    <div class="col-sm-12">
+                        <div class="pull-right">
+                            <button class="btn btn-primary ml-2" (click)="UpdateConfirm()" [translate]="'admin.userModuleAccess.updateButton'">
+                            </button>
+                            <button type="button" class="btn btn-primary ml-2" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- MAIN END -->
+<!-- SIDEBAR START -->

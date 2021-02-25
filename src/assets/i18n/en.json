@@ -801,6 +801,29 @@
             },
             "error": "Something went wrong"
         },
+        "userModuleAccess": {
+            "success": "Update success",
+            "updateConfirm": "Are you sure to update",
+            "confirm": "Confirm",
+            "title": "User Acccess",
+            "updateButton": "Update",
+            "close": "Close",
+            "table": {
+                "active": "Active",
+                "moduleName": "Module Name",
+                "action": "Action"
+            },
+            "error": "Something went wrong",
+            "showUser": "Show User",
+            "companyName": "CompanyName",
+            "userName": "UserName",
+            "fullName": "Full Name",
+            "emailId": "Email ID",
+            "isActive": "Active",
+            "allowStockAPI": "API",
+            "allowWebsite": "Website",
+            "isAutoMail": "AutoMail"
+        },
         "search": {
             "title": "Search",
             "titleUcoming": "Upcoming",

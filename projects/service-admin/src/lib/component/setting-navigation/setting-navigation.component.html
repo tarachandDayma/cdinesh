@@ -3,6 +3,7 @@
         <a routerLink="/admin/role" class="nav-link" [ngClass]="currentMenu =='role' ? 'active': ''"> <span [translate]="'admin.profile.nav.role'"> Role </span></a>
         <a routerLink="/admin/roleAccess" class="nav-link" [ngClass]="currentMenu =='roleAccess' ? 'active': ''"> <span [translate]="'admin.roleModuleAccess.title'"> Role Acccess </span></a>
         <a routerLink="/admin/company" class="nav-link" [ngClass]="currentMenu =='company' ? 'active': ''"> <span [translate]="'admin.company.title'"> company </span></a>
+        <a routerLink="/admin/userAccess" class="nav-link" [ngClass]="currentMenu =='userAccess' ? 'active': ''"> <span [translate]="'admin.userModuleAccess.title'"> UserModuleAccess </span></a>
     </nav>
 </div>
 <div class="btn-group d-sm-block d-md-none">
@@ -15,6 +16,7 @@
             <a class="dropdown-item" id="role" routerLink="/admin/role" [ngClass]="currentMenu =='role' ? 'active': ''"> <span [translate]="'admin.profile.nav.role'"> role </span></a>
             <a class="dropdown-item" id="roleAccess" routerLink="/admin/roleAccess" [ngClass]="currentMenu =='roleAccess' ? 'active': ''"> <span [translate]="'admin.roleModuleAccess.title'"> roleAccess </span></a>
             <a class="dropdown-item" id="company" routerLink="/admin/company" [ngClass]="currentMenu =='company' ? 'active': ''"> <span [translate]="'admin.company.title'"> company </span></a>
+            <a class="dropdown-item" id="userAccess" routerLink="/admin/userAccess" [ngClass]="currentMenu =='userAccess' ? 'active': ''"> <span [translate]="'admin.userModuleAccess.title'"> UserModuleAccess </span></a>
         </div>
     </div>
 

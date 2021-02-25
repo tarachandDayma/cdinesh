@@ -18,8 +18,10 @@ import { RolesComponent } from './component/roles/roles.component';
 import { SaveSearchComponent } from './component/save-search/save-search.component';
 import { SearchComponent } from './component/search/search.component';
 import { UpcomingComponent } from './component/upcoming/upcoming.component';
+import { UserAccessModuleComponent } from './component/user-access-module/user-access-module.component';
 import { UserTrackComponent } from './component/user-track/user-track.component';
 import { UserWishComponent } from './component/user-wish/user-wish.component';
+import { UserModuleAccessModel } from './models/user.module.access.model';
 
 
 const routes: Routes = [
@@ -115,6 +117,9 @@ const routes: Routes = [
   },{
     path:"company",
     component:CompanyComponent
+  },{
+    path:"userAccess",
+    component:UserAccessModuleComponent
   }
 
 ];

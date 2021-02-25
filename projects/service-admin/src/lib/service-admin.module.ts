@@ -43,6 +43,8 @@ import { RoleAccessModuleComponent } from './component/role-access-module/role-a
 import { RoleAccessNodeComponent } from './component/role-access-module/role-access-node/role-access-node.component';
 import { CompanyComponent } from './component/company/company.component';
 import { CompanyNodeComponent } from './component/company/company-node/company-node.component';
+import { UserAccessModuleComponent } from './component/user-access-module/user-access-module.component';
+import { UserRoleAccessNodeComponent } from './component/user-access-module/user-role-access-node/user-role-access-node.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -51,7 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [ServiceAdminComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
     ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent,InquiryDetailComponent,DiamondTrackComponent,UserTrackComponent
-  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent, RoleAccessModuleComponent, RoleAccessNodeComponent, CompanyComponent, CompanyNodeComponent],
+  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent, RoleAccessModuleComponent, RoleAccessNodeComponent, CompanyComponent, CompanyNodeComponent, UserAccessModuleComponent, UserRoleAccessNodeComponent],
     imports: [
       FormsModule,ReactiveFormsModule,
       TranslateModule.forChild(),
