@@ -822,7 +822,9 @@
             "isActive": "Active",
             "allowStockAPI": "API",
             "allowWebsite": "Website",
-            "isAutoMail": "AutoMail"
+            "isAutoMail": "AutoMail",
+            "permission": "Permission",
+            "userPermissionTitle": "User Permission"
         },
         "search": {
             "title": "Search",

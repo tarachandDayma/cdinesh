@@ -7,7 +7,7 @@
                 <lib-setting-navigation></lib-setting-navigation>
             </div>
             <div class="row">
-                <div class="col-sm-6" *ngIf="roles.length > 0" style="overflow: auto;height: 70vh;">
+                <div class="col-sm-4" *ngIf="roles.length > 0" style="overflow: auto;height: 70vh;">
                     <ng-container *ngFor="let item of roles">
                         <ul style="list-style-type:none;">
                             <LI>
@@ -17,7 +17,7 @@
                         </ul>
                     </ng-container>
                 </div>
-                <div *ngIf="CurrentMode=='EDIT'" class="col-sm-6">
+                <div *ngIf="CurrentMode=='EDIT'" class="col-sm-8">
                     <div class="col-md-12">
                         <form (ngSubmit)="loadUser()">
                             <div class="input-group input-group-sm mb-3">
@@ -43,7 +43,17 @@
                     <div class="col-md-12">
                         <div #div>
                             <div class="table-fixed" style="height: 63.3vh;">
-                                <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table " style="width: 100%;height: 150px;">
+                                <img class="no-record-img" style="width: auto!important;" *ngIf="userList.length<=0 || userList==undefined" src="/assets/logos/CDinesh-Logo-Layers.gif">
+                                <div class="pagination pull-left" *ngIf="PageCount >1">
+                                    <a class="btn btn-secondary" (click)="FirstPage()">
+                                        << </a>
+                                            <a class="btn btn-secondary" (click)="PrevPage()">
+                                                < </a>
+                                                    <a class="btn btn-secondary"> {{currentPageNo+1}} / {{Pages.length}} </a>
+                                                    <a class="btn btn-secondary" (click)="NextPage()">></a>
+                                                    <a class="btn btn-secondary" (click)="LastPage()">>></a>
+                                </div>
+                                <table *ngIf="!(userList.length<=0 || userList==undefined)" class="table table-bordered table-sm table-striped table-hover font-12 cd-table " style="width: 100%;height: 150px;">
                                     <thead>
                                         <tr>
                                             <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.companyName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.companyName'">
@@ -76,7 +86,7 @@
                                                 </span>
                                                 </span>
                                             </th>
-                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.fullName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.companyName'">
+                                            <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.fullName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.fullName'">
                                                 fullName
                                                 <span style="margin-right: 10px;margin-top: 7px;">
                                                     <span (click)="sort('fullName')" class="default-sort-arrow"
@@ -173,7 +183,7 @@
                                         <ng-container *ngFor="let item of Pages[currentPageNo] ">
                                             <tr>
                                                 <th data-toggle="tooltip" data-placement="top" class="fixed-column" style="width: 32px;">
-                                                    {{item.companyName}}
+                                                    <a (click)="EditPermission(contentpermission,item)" style="color: blue;text-decoration:underline;" [translate]="'admin.userModuleAccess.permission'"></a> {{item.companyName}}
                                                 </th>
                                                 <td>
                                                     {{item.userName}}
@@ -206,15 +216,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="pagination pull-left" *ngIf="PageCount >1">
-                                <a class="btn btn-secondary" (click)="FirstPage()">
-                                    << </a>
-                                        <a class="btn btn-secondary" (click)="PrevPage()">
-                                            < </a>
-                                                <a class="btn btn-secondary"> {{currentPageNo+1}} / {{Pages.length}} </a>
-                                                <a class="btn btn-secondary" (click)="NextPage()">></a>
-                                                <a class="btn btn-secondary" (click)="LastPage()">>></a>
-                            </div>
+
                         </div>
                     </div>
                     <!-- <div class="col-md-12">
@@ -294,6 +296,71 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #contentpermission let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" [translate]="'admin.userModuleAccess.userPermissionTitle'"> UserPermission</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{this.currentUser.fullName}}</h3>
+                </div>
+                <div class="card-body">
+                    <div style="overflow: auto;height: 70vh;">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th [translate]="'admin.userModuleAccess.table.active'">
+                                        <label class="custom-control material-checkbox">
+                                            <input type="checkbox"
+                                                class="material-control-input" name="AllReslt"
+                                                [(ngModel)]="allSelected" (change)="SelectAll()">
+                                            <span class="material-control-indicator"></span>
+                                        </label>
+                                    </th>
+                                    <th [translate]="'admin.userModuleAccess.table.moduleName'">
+                                    </th>
+                                    <th [translate]="'admin.userModuleAccess.table.action'">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of userModuleAccessList">
+                                    <td>
+                                        <label class="custom-control material-checkbox">
+                                        <input type="checkbox"
+                                            class="material-control-input" name="AllReslt"
+                                            [(ngModel)]="item.isActive">
+                                        <span class="material-control-indicator"></span>
+                                    </label>
+                                    </td>
+                                    <td>
+                                        {{item.moduleName}}
+                                    </td>
+                                    <td>
+                                        {{item.action}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary ml-2" type="button" class="close" aria-label="Close" (click)="UpdateConfirm()">
+                    <span [translate]="'admin.roleModuleAccess.updateButton'"></span>
+                </button>
+                <button class="btn btn-primary ml-2" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
     </div>

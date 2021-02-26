@@ -67,6 +67,7 @@ export class UserAccessModuleComponent implements OnInit {
   }
   Update() {
     this.allSelected=false;
+
     this.modalService.open(this.contentDeleteConfirm, { backdrop: "static", size: "sm", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
     }, (reason) => {
     });
@@ -81,18 +82,35 @@ export class UserAccessModuleComponent implements OnInit {
       element.userId = this.currentUser.id;
     })
     this.modalService.dismissAll();
-    // this.roleModuleAccessService.AddUpdate(this.roleModuleAccessList).subscribe(result => {
-    //   this.loader.show(false);
-    //   if (result.status) {
-    //     this.CurrentMode = "";
-    //     this.modalService.dismissAll();
-    //   } else {
-    //     this.alertService.Error(this.translate.instant("admin.roleModuleAccess.error"), "");
-    //   }
-    // }, error => {
-    //   this.loader.show(false);
-    //   this.alertService.Error(this.translate.instant("admin.roleModuleAccess.error"), "");
-    // })
+    this.userModuleAccessService.Update(this.userModuleAccessList).subscribe(result => {
+      this.loader.show(false);
+      if (result.status) {
+        this.modalService.dismissAll();
+      } else {
+        this.alertService.Error(this.translate.instant("admin.userModuleAccess.error"), "");
+      }
+    }, error => {
+      this.loader.show(false);
+      this.alertService.Error(this.translate.instant("admin.userModuleAccess.error"), "");
+    })
+  }
+  EditPermission(contentPermission:any,user:UserModel) {
+    this.allSelected=false;
+    this.currentUser=user;
+    this.LoadUserAcccess(contentPermission);
+    
+  }
+  LoadUserAcccess(contentPermission:any){
+    this.loader.show(true);
+    this.userModuleAccessService.GetAccessUser(this.currentUser.id).subscribe(result=>{
+      this.userModuleAccessList=result;
+      this.loader.show(false);
+      this.modalService.open(contentPermission, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      }, (reason) => {
+      });
+    },error=>{
+      this.loader.show(false);
+    })
   }
   @ViewChild('div') div;
   currentPageNo: number = 0;
@@ -106,7 +124,7 @@ export class UserAccessModuleComponent implements OnInit {
   startX: any;
   startWidth: any;
   tableWidth: number;
-  recordrerpage: number = 200;
+  recordrerpage: number = 15;
   ////pagination
   doPagination() {
     this.PageCount = Math.ceil(this.userList.length / this.recordrerpage);
@@ -209,4 +227,5 @@ export class UserAccessModuleComponent implements OnInit {
     this.loader.show(false);
     this.doPagination();
   }
+ 
 }

@@ -705,16 +705,26 @@ export class SearchComponent implements OnInit {
   }
   
   CheckModuleAccess( ModuleName:string,action: string): boolean {
-    if (this.environmentService.RoleModuleAccessList != null) {
-      var access = this.environmentService.RoleModuleAccessList.filter(x => x.action == action && x.moduleName==ModuleName)[0];
+    if (this.environmentService.UserModuleAccessList != null) {
+      var access = this.environmentService.UserModuleAccessList.filter(x => x.id > 0 && x.action == action && x.moduleName==ModuleName)[0];
       if (access == null || access == undefined) {
-        return true;
+        if (this.environmentService.RoleModuleAccessList != null) {
+          var roleaccess = this.environmentService.RoleModuleAccessList.filter(x => x.id > 0 && x.action == action && x.moduleName==ModuleName)[0];
+          if (roleaccess == null || roleaccess == undefined) {
+            return true;
+          } else {
+            return roleaccess.isActive;
+          }
+        } else {
+          return true;
+        }
       } else {
         return access.isActive;
       }
     } else {
       return true;
     }
+    
   }
   LoadDbParameter() {
 

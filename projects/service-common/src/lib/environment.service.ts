@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Inject } from "@angular/core";
 import { Router } from '@angular/router';
 import { RoleModuleAccessModel } from './model/role.module.access.model';
+import { UserModuleAccessModel } from './model/user.module.access.model';
 declare var jQuery;
 @Injectable({
   providedIn: "root"
@@ -160,6 +161,22 @@ export class EnvironmentService {
     if (request.status === 200) {
       flag = true;
       _thiscomp.RoleModuleAccessList = JSON.parse(request.responseText);
+    }
+    this.GetUserModuleAcccess();
+    return flag;
+  }
+  public UserModuleAccessList: UserModuleAccessModel[] = [];
+  public GetUserModuleAcccess():boolean {
+    // return this.CheckGuestLogin();
+    var flag = false;
+    var _thiscomp = this;
+    var request = new XMLHttpRequest();
+    request.open('GET', this.ApiGateway + "/admin/UserRoleAccess/GetAccess", false);  // `false` makes the request synchronous
+    request.setRequestHeader("Authorization", "Bearer " + _thiscomp.Authtoken)
+    request.send(null);
+    if (request.status === 200) {
+      flag = true;
+      _thiscomp.UserModuleAccessList = JSON.parse(request.responseText);
     }
     return flag;
   }

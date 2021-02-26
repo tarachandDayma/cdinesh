@@ -42,4 +42,19 @@ export class UserModuleAccessService extends RestService {
         url = this.env.ApiGateway + "/admin/UserRoleAccess/GetUsers?SearchText="+searchText+"&RoleId="+RoleId;
         return super.Get(url);
     }
+    public GetAccess(UserId:string): Observable<UserModuleAccessModel[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/UserRoleAccess/GetAccess?UserId="+UserId;
+        return super.Get(url);
+    }
+    public GetAccessUser(UserId:string): Observable<UserModuleAccessModel[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/UserRoleAccess/GetAccessUser?UserId="+UserId;
+        return super.Get(url);
+    }
+    public Update(model:UserModuleAccessModel[]): Observable<any> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/UserRoleAccess/Add?UserId=";
+        return super.post(url,model);
+    }
 }
