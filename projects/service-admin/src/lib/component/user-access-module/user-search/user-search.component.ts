@@ -5,25 +5,27 @@ import { TranslateService } from '@ngx-translate/core';
 import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
 import { RoleModel } from '../../../models/role.model';
 import { RoleSearchCriteriaModel } from '../../../models/role.searchcriteria.model';
+import { UserSearchCriteriaModel } from '../../../models/user.searchCriteria.model';
+import { UserModel } from '../../../models/user/user.model';
 import { CartService } from '../../../service/cart.service';
 import { DiamondCommentService } from '../../../service/diamond.comment.service';
 import { DiamondTrackService } from '../../../service/diamond.track.service';
 import { DownloadService } from '../../../service/download.service';
 import { EntityService } from '../../../service/entity.service';
-import { RoleModuleAccessService } from '../../../service/role.module.access.service';
 import { ScheduleService } from '../../../service/schedule.service';
 import { SearchService } from '../../../service/search.service';
 import { TrackTypeService } from '../../../service/track.type.service';
+import { UserModuleAccessService } from '../../../service/user.module.aaccess.service';
 import { UserService } from '../../../service/user.service';
 import { UserWishService } from '../../../service/user.wish.service';
 import { UserSaveSearchService } from '../../../service/userSaveSearch.service';
 
 @Component({
-  selector: 'lib-role-search',
-  templateUrl: './role-search.component.html',
-  styleUrls: ['./role-search.component.css']
+  selector: 'lib-user-search',
+  templateUrl: './user-search.component.html',
+  styleUrls: ['./user-search.component.css']
 })
-export class RoleSearchComponent implements OnInit {
+export class UserSearchComponent implements OnInit {
 
   constructor(private loader: loaderserice
     , private router: Router
@@ -44,7 +46,7 @@ export class RoleSearchComponent implements OnInit {
     , private scheduleService: ScheduleService
     , private diamondTrackService: DiamondTrackService
     , private trackTypeService: TrackTypeService
-    , private roleModuleAccessService: RoleModuleAccessService,
+    , private userModuleAccessService: UserModuleAccessService,
   ) { }
   shapeList: any;
   colorList: any;
@@ -122,8 +124,8 @@ export class RoleSearchComponent implements OnInit {
   _3Vg: boolean = false;
   IsPriority: string = '';
   @Input()
-  role: RoleModel;
-  currentRoleSearchCriteriaModel: RoleSearchCriteriaModel;
+  user: UserModel;
+  currentUserSearchCriteriaModel: UserSearchCriteriaModel;
   ngOnInit(): void {
     this.selectedPointer = [];
     this.defaultCaratRange = [
@@ -574,11 +576,11 @@ export class RoleSearchComponent implements OnInit {
   }
   roleDataLoad() {
     this.loader.show(true);
-    this.roleModuleAccessService.LoadSearchCriteria(this.role.id).subscribe(result => {
+    this.userModuleAccessService.LoadSearchCriteria(this.user.id).subscribe(result => {
       this.loader.show(false);
-      this.currentRoleSearchCriteriaModel = result;
-      if (this.currentRoleSearchCriteriaModel != undefined || this.currentRoleSearchCriteriaModel != null) {
-        var SearchFilter = JSON.parse(this.currentRoleSearchCriteriaModel.searchData);
+      this.currentUserSearchCriteriaModel = result;
+      if (this.currentUserSearchCriteriaModel != undefined || this.currentUserSearchCriteriaModel != null) {
+        var SearchFilter = JSON.parse(this.currentUserSearchCriteriaModel.searchData);
         this.SetFilterObject(SearchFilter);
       }else{
         this.LoadDbParameter();
@@ -1252,16 +1254,16 @@ export class RoleSearchComponent implements OnInit {
   }
   
   UpdateRoleCriteria() {
-    if (this.currentRoleSearchCriteriaModel == null || this.currentRoleSearchCriteriaModel == undefined) {
-      this.currentRoleSearchCriteriaModel = new RoleSearchCriteriaModel();
-      this.currentRoleSearchCriteriaModel.roleId = this.role.id;
+    if (this.currentUserSearchCriteriaModel == null || this.currentUserSearchCriteriaModel == undefined) {
+      this.currentUserSearchCriteriaModel = new UserSearchCriteriaModel();
+      this.currentUserSearchCriteriaModel.userId = this.user.id;
     }
     var obj = {
-      Model: this.currentRoleSearchCriteriaModel,
+      Model: this.currentUserSearchCriteriaModel,
       Filter: this.GetFilterObject()
     }
     this.loader.show(true);
-    this.roleModuleAccessService.AddUpdateSearchCriteria(obj).subscribe(result => {
+    this.userModuleAccessService.AddUpdateSearchCriteria(obj).subscribe(result => {
       this.loader.show(false);
       if (result.status) {
         this.alertService.success(this.translate.instant(result.message), "");

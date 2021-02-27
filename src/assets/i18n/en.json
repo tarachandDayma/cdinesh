@@ -824,9 +824,19 @@
             "allowWebsite": "Website",
             "isAutoMail": "AutoMail",
             "permission": "Permission",
-            "userPermissionTitle": "User Permission"
+            "userPermissionTitle": "User Permission",
+            "stockAccess": "Stock Access"
         },
         "roleSearchCriteria": {
+            "updateSucess": "Update Sucess",
+            "sucess": "Sucess",
+            "title": "Stock Criterai",
+            "editStock": "Edit Stock",
+            "error": "Something went wrong",
+            "updateButton": "Update"
+
+        },
+        "userSearchCriteria": {
             "updateSucess": "Update Sucess",
             "sucess": "Sucess",
             "title": "Stock Criterai",

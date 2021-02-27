@@ -56,6 +56,9 @@
                                 <table *ngIf="!(userList.length<=0 || userList==undefined)" class="table table-bordered table-sm table-striped table-hover font-12 cd-table " style="width: 100%;height: 150px;">
                                     <thead>
                                         <tr>
+                                            <th>
+
+                                            </th>
                                             <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.userModuleAccess.companyName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.userModuleAccess.companyName'">
                                                 companyName
                                                 <span style="margin-right: 10px;margin-top: 7px;">
@@ -183,7 +186,11 @@
                                         <ng-container *ngFor="let item of Pages[currentPageNo] ">
                                             <tr>
                                                 <th data-toggle="tooltip" data-placement="top" class="fixed-column" style="width: 32px;">
-                                                    <a (click)="EditPermission(contentpermission,item)" style="color: blue;text-decoration:underline;" [translate]="'admin.userModuleAccess.permission'"></a> {{item.companyName}}
+                                                    <a class="ml-2" (click)="EditPermission(contentpermission,item)" style="color: blue;text-decoration:underline;" [translate]="'admin.userModuleAccess.permission'"></a>
+                                                    <a class="ml-2" (click)="EditUserCriterai(item)" style="color: blue;text-decoration:underline;" [translate]="'admin.userModuleAccess.stockAccess'"></a>
+                                                </th>
+                                                <th>
+                                                    {{item.companyName}}
                                                 </th>
                                                 <td>
                                                     {{item.userName}}
@@ -209,7 +216,7 @@
                                             </tr>
                                         </ng-container>
                                         <tr style="height:70vh !important;">
-                                            <td colspan="8" style="text-align: center !important;">
+                                            <td colspan="9" style="text-align: center !important;">
                                                 <img class="no-record-img" style="width: auto!important;" *ngIf="userList.length<=0 || userList==undefined" src="/assets/img/NoRecordFound.png">
                                             </td>
                                         </tr>
@@ -365,6 +372,18 @@
         </div>
     </div>
 </ng-template>
-
+<ng-template #contentSearch let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" style="text-transform: uppercase;"> <span>{{currentRole.name}}</span> <span [translate]="'admin.userSearchCriteria.title'">Stock Criterai</span></h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <lib-user-search [user]="currentUser"></lib-user-search>
+        </div>
+    </div>
+</ng-template>
 <!-- MAIN END -->
 <!-- SIDEBAR START -->

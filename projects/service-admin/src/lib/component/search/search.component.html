@@ -138,9 +138,10 @@
                             <div class="row">
                                 <div class="col-sm-2 col-sm-pointer-2 carat-col-sm-1">
                                     <span [translate]="'admin.search.caratrange'"> Carat Range </span>
-                                    <i class="fa fa-refresh" (click)="resetPointer()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i>
+                                    <i [hidden]="hideDefualtPointer" class="fa fa-refresh" (click)="resetPointer()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i>
                                 </div>
-                                <div class="col-sm-3 carat-col-sm-1">
+
+                                <div [hidden]="hideDefualtPointer" class="col-sm-3 carat-col-sm-1">
                                     <div class="input-group input-group-sm mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroup-sizing-sm"><span
@@ -161,13 +162,12 @@
                                 <div class="col-sm-7">
                                     <div class="row">
                                         <div class="col-md-1 col-md-selected-pointer-1" *ngFor="let  item of selectedPointer;">
-                                            <span [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{item.from | number : '1.2-2'}}-{{item.to | number :
-                                                '1.2-2'}} <span (click)="removeCaratRange(item)"
-                                                    style="padding-left: 2px;">X</span> </span>
+                                            <span [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{item.from | number : '1.2-2'}}-{{item.to | number :'1.2-2'}} <span [hidden]="hideDefualtPointer" (click)="removeCaratRange(item)" style="padding-left: 2px;">X</span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
+                                <div class="col-sm-12" [hidden]="hideDefualtPointer">
                                     <div class="pull-left"><button type="button" class="btn-critearia" (click)="openMorePointer()"><i *ngIf="!showMorePointer"
                                                 class="fa fa-plus"></i><i *ngIf="showMorePointer"
                                                 class="fa fa-minus"></i> </button></div>

@@ -11,6 +11,7 @@ import { ExportToEmailModel } from '../models/exportToEmail.model';
 import { RoleModel } from '../models/role.model';
 import { UserModuleAccessModel } from '../models/user.module.access.model';
 import { UserModel } from '../models/user/user.model';
+import { UserSearchCriteriaModel } from '../models/user.searchCriteria.model';
 
 @Injectable({
     providedIn: 'root'
@@ -55,6 +56,16 @@ export class UserModuleAccessService extends RestService {
     public Update(model:UserModuleAccessModel[]): Observable<any> {
         var url = "";
         url = this.env.ApiGateway + "/admin/UserRoleAccess/Add?UserId=";
+        return super.post(url,model);
+    }
+    public LoadSearchCriteria(UserId:string): Observable<UserSearchCriteriaModel> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/UserSearchCriteria/Load?UserId="+UserId;
+        return super.Get(url);
+    }
+    public AddUpdateSearchCriteria(model:any): Observable<any> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/UserSearchCriteria/AddUpdate";
         return super.post(url,model);
     }
 }

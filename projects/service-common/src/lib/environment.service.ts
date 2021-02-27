@@ -178,6 +178,30 @@ export class EnvironmentService {
       flag = true;
       _thiscomp.UserModuleAccessList = JSON.parse(request.responseText);
     }
+    this.GetSearchStockAccess();
+    return flag;
+  }
+  public get searchStock(): string{
+    return JSON.parse(localStorage.getItem("searchStock"));
+  }
+  public get searchStockData(): string{
+    return JSON.parse(localStorage.getItem("searchStock"));
+  }
+  public set searchStockData(data:string){
+    localStorage.setItem("searchStock",data);
+  }
+  public GetSearchStockAccess(): boolean {
+    // return this.CheckGuestLogin();
+    var flag = false;
+    var _thiscomp = this;
+    var request = new XMLHttpRequest();
+    request.open('GET', this.ApiGateway + "/admin/UserSearchCriteria/LoadByCurrentUser", false);  // `false` makes the request synchronous
+    request.setRequestHeader("Authorization", "Bearer " + _thiscomp.Authtoken)
+    request.send(null);
+    if (request.status === 200) {
+      flag = true;
+      _thiscomp.searchStockData = request.responseText;
+    }
     return flag;
   }
   public CheckModuleAccess(ModuleName: string, Action: string): boolean {

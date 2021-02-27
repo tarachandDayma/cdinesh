@@ -24,8 +24,8 @@
                 <li>
                     <ng-container *ngFor="let item of node.children">
                         <div class="col-sm-12">
-                            <lib-role-node [node]="item" (Edit)="EditNode($event)" (EditCriterai)="EditRoleCriterai($event)">
-                            </lib-role-node>
+                            <lib-role-access-node [node]="item" (Edit)="EditNode($event)" (EditCriterai)="EditRoleCriterai($event)">
+                            </lib-role-access-node>
                         </div>
                     </ng-container>
                 </li>

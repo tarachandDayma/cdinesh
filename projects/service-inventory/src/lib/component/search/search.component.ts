@@ -54,8 +54,8 @@ export class SearchComponent implements OnInit {
     , private userSaveSearchService: UserSaveSearchService
     , private userWishService: UserWishService
     , private scheduleService: ScheduleService
-    , private diamondTrackService:DiamondTrackService
-    , private trackTypeService:TrackTypeService) { }
+    , private diamondTrackService: DiamondTrackService
+    , private trackTypeService: TrackTypeService) { }
   shapeList: any;
   colorList: any;
   fancycolorList: any;
@@ -699,176 +699,179 @@ export class SearchComponent implements OnInit {
     })
 
   }
-  
+  hideDefualtPointer=false;
   LoadDbParameter() {
+    if (this.environmentService.searchStock != undefined && this.environmentService.searchStock != null) {
+      this.ModifyFilterObjectByAccess(this.environmentService.searchStock);
+      
+    } else {
+      this.entityService.GetEntity("Shape").subscribe(result => {
 
-    this.entityService.GetEntity("Shape").subscribe(result => {
+        this.shapeList.list = result;
+      }, error => {
 
-      this.shapeList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("Colour").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("Colour").subscribe(result => {
+        this.colorList.list = result;
+      }, error => {
 
-      this.colorList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("Clarity").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("Clarity").subscribe(result => {
+        this.clarityList.list = result;
+      }, error => {
 
-      this.clarityList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("cut").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("cut").subscribe(result => {
+        this.cutList.list = result;
+      }, error => {
 
-      this.cutList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("polish").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("polish").subscribe(result => {
+        this.polishList.list = result;
+      }, error => {
 
-      this.polishList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("Symmetry").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("Symmetry").subscribe(result => {
+        this.symList.list = result;
+      }, error => {
 
-      this.symList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("Location").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("Location").subscribe(result => {
+        this.locationList.list = result;
+      }, error => {
 
-      this.locationList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("FancyColor").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("FancyColor").subscribe(result => {
+        this.fancycolorList.list = result;
+      }, error => {
 
-      this.fancycolorList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("FancyColorOvertone").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("FancyColorOvertone").subscribe(result => {
+        this.fancyOvertoneList.list = result;
+      }, error => {
 
-      this.fancyOvertoneList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("FancyColorIntensity").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("FancyColorIntensity").subscribe(result => {
+        this.fancyIntensityList.list = result;
+      }, error => {
 
-      this.fancyIntensityList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("Flourence").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("Flourence").subscribe(result => {
+        this.flourenceList.list = result;
+      }, error => {
 
-      this.flourenceList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("shade").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("shade").subscribe(result => {
+        this.shadeList.list = result;
+      }, error => {
 
-      this.shadeList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("milky").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("milky").subscribe(result => {
+        this.milkyList.list = result;
+      }, error => {
 
-      this.milkyList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("Lusture").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("Lusture").subscribe(result => {
+        this.lusterList.list = result;
+      }, error => {
 
-      this.lusterList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("BlackCrown").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("BlackCrown").subscribe(result => {
+        this.blackIncCrnList.list = result;
+        this.whiteIncCrnList.list = JSON.parse(JSON.stringify(result));
+      }, error => {
 
-      this.blackIncCrnList.list = result;
-      this.whiteIncCrnList.list = JSON.parse(JSON.stringify(result));
-    }, error => {
+      })
+      this.entityService.GetEntity("BlackTable").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("BlackTable").subscribe(result => {
+        this.blackIncTblList.list = result;
+        this.whiteIncTblList.list = JSON.parse(JSON.stringify(result));
+      }, error => {
 
-      this.blackIncTblList.list = result;
-      this.whiteIncTblList.list = JSON.parse(JSON.stringify(result));
-    }, error => {
+      })
+      this.entityService.GetEntity("Culet").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("Culet").subscribe(result => {
+        this.culetList.list = result;
+      }, error => {
 
-      this.culetList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("ExtraFacetCrown").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("ExtraFacetCrown").subscribe(result => {
+        this.extraFacetCrnList.list = result;
+      }, error => {
 
-      this.extraFacetCrnList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("ExtraFacetPavilion").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("ExtraFacetPavilion").subscribe(result => {
+        this.extraFacetPavList.list = result;
+      }, error => {
 
-      this.extraFacetPavList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("EyeClean").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("EyeClean").subscribe(result => {
+        this.eyeCleanList.list = result;
+      }, error => {
 
-      this.eyeCleanList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("NaturalGirdle").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("NaturalGirdle").subscribe(result => {
+        this.naturalGirdleList.list = result;
+      }, error => {
 
-      this.naturalGirdleList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("NaturalPavilion").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("NaturalPavilion").subscribe(result => {
+        this.naturalPavList.list = result;
+      }, error => {
 
-      this.naturalPavList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("NaturalCrown").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("NaturalCrown").subscribe(result => {
+        this.naturalCrnList.list = result;
+      }, error => {
 
-      this.naturalCrnList.list = result;
-    }, error => {
+      })
+      this.entityService.GetEntity("Girdle").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("Girdle").subscribe(result => {
+        this.fromgirdleList.list = result;
+        this.togirdleList.list = JSON.parse(JSON.stringify(result));
+      }, error => {
 
-      this.fromgirdleList.list = result;
-      this.togirdleList.list = JSON.parse(JSON.stringify(result));
-    }, error => {
+      })
+      this.entityService.GetEntity("HNA").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("HNA").subscribe(result => {
+        this.fromhaList.list = result;
+        this.tohaList.list = JSON.parse(JSON.stringify(result));
+      }, error => {
 
-      this.fromhaList.list = result;
-      this.tohaList.list = JSON.parse(JSON.stringify(result));
-    }, error => {
+      })
+      this.entityService.GetEntity("Certificate").subscribe(result => {
 
-    })
-    this.entityService.GetEntity("Certificate").subscribe(result => {
+        this.certificateList.list = result;
+      }, error => {
 
-      this.certificateList.list = result;
-    }, error => {
+      })
+      this.entityService.GetAdvanceEntity("Keytosymbol").subscribe(result => {
 
-    })
-    this.entityService.GetAdvanceEntity("Keytosymbol").subscribe(result => {
+        this.keytoSymbolList.list = result;
+      }, error => {
 
-      this.keytoSymbolList.list = result;
-    }, error => {
-
-    })
-
+      })
+    }
   }
   toggleKeyToSymbol() {
     this.keytoSymbolContains = !this.keytoSymbolContains;
@@ -1440,6 +1443,83 @@ export class SearchComponent implements OnInit {
     });
 
 
+  }
+  ModifyFilterObjectByAccess(filter) {
+    this.searchService.GetSearch(filter).subscribe(item => {
+      this.shapeList.list = item.shapeList;
+
+      this.colorList.list = item.colorList;
+      this.fancycolorList.list = item.fancyColorList;
+      this.fancyOvertoneList.list = item.fancyOvertoneList;
+      this.fancyIntensityList.list = item.fancyIntensityList;
+      this.clarityList.list = item.clarityList;
+      this.cutList.list = item.cutList;
+      this.polishList.list = item.polishList
+      this.symList.list = item.symList;
+      this.locationList.list = item.locationList;
+      this.flourenceList.list = item.flourenceList;
+      this.milkyList.list = item.milkyList;
+      this.shadeList.list = item.shadeList;
+      this.blackIncTblList.list = item.blackIncTblList;
+      this.blackIncCrnList.list = item.blackIncCrnList;
+      this.whiteIncTblList.list = item.whiteIncTblList;
+      this.whiteIncCrnList.list = item.whiteIncCrnList
+      this.culetList.list = item.culetList;
+      this.eyeCleanList.list = item.eyeCleanList;
+      this.naturalGirdleList.list = item.naturalGirdleList;
+      this.naturalPavList.list = item.naturalPavList;
+      this.naturalCrnList.list = item.naturalCrnList;
+      this.extraFacetPavList.list = item.extraFacetPavList;
+      this.extraFacetCrnList.list = item.extraFacetCrnList;
+      this.fromgirdleList.list = item.fromgirdleList;
+      this.togirdleList.list = item.togirdleList;
+      this.fromhaList.list = item.fromhaList;
+      this.tohaList.list = item.tohaList;
+      this.keytoSymbolList.list = item.keytoSymbolList;
+      this.certificateList.list = item.certificateList;
+      this.lusterList.list = item.lusterList;
+      this.selectedPointer = item.selectedPointer;
+      this.fancyColor = item.fancyColor;
+      this.fromPrice = item.fromPrice;
+      this.toPrice = item.toPrice;
+      this.fromTotalPrice = item.fromTotalPrice;
+      this.toTotalPrice = item.toTotalPrice;
+      this.fromLength = item.fromLength;
+      this.toLength = item.toLength;
+      this.fromWidth = item.fromWidth;
+      this.toWidth = item.toWidth;
+      this.fromDepth = item.fromDepth;
+      this.toDepth = item.toDepth;
+      this.fromRatio = item.fromRatio;
+      this.toRatio = item.toRatio;
+      this.fromTablePer = item.fromTablePer;
+      this.toTablePer = item.toTablePer;
+      this.fromDepthPer = item.fromDepthPer;
+      this.toDepthPer = item.toDepthPer;
+      this.fromGirdlePer = item.fromGirdlePer;
+      this.toGirdlePer = item.toGirdlePer;
+      this.fromCrownHeight = item.fromCrownHeight;
+      this.toCrownHeight = item.toCrownHeight;
+      this.fromPavDepth = item.fromPavDepth;
+      this.toPevDepth = item.toPevDepth;
+      this.fromPavAngle = item.fromPavAngle;
+      this.toPevAngle = item.toPevAngle;
+      this.fromCrownAngle = item.fromCrownAngle;
+      this.toCrownAngle = item.toCrownAngle;
+      this.video = item.video;
+      this.sealdStone = item.sealdStone;
+      this.keytoSymbolContains = item.keytoSymbolContains;
+      this.jewellerChoice = item.jewellerChoice;
+      this.sarineDiamondJourney = item.sarineDiamondJourney;
+      this.delveryAt = item.delveryAt;
+      this.PacketNos = (item.packetNos != "" && item.packetNos != undefined ? item.packetNos.replace("'", "") : "");
+      this.Status = item.status;
+      this.IsPriority = item.isPriority;
+      this.reshapeLists();
+      if(this.selectedPointer.length > 0){
+        this.hideDefualtPointer=true;
+      }
+    });
   }
   reshapeLists() {
     this.shapeList.allSelected = this.shapeList.list.filter(x => x.selected == true).length <= 0;
@@ -2202,7 +2282,7 @@ Greetings of the day `;
       });
     }
   }
-  TrackDiamonds:diamondsearchResult[]=[];
+  TrackDiamonds: diamondsearchResult[] = [];
   LoadTrackModel(content) {
     this.TrackDiamonds = JSON.parse(JSON.stringify(this.searchResult.filter(x => x.selected)));
     this.TrackDiamonds.forEach(element => {
@@ -2217,7 +2297,7 @@ Greetings of the day `;
       }, (reason) => {
 
       });
-    }else{
+    } else {
       this.alertService.Error(this.translate.instant("inventory.profile.diamondTrack.selectDiamonderror"), "");
     }
   }
@@ -2357,5 +2437,5 @@ Greetings of the day `;
 
     });
   }
-  
+
 }

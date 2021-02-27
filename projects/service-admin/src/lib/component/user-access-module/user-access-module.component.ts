@@ -227,5 +227,14 @@ export class UserAccessModuleComponent implements OnInit {
     this.loader.show(false);
     this.doPagination();
   }
- 
+  @ViewChild("contentSearch") contentSearch;
+  EditUserCriterai(user: UserModel) {
+    this.allSelected=false;
+    this.currentUser=user;
+    this.modalService.open(this.contentSearch, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+  }
 }
