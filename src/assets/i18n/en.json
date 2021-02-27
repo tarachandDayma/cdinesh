@@ -826,6 +826,15 @@
             "permission": "Permission",
             "userPermissionTitle": "User Permission"
         },
+        "roleSearchCriteria": {
+            "updateSucess": "Update Sucess",
+            "sucess": "Sucess",
+            "title": "Stock Criterai",
+            "editStock": "Edit Stock",
+            "error": "Something went wrong",
+            "updateButton": "Update"
+
+        },
         "search": {
             "title": "Search",
             "titleUcoming": "Upcoming",

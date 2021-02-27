@@ -1,0 +1,1076 @@
+<div class="card">
+    <div class="card-header">
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary" (click)="UpdateRoleCriteria()" [translate]="'admin.roleSearchCriteria.updateButton'">Update</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row col-md-12" *ngIf="shapeList.list.length >0">
+            <div (click)="SelectCriteria(shapeList,null)" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
+                <span class="shape" data-toggle="tooltip" data-placement="top" title="" data-original-title="All Shapes" [ngStyle]="shapeList.allSelected && {'background': '#e5803f','color': '#ffffff'}"><br>All
+                    Shapes</span>
+            </div>
+            <div (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement>9" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
+                <span [ngStyle]="item.selected && {'background': '#e5803f','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
+                    <img onerror="this.style.display='none'"
+                        src="./assets/img/{{item.selected?item.id+'-white':item.id}}.png" style="height: 38px;">
+                    <br> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue
+                    :item.websiteAbr}}
+                </span>
+            </div>
+            <div name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1" (click)="ShowMoreLess(shapeList)">
+                <span [ngStyle]=" (shapeList.selectedOther) && {'background': '#e5803f','color': '#ffffff'}" class=" shape " role="button">
+                    <img onerror="this.style.display='none'"
+                        src="./assets/img/{{shapeList.selectedOther?'other-white':'other'}}.png"> <br>
+                    {{shapeList.showMore?"Less":"More"}}
+                </span>
+            </div>
+            <div class="col-sm-12">
+                <hr>
+            </div>
+        </div>
+        <div class="row col-md-12" *ngIf="shapeList.list.length >0 && shapeList.showMore">
+            <div (click)="SelectCriteria(shapeList,item)" *ngFor="let item of shapeList.list;let indexOfelement=index;" [hidden]="indexOfelement<=9" name="" id="" class="col-3 col-sm-2 col-sm-shape-2 col-xl-1">
+                <span [ngStyle]="item.selected && {'background': '#e5803f','color': '#ffffff'}" class="shape" data-toggle="tooltip" data-placement="top" title="{{item.websiteAbr}}">
+                    <img onerror="this.style.display='none'"
+                        src="./assets/img/{{item.selected?item.id+'-white':item.id}}.png" style="height: 38px;">
+                    <br> {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue
+                    :item.websiteAbr}}
+                </span>
+            </div>
+            <div class="col-sm-12">
+                <hr>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div class=" col-sm-12 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-2 col-sm-pointer-2 carat-col-sm-1">
+                            <span [translate]="'admin.search.caratrange'"> Carat Range </span>
+                            <i class="fa fa-refresh" (click)="resetPointer()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i>
+                        </div>
+                        <div class="col-sm-3 carat-col-sm-1">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                            [translate]="'admin.search.caratrangefrom'"> From </span>
+                                    </span>
+                                </div>
+                                <input name="fromCarat" [(ngModel)]="fromCarat" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                            [translate]="'admin.search.caratrangeto'"> From </span></span>
+                                </div>
+                                <input name="toCarat" [(ngModel)]="toCarat" type="number" class="form-control carat-input" min="0" placeholder="to">
+                                <div class="input-group-append">
+                                    <button type="button" (click)="addPointer()" class="btn btn-outline-secondary"> <i class="fa fa-plus"> </i> </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <div class="col-md-1 col-md-selected-pointer-1" *ngFor="let  item of selectedPointer;">
+                                    <span [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button"> {{item.from | number : '1.2-2'}}-{{item.to | number :
+                                        '1.2-2'}} <span (click)="removeCaratRange(item)"
+                                            style="padding-left: 2px;">X</span> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="pull-left"><button type="button" class="btn-critearia" (click)="openMorePointer()"><i *ngIf="!showMorePointer"
+                                        class="fa fa-plus"></i><i *ngIf="showMorePointer"
+                                        class="fa fa-minus"></i> </button></div>
+                            <div class="row">
+                                <div class="col-md-1 col-md-pointer-1" *ngFor="let  item of defaultCaratRange;">
+                                    <button [ngClass]="item.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" (click)="selectPointer(null,item)" type="button">
+                                        {{item.lable}}</button>
+                                    <ul style="list-style-type:none;" [hidden]="!showMorePointer">
+                                        <li *ngFor="let  subitem of item.list;">
+                                            <button (click)="selectPointer(item,subitem)" [ngClass]="subitem.selected !=true ? 'btn-pointer': 'btn-pointer-selected'" type="button">
+                                                {{subitem.labelfrom}}-{{subitem.labelto}}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row col-md-12">
+            <div class=" col-sm-12 " *ngIf="!fancyColor">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h6 class="pull-left"><span [translate]="'admin.search.color'"> color </span>
+                            </h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(colorList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancyColor !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="showFancy(true)"> Fancy</button>
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="colorList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(colorList,null)"> ALL</button>
+                            <button *ngFor="let  item of colorList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(colorList,item)"> {{item.groupValue!=null
+                                && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="  col-sm-12 " *ngIf="fancyColor">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h6 class="pull-left"><span [translate]="'admin.search.fancycolor'"> Fancy Color
+                                </span></h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fancycolorList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancyColor ==true ? 'btn-critearia': 'btn-critearia-selected'" (click)="showFancy(false)"> White</button>
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancycolorList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(fancycolorList,null)"> ALL</button>
+                            <button *ngFor="let  item of fancycolorList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(fancycolorList,item)">
+                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue
+                                :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-12 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="pull-left"><span [translate]="'admin.search.clarity'"> Clarity
+                                </span></h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(clarityList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="clarityList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(clarityList,null)"> ALL</button>
+                            <button *ngFor="let  item of clarityList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(clarityList,item)">
+                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue
+                                :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12" *ngIf="fancyColor">
+            <div class=" col-sm-6 col-sm-color-6 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="pull-left"><span [translate]="'admin.search.fancyovertone'"> Fancy
+                                    Overtone </span> </h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fancyOvertoneList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancyOvertoneList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(fancyOvertoneList,null)"> ALL</button>
+                            <button *ngFor="let  item of fancyOvertoneList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(fancyOvertoneList,item)">
+                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue
+                                :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-6 col-sm-clarity-6 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="pull-left"><span [translate]="'admin.search.fancyintensity'"> Fancy
+                                    Intensity </span></h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fancyIntensityList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fancyIntensityList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(fancyIntensityList,null)"> ALL</button>
+                            <button *ngFor="let  item of fancyIntensityList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(fancyIntensityList,item)">
+                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue
+                                :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div class=" col-sm-4 col-sm-cut-6 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="pull-left"><span [translate]="'admin.search.cut'"> Cut </span></h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(cutList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="cutList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(cutList,null)"> ALL</button>
+                            <button *ngFor="let  item of cutList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(cutList,item)"> {{item.groupValue!=null &&
+                                item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-4 col-sm-polish-6 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="pull-left"><span [translate]="'admin.search.polish'"> Polish </span>
+                            </h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(polishList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="polishList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(polishList,null)"> ALL</button>
+                            <button *ngFor="let  item of polishList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(polishList,item)"> {{item.groupValue!=null
+                                && item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-4 col-sm-symmetry-6 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="pull-left"><span [translate]="'admin.search.symmetry'"> Symmetry
+                                </span></h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(symList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="symList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(symList,null)"> ALL</button>
+                            <button *ngFor="let  item of symList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(symList,item)"> {{item.groupValue!=null &&
+                                item.groupValue!=undefined ?item.groupValue :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-4 col-sm-cut-6 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="pull-left"><span [translate]="'admin.search.location'"> Location
+                                </span></h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(locationList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="locationList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(locationList,null)"> ALL</button>
+                            <button *ngFor="let  item of locationList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(locationList,item)">
+                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue
+                                :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-4 col-sm-clarity-6 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="pull-left"><span [translate]="'admin.search.fluorescence'">
+                                    Fluorescence </span></h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(flourenceList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="flourenceList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(flourenceList,null)"> ALL</button>
+                            <button *ngFor="let  item of flourenceList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(flourenceList,item)">
+                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue
+                                :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-4 col-sm-symmetry-6 ">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="pull-left"><span [translate]="'admin.search.certificate'">
+                                    Certificate </span></h6>
+                            <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(certificateList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="certificateList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(certificateList,null)"> ALL</button>
+                            <button *ngFor="let  item of certificateList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(certificateList,item)">
+                                {{item.groupValue!=null && item.groupValue!=undefined ?item.groupValue
+                                :item.websiteAbr}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div class="col-sm-12">
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0 text-center">
+                                <button class="btn btn-link btn-more-parameter" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span [translate]="'admin.search.advanceparameter'"> Advance Parameter
+                                    </span>
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body" style="padding-left: 0px;
+                            padding-right: 0px;">
+                                <div class="row col-md-12" style="padding-left: 0px;
+                                padding-right: 0px;">
+
+                                    <div class=" col-sm-3 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.milky'"> Milky
+                                                        </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(milkyList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="milkyList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(milkyList,null)"> ALL</button>
+                                                    <button *ngFor="let  item of milkyList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(milkyList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.luster'"> Luster
+                                                        </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(lusterList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="lusterList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(lusterList,null)"> ALL</button>
+                                                    <button *ngFor="let  item of lusterList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(lusterList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-6 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.shade'"> shade
+                                                        </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(shadeList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="shadeList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(shadeList,null)"> ALL</button>
+                                                    <button *ngFor="let  item of shadeList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(shadeList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                    <div class=" col-sm-3 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.blackinctbl'"> Black
+                                                            Inc. Tbl. </span> </h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(blackIncTblList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="blackIncTblList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(blackIncTblList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of blackIncTblList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(blackIncTblList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.blackinccrn'"> Black
+                                                            Inc. Crn. </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(blackIncCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="blackIncCrnList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(blackIncCrnList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of blackIncCrnList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(blackIncCrnList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.whiteinctbl'"> White
+                                                            Inc. Tbl. </span>.</h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(whiteIncTblList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="whiteIncTblList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(whiteIncTblList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of whiteIncTblList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(whiteIncTblList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.whiteinccrn'"> White
+                                                            Inc. Crn. </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(whiteIncCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="whiteIncCrnList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(whiteIncCrnList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of whiteIncCrnList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(whiteIncCrnList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                    <div class=" col-sm-3 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.culet'"> Culet
+                                                        </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(culetList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="culetList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(culetList,null)"> ALL</button>
+                                                    <button *ngFor="let  item of culetList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(culetList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.eyeclean'"> Eye
+                                                            Clean</span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(eyeCleanList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="eyeCleanList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(eyeCleanList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of eyeCleanList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(eyeCleanList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.extrafacetpv'"> Extra
+                                                            Facet Pv. </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(extraFacetPavList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="extraFacetPavList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(extraFacetPavList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of extraFacetPavList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(extraFacetPavList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-7">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.extrafacetcrn'">
+                                                            Extra Facet Crn. </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(extraFacetCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="extraFacetCrnList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(extraFacetCrnList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of extraFacetCrnList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(extraFacetCrnList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                    <div class=" col-sm-3 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.naturalgrdl'">
+                                                            Natural Grdl. </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(naturalGirdleList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="naturalGirdleList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(naturalGirdleList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of naturalGirdleList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(naturalGirdleList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.naturalpav'"> Natural
+                                                            Pav. </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(naturalPavList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="naturalPavList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(naturalPavList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of naturalPavList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(naturalPavList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-6 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.naturalcrn'"> Natural
+                                                            Crn. </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(naturalCrnList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="naturalCrnList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(naturalCrnList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of naturalCrnList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(naturalCrnList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                    <div class=" col-sm-3 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.fromgirdle'"> Girdle
+                                                        </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fromgirdleList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fromgirdleList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(fromgirdleList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of fromgirdleList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(fromgirdleList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.togirdle'"> Girdle
+                                                        </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(togirdleList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="togirdleList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(togirdleList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of togirdleList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(togirdleList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.fromh&a'"> H&A
+                                                        </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(fromhaList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="fromhaList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(fromhaList,null)"> ALL</button>
+                                                    <button *ngFor="let  item of fromhaList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(fromhaList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.toh&a'"> H&A </span>
+                                                    </h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(tohaList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="tohaList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(tohaList,null)"> ALL</button>
+                                                    <button *ngFor="let  item of tohaList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(tohaList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+
+                                    <div class=" col-sm-3 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.TotalPrice$'">Total
+                                                            Price$ </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromTotalPrice" [(ngModel)]="fromTotalPrice" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toTotalPrice" [(ngModel)]="toTotalPrice" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                    <div class=" col-sm-12 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.keytoSymbol'">
+                                                            keytoSymbol </span></h6>
+                                                    <h6 class="pull-left"><i class="fa fa-refresh" (click)="refreshList(keytoSymbolList)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Refresh"></i></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div (click)="toggleKeyToSymbol()" class="radio-button-label" [translate]="'admin.search.keytoSymbolContains'">
+                                                        Contains</div> <button type="button" [ngClass]="keytoSymbolContains !=true ? 'radio-button': 'radio-button-selected'" (click)="toggleKeyToSymbol()"> </button>
+                                                    <div (click)="toggleKeyToSymbol()" class="radio-button-label" [translate]="'admin.search.keytoSymbolNotContains'">
+                                                        Not Contains</div> <button type="button" [ngClass]="keytoSymbolContains ==true ? 'radio-button': 'radio-button-selected'" (click)="toggleKeyToSymbol()"></button>
+                                                    <button type="button" class="btn-critearia-hover btn-critearia-active" [ngClass]="keytoSymbolList.allSelected !=true ? 'btn-critearia': 'btn-critearia-selected'" (click)="SelectCriteria(keytoSymbolList,null)">
+                                                        ALL</button>
+                                                    <button *ngFor="let  item of keytoSymbolList.list;" class="btn-critearia-hover btn-critearia-active" [ngClass]="item.selected !=true ? 'btn-critearia': 'btn-critearia-selected'" type="button" (click)="SelectCriteria(keytoSymbolList,item)">
+                                                        {{item.groupValue!=null && item.groupValue!=undefined
+                                                        ?item.groupValue :item.websiteAbr}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                    <div class="col-sm-12 col-sm-cut-6">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <label class="custom-control material-checkbox">
+                                                        <input type="checkbox" class="material-control-input"
+                                                            name="video" [(ngModel)]="video">
+                                                        <span class="material-control-indicator"></span>
+                                                        <span class="material-control-description"
+                                                            [translate]="'admin.search.video'">video</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="custom-control material-checkbox">
+                                                        <input type="checkbox" class="material-control-input"
+                                                            name="sealdStone" [(ngModel)]="sealdStone">
+                                                        <span class="material-control-indicator"></span>
+                                                        <span class="material-control-description"
+                                                            [translate]="'admin.search.sealdStone'">sealdStone</span>
+                                                    </label>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="custom-control material-checkbox">
+                                                        <input type="checkbox" class="material-control-input"
+                                                            name="jewellerChoice" [(ngModel)]="jewellerChoice">
+                                                        <span class="material-control-indicator"></span>
+                                                        <span class="material-control-description"
+                                                            [translate]="'admin.search.jewellerChoice'">jewellerChoice</span>
+                                                    </label>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="custom-control material-checkbox">
+                                                        <input type="checkbox" class="material-control-input"
+                                                            name="sarineDiamondJourney"
+                                                            [(ngModel)]="sarineDiamondJourney">
+                                                        <span class="material-control-indicator"></span>
+                                                        <span class="material-control-description"
+                                                            [translate]="'admin.search.sarineDiamondJourney'">Sarine
+                                                            Diamond Journey</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                    <div class=" col-sm-3 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.length'"> Length
+                                                        </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromLength" [(ngModel)]="fromLength" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toLength" [(ngModel)]="toLength" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.width'"> Width
+                                                        </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromWidth" [(ngModel)]="fromWidth" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toWidth" [(ngModel)]="toWidth" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.depth'"> Depth
+                                                        </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromDepth" [(ngModel)]="fromDepth" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toDepth" [(ngModel)]="toDepth" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.ratio'"> Ratio
+                                                        </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromRatio" [(ngModel)]="fromRatio" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toRatio" [(ngModel)]="toRatio" type="number" class="form-control carat-input" min="0" placeholder="to">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                    <div class=" col-sm-3 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.tableper'"> Table %
+                                                        </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromTablePer" [(ngModel)]="fromTablePer" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toTablePer" [(ngModel)]="toTablePer" type="number" class="form-control carat-input" min="0" placeholder="to">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.depthper'"> Depth %
+                                                        </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromDepthPer" [(ngModel)]="fromDepthPer" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toDepthPer" [(ngModel)]="toDepthPer" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.girdleper'"> Girdle %
+                                                        </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromGirdlePer" [(ngModel)]="fromGirdlePer" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toGirdlePer" [(ngModel)]="toGirdlePer" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.crownheight'"> Crown
+                                                            Height </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromCrownHeight" [(ngModel)]="fromCrownHeight" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toCrownHeight" [(ngModel)]="toCrownHeight" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" style="padding-left: 0px;  padding-right: 0px;">
+                                    <div class=" col-sm-3 col-sm-cut-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.pavdepth'"> Pavilion
+                                                            Depth </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromPavDepth" [(ngModel)]="fromPavDepth" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toPevDepth" [(ngModel)]="toPevDepth" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-3 col-sm-polish-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.pavangle'">Pav.Angle
+                                                        </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromPavAngle" [(ngModel)]="fromPavAngle" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toPevAngle" [(ngModel)]="toPevAngle" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-sm-6 col-sm-symmetry-6 ">
+                                        <div class="box">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h6 class="pull-left"><span [translate]="'admin.search.crownangle'">
+                                                            Cr.Angle </span></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangefrom'">
+                                                                    From </span> </span>
+                                                        </div>
+                                                        <input name="fromCrownAngle" [(ngModel)]="fromCrownAngle" type="number" class="form-control carat-input" min="0" placeholder="from">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                                                    [translate]="'admin.search.caratrangeto'">
+                                                                    From </span></span>
+                                                        </div>
+                                                        <input name="toCrownAngle" [(ngModel)]="toCrownAngle" type="number" class="form-control carat-input" min="0" placeholder="to">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="page-title">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="pull-left">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button (click)="select3Ex()" [ngClass]="_3Ex?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'admin.search.3ex'"> 3EX </span></button>
+                                <button (click)="select2Ex()" [ngClass]="_2Ex?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'admin.search.2ex'"> 2EX </span></button>
+                                <button (click)="select3VG()" [ngClass]="_3Vg?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'admin.search.3vg'"> 3VG+ </span></button>
+                                <button (click)="toggleNoBGM()" [ngClass]="nobgm?'btn-critearia-selected':'btn-critearia search-footer-button'" type="button"><span [translate]="'admin.search.nobgm'"> NO BGM </span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

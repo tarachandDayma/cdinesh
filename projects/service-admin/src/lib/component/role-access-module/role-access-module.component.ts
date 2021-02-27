@@ -87,4 +87,14 @@ export class RoleAccessModuleComponent implements OnInit {
       this.alertService.Error(this.translate.instant("admin.roleModuleAccess.error"), "");
     })
   }
+  @ViewChild("contentSearch") contentSearch;
+  EditRoleCriterai(role: RoleModel) {
+    this.allSelected=false;
+    this.currentRole=role;
+    this.modalService.open(this.contentSearch, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+  }
 }

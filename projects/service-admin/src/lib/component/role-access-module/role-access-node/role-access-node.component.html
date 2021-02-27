@@ -16,6 +16,7 @@
             <div class="btn-group btn-group-sm">
                 <button class="btn btn-primary btn-sm  ml-2  " (click)="EditNode(node)"><i
                         class="fa fa-edit"></i></button>
+                <a (click)="EditRoleCriterai(node)" class="ml-2" style="color: blue;text-decoration: underline;" [translate]="'admin.roleSearchCriteria.editStock'">editStock</a>
             </div>
         </div>
         <div>
@@ -23,7 +24,7 @@
                 <li>
                     <ng-container *ngFor="let item of node.children">
                         <div class="col-sm-12">
-                            <lib-role-node [node]="item" (Edit)="EditNode($event)">
+                            <lib-role-node [node]="item" (Edit)="EditNode($event)" (EditCriterai)="EditRoleCriterai($event)">
                             </lib-role-node>
                         </div>
                     </ng-container>

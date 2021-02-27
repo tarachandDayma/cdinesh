@@ -11,7 +11,7 @@
                     <ng-container *ngFor="let item of roles">
                         <ul style="list-style-type:none;">
                             <LI>
-                                <lib-role-access-node [node]="item" (Edit)="EditNode($event)">
+                                <lib-role-access-node [node]="item" (Edit)="EditNode($event)" (EditCriterai)="EditRoleCriterai($event)">
                                 </lib-role-access-node>
                             </LI>
                         </ul>
@@ -100,6 +100,19 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #contentSearch let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" style="text-transform: uppercase;"> <span>{{currentRole.name}}</span> <span [translate]="'admin.roleSearchCriteria.title'">Stock Criterai</span></h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <lib-role-search [role]="currentRole"></lib-role-search>
         </div>
     </div>
 </ng-template>

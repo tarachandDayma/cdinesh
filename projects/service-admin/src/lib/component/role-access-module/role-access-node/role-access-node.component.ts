@@ -15,6 +15,8 @@ export class RoleAccessNodeComponent implements OnInit {
   remove: EventEmitter<RoleModel> = new EventEmitter<RoleModel>();
   @Output()
   Edit: EventEmitter<RoleModel> = new EventEmitter<RoleModel>();
+  @Output()
+  EditCriterai: EventEmitter<RoleModel> = new EventEmitter<RoleModel>();
   ngOnInit(): void {
   }
   EditNode(role: RoleModel) {
@@ -25,6 +27,9 @@ export class RoleAccessNodeComponent implements OnInit {
   }
   toggleNode(role: RoleModel) {
     role.showDetail = !role.showDetail;
+  }
+  EditRoleCriterai(role: RoleModel) {
+    this.EditCriterai.emit(role);
   }
 
 }

@@ -10,6 +10,7 @@ import { UserDownloadFieldsModel } from '../models/user.download.fields.model';
 import { ExportToEmailModel } from '../models/exportToEmail.model';
 import { RoleModel } from '../models/role.model';
 import { RoleModuleAccessModel } from '../models/role.module.access.model';
+import { RoleSearchCriteriaModel } from '../models/role.searchcriteria.model';
 
 @Injectable({
     providedIn: 'root'
@@ -35,5 +36,15 @@ export class RoleModuleAccessService extends RestService {
         var url = "";
         url = this.env.ApiGateway + "/admin/RoleModuleAccess/LoadbyModule?ModuleName="+ModuleName;
         return super.Get(url);
+    }
+    public LoadSearchCriteria(RoleId:string): Observable<RoleSearchCriteriaModel> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/RoleSearchCriteria/Load?RoleId="+RoleId;
+        return super.Get(url);
+    }
+    public AddUpdateSearchCriteria(model:any): Observable<any> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/RoleSearchCriteria/AddUpdate";
+        return super.post(url,model);
     }
 }
