@@ -182,7 +182,12 @@ export class EnvironmentService {
     return flag;
   }
   public get searchStock(): string{
-    return JSON.parse(localStorage.getItem("searchStock"));
+    try {
+      return JSON.parse(localStorage.getItem("searchStock")).filterData;  
+    } catch (error) {
+      return null
+    } 
+    
   }
   public get searchStockData(): string{
     return JSON.parse(localStorage.getItem("searchStock"));
@@ -223,5 +228,6 @@ export class EnvironmentService {
   public logout() {
     this.Authtoken = null;
     this.router.navigateByUrl("/auth/login");
+    localStorage.clear();
   }
 }

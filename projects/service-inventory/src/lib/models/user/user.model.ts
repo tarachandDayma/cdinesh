@@ -15,6 +15,7 @@ export class UserModel {
             this.userAccountInfo= new UserAccountInfoModel();
             this.userReferralInfo=[];
     }
+    id: string;
     userName: string;
     fullName:string;
     password: string;

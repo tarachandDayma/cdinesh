@@ -166,7 +166,9 @@ export class SearchComponent implements OnInit {
       localStorage.setItem("PacketNo", "");
     } else if (-1 != this.router.url.indexOf("SearchPacket")) {
       this.PacketNos = localStorage.getItem("PacketNo");
-      this.searchDiamond();
+      if (this.PacketNos.trim() != "" && this.PacketNos != undefined && this.PacketNos != null) {
+        this.searchDiamond();
+      }
     } else if (-1 != this.router.url.indexOf("newgoods")) {
       this.Status = "N";
       this.searchDiamond();
@@ -726,15 +728,19 @@ export class SearchComponent implements OnInit {
     }
 
   }
-  hideDefualtPointer=false;
+  hideDefualtPointer = false;
   LoadDbParameter() {
     if (this.environmentService.searchStock != undefined && this.environmentService.searchStock != null) {
       this.ModifyFilterObjectByAccess(this.environmentService.searchStock);
-     
+
     } else {
       this.entityService.GetEntity("Shape").subscribe(result => {
 
         this.shapeList.list = result;
+        if(this.shapeList.list.filter(x=> x.id==22).length > 0) {
+          this.shapeList.list.filter(x=> x.id==22)[0].selected=true;
+          this.shapeList.allSelected=false;
+        }
       }, error => {
 
       })
@@ -1544,8 +1550,8 @@ export class SearchComponent implements OnInit {
       this.Status = item.status;
       this.IsPriority = item.isPriority;
       this.reshapeLists();
-      if(this.selectedPointer.length > 0){
-        this.hideDefualtPointer=true;
+      if (this.selectedPointer.length > 0) {
+        this.hideDefualtPointer = true;
       }
     });
   }
@@ -1849,7 +1855,7 @@ export class SearchComponent implements OnInit {
       this.cartCount = result.length;
     })
   }
-  markup: number;
+  markup: number=0;
   ExportType: string = "Download";
   emailformgroup: FormGroup;
 
