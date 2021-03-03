@@ -24,6 +24,9 @@ export class SettingNavigationComponent implements OnInit {
     if (-1 != this.router.url.indexOf("userAccess")) {
       this.currentMenu = "userAccess";
     }
+    if (-1 != this.router.url.indexOf("partialClient")) {
+      this.currentMenu = "partialClient";
+    }
     setTimeout(() => {
         document.getElementById(this.currentMenu).focus();
     }, 1000);  

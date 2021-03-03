@@ -10,6 +10,7 @@ import { InquiryDetailComponent } from './component/inquiry-detail/inquiry-detai
 import { MyCartComponent } from './component/my-cart/my-cart.component';
 import { NewgoodsComponent } from './component/newgoods/newgoods.component';
 import { PairSetupComponent } from './component/pair-setup/pair-setup.component';
+import { PartialClientComponent } from './component/partial-client/partial-client.component';
 import { PersonalDetailComponent } from './component/personal-detail/personal-detail.component';
 import { RecommendedComponent } from './component/recommended/recommended.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
@@ -120,6 +121,9 @@ const routes: Routes = [
   },{
     path:"userAccess",
     component:UserAccessModuleComponent
+  },{
+    path:"partialClient",
+    component:PartialClientComponent
   }
 
 ];

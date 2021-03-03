@@ -748,7 +748,8 @@
             "schedule": "Schedule",
             "inquiry": "Inquiry",
             "trackMenuName": "Track",
-            "role": "Roles"
+            "role": "Roles",
+            "partialClient": "PartialClient"
         },
         "company": {
             "title": "Company",
@@ -844,6 +845,24 @@
             "error": "Something went wrong",
             "updateButton": "Update"
 
+        },
+        "partialClientMapping": {
+            "updateSucess": "Update Sucess",
+            "sucess": "Sucess",
+            "title": "Partial Clients",
+            "search": "Search",
+            "table": {
+                "fullName": "Full Name",
+                "userName": "UserName",
+                "companyName": "CompanyName"
+            },
+            "error": "Something went wrong",
+            "myPartialClient": "My Partial Client",
+            "searchPartialClient": "New Client List",
+            "alreadyExists": "Partil client already in you list",
+            "notfound": "Partial client not found",
+            "remove": "Remove",
+            "add": "Add"
         },
         "search": {
             "title": "Search",
@@ -1117,7 +1136,8 @@
                 "inquiry": "Inquiry",
                 "menu": "Menu",
                 "trackMenuName": "Track",
-                "role": "Roles"
+                "role": "Roles",
+                "partialClient": "partialClient"
             },
             "diamondTrack": {
                 "title": "Track",
