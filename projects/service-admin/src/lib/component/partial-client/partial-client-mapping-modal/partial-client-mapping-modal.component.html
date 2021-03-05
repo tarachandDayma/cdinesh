@@ -1,10 +1,10 @@
 <div class="card">
     <div class="card-header">
-        <h3 [translate]="'admin.partialClientMapping.title'"></h3>
+        <button class="btn btn-primary" (click)="AddPartialUser(contentAddUser)"> <i class="fa fa-plus"></i> </button>
     </div>
     <div class="card-body">
         <div class="row col-sm-12">
-            <div>
+            <div class="col-md-12">
                 <h4 [translate]="'admin.partialClientMapping.myPartialClient'"></h4>
                 <hr>
             </div>
@@ -25,8 +25,8 @@
                     </div>
                 </form>
             </div>
-            <div #div1>
-                <div class="table-fixed" style="height: 63.3vh;">
+            <div class="col-md-12" #div1>
+                <div class="table-fixed" style="height: 40.3vh;">
                     <img class="no-record-img" style="width: auto!important;" *ngIf="!(partialClient !=null && partialClient !=undefined && partialClient.clients.length > 0 && partialClient.clients !=undefined &&  partialClient.clients!=null)" src="/assets/logos/CDinesh-Logo-Layers.gif">
                     <div class="pagination pull-left" *ngIf="PageCount1 >1">
                         <a class="btn btn-secondary" (click)="FirstPage1()">
@@ -44,7 +44,7 @@
                                 <th>
 
                                 </th>
-                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.myPartialClient.table.fullName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.myPartialClient.table.fullName'">
+                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.partialClientMapping.table.fullName')}}" class="fixed-column" style="width:150.8px;" [translate]="'admin.partialClientMapping.table.fullName'">
                                     fullName
                                     <span style="margin-right: 10px;margin-top: 7px;">
                                         <span (click)="sort1('fullName')" class="default-sort-arrow"
@@ -59,7 +59,7 @@
                                     </span>
                                     </span>
                                 </th>
-                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.myPartialClient.table.userName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.myPartialClient.table.userName'">
+                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.partialClientMapping.table.userName')}}" class="fixed-column" style="width:150px;" [translate]="'admin.partialClientMapping.table.userName'">
                                     userName
                                     <span style="margin-right: 10px;margin-top: 7px;">
                                         <span (click)="sort1('userName')" class="default-sort-arrow"
@@ -74,7 +74,7 @@
                                     </span>
                                     </span>
                                 </th>
-                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.myPartialClient.table.companyName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.myPartialClient.table.companyName'">
+                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.partialClientMapping.table.companyName')}}" class="fixed-column" style="width:150px;" [translate]="'admin.partialClientMapping.table.companyName'">
                                     companyName
                                     <span style="margin-right: 10px;margin-top: 7px;">
                                         <span (click)="sort1('companyName')" class="default-sort-arrow"
@@ -119,7 +119,7 @@
                     </table>
                 </div>
             </div>
-            <div>
+            <div class="col-md-12">
                 <h4 [translate]="'admin.partialClientMapping.searchPartialClient'"></h4>
                 <hr>
             </div>
@@ -140,8 +140,8 @@
                     </div>
                 </form>
             </div>
-            <div #div>
-                <div class="table-fixed" style="height: 63.3vh;">
+            <div class="col-md-12" #div>
+                <div class="table-fixed" style="height: 40.3vh;">
                     <img class="no-record-img" style="width: auto!important;" *ngIf="userList.length<=0 || userList==undefined" src="/assets/logos/CDinesh-Logo-Layers.gif">
                     <div class="pagination pull-left" *ngIf="PageCount >1">
                         <a class="btn btn-secondary" (click)="FirstPage()"> &#60;&#60; </a>
@@ -155,7 +155,7 @@
                             <tr>
                                 <th>
                                 </th>
-                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.myPartialClient.table.fullName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.myPartialClient.table.fullName'">
+                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.partialClientMapping.table.fullName')}}" class="fixed-column" style="width:150px;" [translate]="'admin.partialClientMapping.table.fullName'">
                                     fullName
                                     <span style="margin-right: 10px;margin-top: 7px;">
                                         <span (click)="sort('fullName')" class="default-sort-arrow" style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px">
@@ -167,7 +167,7 @@
                                     </span>
                                     </span>
                                 </th>
-                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.myPartialClient.table.userName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.myPartialClient.table.userName'">
+                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.partialClientMapping.table.userName')}}" class="fixed-column" style="width:150px;" [translate]="'admin.partialClientMapping.table.userName'">
                                     userName
                                     <span style="margin-right: 10px;margin-top: 7px;">
                                         <span (click)="sort('userName')" class="default-sort-arrow"
@@ -182,7 +182,7 @@
                                     </span>
                                     </span>
                                 </th>
-                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.myPartialClient.table.companyName')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.myPartialClient.table.companyName'">
+                                <th data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.partialClientMapping.table.companyName')}}" class="fixed-column" style="width:150px;" [translate]="'admin.partialClientMapping.table.companyName'">
                                     companyName
                                     <span style="margin-right: 10px;margin-top: 7px;">
                                         <span (click)="sort('companyName')" class="default-sort-arrow"
@@ -229,3 +229,12 @@
         </div>
     </div>
 </div>
+<ng-template #contentAddUser let-modal>
+    <div class="col-sm-12">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <lib-partial-client-add-modal (savesuccess)="AddSucess($event)" [seller]="partialClient.seller"></lib-partial-client-add-modal>
+
+</ng-template>

@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       formdata.append("scope", this.environment.Scope);
       this.loginservice.login(formdata).subscribe(result => {
         this.loader.show(false);
+        localStorage.clear();
         this.environment.Authtoken = result.accessToken;
         if (result == null) {
           this.environment.GetModuleAcccess();

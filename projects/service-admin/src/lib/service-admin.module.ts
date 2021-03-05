@@ -49,6 +49,7 @@ import { RoleSearchComponent } from './component/role-access-module/role-search/
 import { UserSearchComponent } from './component/user-access-module/user-search/user-search.component';
 import { PartialClientComponent } from './component/partial-client/partial-client.component';
 import { PartialClientMappingModalComponent } from './component/partial-client/partial-client-mapping-modal/partial-client-mapping-modal.component';
+import { PartialClientAddModalComponent } from './component/partial-client/partial-client-add-modal/partial-client-add-modal.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -57,7 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [ServiceAdminComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
     ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent,InquiryDetailComponent,DiamondTrackComponent,UserTrackComponent
-  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent, RoleAccessModuleComponent, RoleAccessNodeComponent, CompanyComponent, CompanyNodeComponent, UserAccessModuleComponent, UserRoleAccessNodeComponent, RoleSearchComponent, UserSearchComponent, PartialClientComponent, PartialClientMappingModalComponent],
+  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent, RoleAccessModuleComponent, RoleAccessNodeComponent, CompanyComponent, CompanyNodeComponent, UserAccessModuleComponent, UserRoleAccessNodeComponent, RoleSearchComponent, UserSearchComponent, PartialClientComponent, PartialClientMappingModalComponent, PartialClientAddModalComponent],
     imports: [
       FormsModule,ReactiveFormsModule,
       TranslateModule.forChild(),

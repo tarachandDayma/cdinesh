@@ -50,6 +50,7 @@ export class UserModel {
     shippingStateName:string;
     shippingCityName:string;
     sellerEmailId:string;
+    isPartial:boolean;
     roles:string;
     diafelxuserId:number;
     userBasicInfo: UserBasicInfoModel;

@@ -848,7 +848,7 @@
         },
         "partialClientMapping": {
             "updateSucess": "Update Sucess",
-            "sucess": "Sucess",
+            "success": "success",
             "title": "Partial Clients",
             "search": "Search",
             "table": {
@@ -1137,7 +1137,7 @@
                 "menu": "Menu",
                 "trackMenuName": "Track",
                 "role": "Roles",
-                "partialClient": "partialClient"
+                "partialClient": "PartialClient"
             },
             "diamondTrack": {
                 "title": "Track",

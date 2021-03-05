@@ -21,12 +21,15 @@ export class PartialClientMappingModalComponent implements OnInit {
   userList: UserModel[] = [];
   ngOnInit(): void {
     this.LoadPartilClient();
+
   }
   LoadPartilClient() {
     this.loader.show(true);
     this.partialClientMappingservice.Load(this.searchText).subscribe(result => {
       this.loader.show(false);
       this.partialClient=result;
+      this.doPagination1();
+      
     }, error => {
       this.loader.show(false);
       this.alertService.Error(this.translate.instant("admin.partialClientMapping.error"), "");
@@ -37,6 +40,7 @@ export class PartialClientMappingModalComponent implements OnInit {
     this.partialClientMappingservice.LoadUsersAll(this.searchText1).subscribe(result => {
       this.loader.show(false);
       this.userList=result;
+      this.doPagination();
     }, error => {
       this.loader.show(false);
       this.alertService.Error(this.translate.instant("admin.partialClientMapping.error"), "");
@@ -50,22 +54,30 @@ export class PartialClientMappingModalComponent implements OnInit {
       this.loader.show(false);
       if(result.status){
         this.alertService.success(this.translate.instant(result.message),"");
+        this.LoadPartilClient();
         this.modalService.dismissAll();
       }else{
         this.alertService.Error(this.translate.instant(result.message),"");
       }
+    },error=>{
+      this.loader.show(false);
+      this.alertService.Error(this.translate.instant("admin.partialClientMapping.error"), "");
     })
   }
-  Remove(client:PartialClientMappingModel){
+  Remove(client:UserModel){
     this.loader.show(true);
-    this.partialClientMappingservice.Remove(client).subscribe(result=>{
+    this.partialClientMappingservice.Remove(client.id).subscribe(result=>{
       this.loader.show(false);
       if(result.status){
         this.alertService.success(this.translate.instant(result.message),"");
+        this.LoadPartilClient();
         this.modalService.dismissAll();
       }else{
         this.alertService.Error(this.translate.instant(result.message),"");
       }
+    },error=>{
+      this.loader.show(false);
+      this.alertService.Error(this.translate.instant("admin.partialClientMapping.error"), "");
     })
   }
   @ViewChild('div') div;
@@ -172,24 +184,24 @@ export class PartialClientMappingModalComponent implements OnInit {
   recordrerpage1: number = 20;
   ////pagination
   doPagination1() {
-    this.PageCount = Math.ceil(this.userList.length / this.recordrerpage);
+    this.PageCount1 = Math.ceil(this.partialClient.clients.length / this.recordrerpage);
     var RecordNumber = 0;
-    this.Pages = [];
-    this.PageNos = [];
-    for (var i = 0; i < this.PageCount; i++) {
-      this.Pages.push(new Array());
-      this.PageNos.push(i);
+    this.Pages1 = [];
+    this.PageNos1 = [];
+    for (var i = 0; i < this.PageCount1; i++) {
+      this.Pages1.push(new Array());
+      this.PageNos1.push(i);
       var k = 0;
-      for (var j = RecordNumber; j < this.userList.length; j++) {
-        this.Pages[this.Pages.length - 1].push(this.userList[j]);
+      for (var j = RecordNumber; j < this.partialClient.clients.length; j++) {
+        this.Pages1[this.Pages1.length - 1].push(this.partialClient.clients[j]);
         RecordNumber++;
         k++;
-        if (k >= this.recordrerpage) {
+        if (k >= this.recordrerpage1) {
           break;
         }
       }
     }
-    this.dataTableResizeEvent();
+    this.dataTableResizeEvent1();
   }
   FirstPage1(): void {
     this.currentPageNo = 0;
@@ -297,5 +309,15 @@ export class PartialClientMappingModalComponent implements OnInit {
     this.partialClient.clients = oldresult;
     this.loader.show(false);
     this.doPagination1();
+  }
+  AddPartialUser(content) {
+    this.modalService.open(content, { size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+  }
+  AddSucess(data){
+    this.LoadPartilClient();
   }
 }
