@@ -8,11 +8,11 @@ import { PartialClientMappingService } from '../../../service/partial.client.map
 import { UserService } from '../../../service/user.service';
 
 @Component({
-  selector: 'lib-partial-client-add-modal',
-  templateUrl: './partial-client-add-modal.component.html',
-  styleUrls: ['./partial-client-add-modal.component.css']
+  selector: 'lib-partial-client-edit-modal',
+  templateUrl: './partial-client-edit-modal.component.html',
+  styleUrls: ['./partial-client-edit-modal.component.css']
 })
-export class PartialClientAddModalComponent implements OnInit {
+export class PartialClientEditModalComponent implements OnInit {
 
   constructor(
     private partialClientMappingservice: PartialClientMappingService
@@ -23,6 +23,7 @@ export class PartialClientAddModalComponent implements OnInit {
     , private formvalidationService: FormValidationService
     , private modalService: NgbModal) { }
   formgroup: FormGroup;
+  @Input()
   item: UserModel= new UserModel();
   companyName:string;
   billingStateParam: string;
@@ -31,11 +32,11 @@ export class PartialClientAddModalComponent implements OnInit {
   submited: boolean = false;
   @Input()
   seller:UserModel;  
+  
   @Output()
   savesuccess:EventEmitter<any>= new EventEmitter<any>(); 
   ngOnInit(): void {
     this.formgroup = new FormGroup({
-      userName: new FormControl('', Validators.required),
       companyId: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -86,9 +87,7 @@ export class PartialClientAddModalComponent implements OnInit {
     }
   }
   registerUser() {
-    this.item.sellerId=this.seller.id;
-    this.item.sellerEmailId=this.seller.emailId;
-    this.partialClientMappingservice.AddNewUser(this.item).subscribe(result => {
+    this.partialClientMappingservice.UpdateUser(this.item).subscribe(result => {
       this.loader.show(false);
       if (result.status) {
         this.alertService.success("", this.translate.instant(result.message));
@@ -107,4 +106,5 @@ export class PartialClientAddModalComponent implements OnInit {
       }
     });
   }
+
 }

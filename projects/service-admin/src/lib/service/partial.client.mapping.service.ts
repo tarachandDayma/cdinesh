@@ -48,6 +48,12 @@ export class PartialClientMappingService extends RestService {
         url = this.env.authServerUrl + "/api/auth/register_Partial";
         return super.post(url, client);
     }
+    public UpdateUser(client: UserModel): Observable<any> {
+        var url = "";
+        client.isPartial=true;
+        url = this.env.authServerUrl + "/api/auth/Update_Partial";
+        return super.post(url, client);
+    }
     public addCompany(data: any): Observable<any> {
         var url = this.env.ApiGateway + "/AddCompany"
         return super.post(url, data);

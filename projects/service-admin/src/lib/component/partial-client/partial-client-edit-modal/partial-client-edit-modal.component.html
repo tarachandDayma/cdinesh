@@ -3,12 +3,6 @@
         <legend>Basic Info</legend>
         <div class="row">
             <div class="col-md-3">
-                <label [translate]="'auth.register.username'" for="userName "></label>
-                <input maxlength="50" formControlName="userName" [(ngModel)]="item.userName" name="userName" type="text" class="form-control" id="userName" placeholder="" aria-describedby="emailHelp">
-                <label *ngIf="formgroup.get('userName').errors?.required && (formgroup.get('userName').touched  || submited)" [translate]="'auth.register.username_error'" class="form-text text-danger"></label>
-                <label *ngIf="formgroup.get('userName').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('userName').errors?.serverError)}} </label>
-            </div>
-            <div class="col-md-3">
                 <label [translate]="'auth.register.company'" for="companyId "></label>
                 <lib-cddropdown [entitypath]="'CompanybyId'" [form]="formgroup" [(modelkey)]="item.userBasicInfo.companyId" [(modelvalue)]="companyName" [formcontrolname]="'companyId'" [path]="'GetCompanies'" [valuemember]="'companyId'" [displaymember]="'companyName'"
                     (change)="companyChange($event)"></lib-cddropdown>

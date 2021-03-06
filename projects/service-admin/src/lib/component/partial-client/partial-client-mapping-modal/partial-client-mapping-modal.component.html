@@ -97,7 +97,7 @@
                                 <tr>
                                     <th data-toggle="tooltip" data-placement="top" class="fixed-column" style="width: 32px;">
                                         <a class="ml-2" (click)="Remove(item)" style="color: blue;text-decoration:underline;" [translate]="'admin.partialClientMapping.remove'"></a>
-
+                                        <a class="ml-2" (click)="UpdatePartialUser(item)" style="color: blue;text-decoration:underline;" [translate]="'admin.partialClientMapping.edit'"></a>
                                     </th>
                                     <th>
                                         {{item.fullName}}
@@ -236,5 +236,14 @@
         </button>
     </div>
     <lib-partial-client-add-modal (savesuccess)="AddSucess($event)" [seller]="partialClient.seller"></lib-partial-client-add-modal>
+
+</ng-template>
+<ng-template #contentEditUser let-modal>
+    <div class="col-sm-12">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <lib-partial-client-edit-modal (savesuccess)="AddSucess($event)" [item]="updateUser" [seller]="partialClient.seller"></lib-partial-client-edit-modal>
 
 </ng-template>

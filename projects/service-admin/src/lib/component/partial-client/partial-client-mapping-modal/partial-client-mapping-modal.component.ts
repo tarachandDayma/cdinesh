@@ -310,8 +310,18 @@ export class PartialClientMappingModalComponent implements OnInit {
     this.loader.show(false);
     this.doPagination1();
   }
+  updateUser:UserModel;
   AddPartialUser(content) {
     this.modalService.open(content, { size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+  }
+  @ViewChild("contentEditUser")  EditModal;
+  UpdatePartialUser(user:UserModel) {
+    this.updateUser=user;
+    this.modalService.open(this.EditModal, { size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
 
     }, (reason) => {
 

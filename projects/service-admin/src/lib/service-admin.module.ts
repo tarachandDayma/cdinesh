@@ -50,6 +50,7 @@ import { UserSearchComponent } from './component/user-access-module/user-search/
 import { PartialClientComponent } from './component/partial-client/partial-client.component';
 import { PartialClientMappingModalComponent } from './component/partial-client/partial-client-mapping-modal/partial-client-mapping-modal.component';
 import { PartialClientAddModalComponent } from './component/partial-client/partial-client-add-modal/partial-client-add-modal.component';
+import { PartialClientEditModalComponent } from './component/partial-client/partial-client-edit-modal/partial-client-edit-modal.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -58,7 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [ServiceAdminComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
     ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent,InquiryDetailComponent,DiamondTrackComponent,UserTrackComponent
-  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent, RoleAccessModuleComponent, RoleAccessNodeComponent, CompanyComponent, CompanyNodeComponent, UserAccessModuleComponent, UserRoleAccessNodeComponent, RoleSearchComponent, UserSearchComponent, PartialClientComponent, PartialClientMappingModalComponent, PartialClientAddModalComponent],
+  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent, RoleAccessModuleComponent, RoleAccessNodeComponent, CompanyComponent, CompanyNodeComponent, UserAccessModuleComponent, UserRoleAccessNodeComponent, RoleSearchComponent, UserSearchComponent, PartialClientComponent, PartialClientMappingModalComponent, PartialClientAddModalComponent, PartialClientEditModalComponent],
     imports: [
       FormsModule,ReactiveFormsModule,
       TranslateModule.forChild(),

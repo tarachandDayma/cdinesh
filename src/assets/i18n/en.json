@@ -862,7 +862,8 @@
             "alreadyExists": "Partil client already in you list",
             "notfound": "Partial client not found",
             "remove": "Remove",
-            "add": "Add"
+            "add": "Add",
+            "edit": "Edit"
         },
         "search": {
             "title": "Search",
