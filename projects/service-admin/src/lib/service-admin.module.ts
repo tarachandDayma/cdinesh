@@ -51,6 +51,7 @@ import { PartialClientComponent } from './component/partial-client/partial-clien
 import { PartialClientMappingModalComponent } from './component/partial-client/partial-client-mapping-modal/partial-client-mapping-modal.component';
 import { PartialClientAddModalComponent } from './component/partial-client/partial-client-add-modal/partial-client-add-modal.component';
 import { PartialClientEditModalComponent } from './component/partial-client/partial-client-edit-modal/partial-client-edit-modal.component';
+import { CartBroadcaster } from './service/cartbroadcaster';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -85,7 +86,8 @@ export class ServiceAdminModule {
     return {
         ngModule: ServiceAdminModule,
         providers: [
-            ServiceAdminService
+            ServiceAdminService,
+            CartBroadcaster
         ]
     };
   }
