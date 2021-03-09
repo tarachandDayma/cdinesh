@@ -134,3 +134,13 @@ header .fa.icon {
     display: inline-block;
     color: white;
 }
+
+.toggleMenu {
+    width: 0px;
+    transition: width 500ms;
+}
+
+.toggleMenu1 {
+    width: 103px;
+    transition: width 500ms;
+}

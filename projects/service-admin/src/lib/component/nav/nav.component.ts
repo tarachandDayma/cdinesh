@@ -107,7 +107,7 @@ export class NavComponent implements OnInit {
     if (-1 !== this.router.url.indexOf("SearchPacket")) {
       location.reload();
     } else {
-      this.router.navigateByUrl("/inventory/SearchPacket");
+      this.router.navigateByUrl("/admin/SearchPacket");
     }
   } 
   LoadCart(){

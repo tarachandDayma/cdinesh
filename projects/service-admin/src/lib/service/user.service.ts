@@ -46,4 +46,9 @@ export class UserService extends RestService {
         url = this.env.ApiGateway + "/GetSalesExecutive";
         return super.Get(url);
     }
+    public GetClientList(SearchText:string): Observable<UserModel[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/User/GetClientList?SearchText="+SearchText;
+        return super.Get(url);
+    }
 }

@@ -2,17 +2,22 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { UserModel } from 'dist/service-account/lib/models/user.model';
 import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
 import { CartModel } from '../../models/cart.model';
 import { diamondsearchResult } from '../../models/diamond.result.model';
 import { HoldModel } from '../../models/hold.model';
+import { MemberMasterModel } from '../../models/memberMaster.model';
+import { TermsModel } from '../../models/terms.model';
 import { CartService } from '../../service/cart.service';
 import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { DiamondCommentService } from '../../service/diamond.comment.service';
 import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
 import { HoldService } from '../../service/hold.service';
+import { MemberMasterService } from '../../service/membermaster.service';
 import { SearchService } from '../../service/search.service';
+import { TermsService } from '../../service/terms.service';
 import { UserService } from '../../service/user.service';
 declare var $: any;
 @Component({
@@ -20,10 +25,10 @@ declare var $: any;
   templateUrl: './diamond-hold.component.html',
   styleUrls: ['./diamond-hold.component.css']
 })
-export class DiamondHoldComponent implements OnInit,OnChanges {
+export class DiamondHoldComponent implements OnInit, OnChanges {
 
   @Input("diamonds")
-  
+
   diamonds: diamondsearchResult[] = [];
   avgPrice: number;
   avgBack: number;
@@ -39,8 +44,17 @@ export class DiamondHoldComponent implements OnInit,OnChanges {
   selectedtotalAvgDisc: number;
   selectedtotalPrice: number;
   comment: string;
+  TermsId: number = 19;
+  TermsList: TermsModel[] = [];
+  MemberId: number;
+  MemberList: MemberMasterModel[] = [];
+  AddatPer: number;
+  AddatList: any[] = [];
+  selectedClient: UserModel;
+  ClientList: UserModel[] = [];
   @Output()
-  onsave:EventEmitter<any>= new EventEmitter<any>();
+  onsave: EventEmitter<any> = new EventEmitter<any>();
+
   ////summary variable
   constructor(private loader: loaderserice
     , private router: Router
@@ -57,13 +71,20 @@ export class DiamondHoldComponent implements OnInit,OnChanges {
     , private environmentService: EnvironmentService
     , private userService: UserService
     , private diamondCommentService: DiamondCommentService
-    , private holdService: HoldService) { }
+    , private holdService: HoldService
+    , private termservice: TermsService
+    , private memberMasterService: MemberMasterService) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.doPagination();
+
   }
 
   ngOnInit(): void {
-      this.LoadStoneStatusMessage();
+    this.LoadStoneStatusMessage();
+    this.LoadTerms();
+    this.LoadMemberPer();
+    this.LoadAddat();
+    this.LoadClient();
   }
   @ViewChild('div') div;
   currentPageNo: number = 0;
@@ -78,6 +99,7 @@ export class DiamondHoldComponent implements OnInit,OnChanges {
   startWidth: any;
   tableWidth: number;
   recordrerpage: number = 200;
+
   ////pagination
   doPagination() {
     this.PageCount = Math.ceil(this.diamonds.length / this.recordrerpage);
@@ -259,20 +281,20 @@ export class DiamondHoldComponent implements OnInit,OnChanges {
     }
   }
   saveHold() {
-    if(this.comment=="" || this.comment==undefined || this.comment==null){
+    if (this.comment == "" || this.comment == undefined || this.comment == null) {
       this.alertService.Error(this.translate.instant("inventory.hold.comment_error"), "");
       return;
     }
     var offers: HoldModel[] = [];
     this.diamonds.forEach(element => {
-      var offer=new HoldModel();
-      offer.back=element.back;
-      offer.comment=this.comment;
-      offer.deliveryAt=element.deliveryAt;
-      offer.packetNo=element.packetNo;
-      offer.price=element.price;
+      var offer = new HoldModel();
+      offer.back = element.back;
+      offer.comment = this.comment;
+      offer.deliveryAt = element.deliveryAt;
+      offer.packetNo = element.packetNo;
+      offer.price = element.price;
       offers.push(offer);
-    }); 
+    });
     this.loader.show(true);
     this.holdService.SaveHold(offers, this.diamonds).subscribe(result => {
       this.loader.show(false);
@@ -287,23 +309,58 @@ export class DiamondHoldComponent implements OnInit,OnChanges {
   LoadStoneStatusMessage() {
     var offers: HoldModel[] = [];
     this.diamonds.forEach(element => {
-      var offer=new HoldModel();
-      offer.back=element.back;
-      offer.comment=this.comment;
-      offer.deliveryAt=element.deliveryAt;
-      offer.packetNo=element.packetNo;
-      offer.price=element.price;
+      var offer = new HoldModel();
+      offer.back = element.back;
+      offer.comment = this.comment;
+      offer.deliveryAt = element.deliveryAt;
+      offer.packetNo = element.packetNo;
+      offer.price = element.price;
       offers.push(offer);
-    }); 
+    });
     this.loader.show(true);
     this.holdService.LoadMessage(offers, this.diamonds).subscribe(result => {
       this.loader.show(false);
-      if(result.message !=undefined && result.message !="" && result.message!=null)
-      this.alertService.success(result.message, "");
+      if (result.message != undefined && result.message != "" && result.message != null)
+        this.alertService.success(result.message, "");
 
     }, erro => {
       this.loader.show(false);
       this.alertService.Error(this.translate.instant("inventory.hold.error"), "");
     })
   }
+  LoadTerms() {
+    this.termservice.GetAll("").subscribe(result => {
+      this.TermsList = result;
+    }, error => {
+    })
+  }
+  LoadMemberPer() {
+    this.memberMasterService.GetAll("").subscribe(result => {
+      this.MemberList = result;
+    }, error => {
+    })
+  }
+  LoadAddat() {
+    this.memberMasterService.GetAddat().subscribe(result => {
+      this.AddatList = result;
+    }, error => {
+    })
+  }
+  SearchText: string = "";
+  LoadClient() {
+    this.loader.show(true);
+    this.userService.GetClientList(this.SearchText).subscribe(result => {
+      this.loader.show(false);
+      this.ClientList = result;
+    }, error => {
+      this.loader.show(false);
+    })
+  }
+  SelectClient(item: UserModel) {
+    this.selectedClient = item;
+  }
+  myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
 }

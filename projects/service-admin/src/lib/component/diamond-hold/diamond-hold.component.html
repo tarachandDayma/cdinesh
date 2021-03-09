@@ -15,22 +15,88 @@
                     <span style="color: navy;">{{totalPrice | number : '1.2-2'}}</span>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="input-group input-group-sm mb-1">
-                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
-                        [translate]="'admin.hold.comment'"> Comment </span> </span>
-                    </div>
-                    <input class="form-control" type="text" name="comment" [(ngModel)]="comment">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.terms'"> Terms </span> </span>
                 </div>
+                <select class="form-control" name="TermsId" [(ngModel)]="TermsId">
+                        <option value="0" >---Select Term--- </option>
+                        <option *ngFor="let item of TermsList" [value]="item.termsId" >{{item.description}}</option>
+                    </select>
             </div>
-            <div class="col-ms3">
-                <button class="btn btn-primary" (click)="saveHold()" type="button" [translate]="'admin.hold.save'">Save</button>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.memberPer'"> memberPer </span> </span>
+                </div>
+                <select class="form-control" name="MemberId" [(ngModel)]="MemberId">
+                        <option value="0" >---Select Member Per--- </option>
+                        <option *ngFor="let item of MemberList" [value]="item.memberId" >{{item.discription}}</option>
+                    </select>
             </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.addat'"> Addat% </span> </span>
+                </div>
+                <select class="form-control" name="AddatPer" [(ngModel)]="AddatPer">
+                        <option value="0" >---Select Addat Per--- </option>
+                        <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                    </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="input-group input-group-sm mb-1" style="border: grey solid 1px;">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.client'"> client </span> </span>
+                </div>
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <button style="background-color: transparent !important;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-size: 12px;" (click)="myFunction()" class="dropbtn form-control">{{(selectedClient!=null && selectedClient !=undefined)?(selectedClient.companyName+'-'+selectedClient.userName):'Select Client'}}</button>
+                    <div id="myDropdown" class="dropdown-content" style="overflow: auto;">
+                        <input class="form-control" type="text" placeholder="Search.." name="SearchText" id="SearchText" [(ngModel)]="SearchText" (ngModelChange)="LoadClient()">
+                        <div class="input-group input-group-sm mb-1">
+                            <div style="min-height: 100%;height: 200px;">
+                                <table class="table table-borderd">
+                                    <tr (click)="SelectClient(item);myFunction();" *ngFor="let item of ClientList;">
+                                        <td>{{(item.companyName+'-'+item.userName)}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                [translate]="'admin.hold.comment'"> Comment </span> </span>
+                </div>
+                <input class="form-control" type="text" name="comment" [(ngModel)]="comment">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="saveHold()" type="button" [translate]="'admin.hold.save'">Save</button>
         </div>
     </div>
     <div class="cart-body" style="overflow: auto;" #div>
-        <div class="table-fixed" style="height: 63.3vh;">
+        <div *ngIf="Pages!=undefined && Pages.length > 0 " class="table-fixed" style="height: 63.3vh;">
             <table class="table table-bordered table-sm table-striped table-hover font-12 cd-table " style="width: 100%;height: 450px;">
                 <thead>
                     <tr>

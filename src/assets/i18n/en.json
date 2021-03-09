@@ -1032,7 +1032,11 @@
             "save": "Save Hold",
             "success": "Success",
             "error": "Something went wrong",
-            "comment_error": "Please enter comment"
+            "comment_error": "Please enter comment",
+            "terms": "Terms",
+            "memberPer": "MemberPer",
+            "addat": "Addat%",
+            "client": "Client"
         },
         "confirm": {
             "title": "Place Order",
