@@ -52,9 +52,11 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
   AddatList: any[] = [];
   selectedClient: UserModel;
   ClientList: UserModel[] = [];
+  PartyPer1:number;
+  PartyPer2:number;
   @Output()
   onsave: EventEmitter<any> = new EventEmitter<any>();
-
+  
   ////summary variable
   constructor(private loader: loaderserice
     , private router: Router
@@ -84,7 +86,7 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
     this.LoadTerms();
     this.LoadMemberPer();
     this.LoadAddat();
-    this.LoadClient();
+    this.LoadClient('');
   }
   @ViewChild('div') div;
   currentPageNo: number = 0;
@@ -221,7 +223,6 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
   sortedColumn: string;
   sortDirection = 'desc';
   sort(columnName) {
-    this.loader.show(true);
     var oldresult = this.diamonds //JSON.parse(JSON.stringify(this.searchResult));
     this.diamonds = [];
     if (this.sortDirection == 'desc') {
@@ -241,7 +242,6 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
     }
     this.sortedColumn = columnName;
     this.diamonds = oldresult;
-    this.loader.show(false);
     this.doPagination();
   }
   calculateSummary() {
@@ -317,14 +317,13 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
       offer.price = element.price;
       offers.push(offer);
     });
-    this.loader.show(true);
+    
     this.holdService.LoadMessage(offers, this.diamonds).subscribe(result => {
-      this.loader.show(false);
+    
       if (result.message != undefined && result.message != "" && result.message != null)
         this.alertService.success(result.message, "");
 
     }, erro => {
-      this.loader.show(false);
       this.alertService.Error(this.translate.instant("inventory.hold.error"), "");
     })
   }
@@ -346,17 +345,18 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
     }, error => {
     })
   }
-  SearchText: string = "";
-  LoadClient() {
+  
+  LoadClient(SearchText:any) {
     this.loader.show(true);
-    this.userService.GetClientList(this.SearchText).subscribe(result => {
+    this.userService.GetClientList(SearchText).subscribe(result => {
+      this.ClientList=[];
       this.loader.show(false);
       this.ClientList = result;
     }, error => {
       this.loader.show(false);
     })
   }
-  SelectClient(item: UserModel) {
+  SelectClient(item: any) {
     this.selectedClient = item;
   }
   myFunction() {

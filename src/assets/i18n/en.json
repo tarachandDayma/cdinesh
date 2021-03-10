@@ -1036,7 +1036,9 @@
             "terms": "Terms",
             "memberPer": "MemberPer",
             "addat": "Addat%",
-            "client": "Client"
+            "client": "Client",
+            "partyPer": "Party%",
+            "partyPer1": "Party1%"
         },
         "confirm": {
             "title": "Place Order",

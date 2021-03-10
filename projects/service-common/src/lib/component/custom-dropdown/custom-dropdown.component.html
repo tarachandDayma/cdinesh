@@ -1,0 +1,17 @@
+<button style="background-color: transparent !important;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-size: 12px;" (click)="myFunction()" class="dropbtn form-control">
+    {{(selectedClient!=null && selectedClient !=undefined)?(selectedClient[displaymember]+'-'+selectedClient[displaymember1]):'Select Client'}}
+</button>
+<div id="myDropdown" class="dropdown-content" style="overflow: auto;">
+    <input class="form-control" type="text" placeholder="Search.." name="SearchText" id="SearchText" [(ngModel)]="SearchText" (keydown)="LoadList($event)">
+    <div class="input-group input-group-sm mb-1">
+        <div style="min-height: 100%;height: 200px;">
+            <table class="table table-borderd">
+                <tr (click)="SelectClient(item);myFunction();" *ngFor="let item of dataSource;">
+                    <td>{{(item[displaymember])}}</td>
+                    <td *ngIf="displaymember1 !=null && displaymember1!=undefined">{{item[displaymember1]}}
+                        <td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -64,22 +64,32 @@
                         [translate]="'admin.hold.client'"> client </span> </span>
                 </div>
                 <div class="input-group-prepend " style="background-color: transparent;border: 0;">
-                    <button style="background-color: transparent !important;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-size: 12px;" (click)="myFunction()" class="dropbtn form-control">{{(selectedClient!=null && selectedClient !=undefined)?(selectedClient.companyName+'-'+selectedClient.userName):'Select Client'}}</button>
-                    <div id="myDropdown" class="dropdown-content" style="overflow: auto;">
-                        <input class="form-control" type="text" placeholder="Search.." name="SearchText" id="SearchText" [(ngModel)]="SearchText" (ngModelChange)="LoadClient()">
-                        <div class="input-group input-group-sm mb-1">
-                            <div style="min-height: 100%;height: 200px;">
-                                <table class="table table-borderd">
-                                    <tr (click)="SelectClient(item);myFunction();" *ngFor="let item of ClientList;">
-                                        <td>{{(item.companyName+'-'+item.userName)}}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <lib-custom-dropdown [dataSource]="ClientList" [displaymember]="'companyName'" [displaymember1]="'userName'" (SearchChange)="LoadClient($event)" (selectedChange)="SelectClient($event)"></lib-custom-dropdown>
                 </div>
-
-
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.partyPer'"> partyPer% </span> </span>
+                </div>
+                <select class="form-control" name="PartyPer1" [(ngModel)]="PartyPer1">
+                        <option value="0" >---Select Addat Per--- </option>
+                        <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                    </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.partyPer'"> partyPer1% </span> </span>
+                </div>
+                <select class="form-control" name="PartyPer2" [(ngModel)]="PartyPer2">
+                        <option value="0" >---Select Addat Per--- </option>
+                        <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                    </select>
             </div>
         </div>
         <div class="col-md-4">
@@ -107,7 +117,7 @@
                         </th>
                         <th (click)="sort('packetNo')" data-toggle="tooltip" data-placement="top" title="{{translate.instant('admin.search.result.PacketNo')}}" class="fixed-column" style="width:93.8px;" [translate]="'admin.search.result.PacketNo'">
                             PacketNo
-                            <span style="margin-right: 10px;margin-top: 7px;">
+                            <span style="margin-right: 10px;margin-top: 7px;"> 
                                 <span class="default-sort-arrow"
                                     style="position:relative;width:5px;height:10px;transform:scale(0.8);-moz-transform:scale(0.60);margin-left:2px"
                                     data-reactroot="" wfd-id="3710">

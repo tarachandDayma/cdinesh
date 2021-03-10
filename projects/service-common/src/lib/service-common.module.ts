@@ -22,16 +22,17 @@ import { PaginationComponent } from './component/pagination/pagination.component
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr/toastr/toastr.module';
 import { AppSwitchComponent } from './component/app-switch/app-switch.component';
+import { CustomDropdownComponent } from './component/custom-dropdown/custom-dropdown.component';
 
 
 
 @NgModule({
-  declarations: [ServiceCommonComponent, loader,alert, CDDropdownComponent, CdmulitselectComponent, CdGridComponent, CdDragDropDirective, PaginationComponent, AppSwitchComponent],
+  declarations: [ServiceCommonComponent, loader,alert, CDDropdownComponent, CdmulitselectComponent, CdGridComponent, CdDragDropDirective, PaginationComponent, AppSwitchComponent, CustomDropdownComponent],
   imports: [
     HttpClientModule,
     CommonModule,FormsModule,ReactiveFormsModule
   ],
-  exports: [ServiceCommonComponent, loader,alert,CDDropdownComponent,CdmulitselectComponent,CdGridComponent,PaginationComponent,AppSwitchComponent]
+  exports: [ServiceCommonComponent, loader,alert,CDDropdownComponent,CdmulitselectComponent,CdGridComponent,PaginationComponent,AppSwitchComponent,CustomDropdownComponent]
 })
 export class ServiceCommonModule {
   static forRoot(): ModuleWithProviders {
