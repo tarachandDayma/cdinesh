@@ -92,6 +92,66 @@
                     </select>
             </div>
         </div>
+        <div class="col-md-2">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.referral'"> referral </span> </span>
+                </div>
+                <select class="form-control" name="PartyPer2" [(ngModel)]="selectedReferral">
+                        <option value="0" >---Select Referral Per--- </option>
+                        <option *ngFor="let item of ReferralList" [value]="item" >{{item.referralName}}</option>
+                    </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.broker'"> Broker </span> </span>
+                </div>
+                <select class="form-control" name="Broker" [(ngModel)]="selectedBroker">
+                        <option value="0" >---Select Broker Per--- </option>
+                        <option *ngFor="let item of BrokerList" [value]="item" >{{item.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.brokerPer'"> Broker </span> </span>
+                </div>
+                <select class="form-control" name="Broker" [(ngModel)]="BrokerPer">
+                        <option value="0" >---Select % Per--- </option>
+                        <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.buyer'"> % </span> </span>
+                </div>
+                <select class="form-control" name="Broker" [(ngModel)]="selectedBuyer">
+                        <option value="0" >---Select Broker Per--- </option>
+                        <option *ngFor="let item of BuyerList" [value]="item" >{{item.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                        [translate]="'admin.hold.buyerPer'"> % </span> </span>
+                </div>
+                <select class="form-control" name="Broker" [(ngModel)]="BuyerPer">
+                        <option value="0" >---Select % Per--- </option>
+                        <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                </select>
+            </div>
+        </div>
         <div class="col-md-4">
             <div class="input-group input-group-sm mb-1">
                 <div class="input-group-prepend " style="background-color: transparent;border: 0;">

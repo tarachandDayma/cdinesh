@@ -1,0 +1,33 @@
+export class BBPInformationModel{
+    id:number;
+    bBPID:number;
+    name:string;
+    coName:string;
+    address:string;
+    phoneNo:string;
+    phoneNo_R:string;
+    mobNo:string;
+    faxNo:string;
+    emailId:string;
+    website:string;
+    throughParty:string;
+    throughBroker:string;
+    throughBuyer:string;
+    shippingAdd:string;
+    post:number;
+    bank:string;
+    terms :number;
+    pictureId:number;
+    demandId:number;
+    userName:string;
+    systemDateTime:Date;
+    partyRefBroId:number;
+    remark:string;
+    amount:string;
+    throughParty1:string;
+    throughParty2:string;
+    throughParty3:string;
+    ifblacklistL:string;
+    removerName:string;
+    isDisable:boolean;
+}

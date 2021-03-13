@@ -4,11 +4,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { UserModel } from 'dist/service-account/lib/models/user.model';
 import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
+import { BBPInformationModel } from '../../models/bbpInformation.model';
 import { CartModel } from '../../models/cart.model';
 import { diamondsearchResult } from '../../models/diamond.result.model';
 import { HoldModel } from '../../models/hold.model';
 import { MemberMasterModel } from '../../models/memberMaster.model';
+import { ReferralModel } from '../../models/referral.model';
 import { TermsModel } from '../../models/terms.model';
+import { BBpInformationService } from '../../service/bbpInformation.service';
 import { CartService } from '../../service/cart.service';
 import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { DiamondCommentService } from '../../service/diamond.comment.service';
@@ -16,6 +19,7 @@ import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
 import { HoldService } from '../../service/hold.service';
 import { MemberMasterService } from '../../service/membermaster.service';
+import { ReferralService } from '../../service/referral.service';
 import { SearchService } from '../../service/search.service';
 import { TermsService } from '../../service/terms.service';
 import { UserService } from '../../service/user.service';
@@ -52,11 +56,19 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
   AddatList: any[] = [];
   selectedClient: UserModel;
   ClientList: UserModel[] = [];
-  PartyPer1:number;
-  PartyPer2:number;
+  PartyPer1: number;
+  PartyPer2: number;
+  selectedReferral: ReferralModel;
+  ReferralList: ReferralModel[] = [];
+  BuyerList: BBPInformationModel[] = [];
+  BrokerList: BBPInformationModel[] = [];
+  selectedBuyer:BBPInformationModel;
+  selectedBroker:BBPInformationModel;
+  BuyerPer:number;
+  BrokerPer:number;
   @Output()
   onsave: EventEmitter<any> = new EventEmitter<any>();
-  
+
   ////summary variable
   constructor(private loader: loaderserice
     , private router: Router
@@ -75,7 +87,9 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
     , private diamondCommentService: DiamondCommentService
     , private holdService: HoldService
     , private termservice: TermsService
-    , private memberMasterService: MemberMasterService) { }
+    , private memberMasterService: MemberMasterService
+    , private referralService: ReferralService
+    , private bbpInformationService:BBpInformationService) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.doPagination();
 
@@ -317,9 +331,9 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
       offer.price = element.price;
       offers.push(offer);
     });
-    
+
     this.holdService.LoadMessage(offers, this.diamonds).subscribe(result => {
-    
+
       if (result.message != undefined && result.message != "" && result.message != null)
         this.alertService.success(result.message, "");
 
@@ -345,11 +359,11 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
     }, error => {
     })
   }
-  
-  LoadClient(SearchText:any) {
+
+  LoadClient(SearchText: any) {
     this.loader.show(true);
     this.userService.GetClientList(SearchText).subscribe(result => {
-      this.ClientList=[];
+      this.ClientList = [];
       this.loader.show(false);
       this.ClientList = result;
     }, error => {
@@ -358,9 +372,33 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
   }
   SelectClient(item: any) {
     this.selectedClient = item;
+    this.LoadReferral();
   }
   myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
-  
+  LoadReferral() {
+    if (this.selectedClient != null && this.selectedClient != undefined) {
+      this.loader.show(true);
+      this.referralService.GetAll(this.selectedClient.id).subscribe(result=>{
+        this.loader.show(false);
+        this.ReferralList=result;
+      },error=>{
+        this.loader.show(false);
+      })
+    }
+  }
+  LoadBroker() {
+      this.bbpInformationService.GetAll("2").subscribe(result=>{
+        this.BrokerList=result;
+      },error=>{
+      })
+  }
+  LoadBuyer() {
+    this.bbpInformationService.GetAll("1").subscribe(result=>{
+      this.BuyerList=result;
+    },error=>{
+    })
+}
+
 }

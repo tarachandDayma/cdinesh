@@ -1038,7 +1038,12 @@
             "addat": "Addat%",
             "client": "Client",
             "partyPer": "Party%",
-            "partyPer1": "Party1%"
+            "partyPer1": "Party1%",
+            "referral": "Referral",
+            "broker": "Broker",
+            "buyer": "Buyer",
+            "brokerPer": "Broker%",
+            "buyerPer": "Buyer%"
         },
         "confirm": {
             "title": "Place Order",
