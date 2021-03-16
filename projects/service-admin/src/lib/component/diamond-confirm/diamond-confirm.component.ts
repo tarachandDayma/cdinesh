@@ -3,17 +3,30 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { loaderserice, alertserice, FormValidationService, EnvironmentService } from 'service-common';
+import { BBPInformationModel } from '../../models/bbpInformation.model';
 
 import { CartModel } from '../../models/cart.model';
 import { ConfirmModel } from '../../models/confirm.model';
 import { diamondsearchResult } from '../../models/diamond.result.model';
+import { ExportTermsMasterModel } from '../../models/exportTermsMaster.model';
+import { HkTermsMasterModel } from '../../models/hkTerms.master.model';
+import { MemberMasterModel } from '../../models/memberMaster.model';
+import { ReferralModel } from '../../models/referral.model';
+import { TermsModel } from '../../models/terms.model';
+import { UserModel } from '../../models/user/user.model';
+import { BBpInformationService } from '../../service/bbpInformation.service';
 import { CartService } from '../../service/cart.service';
 import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { ConfirmService } from '../../service/confirm.service';
 import { DiamondCommentService } from '../../service/diamond.comment.service';
 import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
+import { ExportTermMasterService } from '../../service/export.termsMaster.service';
+import { HKExportTermMasterService } from '../../service/hkexport.termMaster.service';
+import { MemberMasterService } from '../../service/membermaster.service';
+import { ReferralService } from '../../service/referral.service';
 import { SearchService } from '../../service/search.service';
+import { TermsService } from '../../service/terms.service';
 import { UserService } from '../../service/user.service';
 declare var $: any;
 @Component({
@@ -26,7 +39,7 @@ export class DiamondConfirmComponent implements OnInit {
   @Input("diamonds")
   diamonds: diamondsearchResult[] = [];
   @Output("closeEvent")
-  closeEvent:EventEmitter<any>= new EventEmitter<any>(); 
+  closeEvent: EventEmitter<any> = new EventEmitter<any>();
   avgPrice: number;
   avgBack: number;
   ////summary variable
@@ -41,7 +54,31 @@ export class DiamondConfirmComponent implements OnInit {
   selectedtotalAvgDisc: number;
   selectedtotalPrice: number;
   comment: string;
-  onsave:EventEmitter<any>= new EventEmitter<any>();
+  TermsId: number = 19;
+  TermsList: TermsModel[] = [];
+  selectedMember: MemberMasterModel;
+  MemberList: MemberMasterModel[] = [];
+  AddatPer: number;
+  AddatList: any[] = [];
+  selectedClient: UserModel;
+  ClientList: UserModel[] = [];
+  PartyPer1: number;
+  PartyPer2: number;
+  selectedReferral: ReferralModel;
+  ReferralList: ReferralModel[] = [];
+  BuyerList: BBPInformationModel[] = [];
+  BrokerList: BBPInformationModel[] = [];
+  selectedBuyer: BBPInformationModel;
+  selectedBroker: BBPInformationModel;
+  ExportList: ExportTermsMasterModel[] = [];
+  HKLExportList: HkTermsMasterModel[] = [];
+  selectedExport: number;
+  selectedHKExport: number;
+  hkOption: number = 0;
+  BuyerPer: number;
+  BrokerPer: number;
+  @Output()
+  onsave: EventEmitter<any> = new EventEmitter<any>();
   ////summary variable
   constructor(private loader: loaderserice
     , private router: Router
@@ -58,13 +95,27 @@ export class DiamondConfirmComponent implements OnInit {
     , private environmentService: EnvironmentService
     , private userService: UserService
     , private diamondCommentService: DiamondCommentService
-    , private confirmService: ConfirmService) { }
+    , private confirmService: ConfirmService
+    , private termservice: TermsService
+    , private memberMasterService: MemberMasterService
+    , private referralService: ReferralService
+    , private bbpInformationService: BBpInformationService
+    , private hkexportTermMasterService: HKExportTermMasterService
+    , private exportTermMasterService: ExportTermMasterService) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.doPagination();
   }
 
   ngOnInit(): void {
-      this.LoadStoneStatusMessage();
+    this.LoadStoneStatusMessage();
+    this.LoadTerms();
+    this.LoadMemberPer();
+    this.LoadAddat();
+    this.LoadClient('');
+    this.LoadExportTerm();
+    this.LoadHKExportTerm();
+    this.LoadBroker();
+    this.LoadBuyer();
   }
   @ViewChild('div') div;
   currentPageNo: number = 0;
@@ -260,26 +311,50 @@ export class DiamondConfirmComponent implements OnInit {
     }
   }
   saveHold() {
-    if(this.comment=="" || this.comment==undefined || this.comment==null){
+    if (this.comment == "" || this.comment == undefined || this.comment == null) {
       this.alertService.Error(this.translate.instant("inventory.confirm.comment_error"), "");
       return;
     }
     var offers: ConfirmModel[] = [];
     this.diamonds.forEach(element => {
-      var offer=new ConfirmModel();
-      offer.back=element.back;
-      offer.comment=this.comment;
-      offer.deliveryAt=element.deliveryAt;
-      offer.packetNo=element.packetNo;
-      offer.price=element.price;
+      var offer = new ConfirmModel();
+      offer.back = element.back;
+      offer.comment = this.comment;
+      offer.deliveryAt = element.deliveryAt;
+      offer.packetNo = element.packetNo;
+      offer.price = element.price;
       offers.push(offer);
-    }); 
+    });
+    var terms = this.TermsList.filter(x => x.termsId == this.TermsId)[0];
+    var obj = {
+      Confirms: offers,
+      Diamonds: this.diamonds,
+      Broker: this.selectedBroker,
+      Buyer: this.selectedBuyer,
+      MemberPer: this.selectedMember,
+      Client: this.selectedClient,
+      Referral: this.selectedReferral,
+      ExportId: this.selectedExport,
+      HkExportId: this.selectedHKExport,
+      HkOption: this.hkOption,
+      AddatPer: (this.AddatPer != undefined && this.AddatPer != null) ? parseFloat(this.AddatPer.toString()) : 0,
+      PartyPer1: (this.PartyPer1 != undefined && this.PartyPer1 != null) ? parseFloat(this.PartyPer1.toString()) : 0,
+      PartyPer2: (this.PartyPer2 != undefined && this.PartyPer2 != null) ? parseFloat(this.PartyPer2.toString()) : 0,
+      BrokerPer: (this.BrokerPer != undefined && this.BrokerPer != null) ? parseFloat(this.BrokerPer.toString()) : 0,
+      BuyerPer: (this.BuyerPer != undefined && this.BuyerPer != null) ? parseFloat(this.BuyerPer.toString()) : 0,
+      Terms: (terms == null || terms == undefined) ? null : terms
+    }
     this.loader.show(true);
-    this.confirmService.SaveConfirm(offers, this.diamonds).subscribe(result => {
+    this.confirmService.SaveConfirm(obj).subscribe(result => {
+
       this.loader.show(false);
-      this.modalService.dismissAll();
-      this.alertService.success(this.translate.instant("inventory.confirm.success"), "");
-      this.onsave.emit();
+      if (result.status) {
+        this.modalService.dismissAll();
+        this.alertService.success(this.translate.instant("inventory.confirm.success"), "");
+        this.onsave.emit();
+      } else {
+        this.alertService.Error(this.translate.instant(result.message), "");
+      }
     }, erro => {
       this.loader.show(false);
       this.alertService.Error(this.translate.instant("inventory.confirm.error"), "");
@@ -288,19 +363,135 @@ export class DiamondConfirmComponent implements OnInit {
   LoadStoneStatusMessage() {
     var offers: ConfirmModel[] = [];
     this.diamonds.forEach(element => {
-      var offer=new ConfirmModel();
-      offer.back=element.back;
-      offer.comment=this.comment;
-      offer.deliveryAt=element.deliveryAt;
-      offer.packetNo=element.packetNo;
-      offer.price=element.price;
+      var offer = new ConfirmModel();
+      offer.back = element.back;
+      offer.comment = this.comment;
+      offer.deliveryAt = element.deliveryAt;
+      offer.packetNo = element.packetNo;
+      offer.price = element.price;
       offers.push(offer);
-    }); 
-    this.loader.show(true);
+    });
+    
     this.confirmService.LoadMessage(offers, this.diamonds).subscribe(result => {
+      if (result.message != undefined && result.message != "" && result.message != null)
+        this.alertService.success(result.message, "");
+    }, erro => {
+    
+      this.alertService.Error(this.translate.instant("inventory.confirm.error"), "");
+    })
+  }
+  LoadTerms() {
+    this.termservice.GetAll("").subscribe(result => {
+      this.TermsList = result;
+    }, error => {
+    })
+  }
+  LoadMemberPer() {
+    this.memberMasterService.GetAll("").subscribe(result => {
+      this.MemberList = result;
+    }, error => {
+    })
+  }
+  LoadAddat() {
+    this.memberMasterService.GetAddat().subscribe(result => {
+      this.AddatList = result;
+    }, error => {
+    })
+  }
+
+  LoadClient(SearchText: any) {
+    this.loader.show(true);
+    this.userService.GetClientList(SearchText).subscribe(result => {
+      this.ClientList = [];
       this.loader.show(false);
-      if(result.message !=undefined && result.message !="" && result.message!=null)
-      this.alertService.success(result.message, "");
+      this.ClientList = result;
+    }, error => {
+      this.loader.show(false);
+    })
+  }
+  SelectClient(item: any) {
+    this.selectedClient = item;
+    this.LoadReferral();
+  }
+  myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  LoadReferral() {
+    if (this.selectedClient != null && this.selectedClient != undefined) {
+      this.loader.show(true);
+      this.referralService.GetAll(this.selectedClient.id).subscribe(result => {
+        this.loader.show(false);
+        this.ReferralList = result;
+      }, error => {
+        this.loader.show(false);
+      })
+    }
+  }
+  LoadBroker() {
+    this.bbpInformationService.GetAll("2").subscribe(result => {
+      this.BrokerList = result;
+    }, error => {
+    })
+  }
+  LoadBuyer() {
+    this.bbpInformationService.GetAll("1").subscribe(result => {
+      this.BuyerList = result;
+    }, error => {
+    });
+  }
+  LoadExportTerm() {
+    this.exportTermMasterService.LoadAll().subscribe(result => {
+      this.ExportList = result;
+    }, error => {
+    });
+  }
+  LoadHKExportTerm() {
+    this.hkexportTermMasterService.LoadAll().subscribe(result => {
+      this.HKLExportList = result;
+    }, error => {
+    });
+  }
+  exportTermChange() {
+    if (this.selectedExport != 1) {
+      this.selectedHKExport = undefined;
+      this.hkOption = 0;
+    }
+  }
+  priceChange() {
+    var offers: ConfirmModel[] = [];
+    this.diamonds.forEach(element => {
+      var offer = new ConfirmModel();
+      offer.back = element.back;
+      offer.comment = this.comment;
+      offer.deliveryAt = element.deliveryAt;
+      offer.packetNo = element.packetNo;
+      offer.price = element.price;
+      offers.push(offer); 
+    });
+    var terms = this.TermsList.filter(x => x.termsId == this.TermsId)[0];
+    var obj = {
+      Confirms: offers,
+      Diamonds: this.diamonds,
+      Broker: this.selectedBroker,
+      Buyer: this.selectedBuyer,
+      MemberPer: this.selectedMember,
+      Client: this.selectedClient,
+      Referral: this.selectedReferral,
+      ExportId: this.selectedExport,
+      HkExportId: this.selectedHKExport,
+      HkOption: this.hkOption,
+      AddatPer: (this.AddatPer != undefined && this.AddatPer != null) ? parseFloat(this.AddatPer.toString()) : 0,
+      PartyPer1: (this.PartyPer1 != undefined && this.PartyPer1 != null) ? parseFloat(this.PartyPer1.toString()) : 0,
+      PartyPer2: (this.PartyPer2 != undefined && this.PartyPer2 != null) ? parseFloat(this.PartyPer2.toString()) : 0,
+      BrokerPer: (this.BrokerPer != undefined && this.BrokerPer != null) ? parseFloat(this.BrokerPer.toString()) : 0,
+      BuyerPer: (this.BuyerPer != undefined && this.BuyerPer != null) ? parseFloat(this.BuyerPer.toString()) : 0,
+      Terms: (terms == null || terms == undefined) ? null : terms
+    }
+    this.loader.show(true);
+    this.confirmService.PriceChange(obj).subscribe(result => {
+      this.loader.show(false);
+      this.diamonds = result;
+      this.doPagination();
     }, erro => {
       this.loader.show(false);
       this.alertService.Error(this.translate.instant("inventory.confirm.error"), "");

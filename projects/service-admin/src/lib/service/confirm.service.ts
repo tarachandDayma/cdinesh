@@ -22,13 +22,14 @@ export class ConfirmService extends RestService {
     constructor(public http: HttpClient, public env: EnvironmentService) {
         super(http);
     }
-    public SaveConfirm(confirm:ConfirmModel[],diamonds:diamondsearchResult[]): Observable<any> {
+    public SaveConfirm(obj:any): Observable<any> {
         var url = "";
-        var obj={
-            Confirms:confirm,
-            Diamonds:diamonds
-        }
         url = this.env.ApiGateway + "/admin/Confirm/Insert";
+        return super.post(url,obj);
+    }
+    public PriceChange(obj:any): Observable<diamondsearchResult[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/Confirm/ReloadHoldData";
         return super.post(url,obj);
     }
     public LoadMessage(confirm:ConfirmModel[],diamonds:diamondsearchResult[]): Observable<any> {
@@ -40,4 +41,5 @@ export class ConfirmService extends RestService {
         url = this.env.ApiGateway + "/admin/Confirm/GetStatusMessage";
         return super.post(url,obj);
     }
+    
 }

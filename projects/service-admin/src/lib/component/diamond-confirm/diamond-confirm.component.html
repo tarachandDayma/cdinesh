@@ -15,17 +15,166 @@
                     <span style="color: navy;">{{totalPrice | number : '1.2-2'}}</span>
                 </div>
             </div>
-            <div class="col-sm-3">
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="input-group input-group-sm mb-1">
                     <div class="input-group-prepend " style="background-color: transparent;border: 0;">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span
-                        [translate]="'admin.confirm.comment'"> Comment </span> </span>
+                            [translate]="'admin.confirm.terms'"> Terms </span> </span>
+                    </div>
+                    <select (change)="priceChange()" class="form-control" name="TermsId" [(ngModel)]="TermsId">
+                            <option value="undefined" >---Select Term--- </option>
+                            <option *ngFor="let item of TermsList" [value]="item.termsId" >{{item.description}}</option>
+                        </select>
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                [translate]="'admin.confirm.memberPer'"> memberPer </span> </span>
+                    </div>
+                    <select (change)="priceChange()" class="form-control" name="MemberId" [(ngModel)]="selectedMember">
+                                <option value="undefined" >---Select Member Per--- </option>
+                                <option *ngFor="let item of MemberList" [value]="item" >{{item.discription}}</option>
+                            </select>
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                    [translate]="'admin.confirm.addat'"> Addat% </span> </span>
+                    </div>
+                    <select (change)="priceChange()" class="form-control" name="AddatPer" [(ngModel)]="AddatPer">
+                                    <option value="undefined" >---Select Addat Per--- </option>
+                                    <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                                </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="input-group input-group-sm mb-1" style="border: grey solid 1px;">
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.client'"> client </span> </span>
+                    </div>
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <lib-custom-dropdown [dataSource]="ClientList" [displaymember]="'companyName'" [displaymember1]="'userName'" (SearchChange)="LoadClient($event)" (selectedChange)="SelectClient($event)"></lib-custom-dropdown>
+                    </div>
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.partyPer'"> partyPer% </span> </span>
+                    </div>
+                    <select (change)="priceChange()" class="form-control" name="PartyPer1" [(ngModel)]="PartyPer1">
+                            <option value="undefined" >---Select Addat Per--- </option>
+                            <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                        </select>
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                                [translate]="'admin.confirm.partyPer'"> partyPer1% </span> </span>
+                    </div>
+                    <select (change)="priceChange()" class="form-control" name="PartyPer2" [(ngModel)]="PartyPer2">
+                                <option value="undefined" >---Select Addat Per--- </option>
+                                <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                            </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.referral'"> referral </span> </span>
+                    </div>
+                    <select class="form-control" name="selectedReferral" [(ngModel)]="selectedReferral">
+                            <option value="undefined" >---Select Referral Per--- </option>
+                            <option *ngFor="let item of ReferralList" [value]="item" >{{item.referralName}}</option>
+                        </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.broker'"> Broker </span> </span>
+                    </div>
+                    <select class="form-control" name="Broker" [(ngModel)]="selectedBroker">
+                            <option value="undefined" >---Select Broker Per--- </option>
+                            <option *ngFor="let item of BrokerList" [value]="item" >{{item.name}}</option>
+                    </select>
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.brokerPer'"> Broker </span> </span>
+                    </div>
+                    <select (change)="priceChange()" class="form-control" name="BrokerPer" [(ngModel)]="BrokerPer">
+                            <option value="undefined" >---Select % Per--- </option>
+                            <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.buyer'"> % </span> </span>
+                    </div>
+                    <select class="form-control" name="selectedBuyer" [(ngModel)]="selectedBuyer">
+                            <option value="undefined" >---Select Broker Per--- </option>
+                            <option *ngFor="let item of BuyerList" [value]="item" >{{item.name}}</option>
+                    </select>
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.buyerPer'"> % </span> </span>
+                    </div>
+                    <select (change)="priceChange()" class="form-control" name="BuyerPer" [(ngModel)]="BuyerPer">
+                            <option value="undefined" >---Select % Per--- </option>
+                            <option *ngFor="let item of AddatList" [value]="item" >{{item}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.exportTo'"> exportTo </span> </span>
+                    </div>
+                    <select (change)="priceChange()" (change)="exportTermChange()" class="form-control" name="selectedExport" [(ngModel)]="selectedExport">
+                            <option value="undefined" >---Select Terms Per--- </option>
+                            <option *ngFor="let item of ExportList" [value]="item.id" >{{item.exportName}}</option>
+                    </select>
+                    <div *ngIf="(selectedExport == 1)" class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.hKExportTerm'"> hKExportTerm </span> </span>
+                    </div>
+                    <select (change)="priceChange()" *ngIf="(selectedExport == 1)" class="form-control" name="selectedHKExport" [(ngModel)]="selectedHKExport">
+                            <option value="undefined" >---Select Terms Per--- </option>
+                            <option *ngFor="let item of HKLExportList" [value]="item.id" >{{item.hkTermsName}}</option>
+                    </select>
+                    <div *ngIf="(selectedExport == 1)" class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                            [translate]="'admin.confirm.hkOption'"> hkOption </span> </span>
+                    </div>
+                    <select *ngIf="(selectedExport == 1)" class="form-control" name="hkOption" [(ngModel)]="hkOption">
+                        <option Value="0" selected>--SELECT--</option>
+                        <option Value="1">MEMO</option>
+                        <option Value="2">OPEN</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend " style="background-color: transparent;border: 0;">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span
+                    [translate]="'admin.confirm.comment'"> Comment </span> </span>
                     </div>
                     <input class="form-control" type="text" name="comment" [(ngModel)]="comment">
                 </div>
             </div>
-            <div class="col-ms3">
-                <button class="btn btn-primary" (click)="saveHold()" type="button" [translate]="'admin.confirm.save'">Save</button>
+        </div>
+        <div class="row">
+            <div class="col-md- 3 pull-right">
+                <button class="btn btn-primary ml-2" (click)="saveHold()" type="button" [translate]="'admin.confirm.save'">Save</button>
             </div>
         </div>
     </div>
@@ -372,10 +521,10 @@
                                 {{item.wt | number : '1.2-2'}}
                             </td>
                             <td (mouseover)="ShowPopUp(item,false)" style="text-align: right !important;">
-                                {{item.price | number : '1.2-2'}}
+                                {{ (item.calcPrice > 0 ? item.calcPrice:item.price) | number : '1.2-2'}}
                             </td>
                             <td (mouseover)="ShowPopUp(item,false)" style="text-align: right !important;">
-                                {{item.back | number : '1.2-2'}}
+                                {{((item.calcBack != 0 && item.calcBack !=undefined ) ? item.calcBack:item.back) | number : '1.2-2'}}
                             </td>
                             <td (mouseover)="ShowPopUp(item,false)" style="text-align: right !important;">
                                 {{item.amount | number : '1.2-2'}}

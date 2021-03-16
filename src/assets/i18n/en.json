@@ -1043,7 +1043,11 @@
             "broker": "Broker",
             "buyer": "Buyer",
             "brokerPer": "Broker%",
-            "buyerPer": "Buyer%"
+            "buyerPer": "Buyer%",
+            "exportTo": "ExportTo",
+            "hKExportTerm": "HKExportTerm",
+            "hkOption": "HKOption",
+            "partySelectError": "Please select Client"
         },
         "confirm": {
             "title": "Place Order",
@@ -1051,7 +1055,22 @@
             "save": "Buy Now",
             "success": "Success",
             "error": "Something went wrong",
-            "comment_error": "Please enter comment"
+            "comment_error": "Please enter comment",
+            "terms": "Terms",
+            "memberPer": "MemberPer",
+            "addat": "Addat%",
+            "client": "Client",
+            "partyPer": "Party%",
+            "partyPer1": "Party1%",
+            "referral": "Referral",
+            "broker": "Broker",
+            "buyer": "Buyer",
+            "brokerPer": "Broker%",
+            "buyerPer": "Buyer%",
+            "exportTo": "ExportTo",
+            "hKExportTerm": "HKExportTerm",
+            "hkOption": "HKOption",
+            "partySelectError": "Please select Client"
         },
         "diamondDetail": {
             "title": "Diamond Detail",

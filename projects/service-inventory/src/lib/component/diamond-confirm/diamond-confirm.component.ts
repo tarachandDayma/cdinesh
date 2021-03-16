@@ -41,6 +41,7 @@ export class DiamondConfirmComponent implements OnInit {
   selectedtotalAvgDisc: number;
   selectedtotalPrice: number;
   comment: string;
+  @Output()
   onsave:EventEmitter<any>= new EventEmitter<any>();
   ////summary variable
   constructor(private loader: loaderserice

@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   }
   search(item){
     localStorage.setItem("recentSearch",JSON.stringify(item));
-    this.router.navigate(["/inventory/search"]);
+    this.router.navigate(["/admin/search"]);
   }
   GetAllFeaturedStones(){
     this.topStoneService.GetAll().subscribe(result=>{

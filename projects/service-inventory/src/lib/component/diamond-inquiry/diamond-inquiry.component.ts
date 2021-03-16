@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -38,6 +38,7 @@ export class DiamondInquiryComponent implements OnInit,OnChanges {
   selectedtotalAvgDisc: number;
   selectedtotalPrice: number;
   comment: string;
+  @Output()
   onsave:EventEmitter<any>= new EventEmitter<any>();
   ////summary variable
   constructor(private loader: loaderserice

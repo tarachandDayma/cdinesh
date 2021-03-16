@@ -2,21 +2,25 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { UserModel } from 'dist/service-account/lib/models/user.model';
 import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
 import { BBPInformationModel } from '../../models/bbpInformation.model';
 import { CartModel } from '../../models/cart.model';
 import { diamondsearchResult } from '../../models/diamond.result.model';
+import { ExportTermsMasterModel } from '../../models/exportTermsMaster.model';
+import { HkTermsMasterModel } from '../../models/hkTerms.master.model';
 import { HoldModel } from '../../models/hold.model';
 import { MemberMasterModel } from '../../models/memberMaster.model';
 import { ReferralModel } from '../../models/referral.model';
 import { TermsModel } from '../../models/terms.model';
+import { UserModel } from '../../models/user/user.model';
 import { BBpInformationService } from '../../service/bbpInformation.service';
 import { CartService } from '../../service/cart.service';
 import { CartBroadcaster } from '../../service/cartbroadcaster';
 import { DiamondCommentService } from '../../service/diamond.comment.service';
 import { DownloadService } from '../../service/download.service';
 import { EntityService } from '../../service/entity.service';
+import { ExportTermMasterService } from '../../service/export.termsMaster.service';
+import { HKExportTermMasterService } from '../../service/hkexport.termMaster.service';
 import { HoldService } from '../../service/hold.service';
 import { MemberMasterService } from '../../service/membermaster.service';
 import { ReferralService } from '../../service/referral.service';
@@ -50,7 +54,7 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
   comment: string;
   TermsId: number = 19;
   TermsList: TermsModel[] = [];
-  MemberId: number;
+  selectedMember: MemberMasterModel;
   MemberList: MemberMasterModel[] = [];
   AddatPer: number;
   AddatList: any[] = [];
@@ -62,10 +66,15 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
   ReferralList: ReferralModel[] = [];
   BuyerList: BBPInformationModel[] = [];
   BrokerList: BBPInformationModel[] = [];
-  selectedBuyer:BBPInformationModel;
-  selectedBroker:BBPInformationModel;
-  BuyerPer:number;
-  BrokerPer:number;
+  selectedBuyer: BBPInformationModel;
+  selectedBroker: BBPInformationModel;
+  ExportList: ExportTermsMasterModel[] = [];
+  HKLExportList: HkTermsMasterModel[] = [];
+  selectedExport: number;
+  selectedHKExport: number;
+  hkOption: number = 0;
+  BuyerPer: number;
+  BrokerPer: number;
   @Output()
   onsave: EventEmitter<any> = new EventEmitter<any>();
 
@@ -89,7 +98,9 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
     , private termservice: TermsService
     , private memberMasterService: MemberMasterService
     , private referralService: ReferralService
-    , private bbpInformationService:BBpInformationService) { }
+    , private bbpInformationService: BBpInformationService
+    , private hkexportTermMasterService: HKExportTermMasterService
+    , private exportTermMasterService: ExportTermMasterService) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.doPagination();
 
@@ -101,6 +112,10 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
     this.LoadMemberPer();
     this.LoadAddat();
     this.LoadClient('');
+    this.LoadExportTerm();
+    this.LoadHKExportTerm();
+    this.LoadBroker();
+    this.LoadBuyer();
   }
   @ViewChild('div') div;
   currentPageNo: number = 0;
@@ -294,6 +309,7 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
 
     }
   }
+
   saveHold() {
     if (this.comment == "" || this.comment == undefined || this.comment == null) {
       this.alertService.Error(this.translate.instant("inventory.hold.comment_error"), "");
@@ -309,12 +325,36 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
       offer.price = element.price;
       offers.push(offer);
     });
+    var terms = this.TermsList.filter(x => x.termsId == this.TermsId)[0];
+    var obj = {
+      holds: offers,
+      Diamonds: this.diamonds,
+      Broker: this.selectedBroker,
+      Buyer: this.selectedBuyer,
+      MemberPer: this.selectedMember,
+      Client: this.selectedClient,
+      Referral: this.selectedReferral,
+      ExportId: this.selectedExport,
+      HkExportId: this.selectedHKExport,
+      HkOption: this.hkOption,
+      AddatPer: (this.AddatPer != undefined && this.AddatPer != null) ? parseFloat(this.AddatPer.toString()) : 0,
+      PartyPer1: (this.PartyPer1 != undefined && this.PartyPer1 != null) ? parseFloat(this.PartyPer1.toString()) : 0,
+      PartyPer2: (this.PartyPer2 != undefined && this.PartyPer2 != null) ? parseFloat(this.PartyPer2.toString()) : 0,
+      BrokerPer: (this.BrokerPer != undefined && this.BrokerPer != null) ? parseFloat(this.BrokerPer.toString()) : 0,
+      BuyerPer: (this.BuyerPer != undefined && this.BuyerPer != null) ? parseFloat(this.BuyerPer.toString()) : 0,
+      Terms: (terms == null || terms == undefined) ? null : terms
+    }
     this.loader.show(true);
-    this.holdService.SaveHold(offers, this.diamonds).subscribe(result => {
+    this.holdService.SaveHold(obj).subscribe(result => {
+
       this.loader.show(false);
-      this.modalService.dismissAll();
-      this.alertService.success(this.translate.instant("inventory.hold.success"), "");
-      this.onsave.emit();
+      if (result.status) {
+        this.modalService.dismissAll();
+        this.alertService.success(this.translate.instant("inventory.hold.success"), "");
+        this.onsave.emit();
+      }else{
+        this.alertService.Error(this.translate.instant(result.message), "");
+      }
     }, erro => {
       this.loader.show(false);
       this.alertService.Error(this.translate.instant("inventory.hold.error"), "");
@@ -380,25 +420,82 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
   LoadReferral() {
     if (this.selectedClient != null && this.selectedClient != undefined) {
       this.loader.show(true);
-      this.referralService.GetAll(this.selectedClient.id).subscribe(result=>{
+      this.referralService.GetAll(this.selectedClient.id).subscribe(result => {
         this.loader.show(false);
-        this.ReferralList=result;
-      },error=>{
+        this.ReferralList = result;
+      }, error => {
         this.loader.show(false);
       })
     }
   }
   LoadBroker() {
-      this.bbpInformationService.GetAll("2").subscribe(result=>{
-        this.BrokerList=result;
-      },error=>{
-      })
+    this.bbpInformationService.GetAll("2").subscribe(result => {
+      this.BrokerList = result;
+    }, error => {
+    })
   }
   LoadBuyer() {
-    this.bbpInformationService.GetAll("1").subscribe(result=>{
-      this.BuyerList=result;
-    },error=>{
+    this.bbpInformationService.GetAll("1").subscribe(result => {
+      this.BuyerList = result;
+    }, error => {
+    });
+  }
+  LoadExportTerm() {
+    this.exportTermMasterService.LoadAll().subscribe(result => {
+      this.ExportList = result;
+    }, error => {
+    });
+  }
+  LoadHKExportTerm() {
+    this.hkexportTermMasterService.LoadAll().subscribe(result => {
+      this.HKLExportList = result;
+    }, error => {
+    });
+  }
+  exportTermChange() {
+    if (this.selectedExport != 1) {
+      this.selectedHKExport = undefined;
+      this.hkOption = 0;
+    }
+  }
+  priceChange() {
+    var offers: HoldModel[] = [];
+    this.diamonds.forEach(element => {
+      var offer = new HoldModel();
+      offer.back = element.back;
+      offer.comment = this.comment;
+      offer.deliveryAt = element.deliveryAt;
+      offer.packetNo = element.packetNo;
+      offer.price = element.price;
+      offers.push(offer);
+    });
+    var terms = this.TermsList.filter(x => x.termsId == this.TermsId)[0];
+    var obj = {
+      holds: offers,
+      Diamonds: this.diamonds,
+      Broker: this.selectedBroker,
+      Buyer: this.selectedBuyer,
+      MemberPer: this.selectedMember,
+      Client: this.selectedClient,
+      Referral: this.selectedReferral,
+      ExportId: this.selectedExport,
+      HkExportId: this.selectedHKExport,
+      HkOption: this.hkOption,
+      AddatPer: (this.AddatPer != undefined && this.AddatPer != null) ? parseFloat(this.AddatPer.toString()) : 0,
+      PartyPer1: (this.PartyPer1 != undefined && this.PartyPer1 != null) ? parseFloat(this.PartyPer1.toString()) : 0,
+      PartyPer2: (this.PartyPer2 != undefined && this.PartyPer2 != null) ? parseFloat(this.PartyPer2.toString()) : 0,
+      BrokerPer: (this.BrokerPer != undefined && this.BrokerPer != null) ? parseFloat(this.BrokerPer.toString()) : 0,
+      BuyerPer: (this.BuyerPer != undefined && this.BuyerPer != null) ? parseFloat(this.BuyerPer.toString()) : 0,
+      Terms: (terms == null || terms == undefined) ? null : terms
+    }
+    this.loader.show(true);
+    this.holdService.PriceChange(obj).subscribe(result => {
+      this.loader.show(false);
+      this.diamonds = result;
+      this.doPagination();
+    }, erro => {
+      this.loader.show(false);
+      this.alertService.Error(this.translate.instant("inventory.hold.error"), "");
     })
-}
-
+  }
 }

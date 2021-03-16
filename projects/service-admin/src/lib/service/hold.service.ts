@@ -12,6 +12,7 @@ import { UserPairModel } from '../models/userPair.model';
 import { OfferModel } from '../models/offer.model';
 import { InquiryModel } from '../models/inquiry.model';
 import { HoldModel } from '../models/hold.model';
+import { AnyARecord } from 'dns';
 
 @Injectable({
     providedIn: 'root'
@@ -21,13 +22,15 @@ export class HoldService extends RestService {
     constructor(public http: HttpClient, public env: EnvironmentService) {
         super(http);
     }
-    public SaveHold(Inquireis:HoldModel[],diamonds:diamondsearchResult[]): Observable<any> {
+    public SaveHold(obj:any): Observable<any> {
         var url = "";
-        var obj={
-            holds:Inquireis,
-            Diamonds:diamonds
-        }
+        
         url = this.env.ApiGateway + "/admin/Hold/Insert";
+        return super.post(url,obj);
+    }
+    public PriceChange(obj:any): Observable<diamondsearchResult[]> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/Hold/ReloadHoldData";
         return super.post(url,obj);
     }
     public LoadMessage(Inquireis:HoldModel[],diamonds:diamondsearchResult[]): Observable<any> {

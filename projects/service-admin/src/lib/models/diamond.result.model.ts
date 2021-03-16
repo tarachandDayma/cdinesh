@@ -47,6 +47,8 @@ export class diamondsearchResult{
     mineOfOrigin:string;
     imgLink:string;
     price:number;
+    calcPrice:number;
+    calcBack:number;
     currentRapNetPrice:number;
     eyeClean:string;
     measurements:string;
