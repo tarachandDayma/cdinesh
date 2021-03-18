@@ -321,14 +321,14 @@ export class MyCartComponent implements OnInit {
   showSelected() {
     if (this.searchResult.filter(x => x.selected).length > 0) {
       localStorage.setItem("selectedResult", JSON.stringify(this.searchResult.filter(x => x.selected)));
-      this.router.navigate([]).then(result => { window.open("/inventory/showselected", '_blank'); });
+      this.router.navigate([]).then(result => { window.open("/admin/showselected", '_blank'); });
     } else {
       this.alertService.Error("Please select stone", "");
     }
   }
   showDetail(item) {
     localStorage.setItem("detailPacketNo", item.packetNo);
-    this.router.navigate([]).then(result => { window.open("/inventory/diamondDetail", '_blank'); });
+    this.router.navigate([]).then(result => { window.open("/admin/diamondDetail", '_blank'); });
   }
   reload() {
     location.reload();

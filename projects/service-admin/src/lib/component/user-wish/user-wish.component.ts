@@ -39,11 +39,11 @@ export class UserWishComponent implements OnInit {
   }
   Load(item:UserWishModel):void{
     localStorage.setItem("saveUserWish",JSON.stringify(item));
-    this.router.navigate(["/inventory/search"]);
+    this.router.navigate(["/admin/search"]);
   }
   Modify(item:UserWishModel):void{
     localStorage.setItem("modifyUserWish",JSON.stringify(item));
-    this.router.navigate(["/inventory/search"]);
+    this.router.navigate(["/admin/search"]);
   }
   SyncSearches(){
     this.loader.show(true);

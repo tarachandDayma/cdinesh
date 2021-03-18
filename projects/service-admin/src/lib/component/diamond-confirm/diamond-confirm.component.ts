@@ -243,7 +243,7 @@ export class DiamondConfirmComponent implements OnInit {
   }
   showDetail(item) {
     localStorage.setItem("detailPacketNo", item.packetNo);
-    this.router.navigate([]).then(result => { window.open("/inventory/diamondDetail", '_blank'); });
+    this.router.navigate([]).then(result => { window.open("/admin/diamondDetail", '_blank'); });
   }
   toggleDetail(item) {
     item.showDetail = !item.showDetail;
@@ -312,7 +312,7 @@ export class DiamondConfirmComponent implements OnInit {
   }
   saveHold() {
     if (this.comment == "" || this.comment == undefined || this.comment == null) {
-      this.alertService.Error(this.translate.instant("inventory.confirm.comment_error"), "");
+      this.alertService.Error(this.translate.instant("admin.confirm.comment_error"), "");
       return;
     }
     var offers: ConfirmModel[] = [];
@@ -350,14 +350,14 @@ export class DiamondConfirmComponent implements OnInit {
       this.loader.show(false);
       if (result.status) {
         this.modalService.dismissAll();
-        this.alertService.success(this.translate.instant("inventory.confirm.success"), "");
+        this.alertService.success(this.translate.instant("admin.confirm.success"), "");
         this.onsave.emit();
       } else {
         this.alertService.Error(this.translate.instant(result.message), "");
       }
     }, erro => {
       this.loader.show(false);
-      this.alertService.Error(this.translate.instant("inventory.confirm.error"), "");
+      this.alertService.Error(this.translate.instant("admin.confirm.error"), "");
     })
   }
   LoadStoneStatusMessage() {
@@ -377,7 +377,7 @@ export class DiamondConfirmComponent implements OnInit {
         this.alertService.success(result.message, "");
     }, erro => {
     
-      this.alertService.Error(this.translate.instant("inventory.confirm.error"), "");
+      this.alertService.Error(this.translate.instant("admin.confirm.error"), "");
     })
   }
   LoadTerms() {
@@ -494,7 +494,7 @@ export class DiamondConfirmComponent implements OnInit {
       this.doPagination();
     }, erro => {
       this.loader.show(false);
-      this.alertService.Error(this.translate.instant("inventory.confirm.error"), "");
+      this.alertService.Error(this.translate.instant("admin.confirm.error"), "");
     })
   }
 

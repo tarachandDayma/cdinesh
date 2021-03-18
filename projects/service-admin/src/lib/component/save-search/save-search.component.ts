@@ -39,11 +39,11 @@ export class SaveSearchComponent implements OnInit {
   }
   Load(item:UserSearchModel):void{
     localStorage.setItem("saveSearch",JSON.stringify(item));
-    this.router.navigate(["/inventory/search"]);
+    this.router.navigate(["/admin/search"]);
   }
   Modify(item:UserSearchModel):void{
     localStorage.setItem("modifySearch",JSON.stringify(item));
-    this.router.navigate(["/inventory/search"]);
+    this.router.navigate(["/admin/search"]);
   }
   SyncSearches(){
     this.loader.show(true);

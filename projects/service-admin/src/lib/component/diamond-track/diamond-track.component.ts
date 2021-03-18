@@ -250,7 +250,7 @@ export class DiamondTrackComponent implements OnInit, OnChanges {
       }
     }, error => {
       this.loader.show(false);
-      this.alertService.Error(this.translate.instant("inventory.profile.diamondTrack.error"), "");
+      this.alertService.Error(this.translate.instant("admin.profile.diamondTrack.error"), "");
     })
   }
   ShowPopUp(item, flag: boolean) {

@@ -1793,14 +1793,14 @@ export class SearchComponent implements OnInit {
   showSelected() {
     if (this.searchResult.filter(x => x.selected).length > 0) {
       localStorage.setItem("selectedResult", JSON.stringify(this.searchResult.filter(x => x.selected)));
-      this.router.navigate([]).then(result => { window.open("/inventory/showselected", '_blank'); });
+      this.router.navigate([]).then(result => { window.open("/admin/showselected", '_blank'); });
     } else {
       this.alertService.Error("Please select stone", "");
     }
   }
   showDetail(item) {
     localStorage.setItem("detailPacketNo", item.packetNo);
-    this.router.navigate([]).then(result => { window.open("/inventory/diamondDetail", '_blank'); });
+    this.router.navigate([]).then(result => { window.open("/admin/diamondDetail", '_blank'); });
   }
   reload() {
     location.reload();
@@ -2097,7 +2097,7 @@ Greetings of the day `;
         }
       }, error => {
         this.loader.show(false);
-        this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+        this.alertService.Error("", this.translate.instant("admin.search.result.error"));
         try {
           this.formvalidationService.BindServerErrors(this.emailformgroup, error);
         } catch (error) {
@@ -2144,7 +2144,7 @@ Greetings of the day `;
         }
       }, error => {
         this.loader.show(false);
-        this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+        this.alertService.Error("", this.translate.instant("admin.search.result.error"));
         try {
           this.formvalidationService.BindServerErrors(this.commentformgroup, error);
         } catch (error) {
@@ -2210,12 +2210,12 @@ Greetings of the day `;
     this.userSaveSearchService.AddSearch(item).subscribe(result => {
       this.loader.show(false);
       if (result.status) {
-        this.alertService.success("", this.translate.instant("inventory.search.result.success"));
+        this.alertService.success("", this.translate.instant("admin.search.result.success"));
         this.modalService.dismissAll();
       }
     }, error => {
       this.loader.show(false);
-      this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+      this.alertService.Error("", this.translate.instant("admin.search.result.error"));
       try {
         this.formvalidationService.BindServerErrors(this.commentformgroup, error);
       } catch (error) {
@@ -2247,7 +2247,7 @@ Greetings of the day `;
     this.submited = true;
     var wish: UserWishModel = new UserWishModel();
     if ((this.NewWishName == null || this.NewWishName == undefined || this.NewWishName == "") && (this.wishId <= 0 || this.wishId == undefined || this.wishId == null)) {
-      this.alertService.Error(this.translate.instant("inventory.profile.userWish.wishName_error"), "");
+      this.alertService.Error(this.translate.instant("admin.profile.userWish.wishName_error"), "");
       return;
     }
     if (this.NewWishName == null || this.NewWishName == undefined || this.NewWishName == "") {
@@ -2267,12 +2267,12 @@ Greetings of the day `;
     this.userWishService.AddSearch(item).subscribe(result => {
       this.loader.show(false);
       if (result.status) {
-        this.alertService.success("", this.translate.instant("inventory.search.result.success"));
+        this.alertService.success("", this.translate.instant("admin.search.result.success"));
         this.modalService.dismissAll();
       }
     }, error => {
       this.loader.show(false);
-      this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+      this.alertService.Error("", this.translate.instant("admin.search.result.error"));
       try {
         this.formvalidationService.BindServerErrors(this.commentformgroup, error);
       } catch (error) {
@@ -2332,7 +2332,7 @@ Greetings of the day `;
 
       });
     } else {
-      this.alertService.Error(this.translate.instant("inventory.profile.diamondTrack.selectDiamonderror"), "");
+      this.alertService.Error(this.translate.instant("admin.profile.diamondTrack.selectDiamonderror"), "");
     }
   }
   scheduleformgroup: FormGroup;
@@ -2439,12 +2439,12 @@ Greetings of the day `;
     this.scheduleService.AddSearch(item).subscribe(result => {
       this.loader.show(false);
       if (result.status) {
-        this.alertService.success("", this.translate.instant("inventory.search.result.success"));
+        this.alertService.success("", this.translate.instant("admin.search.result.success"));
         this.modalService.dismissAll();
       }
     }, error => {
       this.loader.show(false);
-      this.alertService.Error("", this.translate.instant("inventory.search.result.error"));
+      this.alertService.Error("", this.translate.instant("admin.search.result.error"));
       try {
         this.formvalidationService.BindServerErrors(this.commentformgroup, error);
       } catch (error) {

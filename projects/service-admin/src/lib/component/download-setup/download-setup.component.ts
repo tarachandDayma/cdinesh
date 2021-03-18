@@ -95,7 +95,7 @@ export class DownloadSetupComponent implements OnInit {
       }, error => {
       })
     } else {
-      this.alertService.Error(this.translate.instant("inventory.profile.downloadSetup.formatName_error"), "");
+      this.alertService.Error(this.translate.instant("admin.profile.downloadSetup.formatName_error"), "");
     }
   }
 

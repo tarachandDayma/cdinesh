@@ -52,6 +52,7 @@ import { PartialClientMappingModalComponent } from './component/partial-client/p
 import { PartialClientAddModalComponent } from './component/partial-client/partial-client-add-modal/partial-client-add-modal.component';
 import { PartialClientEditModalComponent } from './component/partial-client/partial-client-edit-modal/partial-client-edit-modal.component';
 import { CartBroadcaster } from './service/cartbroadcaster';
+import { UpdateUserComponent } from './component/update-user/update-user.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -60,7 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [ServiceAdminComponent, NavComponent, SearchComponent,DashboardComponent,NewgoodsComponent,UpcomingComponent,RecommendedComponent,BestOfCDComponent,DiamondDetailComponent,MyCartComponent,DownloadSetupComponent,ProfileNavigationComponent,PersonalDetailComponent,PairSetupComponent,DiamondOfferComponent,DiamondInquiryComponent,ResetPasswordComponent,SaveSearchComponent
     ,UserWishComponent,DiamondHoldComponent,DiamondConfirmComponent,DiamondScheduleComponent,InquiryDetailComponent,DiamondTrackComponent,UserTrackComponent
-  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent, RoleAccessModuleComponent, RoleAccessNodeComponent, CompanyComponent, CompanyNodeComponent, UserAccessModuleComponent, UserRoleAccessNodeComponent, RoleSearchComponent, UserSearchComponent, PartialClientComponent, PartialClientMappingModalComponent, PartialClientAddModalComponent, PartialClientEditModalComponent],
+  ,SettingNavigationComponent,RolesComponent,RoleNodeComponent, RoleAccessModuleComponent, RoleAccessNodeComponent, CompanyComponent, CompanyNodeComponent, UserAccessModuleComponent, UserRoleAccessNodeComponent, RoleSearchComponent, UserSearchComponent, PartialClientComponent, PartialClientMappingModalComponent, PartialClientAddModalComponent, PartialClientEditModalComponent, UpdateUserComponent],
     imports: [
       FormsModule,ReactiveFormsModule,
       TranslateModule.forChild(),

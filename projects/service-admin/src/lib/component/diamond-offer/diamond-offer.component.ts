@@ -191,7 +191,7 @@ export class DiamondOfferComponent implements OnInit, OnChanges {
   }
   showDetail(item) {
     localStorage.setItem("detailPacketNo", item.packetNo);
-    this.router.navigate([]).then(result => { window.open("/inventory/diamondDetail", '_blank'); });
+    this.router.navigate([]).then(result => { window.open("/admin/diamondDetail", '_blank'); });
   }
   toggleDetail(item) {
     item.showDetail = !item.showDetail;
@@ -292,7 +292,7 @@ export class DiamondOfferComponent implements OnInit, OnChanges {
   }
   saveOffer() {
     if(this.comment=="" || this.comment==undefined || this.comment==null){
-      this.alertService.Error(this.translate.instant("inventory.offer.comment_error"), "");
+      this.alertService.Error(this.translate.instant("admin.offer.comment_error"), "");
       return;
     }
     var offers: OfferModel[] = [];
@@ -311,11 +311,11 @@ export class DiamondOfferComponent implements OnInit, OnChanges {
     this.offerService.SaveOffer(offers, this.diamonds).subscribe(result => {
       this.loader.show(false);
       this.modalService.dismissAll();
-      this.alertService.success(this.translate.instant("inventory.offer.success"), "");
+      this.alertService.success(this.translate.instant("admin.offer.success"), "");
 
     }, erro => {
       this.loader.show(false);
-      this.alertService.Error(this.translate.instant("inventory.offer.error"), "");
+      this.alertService.Error(this.translate.instant("admin.offer.error"), "");
     })
   }
 }

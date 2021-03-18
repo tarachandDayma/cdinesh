@@ -77,7 +77,7 @@ export class PersonalDetailComponent implements OnInit {
       this.InitForm();
     }, error => {
       this.loader.show(false);
-      this.alertService.Error(this.translate.instant("inventory.profile.userSetup.error"), "");
+      this.alertService.Error(this.translate.instant("admin.profile.userSetup.error"), "");
     })
   }
   billingCountryChange(data) {

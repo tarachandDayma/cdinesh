@@ -39,11 +39,11 @@ export class DiamondScheduleComponent implements OnInit {
   }
   Load(item:ScheduleModel):void{
     localStorage.setItem("saveUserSchedule",JSON.stringify(item));
-    this.router.navigate(["/inventory/search"]);
+    this.router.navigate(["/admin/search"]);
   }
   Modify(item:ScheduleModel):void{
     localStorage.setItem("modifyUserSchedule",JSON.stringify(item));
-    this.router.navigate(["/inventory/search"]);
+    this.router.navigate(["/admin/search"]);
   }
   SyncSearches(){
     this.loader.show(true);

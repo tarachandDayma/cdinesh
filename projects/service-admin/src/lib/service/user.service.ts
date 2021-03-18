@@ -33,6 +33,11 @@ export class UserService extends RestService {
         url = this.env.ApiGateway + "/admin/UserSetup/Update";
         return super.post(url, userModel);
     }
+    public UpdateNew(userModel: any): Observable<any> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/UserSetup/UpdateUserNew";
+        return super.post(url, userModel);
+    }
     public ResetPassword(data: ResetPasswordModel): Observable<any> {
         var url = this.env.authServerUrl + "/api/Auth/ResetPassword"
         return super.post(url, data);
@@ -51,4 +56,21 @@ export class UserService extends RestService {
         url = this.env.ApiGateway + "/admin/User/GetClientList?SearchText="+SearchText;
         return super.Get(url);
     }
+    public addCompany(data:any):Observable<any>{
+        var url = this.env.ApiGateway+"/AddCompany"
+        return super.post(url,data);
+      }
+      public register(data:UserModel):Observable<any>{
+        var url = this.env.authServerUrl+"/api/Auth/register"
+        return super.post(url,data);
+      }
+      public loadSellers():Observable<any>{
+        var url = this.env.authServerUrl+"/api/Auth/GetSalesExecutive"
+        return super.Get(url,);
+      }
+     
+      public forgotPassword(UserName:string):Observable<any>{
+        var url = this.env.authServerUrl+"/api/Auth/Forgotpassword?UserName="+UserName
+        return super.Get(url);
+      }
 }

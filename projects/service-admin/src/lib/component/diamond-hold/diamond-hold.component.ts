@@ -244,7 +244,7 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
   }
   showDetail(item) {
     localStorage.setItem("detailPacketNo", item.packetNo);
-    this.router.navigate([]).then(result => { window.open("/inventory/diamondDetail", '_blank'); });
+    this.router.navigate([]).then(result => { window.open("/admin/diamondDetail", '_blank'); });
   }
   toggleDetail(item) {
     item.showDetail = !item.showDetail;
@@ -312,7 +312,7 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
 
   saveHold() {
     if (this.comment == "" || this.comment == undefined || this.comment == null) {
-      this.alertService.Error(this.translate.instant("inventory.hold.comment_error"), "");
+      this.alertService.Error(this.translate.instant("admin.hold.comment_error"), "");
       return;
     }
     var offers: HoldModel[] = [];
@@ -350,14 +350,14 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
       this.loader.show(false);
       if (result.status) {
         this.modalService.dismissAll();
-        this.alertService.success(this.translate.instant("inventory.hold.success"), "");
+        this.alertService.success(this.translate.instant("admin.hold.success"), "");
         this.onsave.emit();
       }else{
         this.alertService.Error(this.translate.instant(result.message), "");
       }
     }, erro => {
       this.loader.show(false);
-      this.alertService.Error(this.translate.instant("inventory.hold.error"), "");
+      this.alertService.Error(this.translate.instant("admin.hold.error"), "");
     })
   }
   LoadStoneStatusMessage() {
@@ -378,7 +378,7 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
         this.alertService.success(result.message, "");
 
     }, erro => {
-      this.alertService.Error(this.translate.instant("inventory.hold.error"), "");
+      this.alertService.Error(this.translate.instant("admin.hold.error"), "");
     })
   }
   LoadTerms() {
@@ -495,7 +495,7 @@ export class DiamondHoldComponent implements OnInit, OnChanges {
       this.doPagination();
     }, erro => {
       this.loader.show(false);
-      this.alertService.Error(this.translate.instant("inventory.hold.error"), "");
+      this.alertService.Error(this.translate.instant("admin.hold.error"), "");
     })
   }
 }

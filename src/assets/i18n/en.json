@@ -96,6 +96,7 @@
         "register": {
             "signin": "Sign IN",
             "title": "SIGN UP",
+            "updatetitle": "Update",
             "signup": "Submit",
             "username": "User Name",
             "username_error": "Please enter username",

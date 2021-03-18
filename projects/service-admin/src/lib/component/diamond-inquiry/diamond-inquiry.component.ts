@@ -189,7 +189,7 @@ export class DiamondInquiryComponent implements OnInit,OnChanges {
   }
   showDetail(item) {
     localStorage.setItem("detailPacketNo", item.packetNo);
-    this.router.navigate([]).then(result => { window.open("/inventory/diamondDetail", '_blank'); });
+    this.router.navigate([]).then(result => { window.open("/admin/diamondDetail", '_blank'); });
   }
   toggleDetail(item) {
     item.showDetail = !item.showDetail;
@@ -258,7 +258,7 @@ export class DiamondInquiryComponent implements OnInit,OnChanges {
   }
   saveInquiry() {
     if(this.comment=="" || this.comment==undefined || this.comment==null){
-      this.alertService.Error(this.translate.instant("inventory.offer.comment_error"), "");
+      this.alertService.Error(this.translate.instant("admin.offer.comment_error"), "");
       return;
     }
     var offers: InquiryModel[] = [];
@@ -275,12 +275,12 @@ export class DiamondInquiryComponent implements OnInit,OnChanges {
     this.inquiryService.SaveInquiry(offers, this.diamonds).subscribe(result => {
       this.loader.show(false);
       this.modalService.dismissAll();
-      this.alertService.success(this.translate.instant("inventory.inquiry.success"), "");
+      this.alertService.success(this.translate.instant("admin.inquiry.success"), "");
       this.onsave.emit();
 
     }, erro => {
       this.loader.show(false);
-      this.alertService.Error(this.translate.instant("inventory.inquiry.error"), "");
+      this.alertService.Error(this.translate.instant("admin.inquiry.error"), "");
     })
   }
 }
