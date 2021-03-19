@@ -23,6 +23,11 @@ export class UserService extends RestService {
             url = this.env.ApiGateway + "/admin/GetUser";
         return super.Get(url);
     }
+    public GetUserById(Id:string): Observable<UserModel> {
+        var url = "";
+        url = this.env.ApiGateway + "/admin/UserSetup/LoadbyId?UserId="+Id;
+        return super.Get(url);
+    }
     public LoadUserinfor(): Observable<UserModel> {
         var url = "";
         url = this.env.ApiGateway + "/admin/UserSetup/Load";

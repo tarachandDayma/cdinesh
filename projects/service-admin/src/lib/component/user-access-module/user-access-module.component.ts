@@ -11,7 +11,8 @@ import { UserModel } from '../../models/user/user.model';
 import { CompanyService } from '../../service/company.service';
 import { RolesService } from '../../service/role.service';
 import { UserModuleAccessService } from '../../service/user.module.aaccess.service';
-declare var $:any;
+import { UserService } from '../../service/user.service';
+declare var $: any;
 @Component({
   selector: 'lib-user-access-module',
   templateUrl: './user-access-module.component.html',
@@ -19,7 +20,7 @@ declare var $:any;
 })
 export class UserAccessModuleComponent implements OnInit {
 
-  constructor(private userModuleAccessService: UserModuleAccessService, private roleService: RolesService, private loader: loaderserice, private alertService: alertserice, public translate: TranslateService, private router: Router, private modalService: NgbModal) { }
+  constructor(private userModuleAccessService: UserModuleAccessService, private roleService: RolesService, private loader: loaderserice, private alertService: alertserice, public translate: TranslateService, private router: Router, private modalService: NgbModal, private userService: UserService) { }
   roles: RoleModel[] = [];
   userList: UserModel[] = [];
   currentRole: RoleModel;
@@ -27,16 +28,16 @@ export class UserAccessModuleComponent implements OnInit {
   CurrentMode = "";
   userModuleAccessList: UserModuleAccessModel[] = [];
   submited: false;
-  allSelected:false;
-  searchText:string="";
+  allSelected: false;
+  searchText: string = "";
   ngOnInit(): void {
-    this.searchText="";
+    this.searchText = "";
     this.loadRoles();
   }
-  SelectAll(){
-    if(this.userModuleAccessList.length >0){
+  SelectAll() {
+    if (this.userModuleAccessList.length > 0) {
       this.userModuleAccessList.forEach(element => {
-        element.isActive=this.allSelected;
+        element.isActive = this.allSelected;
       });
     }
   }
@@ -48,16 +49,16 @@ export class UserAccessModuleComponent implements OnInit {
     }, error => {
       this.loader.show(false);
     })
-   
+
   }
   EditNode(role: RoleModel) {
     this.CurrentMode = "EDIT"
-    this.currentRole=role;
+    this.currentRole = role;
     this.loadUser();
   }
-  loadUser(){
+  loadUser() {
     this.loader.show(true);
-    this.userModuleAccessService.LoadUsers(this.searchText,this.currentRole.id).subscribe(result => {
+    this.userModuleAccessService.LoadUsers(this.searchText, this.currentRole.id).subscribe(result => {
       this.userList = result;
       this.doPagination();
       this.loader.show(false);
@@ -66,7 +67,7 @@ export class UserAccessModuleComponent implements OnInit {
     });
   }
   Update() {
-    this.allSelected=false;
+    this.allSelected = false;
 
     this.modalService.open(this.contentDeleteConfirm, { backdrop: "static", size: "sm", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
     }, (reason) => {
@@ -94,21 +95,21 @@ export class UserAccessModuleComponent implements OnInit {
       this.alertService.Error(this.translate.instant("admin.userModuleAccess.error"), "");
     })
   }
-  EditPermission(contentPermission:any,user:UserModel) {
-    this.allSelected=false;
-    this.currentUser=user;
+  EditPermission(contentPermission: any, user: UserModel) {
+    this.allSelected = false;
+    this.currentUser = user;
     this.LoadUserAcccess(contentPermission);
-    
+
   }
-  LoadUserAcccess(contentPermission:any){
+  LoadUserAcccess(contentPermission: any) {
     this.loader.show(true);
-    this.userModuleAccessService.GetAccessUser(this.currentUser.id).subscribe(result=>{
-      this.userModuleAccessList=result;
+    this.userModuleAccessService.GetAccessUser(this.currentUser.id).subscribe(result => {
+      this.userModuleAccessList = result;
       this.loader.show(false);
       this.modalService.open(contentPermission, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       }, (reason) => {
       });
-    },error=>{
+    }, error => {
       this.loader.show(false);
     })
   }
@@ -229,9 +230,26 @@ export class UserAccessModuleComponent implements OnInit {
   }
   @ViewChild("contentSearch") contentSearch;
   EditUserCriterai(user: UserModel) {
-    this.allSelected=false;
-    this.currentUser=user;
+    this.allSelected = false;
+    this.currentUser = user;
     this.modalService.open(this.contentSearch, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+  }
+  @ViewChild("contentUserUpdate") contentUserUpdate;
+  LoadUserUpdateModal(user: UserModel) {
+    this.loader.show(true);
+    this.userService.GetUserById(user.id).subscribe(result => {
+      this.loader.show(false);
+      this.currentUser = result;
+    }, error => {
+      this.loader.show(false);
+    })
+    this.currentUser = user;
+
+    this.modalService.open(this.contentUserUpdate, { backdrop: "static", size: "xl", ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
 
     }, (reason) => {
 

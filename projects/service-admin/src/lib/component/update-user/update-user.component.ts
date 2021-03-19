@@ -1,6 +1,7 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
 import { UserModel } from '../../models/user/user.model';
@@ -13,7 +14,7 @@ import { UserService } from '../../service/user.service';
   styleUrls: ['./update-user.component.css']
 })
 export class UpdateUserComponent implements OnInit {
-
+  @Input()
   item: UserModel;
   formgroup: FormGroup;
   billingStateParam: string;
@@ -34,7 +35,8 @@ export class UpdateUserComponent implements OnInit {
     , private router: Router
     , private loginService: UserService
     , private alertService: alertserice
-    , private ngzone: NgZone) {
+    , private ngzone: NgZone
+    , private modalService: NgbModal) {
     this.AppLogo = environment.logoUrl;
     this.AppTitle = environment.appTitle;
   }
@@ -150,7 +152,7 @@ export class UpdateUserComponent implements OnInit {
       this.loader.show(false);
       if (result.status) {
         this.alertService.success("", this.translate.instant(result.message));
-        this.router.navigateByUrl("/auth/login");
+        this.modalService.dismissAll();
       } else {
         this.alertService.Error("", this.translate.instant(result.message));
       }

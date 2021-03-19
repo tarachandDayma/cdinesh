@@ -16,7 +16,8 @@ header:HttpHeaders;
     
    this.header= new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': "Bearer " + token
+      'Authorization': "Bearer " + token,
+      'timeout': `${200000}`
     });
     return this.http.get<any>(path,{ headers: this.header});
   }
@@ -25,7 +26,8 @@ header:HttpHeaders;
     
    this.header= new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': "Bearer " + token
+      'Authorization': "Bearer " + token,
+      'timeout': `${200000}`
     });
     return this.http.post<any>(path,entity,{ headers: this.header});
   }
@@ -34,7 +36,8 @@ header:HttpHeaders;
     
    this.header= new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': "Bearer " + token
+      'Authorization': "Bearer " + token,
+      'timeout': `${200000}`
     });
     return this.http.put<any>(path,entity,{ headers: this.header});
   }
@@ -43,7 +46,8 @@ header:HttpHeaders;
      
     this.header= new HttpHeaders({
        'Content-Type': 'application/json',
-       'Authorization': "Bearer " + token
+       'Authorization': "Bearer " + token,
+       'timeout': `${200000}`
      });
      return this.http.delete<any>(path,{ headers: this.header});
    }

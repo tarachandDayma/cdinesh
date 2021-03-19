@@ -827,7 +827,9 @@
             "isAutoMail": "AutoMail",
             "permission": "Permission",
             "userPermissionTitle": "User Permission",
-            "stockAccess": "Stock Access"
+            "stockAccess": "Stock Access",
+            "edit": "Edit",
+            "updateUser": "Update User"
         },
         "roleSearchCriteria": {
             "updateSucess": "Update Sucess",
