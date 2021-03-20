@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
+import { ReferralModel } from '../../models/referral.model';
 import { UserModel } from '../../models/user/user.model';
 import { UserReferralInfo } from '../../models/user/userReferralInfo.model';
 import { UserService } from '../../service/user.service';
@@ -165,5 +166,11 @@ export class UpdateUserComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+  AddReference(){
+    this.item.userReferralInfo.push(new UserReferralInfo());
+  }
+  AddReferral(){
+    this.item.referrals.push(new ReferralModel());
   }
 }

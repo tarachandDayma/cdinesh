@@ -1,3 +1,4 @@
+import { ReferralModel } from '../referral.model';
 import { UserAccountInfoModel } from './userAccountInfo.model';
 import { UserAddressInfoModel } from './userAddressInfo.model';
 import { UserBasicInfoModel } from './userBasicInfo.Model';
@@ -14,6 +15,7 @@ export class UserModel {
             this.userAddressInfo= new UserAddressInfoModel();
             this.userAccountInfo= new UserAccountInfoModel();
             this.userReferralInfo=[];
+            this.referrals=[];
     }
     id:string;
     userName: string;
@@ -57,5 +59,5 @@ export class UserModel {
     userAddressInfo: UserAddressInfoModel;
     userAccountInfo: UserAccountInfoModel;
     userReferralInfo: UserReferralInfo[];
-    
+    referrals:ReferralModel[];
 }

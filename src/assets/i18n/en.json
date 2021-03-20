@@ -181,7 +181,27 @@
             "successMessage": "Your account has been created.We will contact you soon",
             "errorMessage": "Something went wrong",
             "captchCode_error": "Invalid captch code",
-            "captchCode": "Captcha Code"
+            "captchCode": "Captcha Code",
+            "references": "References",
+            "referrals": "Referrals",
+            "reference": {
+                "table": {
+                    "refName": "Name",
+                    "companyName": "CompanyName",
+                    "contactNo": "contactNo"
+                }
+            },
+            "referral": {
+                "table": {
+                    "refName": "Name",
+                    "companyName": "CompanyName",
+                    "contactNo": "contactNo",
+                    "gstNo": "contactNo"
+                }
+            },
+            "addRefernce": "Add",
+            "addReferral": "Add"
+
         },
         "reset": {
             "title": "Reset Password",
