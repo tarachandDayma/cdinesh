@@ -1,12 +1,16 @@
-import { Component, Input, NgZone, OnInit } from '@angular/core';
+import { Component, Input, NgZone, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { alertserice, EnvironmentService, FormValidationService, loaderserice } from 'service-common';
+import { BBPInformationModel } from '../../models/bbpInformation.model';
 import { ReferralModel } from '../../models/referral.model';
+import { TermsModel } from '../../models/terms.model';
 import { UserModel } from '../../models/user/user.model';
 import { UserReferralInfo } from '../../models/user/userReferralInfo.model';
+import { BBpInformationService } from '../../service/bbpInformation.service';
+import { TermsService } from '../../service/terms.service';
 import { UserService } from '../../service/user.service';
 
 @Component({
@@ -14,7 +18,7 @@ import { UserService } from '../../service/user.service';
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.css']
 })
-export class UpdateUserComponent implements OnInit {
+export class UpdateUserComponent implements OnInit, OnChanges {
   @Input()
   item: UserModel;
   formgroup: FormGroup;
@@ -30,6 +34,8 @@ export class UpdateUserComponent implements OnInit {
   submited: boolean = false;
   sellerList: any[];
   captchaImg: string;
+  BrokerList: BBPInformationModel[] = [];
+  TermsList: TermsModel[] = [];
   constructor(private environment: EnvironmentService,
     public translate: TranslateService, private formvalidationService: FormValidationService
     , private loader: loaderserice
@@ -37,19 +43,23 @@ export class UpdateUserComponent implements OnInit {
     , private loginService: UserService
     , private alertService: alertserice
     , private ngzone: NgZone
-    , private modalService: NgbModal) {
+    , private modalService: NgbModal
+    , private bbpInformationService: BBpInformationService
+    , private termService: TermsService) {
     this.AppLogo = environment.logoUrl;
     this.AppTitle = environment.appTitle;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.item.userAccountInfo.termId1 = 19;
   }
 
   ngOnInit(): void {
     this.item = new UserModel();
     this.item.userReferralInfo.push(new UserReferralInfo());
     this.item.userReferralInfo.push(new UserReferralInfo());
+    this.item.userAccountInfo.termId1 = 19;
     this.formgroup = new FormGroup({
       userName: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
       companyId: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -73,14 +83,18 @@ export class UpdateUserComponent implements OnInit {
       gstNo: new FormControl(''),
       coBuyerName: new FormControl(''),
       website: new FormControl('', Validators.required),
-      refName1: new FormControl(''),
-      refcompanyName1: new FormControl(''),
-      refcontactNo1: new FormControl(''),
-      refName2: new FormControl(''),
-      refcompanyName2: new FormControl(''),
-      refcontactNo2: new FormControl(''),
-      sellerId: new FormControl('', Validators.required),
-      captchCode: new FormControl('', Validators.required)
+      onTable: new FormControl(''),
+      blackList: new FormControl(''),
+      broker: new FormControl(''),
+      term1: new FormControl(''),
+      term2: new FormControl(''),
+      term3: new FormControl(''),
+      averageBuying: new FormControl(''),
+      rappoWithClient: new FormControl(''),
+      saleLimit: new FormControl(''),
+      natureOfClient: new FormControl(''),
+      memoCharge: new FormControl(''),
+      percentage: new FormControl('')
     });
     this.loader.show(true);
     this.loginService.loadSellers().subscribe(result => {
@@ -90,7 +104,9 @@ export class UpdateUserComponent implements OnInit {
     }, error => {
       console.error(error);
       this.loader.show(false);
-    })
+    });
+    this.LoadBroker();
+    this.LoadTerms();
   }
   companyChange(data) {
     this.item.userBasicInfo.companyId = data.id;
@@ -167,10 +183,22 @@ export class UpdateUserComponent implements OnInit {
       }
     });
   }
-  AddReference(){
+  AddReference() {
     this.item.userReferralInfo.push(new UserReferralInfo());
   }
-  AddReferral(){
+  AddReferral() {
     this.item.referrals.push(new ReferralModel());
+  }
+  LoadBroker() {
+    this.bbpInformationService.GetAll("2").subscribe(result => {
+      this.BrokerList = result;
+    }, error => {
+    });
+  }
+  LoadTerms() {
+    this.termService.GetAll("").subscribe(result => {
+      this.TermsList = result;
+    }, error => {
+    })
   }
 }

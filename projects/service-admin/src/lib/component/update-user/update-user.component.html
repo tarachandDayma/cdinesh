@@ -192,11 +192,105 @@
                             <label *ngIf="formgroup.get('coBuyerName').errors?.required && (formgroup.get('coBuyerName').touched || submited ) " [translate]="'auth.register.coBuyerName_error'" class="form-text text-danger"></label>
                             <label *ngIf="formgroup.get('coBuyerName').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('coBuyerName').errors?.serverError)}} </label>
                         </div>
-                        <div class="col-md-6">
-                            <label [translate]="'auth.register.sellerId'" for="sellerId"></label>
-                            <lib-cdmulitselect [modelkey]="item.sellerId" [datasource]="sellerList" [form]="formgroup" [formcontrolname]="'sellerId'" (change)="sellerChange($event)" [valuemember]="'id'" [displaymember]="'userName'"></lib-cdmulitselect>
-                            <label *ngIf="formgroup.get('sellerId').errors?.required && (formgroup.get('sellerId').touched || submited) " [translate]="'auth.register.sellerId_error'" class="form-text text-danger"></label>
-                            <label *ngIf="formgroup.get('sellerId').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('sellerId').errors?.serverError)}} </label>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.percentage'" for="Percentage"></label>
+                            <input min="0" formControlName="percentage" [(ngModel)]="item.userAccountInfo.percentage" name="percentage" type="number" class="form-control" id="percentage" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('percentage').errors?.required && (formgroup.get('percentage').touched || submited ) " [translate]="'auth.register.percentage_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('percentage').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('percentage').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.averageBuying'" for="averageBuying"></label>
+                            <input min="0" formControlName="averageBuying" [(ngModel)]="item.userAccountInfo.averageBuying" name="percentage" type="number" class="form-control" id="averageBuying" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('averageBuying').errors?.required && (formgroup.get('averageBuying').touched || submited ) " [translate]="'auth.register.averageBuying_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('averageBuying').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('averageBuying').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.saleLimit'" for="saleLimit"></label>
+                            <input min="0" formControlName="saleLimit" [(ngModel)]="item.userAccountInfo.saleLimit" name="saleLimit" type="number" class="form-control" id="saleLimit" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('saleLimit').errors?.required && (formgroup.get('saleLimit').touched || submited ) " [translate]="'auth.register.saleLimit_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('saleLimit').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('saleLimit').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.memoCharge'" for="memoCharge"></label>
+                            <input min="0" formControlName="memoCharge" [(ngModel)]="item.userAccountInfo.memoCharge" name="saleLimit" type="number" class="form-control" id="memoCharge" placeholder="" aria-describedby="emailHelp">
+                            <label *ngIf="formgroup.get('memoCharge').errors?.required && (formgroup.get('memoCharge').touched || submited ) " [translate]="'auth.register.memoCharge_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('memoCharge').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('memoCharge').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.onTable'" for="onTable"></label>
+                            <label class="custom-control material-checkbox">
+                                <input  formControlName="onTable" type="checkbox"
+                                    class="material-control-input" name="onTable"
+                                    [(ngModel)]="item.userAccountInfo.onTable">
+                                <span class="material-control-indicator"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.blackList'" for="blackList"></label>
+                            <label class="custom-control material-checkbox">
+                                <input  formControlName="blackList" type="checkbox"
+                                    class="material-control-input" name="onTable"
+                                    [(ngModel)]="item.userAccountInfo.blackList">
+                                <span class="material-control-indicator"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.rappoWithClient'" for="rappoWithClient"></label>
+                            <select class="form-control" formControlName="rappoWithClient" [(ngModel)]="item.userAccountInfo.rappoWithClient">
+                                <option value="">--Select--</option>
+                                <option value="Negotiable">Negotiable</option>
+                                <option value="Non-Negotiable">Non-Negotiable</option>
+                                <option value="One word">One word</option>
+                                <option value="Strickt One word">Strickt One word</option>
+                            </select>
+                            <label *ngIf="formgroup.get('rappoWithClient').errors?.required && (formgroup.get('rappoWithClient').touched || submited ) " [translate]="'auth.register.rappoWithClient_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('rappoWithClient').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('rappoWithClient').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.natureOfClient'" for="natureOfClient"></label>
+                            <select class="form-control" formControlName="natureOfClient" [(ngModel)]="item.userAccountInfo.natureOfClient">
+                                <option value="">--Select--</option>
+                                <option value="Snsetive">Snsetive</option>
+                                <option value="Non-Snsetive">Non-Snsetive</option>
+                            </select>
+                            <label *ngIf="formgroup.get('natureOfClient').errors?.required && (formgroup.get('natureOfClient').touched || submited ) " [translate]="'auth.register.natureOfClient_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('natureOfClient').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('rappoWithClient').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.term1'" for="term1"></label>
+                            <select class="form-control" formControlName="term1" [(ngModel)]="item.userAccountInfo.termId1" disabled>
+                                <option value="">--Select--</option>
+                                <option *ngFor="let item of TermsList" [value]="item.termsId">{{item.description}}</option>
+                            </select>
+                            <label *ngIf="formgroup.get('term1').errors?.required && (formgroup.get('term1').touched || submited ) " [translate]="'auth.register.term1_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('term1').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('term1').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.term2'" for="term2"></label>
+                            <select class="form-control" formControlName="term2" [(ngModel)]="item.userAccountInfo.termId2">
+                                <option value="">--Select--</option>
+                                <option *ngFor="let item of TermsList" [value]="item.termsId">{{item.description}}</option>
+                            </select>
+                            <label *ngIf="formgroup.get('term2').errors?.required && (formgroup.get('term2').touched || submited ) " [translate]="'auth.register.term2_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('term2').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('term2').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.term3'" for="term3"></label>
+                            <select class="form-control" formControlName="term3" [(ngModel)]="item.userAccountInfo.termId2">
+                                <option value="">--Select--</option>
+                                <option *ngFor="let item of TermsList" [value]="item.termsId">{{item.description}}</option>
+                            </select>
+                            <label *ngIf="formgroup.get('term3').errors?.required && (formgroup.get('term3').touched || submited ) " [translate]="'auth.register.term3_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('term3').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('term3').errors?.serverError)}} </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label [translate]="'auth.register.broker'" for="broker"></label>
+                            <select class="form-control" formControlName="broker" [(ngModel)]="item.userAccountInfo.brokerId">
+                                <option value="">--Select--</option>
+                                <option *ngFor="let item of BrokerList" [value]="item.id">{{item.name}}</option>
+                            </select>
+                            <label *ngIf="formgroup.get('broker').errors?.required && (formgroup.get('broker').touched || submited ) " [translate]="'auth.register.broker_error'" class="form-text text-danger"></label>
+                            <label *ngIf="formgroup.get('broker').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('broker').errors?.serverError)}} </label>
                         </div>
                     </div>
                 </Fieldset>

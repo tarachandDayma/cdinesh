@@ -7,4 +7,14 @@ export class UserAccountInfoModel{
     termId1:number;
     termId2:number;
     termId3:number;
+    percentage:number;
+    averageBuying:number;
+    saleLimit:number;
+    rappoWithClient:string;
+    natureOfClient:string;
+    onTable:boolean;
+    paymentCycle:number;
+    businessRelation:string;
+    blackList:boolean;
+    memoCharge:number;
 }

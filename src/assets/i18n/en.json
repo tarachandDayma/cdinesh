@@ -200,7 +200,21 @@
                 }
             },
             "addRefernce": "Add",
-            "addReferral": "Add"
+            "addReferral": "Add",
+            "broker": "Broker",
+            "blackList": "BlackList",
+            "paymentCycle": "PaymentCycle",
+            "onTable": "BusinessRelation",
+            "natureOfClient": "NatureOfClient",
+            "rappoWithClient": "RappoWithClient",
+            "saleLimit": "SaleLimit",
+            "averageBuying": "AverageBuying",
+            "percentage": "Percentage",
+            "businessRelation": "BusinessRelation",
+            "memoCharge": "MemoCharge",
+            "term1": "Terms1",
+            "term2": "Terms2",
+            "term3": "Terms2"
 
         },
         "reset": {
