@@ -78,4 +78,8 @@ export class UserService extends RestService {
         var url = this.env.authServerUrl+"/api/Auth/Forgotpassword?UserName="+UserName
         return super.Get(url);
       }
+      public GetAddatList():Observable<number[]>{
+        var url = this.env.ApiGateway+"/admin/UserSetup/GetAddatList";
+        return super.Get(url);
+      }
 }

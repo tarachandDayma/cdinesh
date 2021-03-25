@@ -214,7 +214,27 @@
             "memoCharge": "MemoCharge",
             "term1": "Terms1",
             "term2": "Terms2",
-            "term3": "Terms2"
+            "term3": "Terms2",
+            "departments": {
+                "title": "Department",
+                "table": {
+                    "id": "Id",
+                    "name": "Name",
+                    "landLineNo": "LandLineNo",
+                    "mobileNo": "MobileNo",
+                    "memoCharge": "MemoCharge",
+                    "broker": "Broker",
+                    "less1": "Less1",
+                    "less2": "Less2",
+                    "billingAddress": "Address",
+                    "businessRelation": "BusinessRelation",
+                    "blackList": "BlackList",
+                    "termId": "Term",
+                    "percentage": "Charges",
+                    "remove": "Remove"
+                },
+                "add": "Add Department"
+            }
 
         },
         "reset": {

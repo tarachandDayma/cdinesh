@@ -8,6 +8,7 @@ import { BBPInformationModel } from '../../models/bbpInformation.model';
 import { ReferralModel } from '../../models/referral.model';
 import { TermsModel } from '../../models/terms.model';
 import { UserModel } from '../../models/user/user.model';
+import { UserDepartmentModel } from '../../models/user/userDeprtment.model';
 import { UserReferralInfo } from '../../models/user/userReferralInfo.model';
 import { BBpInformationService } from '../../service/bbpInformation.service';
 import { TermsService } from '../../service/terms.service';
@@ -36,6 +37,7 @@ export class UpdateUserComponent implements OnInit, OnChanges {
   captchaImg: string;
   BrokerList: BBPInformationModel[] = [];
   TermsList: TermsModel[] = [];
+  AddatList: number[] = [];
   constructor(private environment: EnvironmentService,
     public translate: TranslateService, private formvalidationService: FormValidationService
     , private loader: loaderserice
@@ -107,6 +109,7 @@ export class UpdateUserComponent implements OnInit, OnChanges {
     });
     this.LoadBroker();
     this.LoadTerms();
+    this.LoadAddatList();
   }
   companyChange(data) {
     this.item.userBasicInfo.companyId = data.id;
@@ -165,6 +168,12 @@ export class UpdateUserComponent implements OnInit, OnChanges {
     }
   }
   registerUser() {
+    if(this.item.userDepartments !=null && this.item.userDepartments !=undefined){
+        this.item.userDepartments.forEach(element => {
+            element.less1= parseFloat(element.less1.toString());
+            element.less2= parseFloat(element.less1.toString());
+        });
+    }
     this.loginService.UpdateNew(this.item).subscribe(result => {
       this.loader.show(false);
       if (result.status) {
@@ -186,8 +195,24 @@ export class UpdateUserComponent implements OnInit, OnChanges {
   AddReference() {
     this.item.userReferralInfo.push(new UserReferralInfo());
   }
+  RemoveReference(item: UserReferralInfo) {
+    var referral = JSON.parse(JSON.stringify(item)) as UserReferralInfo;
+    if (this.item.removedUserReferralInfo == null || this.item.removedUserReferralInfo == undefined)
+      this.item.removedUserReferralInfo = [];
+    this.item.removedUserReferralInfo.push(referral);
+    var indx = this.item.userReferralInfo.indexOf(item);
+    this.item.userReferralInfo.splice(indx, 1);
+  }
   AddReferral() {
     this.item.referrals.push(new ReferralModel());
+  }
+  RemoveReferral(item: ReferralModel) {
+    var referral = JSON.parse(JSON.stringify(item)) as ReferralModel;
+    if (this.item.removedReferrals == null || this.item.removedReferrals == undefined)
+      this.item.removedReferrals = [];
+    this.item.removedReferrals.push(referral);
+    var indx = this.item.referrals.indexOf(item);
+    this.item.referrals.splice(indx, 1);
   }
   LoadBroker() {
     this.bbpInformationService.GetAll("2").subscribe(result => {
@@ -200,5 +225,29 @@ export class UpdateUserComponent implements OnInit, OnChanges {
       this.TermsList = result;
     }, error => {
     })
+  }
+  LoadAddatList() {
+    this.loginService.GetAddatList().subscribe(result => {
+      this.AddatList = result;
+    }, error => {
+    })
+  }
+  Adddepartment() {
+    this.item.userDepartments.push(new UserDepartmentModel());
+  }
+  RemoveDepartment(item: UserDepartmentModel) {
+    var dept = JSON.parse(JSON.stringify(item)) as UserDepartmentModel;
+    if (this.item.removedUserDepartments == null || this.item.removedUserDepartments == undefined)
+      this.item.removedUserDepartments = [];
+    this.item.removedUserDepartments.push(dept);
+    var indx = this.item.userDepartments.indexOf(item);
+    this.item.userDepartments.splice(indx, 1);
+  }
+  CopyShippingAddress(){
+    this.item.userAddressInfo.shippingAddress=this.item.userAddressInfo.billingAddress;
+    this.item.userAddressInfo.shippingCityId=this.item.userAddressInfo.billingCityId;
+    this.item.userAddressInfo.shippingCountryId=this.item.userAddressInfo.billingCountryId;
+    this.item.userAddressInfo.shippingStateId=this.item.userAddressInfo.billingStateId;
+    this.item.userAddressInfo.shippingZipCode=this.item.userAddressInfo.billingZipCode;
   }
 }

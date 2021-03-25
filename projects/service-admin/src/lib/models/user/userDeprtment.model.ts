@@ -1,0 +1,21 @@
+export class UserDepartmentModel{
+    id:number;
+    name:string;
+    landLineNo:string;
+    mobileNo:string;
+    memoCharge:number;
+    brokerId:number;
+    less1:number;
+    less2:number;
+    billingAddress:string;
+    businessRelation:string;
+    blackList:Boolean;
+    termId:number;
+    percentage:number;
+    userId:string;
+    createdBy:string;
+    createdDate:Date;
+    updateBy:string;
+    updateDate:Date;
+    existingId:number;
+}

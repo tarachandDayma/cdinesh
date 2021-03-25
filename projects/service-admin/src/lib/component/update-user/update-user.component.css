@@ -3,3 +3,7 @@ form {
     max-width: none!important;
     padding: 20px!important;
 }
+
+select {
+    font-size: 12px !important;
+}

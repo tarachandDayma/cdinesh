@@ -2,6 +2,7 @@ import { ReferralModel } from '../referral.model';
 import { UserAccountInfoModel } from './userAccountInfo.model';
 import { UserAddressInfoModel } from './userAddressInfo.model';
 import { UserBasicInfoModel } from './userBasicInfo.Model';
+import { UserDepartmentModel } from './userDeprtment.model';
 import { UserReferralInfo } from './userReferralInfo.model';
 
 export class UserModel {
@@ -60,4 +61,8 @@ export class UserModel {
     userAccountInfo: UserAccountInfoModel;
     userReferralInfo: UserReferralInfo[];
     referrals:ReferralModel[];
+    userDepartments:UserDepartmentModel[];
+    removedUserReferralInfo: UserReferralInfo[];
+    removedReferrals:ReferralModel[];
+    removedUserDepartments:UserDepartmentModel[];
 }

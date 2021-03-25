@@ -131,7 +131,7 @@
             </div>
             <div class="col-md-6">
                 <fieldset>
-                    <legend> <span [translate]="'auth.register.shippingAddresstitle'"></span></legend>
+                    <legend> <span [translate]="'auth.register.shippingAddresstitle'"></span> <button type="button" (click)="CopyShippingAddress()" [translate]="'auth.register.shippingAddressCopuButton'" class="btn btn-primary btn-sm"></button> </legend>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -217,7 +217,7 @@
                             <label *ngIf="formgroup.get('memoCharge').errors?.serverError" class="form-text text-danger"> {{translate.instant(formgroup.get('memoCharge').errors?.serverError)}} </label>
                         </div>
                         <div class="col-md-3">
-                            <label [translate]="'auth.register.onTable'" for="onTable"></label>
+                            <label [translate]="'auth.register.onTable'" for="onTable"></label><br>
                             <label class="custom-control material-checkbox">
                                 <input  formControlName="onTable" type="checkbox"
                                     class="material-control-input" name="onTable"
@@ -226,7 +226,7 @@
                             </label>
                         </div>
                         <div class="col-md-3">
-                            <label [translate]="'auth.register.blackList'" for="blackList"></label>
+                            <label [translate]="'auth.register.blackList'" for="blackList"></label><br>
                             <label class="custom-control material-checkbox">
                                 <input  formControlName="blackList" type="checkbox"
                                     class="material-control-input" name="onTable"
@@ -305,19 +305,21 @@
                             <th [translate]="'auth.register.reference.table.refName'"></th>
                             <th [translate]="'auth.register.reference.table.companyName'"></th>
                             <th [translate]="'auth.register.reference.table.contactNo'"></th>
+                            <th></th>
                         </thead>
                         <tbody>
                             <tr *ngFor="let ref of item.userReferralInfo;">
                                 <td>
                                     <input name="refName" class="form-control" type="text" [(ngModel)]="ref.refName" [ngModelOptions]="{standalone: true}">
-
                                 </td>
                                 <td> <input name="companyName" class="form-control" type="text" [(ngModel)]="ref.companyName" [ngModelOptions]="{standalone: true}">
                                 </td>
                                 <td> <input name="contactNo" class="form-control" type="text" [(ngModel)]="ref.contactNo" [ngModelOptions]="{standalone: true}"> </td>
+                                <td>
+                                    <button (click)="RemoveReference(ref)" class="btn btn-primary btn-sm" type="button" [translate]="'auth.register.departments.table.remove'"></button>
+                                </td>
                             </tr>
                         </tbody>
-
                     </table>
                 </fieldset>
             </div>
@@ -330,6 +332,7 @@
                             <th [translate]="'auth.register.referral.table.companyName'"></th>
                             <th [translate]="'auth.register.referral.table.contactNo'"></th>
                             <th [translate]="'auth.register.referral.table.gstNo'"></th>
+                            <th></th>
                         </thead>
                         <tbody>
                             <tr *ngFor="let ref of item.referrals;">
@@ -344,9 +347,92 @@
                                 <td> <input name="referralContactNo" class="form-control" type="text" [(ngModel)]="ref.referralContactNo" [ngModelOptions]="{standalone: true}">
                                 </td>
                                 <td> <input name="referralGst" class="form-control" type="text" [(ngModel)]="ref.referralGst" [ngModelOptions]="{standalone: true}"> </td>
+                                <td>
+                                    <button (click)="RemoveReferral(ref)" class="btn btn-primary btn-sm" type="button" [translate]="'auth.register.departments.table.remove'"></button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                </fieldset>
+            </div>
+            <div class="col-md-12">
+                <fieldset>
+                    <legend> <span [translate]="'auth.register.departments.title'"></span><button [translate]="'auth.register.departments.add'" (click)="Adddepartment()" type="button" class="btn btn-sm btn-primary"></button></legend>
+                    <div style="width: 100%;overflow: auto;">
+                        <table class="table table-borderd" style="width: 1300px !important;">
+                            <thead>
+                                <th [translate]="'auth.register.departments.table.name'"></th>
+                                <th [translate]="'auth.register.departments.table.landLineNo'"></th>
+                                <th [translate]="'auth.register.departments.table.mobileNo'"></th>
+                                <th [translate]="'auth.register.departments.table.termId'"></th>
+                                <th [translate]="'auth.register.departments.table.less1'"></th>
+                                <th [translate]="'auth.register.departments.table.less2'"></th>
+                                <th [translate]="'auth.register.departments.table.broker'"></th>
+                                <th [translate]="'auth.register.departments.table.billingAddress'"></th>
+                                <th [translate]="'auth.register.departments.table.businessRelation'"></th>
+                                <th [translate]="'auth.register.departments.table.blackList'"></th>
+                                <th [translate]="'auth.register.departments.table.percentage'"></th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dept of item.userDepartments;">
+                                    <td>
+                                        <input maxlength="50" name="name" type="text" [(ngModel)]="dept.name" [ngModelOptions]="{standalone: true}">
+                                    </td>
+                                    <td>
+                                        <input maxlength="50" name="landLineNo" type="text" [(ngModel)]="dept.landLineNo" [ngModelOptions]="{standalone: true}">
+                                    </td>
+                                    <td>
+                                        <input maxlength="50" name="mobileNo" type="text" [(ngModel)]="dept.mobileNo" [ngModelOptions]="{standalone: true}">
+                                    </td>
+                                    <td>
+                                        <select style="width: 137px !important;" class="form-control" [(ngModel)]="dept.termId" [ngModelOptions]="{standalone: true}">
+                                        <option value="">--Select--</option>
+                                        <option *ngFor="let item of TermsList" [value]="item.termsId">{{item.description}}</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <select style="width: 137px !important;" class="form-control" name="less1" [(ngModel)]="dept.less1" [ngModelOptions]="{standalone: true}">
+                                        <option value="">--Select--</option>
+                                        <option *ngFor="let item of AddatList" [value]="item">{{item}}</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <select style="width: 137px !important;" class="form-control" name="less2" [(ngModel)]="dept.less2" [ngModelOptions]="{standalone: true}">
+                                        <option value="">--Select--</option>
+                                        <option *ngFor="let item of AddatList" [value]="item">{{item}}</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <select style="width: 137px !important;" class="form-control" name="broker" [(ngModel)]="dept.brokerId" [ngModelOptions]="{standalone: true}">
+                                        <option value="">--Select--</option>
+                                        <option *ngFor="let item of BrokerList" [value]="item.id">{{item.name}}</option>
+                                    </select>
+                                    </td>
+                                    <td>
+                                        <input maxlength="250" name="billingAddress" type="text" [(ngModel)]="dept.billingAddress" [ngModelOptions]="{standalone: true}">
+                                    </td>
+                                    <td>
+                                        <input maxlength="250" name="businessRelation" type="text" [(ngModel)]="dept.businessRelation" [ngModelOptions]="{standalone: true}">
+                                    </td>
+                                    <td>
+                                        <label class="custom-control material-checkbox">
+                                        <input  type="checkbox"
+                                            class="material-control-input" name="blackList"
+                                            [(ngModel)]="dept.blackList" [ngModelOptions]="{standalone: true}">
+                                        <span class="material-control-indicator"></span> 
+                                    </label>
+                                    </td>
+                                    <td>
+                                        <input min="0" name="percentage" type="number" [(ngModel)]="dept.percentage" [ngModelOptions]="{standalone: true}">
+                                    </td>
+                                    <td>
+                                        <button (click)="RemoveDepartment(dept)" class="btn btn-primary btn-sm" type="button" [translate]="'auth.register.departments.table.remove'"></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </fieldset>
             </div>
 
