@@ -276,7 +276,7 @@
                         </div>
                         <div class="col-md-3">
                             <label [translate]="'auth.register.term3'" for="term3"></label>
-                            <select class="form-control" formControlName="term3" [(ngModel)]="item.userAccountInfo.termId2">
+                            <select class="form-control" formControlName="term3" [(ngModel)]="item.userAccountInfo.termId3">
                                 <option value="">--Select--</option>
                                 <option *ngFor="let item of TermsList" [value]="item.termsId">{{item.description}}</option>
                             </select>

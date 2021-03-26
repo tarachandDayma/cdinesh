@@ -168,11 +168,23 @@ export class UpdateUserComponent implements OnInit, OnChanges {
     }
   }
   registerUser() {
-    if(this.item.userDepartments !=null && this.item.userDepartments !=undefined){
-        this.item.userDepartments.forEach(element => {
-            element.less1= parseFloat(element.less1.toString());
-            element.less2= parseFloat(element.less1.toString());
-        });
+    if (this.item.userDepartments != null && this.item.userDepartments != undefined) {
+      this.item.userDepartments.forEach(element => {
+        if (element.less1 != null && element.less1 != undefined)
+          element.less1 = parseFloat(element.less1.toString());
+        if (element.less2 != null && element.less2 != undefined)
+          element.less2 = parseFloat(element.less1.toString());
+        if (element.termId != null && element.termId != undefined)
+          element.termId = parseInt(element.termId.toString());
+        if (element.brokerId != null && element.brokerId != undefined)
+          element.brokerId = parseInt(element.brokerId.toString());
+      });
+      if (this.item.userAccountInfo.termId1 != null && this.item.userAccountInfo.termId1 != undefined)
+        this.item.userAccountInfo.termId1 = parseInt(this.item.userAccountInfo.termId1.toString());
+      if (this.item.userAccountInfo.termId2 != null && this.item.userAccountInfo.termId2 != undefined)
+        this.item.userAccountInfo.termId2 = parseInt(this.item.userAccountInfo.termId2.toString());
+      if (this.item.userAccountInfo.termId3 != null && this.item.userAccountInfo.termId3 != undefined)
+        this.item.userAccountInfo.termId3 = parseInt(this.item.userAccountInfo.termId3.toString());
     }
     this.loginService.UpdateNew(this.item).subscribe(result => {
       this.loader.show(false);
@@ -243,11 +255,11 @@ export class UpdateUserComponent implements OnInit, OnChanges {
     var indx = this.item.userDepartments.indexOf(item);
     this.item.userDepartments.splice(indx, 1);
   }
-  CopyShippingAddress(){
-    this.item.userAddressInfo.shippingAddress=this.item.userAddressInfo.billingAddress;
-    this.item.userAddressInfo.shippingCityId=this.item.userAddressInfo.billingCityId;
-    this.item.userAddressInfo.shippingCountryId=this.item.userAddressInfo.billingCountryId;
-    this.item.userAddressInfo.shippingStateId=this.item.userAddressInfo.billingStateId;
-    this.item.userAddressInfo.shippingZipCode=this.item.userAddressInfo.billingZipCode;
+  CopyShippingAddress() {
+    this.item.userAddressInfo.shippingAddress = this.item.userAddressInfo.billingAddress;
+    this.item.userAddressInfo.shippingCityId = this.item.userAddressInfo.billingCityId;
+    this.item.userAddressInfo.shippingCountryId = this.item.userAddressInfo.billingCountryId;
+    this.item.userAddressInfo.shippingStateId = this.item.userAddressInfo.billingStateId;
+    this.item.userAddressInfo.shippingZipCode = this.item.userAddressInfo.billingZipCode;
   }
 }
